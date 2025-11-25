@@ -2143,7 +2143,7 @@
 
     <script>
         // API Configuration
-        const API_URL = 'http://localhost:4000/api';
+        const API_URL = 'http://localhost:5000/api';
 
         // ========== GLOBAL FETCH WITH AUTH TOKEN ==========
         const originalFetch = window.fetch;
@@ -3115,7 +3115,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                 imageCard.style.cssText = 'position: relative; width: 150px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden;';
 
                 // Convert relative URL to absolute URL for display
-                const fullUrl = url.startsWith('http') ? url : `http://localhost:4000${url}`;
+                const fullUrl = url.startsWith('http') ? url : `http://localhost:5000${url}`;
 
                 imageCard.innerHTML = `
                     <div style="position: relative; width: 150px; height: 150px; overflow: hidden;">
@@ -3818,7 +3818,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                                 <div style="margin-bottom: 25px;">
                                     <h4 style="color: #667eea; font-size: 18px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #667eea;">📘 Social Media (Open Graph)</h4>
                                     <div style="border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: white;">
-                                        <div id="ogImagePreviewArea" style="width: 100%; height: 200px; background: ${(seo.meta?.ogImage || seo.ogImage) ? 'url(' + ((seo.meta?.ogImage || seo.ogImage).startsWith('http') ? (seo.meta?.ogImage || seo.ogImage) : 'http://localhost:4000' + (seo.meta?.ogImage || seo.ogImage)) + ')' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'}; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; font-weight: 600; position: relative;">
+                                        <div id="ogImagePreviewArea" style="width: 100%; height: 200px; background: ${(seo.meta?.ogImage || seo.ogImage) ? 'url(' + ((seo.meta?.ogImage || seo.ogImage).startsWith('http') ? (seo.meta?.ogImage || seo.ogImage) : 'http://localhost:5000' + (seo.meta?.ogImage || seo.ogImage)) + ')' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'}; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; font-weight: 600; position: relative;">
                                             ${!(seo.meta?.ogImage || seo.ogImage) ? '📷 No OG Image' : ''}
                                             <div style="position: absolute; bottom: 10px; right: 10px;">
                                                 <input type="file" id="ogImageUploadInput" accept="image/*" style="display: none;" onchange="uploadOgImageForTour(this, '${tour.id || tour._id}')">
@@ -3920,7 +3920,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                     // Update preview
                     const previewArea = document.getElementById('ogImagePreviewArea');
                     if (previewArea) {
-                        previewArea.style.background = `url(http://localhost:4000${result.data.filePath})`;
+                        previewArea.style.background = `url(http://localhost:5000${result.data.filePath})`;
                         previewArea.style.backgroundSize = 'cover';
                         previewArea.style.backgroundPosition = 'center';
                         previewArea.innerHTML = `<div style="position: absolute; bottom: 10px; right: 10px;">
@@ -3999,7 +3999,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             if (previewArea && previewArea.style.background) {
                 const match = previewArea.style.background.match(/url\(["']?([^"')]+)["']?\)/);
                 if (match) {
-                    ogImage = match[1].replace('http://localhost:4000', '');
+                    ogImage = match[1].replace('http://localhost:5000', '');
                 }
             }
 
@@ -4392,7 +4392,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                                 ${hasDesc ? `<span style="color: green;">✓</span> ${meta.description.substring(0, 40)}...` : '<span style="color: red;">✗ Missing</span>'}
                             </td>
                             <td>
-                                ${hasOgImage ? `<img src="${seo.ogImage.startsWith('http') ? seo.ogImage : 'http://localhost:4000' + seo.ogImage}" style="width: 50px; height: 30px; object-fit: cover; border-radius: 4px;">` : '<span style="color: red;">✗ No image</span>'}
+                                ${hasOgImage ? `<img src="${seo.ogImage.startsWith('http') ? seo.ogImage : 'http://localhost:5000' + seo.ogImage}" style="width: 50px; height: 30px; object-fit: cover; border-radius: 4px;">` : '<span style="color: red;">✗ No image</span>'}
                             </td>
                             <td>
                                 <span style="background: ${scoreColor}; color: white; padding: 3px 10px; border-radius: 20px; font-weight: bold;">${score}%</span>
@@ -4455,7 +4455,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                                         <button type="button" onclick="document.getElementById('seoOgImageUpload').click()" style="background: #28a745; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer;">📤 Upload</button>
                                     </div>
                                     <div id="seoOgImagePreview" style="margin-top: 10px;">
-                                        ${seo.ogImage ? `<img src="${seo.ogImage.startsWith('http') ? seo.ogImage : 'http://localhost:4000' + seo.ogImage}" style="max-width: 300px; border-radius: 8px; border: 1px solid #ddd;">` : '<p style="color: #999;">No image selected</p>'}
+                                        ${seo.ogImage ? `<img src="${seo.ogImage.startsWith('http') ? seo.ogImage : 'http://localhost:5000' + seo.ogImage}" style="max-width: 300px; border-radius: 8px; border: 1px solid #ddd;">` : '<p style="color: #999;">No image selected</p>'}
                                     </div>
                                 </div>
 
@@ -4511,7 +4511,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
 
                 if (result.success && result.data.filePath) {
                     document.getElementById('seoOgImage').value = result.data.filePath;
-                    document.getElementById('seoOgImagePreview').innerHTML = `<img src="http://localhost:4000${result.data.filePath}" style="max-width: 300px; border-radius: 8px; border: 1px solid #ddd;">`;
+                    document.getElementById('seoOgImagePreview').innerHTML = `<img src="http://localhost:5000${result.data.filePath}" style="max-width: 300px; border-radius: 8px; border: 1px solid #ddd;">`;
                 } else {
                     alert('Upload failed');
                 }
@@ -5725,6 +5725,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                             <td style="padding: 12px; color: #6c757d; font-size: 14px;">${joinedDate}</td>
                             <td style="padding: 12px; text-align: center;">
                                 <div style="display: flex; gap: 8px; justify-content: center;">
+                                    <button onclick="editUser('${user.id || user._id}')" style="padding: 6px 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;" title="Edit User">✏️ Edit</button>
                                     <button onclick="toggleUserStatus('${user.id || user._id}')"
                                             style="padding: 6px 12px; background: ${user.isActive ? '#ffc107' : '#28a745'}; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;"
                                             title="${user.isActive ? 'Block User' : 'Activate User'}">
@@ -5757,6 +5758,103 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
         }
 
         // Toggle user status (active/inactive)
+
+        // Edit user - open modal with user data
+        async function editUser(userId) {
+            try {
+                const response = await fetch(`${API_URL}/admin/users/${userId}`);
+                const result = await response.json();
+
+                if (!result.success) {
+                    alert('Error loading user data');
+                    return;
+                }
+
+                const user = result.data.user || result.data;
+
+                const modalHtml = `
+                    <div id="editUserModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 10000;">
+                        <div style="background: white; padding: 30px; border-radius: 12px; width: 500px; max-width: 90%;">
+                            <h2 style="margin-bottom: 20px; color: #333;">Edit User</h2>
+                            <form id="editUserForm">
+                                <input type="hidden" id="editUserId" value="${user._id || user.id}">
+                                <div style="margin-bottom: 15px;">
+                                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Name</label>
+                                    <input type="text" id="editUserName" value="${user.name || ''}" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+                                </div>
+                                <div style="margin-bottom: 15px;">
+                                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Email</label>
+                                    <input type="email" id="editUserEmail" value="${user.email || ''}" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+                                </div>
+                                <div style="margin-bottom: 15px;">
+                                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Phone</label>
+                                    <input type="text" id="editUserPhone" value="${user.phone || ''}" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+                                </div>
+                                <div style="margin-bottom: 15px;">
+                                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Role</label>
+                                    <select id="editUserRole" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                                        <option value="user" ${user.role === 'user' ? 'selected' : ''}>User</option>
+                                        <option value="agent" ${user.role === 'agent' ? 'selected' : ''}>Agent</option>
+                                        <option value="admin" ${user.role === 'admin' ? 'selected' : ''}>Admin</option>
+                                    </select>
+                                </div>
+                                <div style="margin-bottom: 20px;">
+                                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">New Password (leave empty to keep current)</label>
+                                    <input type="password" id="editUserPassword" placeholder="Enter new password" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+                                </div>
+                                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                                    <button type="button" onclick="closeEditUserModal()" style="padding: 10px 20px; background: #6c757d; color: white; border: none; border-radius: 6px; cursor: pointer;">Cancel</button>
+                                    <button type="submit" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer;">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                `;
+
+                document.body.insertAdjacentHTML('beforeend', modalHtml);
+                document.getElementById('editUserForm').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    await saveUserChanges();
+                });
+            } catch (error) {
+                console.error('Error loading user:', error);
+                alert('Error loading user data');
+            }
+        }
+
+        function closeEditUserModal() {
+            const modal = document.getElementById('editUserModal');
+            if (modal) modal.remove();
+        }
+
+        async function saveUserChanges() {
+            const userId = document.getElementById('editUserId').value;
+            const role = document.getElementById('editUserRole').value;
+            const password = document.getElementById('editUserPassword').value;
+
+            try {
+                await fetch(`${API_URL}/admin/users/${userId}/role`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ role })
+                });
+
+                if (password) {
+                    await fetch(`${API_URL}/admin/users/${userId}/reset-password`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ newPassword: password })
+                    });
+                }
+
+                alert('User updated successfully!');
+                closeEditUserModal();
+                loadUsers();
+            } catch (error) {
+                console.error('Error saving user:', error);
+                alert('Error saving user changes');
+            }
+        }
         async function toggleUserStatus(userId) {
             if (!confirm('Are you sure you want to change this user\'s status?')) {
                 return;

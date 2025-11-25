@@ -209,8 +209,21 @@ exports.getAllUsers = asyncHandler(async (req, res) => {
  * @route   GET /api/admin/users/:id
  * @access  Private/Admin
  */
-exports.getUserById = asyncHandler(async (req, res) => {
-  const user = demoUsers.find(u => u.id === req.params.id);
+exports.getUserById = asyncHandler(async (req, res, next) => {
+  const User = require('../models/User.model');
+
+  // First try MongoDB
+  let user = await User.findById(req.params.id).select('-password');
+
+  // If not found in MongoDB, try file storage
+  if (!user) {
+    user = await usersStorage.findById(req.params.id);
+  }
+
+  // If still not found, try demo users
+  if (!user) {
+  user = demoUsers.find(u => u.id === req.params.id);
+  }
 
   if (!user) {
     return next(new ApiError(404, 'Foydalanuvchi topilmadi'));
