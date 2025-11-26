@@ -4363,12 +4363,25 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                 { name: 'Samarkand', lat: 39.6542, lng: 66.9597 },
                 { name: 'Bukhara', lat: 39.7681, lng: 64.4556 },
                 { name: 'Khiva', lat: 41.3786, lng: 60.3639 },
-                { name: 'Fergana Valley', lat: 40.3842, lng: 71.7843 },
+                { name: 'Urgench', lat: 41.5500, lng: 60.6333 },
                 { name: 'Nukus', lat: 42.4619, lng: 59.6166 },
+                { name: 'Moynaq', lat: 43.7731, lng: 59.0256 },
+                { name: 'Fergana', lat: 40.3842, lng: 71.7843 },
                 { name: 'Namangan', lat: 41.0011, lng: 71.6673 },
                 { name: 'Andijan', lat: 40.7821, lng: 72.3442 },
+                { name: 'Kokand', lat: 40.5286, lng: 70.9425 },
+                { name: 'Margilan', lat: 40.4706, lng: 71.7147 },
                 { name: 'Termez', lat: 37.2264, lng: 67.2783 },
-                { name: 'Shahrisabz', lat: 39.0569, lng: 66.8297 }
+                { name: 'Shahrisabz', lat: 39.0569, lng: 66.8297 },
+                { name: 'Navoiy', lat: 40.0844, lng: 65.3792 },
+                { name: 'Karshi', lat: 38.8608, lng: 65.7983 },
+                { name: 'Jizzakh', lat: 40.1158, lng: 67.8422 },
+                { name: 'Gulistan', lat: 40.4897, lng: 68.7842 },
+                { name: 'Chirchiq', lat: 41.4689, lng: 69.5822 },
+                { name: 'Zarafshan', lat: 41.5744, lng: 64.1856 },
+                { name: 'Chimbay', lat: 42.9333, lng: 59.7833 },
+                { name: 'Denau', lat: 38.2747, lng: 67.8931 },
+                { name: 'Aral Sea Region', lat: 44.6167, lng: 58.5333 }
             ],
             'KZ': [
                 { name: 'Almaty', lat: 43.2220, lng: 76.8512 },
@@ -4520,14 +4533,16 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
 
         // Initialize map for destination location
         function initDestLocationMap() {
-            if (destLocationMap) {
-                destLocationMap.remove();
-                destLocationMap = null;
-                destMapMarker = null;
-            }
-
             var mapContainer = document.getElementById('destLocationMap');
             if (!mapContainer) return;
+
+            // If map already exists, just invalidate size
+            if (destLocationMap) {
+                setTimeout(function() {
+                    destLocationMap.invalidateSize();
+                }, 200);
+                return;
+            }
 
             // Default center: Uzbekistan
             var defaultLat = 41.2995;
@@ -4536,10 +4551,15 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             var lat = parseFloat(document.getElementById('destLatitude').value) || defaultLat;
             var lng = parseFloat(document.getElementById('destLongitude').value) || defaultLng;
 
-            destLocationMap = L.map('destLocationMap').setView([lat, lng], 6);
+            destLocationMap = L.map('destLocationMap', {
+                center: [lat, lng],
+                zoom: 6,
+                scrollWheelZoom: true
+            });
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap'
+                attribution: '© OpenStreetMap',
+                maxZoom: 18
             }).addTo(destLocationMap);
 
             // Add marker if coordinates exist
@@ -4568,6 +4588,20 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                     });
                 }
             });
+
+            // Force map to render properly after a short delay
+            setTimeout(function() {
+                destLocationMap.invalidateSize();
+            }, 300);
+        }
+
+        // Reset map when modal closes
+        function resetDestLocationMap() {
+            if (destLocationMap) {
+                destLocationMap.remove();
+                destLocationMap = null;
+                destMapMarker = null;
+            }
         }
 
         function autoGenerateSEO() {
@@ -4694,6 +4728,10 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
         function goToDestStep(step) {
             currentDestStep = step;
             updateDestStepUI();
+            if (step === 3) {
+                // Initialize map when entering Step 3
+                setTimeout(initDestLocationMap, 200);
+            }
         }
 
         function destNextStep() {
@@ -4865,6 +4903,8 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
         function closeDestinationModal() {
             document.getElementById('destinationModal').style.display = 'none';
             currentDestinationId = null;
+            // Reset map when modal closes
+            resetDestLocationMap();
         }
         
         async function saveDestination() {
