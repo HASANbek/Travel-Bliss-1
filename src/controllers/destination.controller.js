@@ -7,11 +7,28 @@ const ApiResponse = require('../utils/ApiResponse');
 // @route   GET /api/destinations
 // @access  Public
 exports.getAllDestinations = asyncHandler(async (req, res) => {
-  const { isActive } = req.query;
+  const { status, featured, search, country_code } = req.query;
 
   const filter = {};
-  if (isActive !== undefined) {
-    filter.isActive = isActive === 'true';
+
+  // Filter by status
+  if (status) {
+    filter.status = status;
+  }
+
+  // Filter by featured
+  if (featured !== undefined) {
+    filter.featured = featured === 'true';
+  }
+
+  // Filter by country code
+  if (country_code) {
+    filter.country_code = country_code.toUpperCase();
+  }
+
+  // Search by title
+  if (search) {
+    filter.title = { $regex: search, $options: 'i' };
   }
 
   const destinations = await Destination.find(filter).sort({ createdAt: -1 });
@@ -51,20 +68,33 @@ exports.getDestination = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 exports.createDestination = asyncHandler(async (req, res) => {
   const destinationData = {
-    name: req.body.name,
-    tagline: req.body.tagline,
-    description: req.body.description,
-    country: req.body.country,
-    capital: req.body.capital,
-    currency: req.body.currency,
-    language: req.body.language,
-    heroImage: req.body.heroImage || 'default-destination.jpg',
-    popularPlaces: req.body.popularPlaces || [],
-    features: req.body.features || [],
+    title: req.body.title,
+    slug: req.body.slug,
+    country_code: req.body.country_code || 'UZ',
+    main_image: req.body.main_image || '',
+    gallery_images: req.body.gallery_images || [],
+    thumbnail_image: req.body.thumbnail_image || '',
+    short_description: req.body.short_description || '',
+    long_description: req.body.long_description || '',
+    trips_count: req.body.trips_count || 0,
+    rating: req.body.rating || 0,
+    latitude: req.body.latitude || null,
+    longitude: req.body.longitude || null,
+    // New fields
+    tagline: req.body.tagline || '',
+    capital: req.body.capital || 'Tashkent',
+    currency: req.body.currency || 'UZS (Som)',
+    language: req.body.language || 'Uzbek, Russian',
+    popular_places: req.body.popular_places || [],
     seasons: req.body.seasons || [],
-    faq: req.body.faq || [],
-    isActive: req.body.isActive !== undefined ? req.body.isActive : true,
-    isFeatured: req.body.isFeatured || false
+    faqs: req.body.faqs || [],
+    seo: {
+      meta_title: req.body.seo?.meta_title || '',
+      meta_description: req.body.seo?.meta_description || '',
+      meta_keywords: req.body.seo?.meta_keywords || []
+    },
+    status: req.body.status || 'draft',
+    featured: req.body.featured || false
   };
 
   const destination = await Destination.create(destinationData);
@@ -75,27 +105,51 @@ exports.createDestination = asyncHandler(async (req, res) => {
 });
 
 // @desc    Update destination
-// @route   PUT /api/destinations/:id
+// @route   PUT /api/destinations/:identifier
 // @access  Private/Admin
 exports.updateDestination = asyncHandler(async (req, res) => {
-  const { id } = req.params;
+  const { identifier } = req.params;
+  const id = identifier;
 
   const updateData = {};
 
-  if (req.body.name !== undefined) updateData.name = req.body.name;
+  // Main fields
+  if (req.body.title !== undefined) updateData.title = req.body.title;
+  if (req.body.slug !== undefined) updateData.slug = req.body.slug;
+  if (req.body.country_code !== undefined) updateData.country_code = req.body.country_code;
+
+  // Images
+  if (req.body.main_image !== undefined) updateData.main_image = req.body.main_image;
+  if (req.body.gallery_images !== undefined) updateData.gallery_images = req.body.gallery_images;
+  if (req.body.thumbnail_image !== undefined) updateData.thumbnail_image = req.body.thumbnail_image;
+
+  // Descriptions
+  if (req.body.short_description !== undefined) updateData.short_description = req.body.short_description;
+  if (req.body.long_description !== undefined) updateData.long_description = req.body.long_description;
+
+  // Stats
+  if (req.body.trips_count !== undefined) updateData.trips_count = req.body.trips_count;
+  if (req.body.rating !== undefined) updateData.rating = req.body.rating;
+
+  // Geo Location
+  if (req.body.latitude !== undefined) updateData.latitude = req.body.latitude;
+  if (req.body.longitude !== undefined) updateData.longitude = req.body.longitude;
+
+  // New fields
   if (req.body.tagline !== undefined) updateData.tagline = req.body.tagline;
-  if (req.body.description !== undefined) updateData.description = req.body.description;
-  if (req.body.country !== undefined) updateData.country = req.body.country;
   if (req.body.capital !== undefined) updateData.capital = req.body.capital;
   if (req.body.currency !== undefined) updateData.currency = req.body.currency;
   if (req.body.language !== undefined) updateData.language = req.body.language;
-  if (req.body.heroImage !== undefined) updateData.heroImage = req.body.heroImage;
-  if (req.body.popularPlaces !== undefined) updateData.popularPlaces = req.body.popularPlaces;
-  if (req.body.features !== undefined) updateData.features = req.body.features;
+  if (req.body.popular_places !== undefined) updateData.popular_places = req.body.popular_places;
   if (req.body.seasons !== undefined) updateData.seasons = req.body.seasons;
-  if (req.body.faq !== undefined) updateData.faq = req.body.faq;
-  if (req.body.isActive !== undefined) updateData.isActive = req.body.isActive;
-  if (req.body.isFeatured !== undefined) updateData.isFeatured = req.body.isFeatured;
+  if (req.body.faqs !== undefined) updateData.faqs = req.body.faqs;
+
+  // SEO
+  if (req.body.seo !== undefined) updateData.seo = req.body.seo;
+
+  // Status
+  if (req.body.status !== undefined) updateData.status = req.body.status;
+  if (req.body.featured !== undefined) updateData.featured = req.body.featured;
 
   const destination = await Destination.findByIdAndUpdate(id, updateData, {
     new: true,
@@ -112,10 +166,11 @@ exports.updateDestination = asyncHandler(async (req, res) => {
 });
 
 // @desc    Delete destination
-// @route   DELETE /api/destinations/:id
+// @route   DELETE /api/destinations/:identifier
 // @access  Private/Admin
 exports.deleteDestination = asyncHandler(async (req, res) => {
-  const { id } = req.params;
+  const { identifier } = req.params;
+  const id = identifier;
 
   const destination = await Destination.findByIdAndDelete(id);
 
@@ -125,5 +180,31 @@ exports.deleteDestination = asyncHandler(async (req, res) => {
 
   res.status(200).json(
     new ApiResponse(200, { destination }, 'Destination deleted successfully')
+  );
+});
+
+// @desc    Get active destinations for frontend
+// @route   GET /api/destinations/active
+// @access  Public
+exports.getActiveDestinations = asyncHandler(async (req, res) => {
+  const destinations = await Destination.find({ status: 'active' })
+    .select('title slug country_code main_image short_description trips_count rating')
+    .sort({ featured: -1, trips_count: -1 });
+
+  res.status(200).json(
+    new ApiResponse(200, { destinations, count: destinations.length }, 'Active destinations retrieved')
+  );
+});
+
+// @desc    Get featured destinations
+// @route   GET /api/destinations/featured
+// @access  Public
+exports.getFeaturedDestinations = asyncHandler(async (req, res) => {
+  const destinations = await Destination.find({ status: 'active', featured: true })
+    .select('title slug country_code main_image short_description trips_count')
+    .limit(8);
+
+  res.status(200).json(
+    new ApiResponse(200, { destinations }, 'Featured destinations retrieved')
   );
 });

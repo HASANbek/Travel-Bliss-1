@@ -6,31 +6,696 @@
     <title>Destination Details - Travel Bliss</title>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/jquery-ui.css" rel="stylesheet">
+    <!-- Bootstrap Icon CSS -->
+    <link href="assets/css/bootstrap-icons.css" rel="stylesheet">
+    <!-- CSS -->
+    <link href="assets/css/animate.min.css" rel="stylesheet">
+    <!-- FancyBox CSS -->
+    <link href="assets/css/jquery.fancybox.min.css" rel="stylesheet">
+    <!-- Swiper slider CSS -->
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+    <!-- Slick slider CSS -->
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="assets/css/slick-theme.css">
+    <!-- BoxIcon CSS -->
+    <link href="assets/css/boxicons.min.css" rel="stylesheet">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="assets/css/style.css?v=2">
+    <link rel="icon" href="assets/img/fav-icon.svg" type="image/gif" sizes="20x20">
+    <!-- Leaflet CSS for Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* Override primary color to match logo */
+:root {
+    --primary-color1: #0F16E6 !important;
+    --primary-color1-opc: 15, 22, 230 !important;
+}
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            color: #1f2937;
-            background: #f9fafb;
-        }
+.primary-btn1,
+button.primary-btn1,
+a.primary-btn1 {
+    background-color: #0F16E6 !important;
+}
+
+.slider-btn-grp .slider-btn:hover,
+.progress-wrap:hover,
+.primary-btn1::after,
+.primary-btn1.white-bg::after,
+.primary-btn1.black-bg::after,
+.primary-btn1.transparent::after {
+    background-color: #0F16E6 !important;
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background-color: #0F16E6 !important;
+}
+
+/* Update location and days badges to light purple/blue tones */
+.package-card .package-content .card-content-top span,
+.tour-card .tour-content .card-content-top span,
+.single-activity .activity-content .activity-card-content-top span {
+    background-color: #E0E7FF !important;
+    color: #3730A3 !important;
+}
+
+.package-card .package-content .card-content-top span:first-child,
+.tour-card .tour-content .card-content-top span:first-child {
+    background-color: #D1FAE5 !important;
+    color: #065F46 !important;
+}
+
+/* Custom Header Styling - Nuratau Style */
+.top-info-bar {
+    background: #0d8b7a;
+    padding: 10px 0;
+    color: white;
+}
+
+.top-info-bar .container-fluid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-info-left {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.top-info-left a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.top-info-right {
+    display: flex;
+    gap: 15px;
+}
+
+.top-info-right a {
+    color: white;
+    font-size: 18px;
+}
+
+.header-area.style-2 {
+    background: linear-gradient(to right, #f0f9ff 0%, #e0f2fe 100%);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    padding: 6px 0;
+}
+
+.header-area.style-2 .header-logo img {
+    width: auto !important;
+    height: 45px !important;
+    max-width: 200px !important;
+    transform: none !important;
+    margin: 6px 0;
+    object-fit: contain !important;
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: crisp-edges !important;
+    mix-blend-mode: multiply !important;
+    background: transparent !important;
+}
+
+.header-area.style-2 .menu-list {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.header-area.style-2 .menu-list {
+    display: flex !important;
+    gap: 35px !important;
+    align-items: center !important;
+    list-style: none !important;
+}
+
+.header-area.style-2 .menu-list > li {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.header-area.style-2 .menu-list > li > a {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937 !important;
+    padding: 8px 18px !important;
+    text-decoration: none;
+    transition: all 0.3s;
+    letter-spacing: 0.3px;
+    background: transparent !important;
+    border-radius: 8px !important;
+}
+
+.header-area.style-2 .menu-list > li.active > a {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    color: white !important;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.header-area.style-2 .menu-list > li > a:hover {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Mobile menu contact area should be visible only on mobile */
+@media (max-width: 1199px) {
+    .header-area.style-2 .main-menu .contact-area {
+        display: flex !important;
+    }
+
+    /* Modern mobile menu styling */
+    .main-menu {
+        background: white;
+        padding: 20px;
+    }
+
+    .main-menu .menu-list {
+        flex-direction: column !important;
+        gap: 0 !important;
+        padding: 20px 0 !important;
+    }
+
+    .main-menu .menu-list > li {
+        width: 100% !important;
+        border-bottom: 1px solid #f3f4f6;
+    }
+
+    .main-menu .menu-list > li:last-child {
+        border-bottom: none;
+    }
+
+    .main-menu .menu-list > li > a {
+        display: block !important;
+        width: 100% !important;
+        padding: 16px 20px !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        color: #1f2937 !important;
+        background: transparent !important;
+        border-radius: 0 !important;
+        text-align: left !important;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .main-menu .menu-list > li > a:hover,
+    .main-menu .menu-list > li.active > a {
+        background: linear-gradient(90deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%) !important;
+        color: #6366f1 !important;
+        padding-left: 30px !important;
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    .main-menu .menu-list > li > a:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 100%;
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        transition: width 0.3s ease;
+    }
+
+    .main-menu .menu-list > li > a:hover:before,
+    .main-menu .menu-list > li.active > a:before {
+        width: 4px;
+    }
+
+    /* Contact area in mobile */
+    .main-menu .contact-area {
+        border-top: 2px solid #f3f4f6;
+        border-bottom: 2px solid #f3f4f6;
+        padding: 20px 0 !important;
+        margin: 10px 0 !important;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+        border-radius: 12px;
+    }
+
+    .main-menu .contact-area > div:first-child {
+        margin-bottom: 15px !important;
+    }
+
+    .main-menu .contact-area a[href^="tel"] {
+        font-size: 18px !important;
+        color: #6366f1 !important;
+        font-weight: 700 !important;
+    }
+
+    /* Mobile dropdown */
+    .main-menu .has-dropdown {
+        position: relative;
+    }
+
+    .main-menu .submenu {
+        list-style: none;
+        padding-left: 20px !important;
+        margin: 0;
+        display: none;
+        background: rgba(99, 102, 241, 0.05);
+        border-left: 3px solid #6366f1;
+    }
+
+    .main-menu .has-dropdown.open .submenu {
+        display: block;
+    }
+
+    .main-menu .submenu li {
+        border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+    }
+
+    .main-menu .submenu li:last-child {
+        border-bottom: none;
+    }
+
+    .main-menu .submenu li a {
+        padding: 12px 15px !important;
+        font-size: 14px !important;
+        font-weight: 300 !important;
+        color: #4b5563 !important;
+    }
+
+    .main-menu .submenu li a:hover {
+        color: #6366f1 !important;
+        background: rgba(99, 102, 241, 0.1) !important;
+        padding-left: 25px !important;
+    }
+
+}
+
+/* Desktop dropdown */
+@media (min-width: 1200px) {
+    .header-area .menu-list .has-dropdown {
+        position: relative;
+    }
+
+    .header-area .menu-list .submenu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 420px;
+        background: #f5f1e8;
+        padding: 15px 0;
+        margin-top: 10px;
+        list-style: none;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .header-area .menu-list .has-dropdown:hover .submenu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .header-area .menu-list .submenu li {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .header-area .menu-list .submenu li:last-child {
+        border-bottom: none;
+    }
+
+    .header-area .menu-list .submenu li a {
+        display: block;
+        padding: 12px 25px;
+        color: #333333;
+        font-size: 15px;
+        font-weight: 300;
+        transition: color 0.2s;
+        text-decoration: none;
+    }
+
+    .header-area .menu-list .submenu li a:hover {
+        color: #000000;
+    }
+
+}
+
+/* Make all text black except logo */
+.header-area.style-2 .contact-area .content span,
+.header-area.style-2 .contact-area .content a {
+    color: #000000 !important;
+}
+
+.header-area.style-2 .primary-btn1 {
+    color: #ffffff !important;
+    background: #000000 !important;
+}
+
+.header-area.style-2 .nav-right * {
+    color: #000000 !important;
+}
+
+/* Hide search icon and sign in button */
+.header-area .search-btn,
+.header-area .eg-btn,
+.header-area .primary-btn1:not(.mobile-menu-btn),
+.header-area a[href*="sign"],
+.header-area a[href*="login"],
+.nav-right .eg-btn,
+.nav-right .primary-btn1,
+.sidebar-button:not(.mobile-menu-btn) {
+    display: none !important;
+}
+
+/* IndyGuide Style Banner Swiper Gallery */
+.home4-banner-section {
+    position: relative;
+    height: 700px;
+    overflow: hidden;
+}
+
+.banner-swiper-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.banner-main-swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.banner-main-swiper .swiper-slide {
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-main-swiper .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.banner-main-swiper .swiper-slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+    z-index: 1;
+}
+
+/* Thumbnail Swiper */
+.banner-thumb-swiper {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+    height: 80px;
+    z-index: 10;
+    padding: 0 10px;
+}
+
+.banner-thumb-swiper .swiper-slide {
+    opacity: 0.6;
+    cursor: pointer;
+    border: 3px solid transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.banner-thumb-swiper .swiper-slide-thumb-active {
+    opacity: 1;
+    border-color: #fff;
+    transform: scale(1.1);
+}
+
+.banner-thumb-swiper .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Navigation Buttons */
+.banner-main-swiper .swiper-button-next,
+.banner-main-swiper .swiper-button-prev {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+}
+
+.banner-main-swiper .swiper-button-next:hover,
+.banner-main-swiper .swiper-button-prev:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.banner-main-swiper .swiper-button-next::after,
+.banner-main-swiper .swiper-button-prev::after {
+    font-size: 20px;
+}
+
+.banner-content-wrap {
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .home4-banner-section {
+        height: 500px;
+    }
+
+    .banner-thumb-swiper {
+        height: 60px;
+        max-width: 400px;
+    }
+}
+
+/* Tour Package Cards - Fixed Design */
+.package-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.package-card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+
+.package-img-wrap {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+}
+
+.package-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.package-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.package-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.package-content h5 {
+    margin-bottom: 12px;
+    min-height: 50px;
+}
+
+.location-and-time {
+    margin-bottom: auto;
+}
+
+.btn-and-price-area {
+    margin-top: 15px;
+}
 
         /* Hero Section */
         .hero-section {
             position: relative;
             height: 500px;
+            min-height: 500px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             overflow: hidden;
+            margin-top: 0;
+        }
+
+        .hero-section .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 20px;
+        }
+
+        /* Location Section (Bottom) */
+        .location-section {
+            padding: 60px 0;
+            background: #f8fafc;
+        }
+
+        .location-section .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .location-info-bar {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .location-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .location-detail-item i {
+            font-size: 24px;
+            color: #667eea;
+        }
+
+        .location-detail-item .detail-content {
+            flex: 1;
+        }
+
+        .location-detail-item .detail-label {
+            font-size: 12px;
+            color: #6b7280;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .location-detail-item .detail-value {
+            font-size: 18px;
+            color: #1f2937;
+            font-weight: 700;
+        }
+
+        .location-map-wrapper {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .location-map-wrapper #locationMap {
+            height: 450px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .map-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .map-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 25px;
+            background: #f3f4f6;
+            color: #374151;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .map-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .location-info-bar {
+                flex-direction: column;
+            }
+            .location-detail-item {
+                min-width: unset;
+            }
+            .location-map-wrapper #locationMap {
+                height: 350px;
+            }
+            .map-buttons {
+                flex-direction: column;
+            }
+        }
+
+        .hero-section .hero-title,
+        .hero-section #destinationName {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: white !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-section .hero-subtitle,
+        .hero-section #destinationTagline {
+            font-size: 22px;
+            opacity: 0.95;
+            color: white !important;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         .hero-content {
@@ -49,7 +714,6 @@
             opacity: 0.9;
         }
 
-        /* Info Cards */
         .info-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -68,258 +732,391 @@
             text-align: center;
         }
 
-        .info-card-icon {
-            font-size: 36px;
-            margin-bottom: 10px;
+        .info-card-icon { font-size: 36px; margin-bottom: 10px; }
+        .info-card-label { font-size: 13px; color: #6b7280; text-transform: uppercase; font-weight: 600; margin-bottom: 5px; }
+        .info-card-value { font-size: 18px; font-weight: 700; color: #1f2937; }
+        .section-title { font-size: 32px; font-weight: 700; margin-bottom: 30px; color: #1f2937; }
+        .destination-description { font-size: 16px; line-height: 1.8; color: #4b5563; margin-bottom: 50px; }
+
+        .place-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.08); transition: transform 0.3s; height: 100%; }
+        .place-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .place-image { width: 100%; height: 200px; object-fit: cover; }
+        .place-content { padding: 20px; }
+        .place-title { font-size: 20px; font-weight: 700; margin-bottom: 10px; color: #1f2937; }
+        .place-description { font-size: 14px; color: #6b7280; margin-bottom: 15px; }
+        .map-link { display: inline-flex; align-items: center; gap: 6px; color: #667eea; text-decoration: none; font-weight: 600; font-size: 14px; }
+
+        .feature-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; height: 100%; }
+        .feature-icon { font-size: 48px; margin-bottom: 15px; }
+        .feature-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+        .feature-description { font-size: 14px; opacity: 0.9; }
+
+        .season-card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .season-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .season-icon { font-size: 42px; }
+        .season-title { font-size: 24px; font-weight: 700; color: #1f2937; }
+        .season-weather { font-size: 14px; color: #6b7280; margin-bottom: 10px; }
+        .season-description { font-size: 15px; color: #4b5563; }
+
+        .faq-item { background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .faq-question { font-size: 18px; font-weight: 600; color: #1f2937; margin-bottom: 10px; }
+        .faq-answer { font-size: 15px; color: #6b7280; line-height: 1.6; }
+
+        .tour-card-dest { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.08); transition: transform 0.3s; }
+        .tour-card-dest:hover { transform: translateY(-5px); }
+        .tour-image { width: 100%; height: 220px; object-fit: cover; }
+        .tour-content-dest { padding: 20px; }
+        .tour-title-dest { font-size: 20px; font-weight: 700; margin-bottom: 15px; color: #1f2937; }
+        .tour-meta { display: flex; gap: 15px; margin-bottom: 15px; font-size: 14px; color: #6b7280; }
+        .tour-price { font-size: 28px; font-weight: 800; color: #667eea; margin-bottom: 15px; }
+        .book-btn { width: 100%; padding: 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+
+        .content-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-spacing { margin-bottom: 80px; }
+
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 40px 0;
+            background: #f8fafc;
         }
 
-        .info-card-label {
-            font-size: 13px;
-            color: #6b7280;
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-bottom: 5px;
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
         }
 
-        .info-card-value {
-            font-size: 18px;
-            font-weight: 700;
-            color: #1f2937;
-        }
-
-        /* Section Title */
-        .section-title {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            color: #1f2937;
-        }
-
-        /* Description */
-        .destination-description {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #4b5563;
-            margin-bottom: 50px;
-        }
-
-        /* Popular Places */
-        .place-card {
-            background: white;
+        .gallery-item {
+            position: relative;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-            height: 100%;
-        }
-
-        .place-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-
-        .place-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .place-content {
-            padding: 20px;
-        }
-
-        .place-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: #1f2937;
-        }
-
-        .place-description {
-            font-size: 14px;
-            color: #6b7280;
-            margin-bottom: 15px;
-        }
-
-        .map-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .map-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Why Choose Us */
-        .feature-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 12px;
-            height: 100%;
-        }
-
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-
-        .feature-title {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .feature-description {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
-        /* Seasonal Guide */
-        .season-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
-        }
-
-        .season-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .season-icon {
-            font-size: 42px;
-        }
-
-        .season-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #1f2937;
-        }
-
-        .season-weather {
-            font-size: 14px;
-            color: #6b7280;
-            margin-bottom: 10px;
-        }
-
-        .season-description {
-            font-size: 15px;
-            color: #4b5563;
-        }
-
-        /* FAQ */
-        .faq-item {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        .faq-question {
-            font-size: 18px;
-            font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 10px;
-        }
-
-        .faq-answer {
-            font-size: 15px;
-            color: #6b7280;
-            line-height: 1.6;
-        }
-
-        /* Tour Cards */
-        .tour-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
-        }
-
-        .tour-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .tour-image {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-        }
-
-        .tour-content {
-            padding: 20px;
-        }
-
-        .tour-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #1f2937;
-        }
-
-        .tour-meta {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-            font-size: 14px;
-            color: #6b7280;
-        }
-
-        .tour-meta-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .tour-price {
-            font-size: 28px;
-            font-weight: 800;
-            color: #667eea;
-            margin-bottom: 15px;
-        }
-
-        .book-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            aspect-ratio: 4/3;
         }
 
-        .book-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
-        /* Container */
-        .content-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .gallery-item:hover img {
+            transform: scale(1.05);
         }
 
-        .section-spacing {
-            margin-bottom: 80px;
+        .gallery-item::after {
+            content: '🔍';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 32px;
+            transition: transform 0.3s ease;
+            pointer-events: none;
         }
+
+        .gallery-item:hover::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 8px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            z-index: 10000;
+            background: rgba(0,0,0,0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 50px;
+            color: white;
+            cursor: pointer;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(0,0,0,0.6);
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 16px;
+            background: rgba(0,0,0,0.5);
+            padding: 8px 20px;
+            border-radius: 20px;
+        }
+
     </style>
 </head>
-<body>
+<body class="tt-magic-cursor">
+    <!-- header Section Start-->
+    <header class="header-area style-2 travel-agency3">
+        <div class="container-fluid d-flex flex-nowrap align-items-center justify-content-between">
+            <div class="logo-and-menu-area">
+                <a href="travel-agency-03.html" class="header-logo">
+                    <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 45px; width: auto; max-width: 200px; object-fit: contain; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
+                </a>
+                <div class="main-menu">
+                    <div class="mobile-logo-area d-xl-none d-flex align-items-center justify-content-between">
+                        <a href="travel-agency-03.html" class="mobile-logo-wrap">
+                            <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 40px; width: auto; max-width: 60%; object-fit: contain;">
+                        </a>
+                        <div class="menu-close-btn">
+                            <i class="bi bi-x"></i>
+                        </div>
+                    </div>
+                    <ul class="menu-list">
+                        <li class="active">
+                            <a href="travel-agency-03.html">Home</a>
+                        </li>
+                        <!-- Categories will be loaded dynamically here -->
+                        <li>
+                            <a href="about.html">About</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">Contact Us</a>
+                        </li>
+                    </ul>
+                    <div class="contact-area d-xl-none d-flex" style="gap: 15px; align-items: center; flex-direction: column; padding: 15px 0;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path
+                                            d="M15.5646 11.7424L13.3317 9.50954C12.5343 8.7121 11.1786 9.03111 10.8596 10.0678C10.6204 10.7855 9.82296 11.1842 9.10526 11.0247C7.51037 10.626 5.35726 8.55261 4.95854 6.87797C4.71931 6.16024 5.19778 5.36279 5.91548 5.12359C6.95216 4.80461 7.27113 3.44895 6.47369 2.65151L4.24084 0.418659C3.60288 -0.139553 2.64595 -0.139553 2.08774 0.418659L0.572591 1.93381C-0.942555 3.5287 0.73208 7.75516 4.48007 11.5032C8.22807 15.2512 12.4545 17.0056 14.0494 15.4106L15.5646 13.8955C16.1228 13.2575 16.1228 12.3006 15.5646 11.7424Z"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <a href="tel:998901234567" style="color: #1f2937; font-weight: 600; text-decoration: none; font-size: 16px;">+998 90 123 45 67</a>
+                        </div>
+                        <div class="language-selector-mobile" style="position: relative; width: 100%;">
+                            <button class="language-btn-mobile" style="background: transparent; border: 1px solid #e5e7eb; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; color: #1f2937; padding: 10px 20px; border-radius: 8px; transition: all 0.3s; width: 100%;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                </svg>
+                                <span id="currentLangMobile">English</span>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="language-dropdown-mobile" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 5px; z-index: 1000;">
+                                <a href="#" class="lang-option-mobile" data-lang="English" style="display: block; padding: 12px 15px; color: #1f2937; text-decoration: none; transition: all 0.2s; border-bottom: 1px solid #f3f4f6;">English</a>
+                                <a href="#" class="lang-option-mobile" data-lang="O'zbekcha" style="display: block; padding: 12px 15px; color: #1f2937; text-decoration: none; transition: all 0.2s; border-bottom: 1px solid #f3f4f6;">O'zbekcha</a>
+                                <a href="#" class="lang-option-mobile" data-lang="Русский" style="display: block; padding: 12px 15px; color: #1f2937; text-decoration: none; transition: all 0.2s;">Русский</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="primary-btn1 black-bg d-xl-none d-flex">
+                        <span>
+                            <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+                                <g>
+                                    <path
+                                        d="M7.50105 7.78913C9.64392 7.78913 11.3956 6.03744 11.3956 3.89456C11.3956 1.75169 9.64392 0 7.50105 0C5.35818 0 3.60652 1.75169 3.60652 3.89456C3.60652 6.03744 5.35821 7.78913 7.50105 7.78913ZM14.1847 10.9014C14.0827 10.6463 13.9467 10.4082 13.7936 10.1871C13.0113 9.0306 11.8038 8.2653 10.4433 8.07822C10.2732 8.06123 10.0861 8.09522 9.95007 8.19727C9.23578 8.72448 8.38546 8.99658 7.50108 8.99658C6.61671 8.99658 5.76638 8.72448 5.05209 8.19727C4.91603 8.09522 4.72895 8.04421 4.5589 8.07822C3.19835 8.2653 1.97387 9.0306 1.20857 10.1871C1.05551 10.4082 0.919443 10.6633 0.817424 10.9014C0.766415 11.0034 0.783407 11.1225 0.834416 11.2245C0.970484 11.4626 1.14054 11.7007 1.2936 11.9048C1.53168 12.2279 1.78679 12.517 2.07592 12.7891C2.31401 13.0272 2.58611 13.2483 2.85824 13.4694C4.20177 14.4728 5.81742 15 7.48409 15C9.15076 15 10.7664 14.4728 12.1099 13.4694C12.382 13.2653 12.6541 13.0272 12.8923 12.7891C13.1644 12.517 13.4365 12.2279 13.6746 11.9048C13.8446 11.6837 13.9977 11.4626 14.1338 11.2245C14.2188 11.1225 14.2358 11.0034 14.1847 10.9014Z"/>
+                                </g>
+                            </svg>
+                            Login
+                        </span>
+                        <span>
+                            <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+                                <g>
+                                    <path
+                                        d="M7.50105 7.78913C9.64392 7.78913 11.3956 6.03744 11.3956 3.89456C11.3956 1.75169 9.64392 0 7.50105 0C5.35818 0 3.60652 1.75169 3.60652 3.89456C3.60652 6.03744 5.35821 7.78913 7.50105 7.78913ZM14.1847 10.9014C14.0827 10.6463 13.9467 10.4082 13.7936 10.1871C13.0113 9.0306 11.8038 8.2653 10.4433 8.07822C10.2732 8.06123 10.0861 8.09522 9.95007 8.19727C9.23578 8.72448 8.38546 8.99658 7.50108 8.99658C6.61671 8.99658 5.76638 8.72448 5.05209 8.19727C4.91603 8.09522 4.72895 8.04421 4.5589 8.07822C3.19835 8.2653 1.97387 9.0306 1.20857 10.1871C1.05551 10.4082 0.919443 10.6633 0.817424 10.9014C0.766415 11.0034 0.783407 11.1225 0.834416 11.2245C0.970484 11.4626 1.14054 11.7007 1.2936 11.9048C1.53168 12.2279 1.78679 12.517 2.07592 12.7891C2.31401 13.0272 2.58611 13.2483 2.85824 13.4694C4.20177 14.4728 5.81742 15 7.48409 15C9.15076 15 10.7664 14.4728 12.1099 13.4694C12.382 13.2653 12.6541 13.0272 12.8923 12.7891C13.1644 12.517 13.4365 12.2279 13.6746 11.9048C13.8446 11.6837 13.9977 11.4626 14.1338 11.2245C14.2188 11.1225 14.2358 11.0034 14.1847 10.9014Z"/>
+                                </g>
+                            </svg>
+                            Login
+                        </span>
+                    </a>    
+                </div>
+            </div>
+            <div class="nav-right">
+                <div class="contact-and-search-area">
+                    <div class="contact-area d-xl-flex d-none" style="gap: 20px; align-items: center;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path
+                                            d="M15.5646 11.7424L13.3317 9.50954C12.5343 8.7121 11.1786 9.03111 10.8596 10.0678C10.6204 10.7855 9.82296 11.1842 9.10526 11.0247C7.51037 10.626 5.35726 8.55261 4.95854 6.87797C4.71931 6.16024 5.19778 5.36279 5.91548 5.12359C6.95216 4.80461 7.27113 3.44895 6.47369 2.65151L4.24084 0.418659C3.60288 -0.139553 2.64595 -0.139553 2.08774 0.418659L0.572591 1.93381C-0.942555 3.5287 0.73208 7.75516 4.48007 11.5032C8.22807 15.2512 12.4545 17.0056 14.0494 15.4106L15.5646 13.8955C16.1228 13.2575 16.1228 12.3006 15.5646 11.7424Z"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <a href="tel:998901234567" style="color: #1f2937; font-weight: 600; text-decoration: none;">+998 90 123 45 67</a>
+                        </div>
+                        <div class="language-selector" style="position: relative;">
+                            <button class="language-btn" style="background: transparent; border: none; cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 600; color: #1f2937; padding: 5px 10px; border-radius: 6px; transition: all 0.3s;">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 30'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Crect width='50' height='30'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Crect width='50' height='30' fill='%23012169'/%3E%3Cpath d='M0,0 L50,30 M50,0 L0,30' stroke='%23FFF' stroke-width='6'/%3E%3Cpath d='M0,0 L50,30 M50,0 L0,30' stroke='%23C8102E' stroke-width='4' clip-path='url(%23a)'/%3E%3Cpath d='M25,0 V30 M0,15 H50' stroke='%23FFF' stroke-width='10'/%3E%3Cpath d='M25,0 V30 M0,15 H50' stroke='%23C8102E' stroke-width='6'/%3E%3C/g%3E%3C/svg%3E" alt="UK Flag" width="24" height="16" style="border-radius: 2px; border: 1px solid rgba(0,0,0,0.1);">
+                                <span id="currentLang">EN</span>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="language-dropdown" style="display: none; position: absolute; top: 100%; right: 0; background: white; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 5px; width: max-content; z-index: 1000;">
+                                <a href="#" class="lang-option" data-lang="EN" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 30'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Crect width='50' height='30'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Crect width='50' height='30' fill='%23012169'/%3E%3Cpath d='M0,0 L50,30 M50,0 L0,30' stroke='%23FFF' stroke-width='6'/%3E%3Cpath d='M0,0 L50,30 M50,0 L0,30' stroke='%23C8102E' stroke-width='4' clip-path='url(%23a)'/%3E%3Cpath d='M25,0 V30 M0,15 H50' stroke='%23FFF' stroke-width='10'/%3E%3Cpath d='M25,0 V30 M0,15 H50' stroke='%23C8102E' stroke-width='6'/%3E%3C/g%3E%3C/svg%3E" alt="UK" width="24" height="16" style="border-radius: 2px; border: 1px solid rgba(0,0,0,0.1);">
+                                    <span>English</span>
+                                </a>
+                                <a href="#" class="lang-option" data-lang="IT" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='1' height='2' fill='%23009246'/%3E%3Crect x='1' width='1' height='2' fill='%23fff'/%3E%3Crect x='2' width='1' height='2' fill='%23ce2b37'/%3E%3C/svg%3E" alt="Italy" width="24" height="16" style="border-radius: 2px;">
+                                    <span>Italiano</span>
+                                </a>
+                                <a href="#" class="lang-option" data-lang="FR" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='1' height='2' fill='%23002395'/%3E%3Crect x='1' width='1' height='2' fill='%23fff'/%3E%3Crect x='2' width='1' height='2' fill='%23ED2939'/%3E%3C/svg%3E" alt="France" width="24" height="16" style="border-radius: 2px;">
+                                    <span>Français</span>
+                                </a>
+                                <a href="#" class="lang-option" data-lang="DE" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 3'%3E%3Crect width='5' height='1' fill='%23000'/%3E%3Crect y='1' width='5' height='1' fill='%23D00'/%3E%3Crect y='2' width='5' height='1' fill='%23FFCE00'/%3E%3C/svg%3E" alt="Germany" width="24" height="16" style="border-radius: 2px;">
+                                    <span>Deutsch</span>
+                                </a>
+                                <a href="#" class="lang-option" data-lang="ES" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='3' height='2' fill='%23c60b1e'/%3E%3Crect y='0.5' width='3' height='1' fill='%23ffc400'/%3E%3C/svg%3E" alt="Spain" width="24" height="16" style="border-radius: 2px;">
+                                    <span>Español</span>
+                                </a>
+                                <a href="#" class="lang-option" data-lang="JP" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='3' height='2' fill='%23fff'/%3E%3Ccircle cx='1.5' cy='1' r='0.6' fill='%23bc002d'/%3E%3C/svg%3E" alt="Japan" width="24" height="16" style="border-radius: 2px;">
+                                    <span>日本語</span>
+                                </a>
+                                <a href="#" class="lang-option" data-lang="RU" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 6'%3E%3Crect width='9' height='2' fill='%23fff'/%3E%3Crect y='2' width='9' height='2' fill='%230039a6'/%3E%3Crect y='4' width='9' height='2' fill='%23d52b1e'/%3E%3C/svg%3E" alt="Russia" width="24" height="16" style="border-radius: 2px;">
+                                    <span>Русский</span>
+                                </a>
+                                <a href="#" class="lang-option" data-lang="UZ" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 250'%3E%3Crect width='500' height='80' fill='%231EB53A'/%3E%3Crect y='80' width='500' height='3' fill='%23FF0000'/%3E%3Crect y='83' width='500' height='84' fill='%23FFFFFF'/%3E%3Crect y='167' width='500' height='3' fill='%23FF0000'/%3E%3Crect y='170' width='500' height='80' fill='%230099B5'/%3E%3Ccircle cx='100' cy='40' r='25' fill='%23FFFFFF'/%3E%3Ccircle cx='110' cy='40' r='20' fill='%231EB53A'/%3E%3Cpolygon points='150,25 153,34 162,34 155,40 158,49 150,43 142,49 145,40 138,34 147,34' fill='%23FFFFFF'/%3E%3Cpolygon points='180,25 183,34 192,34 185,40 188,49 180,43 172,49 175,40 168,34 177,34' fill='%23FFFFFF'/%3E%3Cpolygon points='210,25 213,34 222,34 215,40 218,49 210,43 202,49 205,40 198,34 207,34' fill='%23FFFFFF'/%3E%3Cpolygon points='165,50 168,59 177,59 170,65 173,74 165,68 157,74 160,65 153,59 162,59' fill='%23FFFFFF'/%3E%3Cpolygon points='195,50 198,59 207,59 200,65 203,74 195,68 187,74 190,65 183,59 192,59' fill='%23FFFFFF'/%3E%3C/svg%3E" alt="Uzbekistan" width="24" height="16" style="border-radius: 2px;">
+                                    <span>Uzbek</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search-bar">
+                        <div class="search-btn">
+                            <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                <g>
+                                    <path
+                                        d="M15.7417 14.6098L13.486 12.3621C14.7088 10.8514 15.3054 8.9291 15.1526 6.99153C14.9998 5.05396 14.1093 3.24888 12.6648 1.94851C11.2203 0.648146 9.33193 -0.0483622 7.38901 0.00261294C5.44609 0.0535881 3.59681 0.84816 2.22248 2.22248C0.84816 3.59681 0.0535881 5.44609 0.00261294 7.38901C-0.0483622 9.33193 0.648146 11.2203 1.94851 12.6648C3.24888 14.1093 5.05396 14.9998 6.99153 15.1526C8.9291 15.3054 10.8514 14.7088 12.3621 13.486L14.6098 15.7417C14.6839 15.8164 14.7721 15.8757 14.8692 15.9161C14.9664 15.9566 15.0705 15.9774 15.1758 15.9774C15.281 15.9774 15.3852 15.9566 15.4823 15.9161C15.5794 15.8757 15.6676 15.8164 15.7417 15.7417C15.8164 15.6676 15.8757 15.5794 15.9161 15.4823C15.9566 15.3852 15.9774 15.281 15.9774 15.1758C15.9774 15.0705 15.9566 14.9664 15.9161 14.8692C15.8757 14.7721 15.8164 14.6839 15.7417 14.6098ZM1.62572 7.60368C1.62572 6.42135 1.97632 5.26557 2.63319 4.2825C3.29005 3.29943 4.22368 2.53322 5.31601 2.08076C6.40834 1.62831 7.61031 1.50992 8.76992 1.74058C9.92953 1.97124 10.9947 2.54059 11.8307 3.37662C12.6668 4.21266 13.2361 5.27783 13.4668 6.43744C13.6974 7.59705 13.579 8.79902 13.1266 9.89134C12.6741 10.9837 11.9079 11.9173 10.9249 12.5742C9.94178 13.231 8.78601 13.5816 7.60368 13.5816C6.01822 13.5816 4.49771 12.9518 3.37662 11.8307C2.25554 10.7096 1.62572 9.18913 1.62572 7.60368Z"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="search-input">
+                            <div class="search-close"></div>
+                            <form>
+                                <div class="search-group">
+                                    <div class="form-inner2">
+                                        <input type="text" placeholder="Find Your Perfect Tour Package">
+                                        <button type="submit"><i class="bi bi-search"></i></button>
+                                    </div>
+                                </div>
+                                <div class="quick-search">
+                                    <ul>
+                                        <li>Quick Search :</li>
+                                        <li><a href="travel-package-01.html">Thailand Tour,</a></li>
+                                        <li><a href="travel-package-01.html">Philippines Tour,</a></li>
+                                        <li><a href="travel-package-01.html">Bali Tour,</a></li>
+                                        <li><a href="travel-package-01.html">Hawaii, USA Tour,</a></li>
+                                        <li><a href="travel-package-01.html">Switzerland Tour,</a></li>
+                                        <li><a href="travel-package-01.html">Maldives Tour,</a></li>
+                                        <li><a href="travel-package-01.html">Paris Tour,</a></li>
+                                    </ul>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="primary-btn1 black-bg d-xl-flex d-none">
+                    <span>
+                        <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+                            <g>
+                                <path
+                                    d="M7.50105 7.78913C9.64392 7.78913 11.3956 6.03744 11.3956 3.89456C11.3956 1.75169 9.64392 0 7.50105 0C5.35818 0 3.60652 1.75169 3.60652 3.89456C3.60652 6.03744 5.35821 7.78913 7.50105 7.78913ZM14.1847 10.9014C14.0827 10.6463 13.9467 10.4082 13.7936 10.1871C13.0113 9.0306 11.8038 8.2653 10.4433 8.07822C10.2732 8.06123 10.0861 8.09522 9.95007 8.19727C9.23578 8.72448 8.38546 8.99658 7.50108 8.99658C6.61671 8.99658 5.76638 8.72448 5.05209 8.19727C4.91603 8.09522 4.72895 8.04421 4.5589 8.07822C3.19835 8.2653 1.97387 9.0306 1.20857 10.1871C1.05551 10.4082 0.919443 10.6633 0.817424 10.9014C0.766415 11.0034 0.783407 11.1225 0.834416 11.2245C0.970484 11.4626 1.14054 11.7007 1.2936 11.9048C1.53168 12.2279 1.78679 12.517 2.07592 12.7891C2.31401 13.0272 2.58611 13.2483 2.85824 13.4694C4.20177 14.4728 5.81742 15 7.48409 15C9.15076 15 10.7664 14.4728 12.1099 13.4694C12.382 13.2653 12.6541 13.0272 12.8923 12.7891C13.1644 12.517 13.4365 12.2279 13.6746 11.9048C13.8446 11.6837 13.9977 11.4626 14.1338 11.2245C14.2188 11.1225 14.2358 11.0034 14.1847 10.9014Z"/>
+                            </g>
+                        </svg>
+                        Login
+                    </span>
+                    <span>
+                        <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+                            <g>
+                                <path
+                                    d="M7.50105 7.78913C9.64392 7.78913 11.3956 6.03744 11.3956 3.89456C11.3956 1.75169 9.64392 0 7.50105 0C5.35818 0 3.60652 1.75169 3.60652 3.89456C3.60652 6.03744 5.35821 7.78913 7.50105 7.78913ZM14.1847 10.9014C14.0827 10.6463 13.9467 10.4082 13.7936 10.1871C13.0113 9.0306 11.8038 8.2653 10.4433 8.07822C10.2732 8.06123 10.0861 8.09522 9.95007 8.19727C9.23578 8.72448 8.38546 8.99658 7.50108 8.99658C6.61671 8.99658 5.76638 8.72448 5.05209 8.19727C4.91603 8.09522 4.72895 8.04421 4.5589 8.07822C3.19835 8.2653 1.97387 9.0306 1.20857 10.1871C1.05551 10.4082 0.919443 10.6633 0.817424 10.9014C0.766415 11.0034 0.783407 11.1225 0.834416 11.2245C0.970484 11.4626 1.14054 11.7007 1.2936 11.9048C1.53168 12.2279 1.78679 12.517 2.07592 12.7891C2.31401 13.0272 2.58611 13.2483 2.85824 13.4694C4.20177 14.4728 5.81742 15 7.48409 15C9.15076 15 10.7664 14.4728 12.1099 13.4694C12.382 13.2653 12.6541 13.0272 12.8923 12.7891C13.1644 12.517 13.4365 12.2279 13.6746 11.9048C13.8446 11.6837 13.9977 11.4626 14.1338 11.2245C14.2188 11.1225 14.2358 11.0034 14.1847 10.9014Z"/>
+                            </g>
+                        </svg>
+                        Login
+                    </span>
+                </a>
+                <div class="sidebar-button mobile-menu-btn">
+                    <svg width="20" height="18" viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.29445 2.8421H10.5237C11.2389 2.8421 11.8182 2.2062 11.8182 1.42105C11.8182 0.635903 11.2389 0 10.5237 0H1.29445C0.579249 0 0 0.635903 0 1.42105C0 2.2062 0.579249 2.8421 1.29445 2.8421Z"></path>
+                        <path d="M1.23002 10.421H18.77C19.4496 10.421 20 9.78506 20 8.99991C20 8.21476 19.4496 7.57886 18.77 7.57886H1.23002C0.550421 7.57886 0 8.21476 0 8.99991C0 9.78506 0.550421 10.421 1.23002 10.421Z"></path>
+                        <path d="M18.8052 15.1579H10.2858C9.62563 15.1579 9.09094 15.7938 9.09094 16.5789C9.09094 17.3641 9.62563 18 10.2858 18H18.8052C19.4653 18 20 17.3641 20 16.5789C20 15.7938 19.4653 15.1579 18.8052 15.1579Z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header Section End-->
+    
+
+
     <!-- Hero Section -->
     <div class="hero-section">
         <div class="hero-content">
@@ -363,7 +1160,7 @@
         <!-- Popular Tourist Places -->
         <div class="section-spacing">
             <h2 class="section-title">Popular Tourist Places</h2>
-            <div class="row g-4">
+            <div class="row g-4" id="popularPlacesContainer">
                 <div class="col-md-6 col-lg-3">
                     <div class="place-card">
                         <img src="https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=400" alt="Registan Square" class="place-image">
@@ -446,7 +1243,7 @@
         <!-- Seasonal Guide -->
         <div class="section-spacing">
             <h2 class="section-title">Best Time to Visit</h2>
-
+            <div id="seasonsContainer">
             <div class="season-card">
                 <div class="season-header">
                     <div class="season-icon">🌸</div>
@@ -502,12 +1299,13 @@
                     Budget-friendly season with lower prices. Best for travelers seeking authentic local experiences.
                 </p>
             </div>
+            </div>
         </div>
 
         <!-- FAQ Section -->
         <div class="section-spacing">
             <h2 class="section-title">Frequently Asked Questions</h2>
-
+            <div id="faqsContainer">
             <div class="faq-item">
                 <div class="faq-question">What services does Travel Bliss offer?</div>
                 <div class="faq-answer">
@@ -538,6 +1336,7 @@
                     Travel insurance can be added to your package. We recommend it for peace of mind and
                     will help you choose the right coverage for your trip.
                 </div>
+            </div>
             </div>
         </div>
 
@@ -591,54 +1390,440 @@
         </div>
     </div>
 
-    <!-- Footer Spacing -->
-    <div style="height: 80px;"></div>
+    <!-- Location Section -->
+    <section class="location-section" id="locationSection" style="display: none;">
+        <div class="content-container">
+            <h2 class="section-title">📍 Location</h2>
+
+            <!-- Details on top -->
+            <div class="location-info-bar">
+                <div class="location-detail-item">
+                    <span style="font-size: 28px;">🌍</span>
+                    <div class="detail-content">
+                        <div class="detail-label">Country</div>
+                        <div class="detail-value" id="locCountry">Uzbekistan</div>
+                    </div>
+                </div>
+                <div class="location-detail-item" id="locCityItem" style="display: none;">
+                    <span style="font-size: 28px;">🏙️</span>
+                    <div class="detail-content">
+                        <div class="detail-label">City / Region</div>
+                        <div class="detail-value" id="locCity">-</div>
+                    </div>
+                </div>
+                <div class="location-detail-item">
+                    <span style="font-size: 28px;">📍</span>
+                    <div class="detail-content">
+                        <div class="detail-label">Coordinates</div>
+                        <div class="detail-value" id="locCoords">41.29° N, 69.24° E</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Large Map -->
+            <div class="location-map-wrapper">
+                <div id="locationMap"></div>
+                <div class="map-buttons">
+                    <a href="#" id="locGoogleLink" target="_blank" class="map-btn">
+                        🗺️ Open in Google Maps
+                    </a>
+                    <a href="#" id="locYandexLink" target="_blank" class="map-btn">
+                        🧭 Open in Yandex Maps
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JS -->
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/jquery-ui.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/swiper-bundle.min.js"></script>
+    <script src="assets/js/slick.js"></script>
+    <script src="assets/js/jquery.fancybox.min.js"></script>
+    <script src="assets/js/gsap.min.js"></script>
+    <script src="assets/js/ScrollTrigger.min.js"></script>
+    <script src="assets/js/main.js"></script>
 
     <!-- Dynamic Data Loading -->
     <script>
-        // Get destination ID or slug from URL parameter
         const urlParams = new URLSearchParams(window.location.search);
-        const destinationId = urlParams.get('id') || urlParams.get('slug') || 'samarkand-uzbekistan';
+        const destinationId = urlParams.get('id') || urlParams.get('slug') || 'andijan';
 
         async function loadDestination() {
             try {
-                const response = await fetch(`/api/destinations/${destinationId}`);
+                console.log('Loading destination:', destinationId);
+                const response = await fetch('/api/destinations/' + destinationId);
                 const data = await response.json();
-
-                if (data.success) {
+                if (data.success && data.data.destination) {
                     displayDestination(data.data.destination);
                 } else {
-                    console.error('Error loading destination:', data.message);
-                    // Show default content or error message
+                    console.error('Destination not found');
+                    document.getElementById('destinationName').textContent = 'Destination Not Found';
                 }
             } catch (error) {
                 console.error('Error:', error);
-                // Show default content on error
             }
         }
 
-        function displayDestination(dest) {
-            // Update Hero Section
-            document.getElementById('destinationName').textContent = dest.name;
-            document.getElementById('destinationTagline').textContent = dest.tagline;
-
-            // Update Info Cards
-            document.getElementById('capitalInfo').textContent = dest.capital;
-            document.getElementById('currencyInfo').textContent = dest.currency;
-            document.getElementById('languageInfo').textContent = dest.language;
-
-            // Update Description
-            document.getElementById('destinationDescription').textContent = dest.description;
-
-            // The rest (Popular Places, Features, Seasons, FAQ) would be updated here
-            // For now we keep static content as fallback
+        function getSeasonIcon(iconName) {
+            const icons = { 'spring': '🌸', 'summer': '☀️', 'autumn': '🍂', 'fall': '🍂', 'winter': '❄️' };
+            return icons[iconName?.toLowerCase()] || iconName || '🌸';
         }
 
-        // Load destination data when page loads
-        window.addEventListener('DOMContentLoaded', loadDestination);
+        function displayDestination(dest) {
+            // SEO
+            if (dest.seo && dest.seo.meta_title) {
+                document.title = dest.seo.meta_title;
+            } else {
+                document.title = (dest.title || 'Destination') + ' - Travel Bliss';
+
+            // Gallery
+            if (dest.gallery_images && dest.gallery_images.length > 0) {
+                displayGallery(dest.gallery_images);
+            }
+            }
+
+            // Hero Section
+            document.getElementById('destinationName').textContent = dest.title || 'Destination';
+            document.getElementById('destinationTagline').textContent = dest.tagline || dest.short_description || '';
+
+            // Hero background
+            if (dest.main_image) {
+                document.querySelector('.hero-section').style.background =
+                    'linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(' + dest.main_image + ') center/cover no-repeat';
+            }
+
+            // Info Cards
+            document.getElementById('capitalInfo').textContent = dest.capital || 'Tashkent';
+            document.getElementById('currencyInfo').textContent = dest.currency || 'UZS (Som)';
+            document.getElementById('languageInfo').textContent = dest.language || 'Uzbek, Russian';
+
+            // Add rating if exists
+            if (dest.rating && dest.rating > 0) {
+                const infoCards = document.querySelector('.info-cards');
+                const ratingCard = document.createElement('div');
+                ratingCard.className = 'info-card';
+                ratingCard.innerHTML = '<div class="info-card-icon">⭐</div><div class="info-card-label">Rating</div><div class="info-card-value">' + dest.rating.toFixed(1) + '/5</div>';
+                infoCards.appendChild(ratingCard);
+            }
+
+            // Location Section (Bottom)
+            if (dest.latitude && dest.longitude) {
+                const locationSection = document.getElementById('locationSection');
+                locationSection.style.display = 'block';
+
+                // Country names
+                const countryNames = {
+                    'UZ': 'Uzbekistan', 'KZ': 'Kazakhstan', 'TJ': 'Tajikistan',
+                    'KG': 'Kyrgyzstan', 'TM': 'Turkmenistan', 'AZ': 'Azerbaijan',
+                    'GE': 'Georgia', 'AM': 'Armenia', 'TR': 'Turkey',
+                    'AE': 'UAE', 'SA': 'Saudi Arabia', 'EG': 'Egypt',
+                    'TH': 'Thailand', 'MY': 'Malaysia', 'JP': 'Japan',
+                    'KR': 'South Korea', 'IT': 'Italy', 'FR': 'France',
+                    'ES': 'Spain', 'DE': 'Germany', 'GB': 'United Kingdom',
+                    'US': 'United States', 'RU': 'Russia', 'CN': 'China',
+                    'IN': 'India', 'ID': 'Indonesia', 'VN': 'Vietnam', 'MA': 'Morocco'
+                };
+
+                // Set country
+                const countryName = countryNames[dest.country_code] || dest.country_code || 'Unknown';
+                document.getElementById('locCountry').textContent = countryName;
+
+                // Set city - use destination title if city is not set
+                const cityName = dest.city || dest.title || '';
+                if (cityName) {
+                    document.getElementById('locCityItem').style.display = 'flex';
+                    document.getElementById('locCity').textContent = cityName;
+                }
+
+                // Set coordinates
+                const lat = parseFloat(dest.latitude).toFixed(4);
+                const lng = parseFloat(dest.longitude).toFixed(4);
+                document.getElementById('locCoords').textContent = lat + '° N, ' + lng + '° E';
+
+                // Set map links
+                document.getElementById('locGoogleLink').href = 'https://www.google.com/maps?q=' + dest.latitude + ',' + dest.longitude;
+                document.getElementById('locYandexLink').href = 'https://yandex.com/maps/?pt=' + dest.longitude + ',' + dest.latitude + '&z=12';
+
+                // Initialize Leaflet map
+                setTimeout(function() {
+                    const map = L.map('locationMap').setView([dest.latitude, dest.longitude], 10);
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© OpenStreetMap'
+                    }).addTo(map);
+                    L.marker([dest.latitude, dest.longitude])
+                        .addTo(map)
+                        .bindPopup('<strong>' + dest.title + '</strong><br>' + (dest.city || countryName))
+                        .openPopup();
+                }, 200);
+            }
+
+            // Description
+            document.getElementById('destinationDescription').textContent = dest.long_description || dest.short_description || '';
+
+            // Popular Places
+            if (dest.popular_places && dest.popular_places.length > 0) {
+                const placesContainer = document.getElementById('popularPlacesContainer');
+                placesContainer.innerHTML = dest.popular_places.map(function(place) {
+                    const img = place.image && place.image !== 'test.jpg' ? place.image : 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400';
+                    return '<div class="col-md-6 col-lg-3"><div class="place-card">' +
+                        '<img src="' + img + '" alt="' + place.title + '" class="place-image" onerror="this.onerror=null;this.src=\'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400\'">' +
+                        '<div class="place-content"><h3 class="place-title">' + place.title + '</h3>' +
+                        '<p class="place-description">' + (place.description || '') + '</p>' +
+                        (place.map_link ? '<a href="' + place.map_link + '" target="_blank" class="map-link">📍 View on Map</a>' : '') +
+                        '</div></div></div>';
+                }).join('');
+            }
+
+            // Seasons
+            if (dest.seasons && dest.seasons.length > 0) {
+                const seasonsContainer = document.getElementById('seasonsContainer');
+                seasonsContainer.innerHTML = dest.seasons.map(function(season) {
+                    return '<div class="season-card"><div class="season-header">' +
+                        '<div class="season-icon">' + getSeasonIcon(season.icon) + '</div><div>' +
+                        '<div class="season-title">' + season.name + (season.months ? ' (' + season.months + ')' : '') + '</div>' +
+                        '<div class="season-weather">Temperature: ' + (season.temperature || 'N/A') + '</div></div></div>' +
+                        '<p class="season-description">' + (season.description || '') + '</p></div>';
+                }).join('');
+            }
+
+            // FAQs
+            if (dest.faqs && dest.faqs.length > 0) {
+                const faqsContainer = document.getElementById('faqsContainer');
+                faqsContainer.innerHTML = dest.faqs.map(function(faq) {
+                    return '<div class="faq-item"><div class="faq-question">' + faq.question + '</div>' +
+                        '<div class="faq-answer">' + (faq.answer || '') + '</div></div>';
+                }).join('');
+            }
+
+            // Tours title
+            const toursSection = document.querySelector('.section-spacing:last-of-type .section-title');
+            if (toursSection && dest.title) {
+                toursSection.textContent = 'Available Tours in ' + dest.title;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadDestination);
     </script>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <span class="lightbox-nav lightbox-prev" onclick="prevImage()">&#10094;</span>
+        <div class="lightbox-content">
+            <img id="lightboxImage" src="" alt="Gallery Image">
+        </div>
+        <span class="lightbox-nav lightbox-next" onclick="nextImage()">&#10095;</span>
+        <div class="lightbox-counter"><span id="currentIndex">1</span> / <span id="totalImages">1</span></div>
+    </div>
+
+    <script>
+        let galleryImages = [];
+        let currentImageIndex = 0;
+
+        function displayGallery(images) {
+            const section = document.getElementById('gallerySection');
+            const grid = document.getElementById('galleryGrid');
+
+            if (!images || images.length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+
+            galleryImages = images;
+            section.style.display = 'block';
+
+            grid.innerHTML = images.map((img, index) =>
+                '<div class="gallery-item" onclick="openLightbox(' + index + ')">' +
+                    '<img src="' + img + '" alt="Gallery image ' + (index + 1) + '" onerror="this.parentElement.style.display=\'none\'">' +
+                '</div>'
+            ).join('');
+
+            document.getElementById('totalImages').textContent = images.length;
+        }
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            document.getElementById('lightbox').classList.add('active');
+            updateLightboxImage();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function updateLightboxImage() {
+            document.getElementById('lightboxImage').src = galleryImages[currentImageIndex];
+            document.getElementById('currentIndex').textContent = currentImageIndex + 1;
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            updateLightboxImage();
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateLightboxImage();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') nextImage();
+            if (e.key === 'ArrowLeft') prevImage();
+        });
+
+        // Close lightbox on background click
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
+    </script>
+
+    <!-- Footer Section Start -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-contact-wrap">
+                <div class="inquiry-area">
+                    <svg width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <path d="M35.8703 28.2548L33.7795 22.1697C34.7873 20.1094 35.3199 17.8181 35.3235 15.5126C35.3297 11.5039 33.7788 7.71355 30.9563 4.83988C28.1332 1.96565 24.3714 0.347686 20.3636 0.284193C16.2077 0.218522 12.3015 1.79929 9.36472 4.73596C6.53295 7.56766 4.96231 11.3008 4.9126 15.29C2.12162 17.3914 0.474267 20.6676 0.479681 24.167C0.482282 25.8045 0.850861 27.4323 1.54927 28.9043L0.109064 33.0955C-0.138507 33.816 0.0423371 34.5983 0.581071 35.1371C0.960196 35.5162 1.46005 35.7181 1.9741 35.7181C2.19038 35.7181 2.4092 35.6824 2.62259 35.6091L6.81385 34.1688C8.28584 34.8673 9.91365 35.2358 11.5512 35.2384H11.5687C15.1201 35.2383 18.4213 33.5485 20.515 30.6891C22.6938 30.6317 24.8495 30.1043 26.7983 29.1509L32.8835 31.2419C33.1314 31.3274 33.3918 31.3712 33.654 31.3715C34.2649 31.3715 34.8589 31.1316 35.3095 30.6809C35.9497 30.0407 36.1645 29.1111 35.8703 28.2548ZM11.5685 33.0956H11.5545C10.1051 33.0934 8.66574 32.7361 7.39231 32.0624C7.2628 31.9939 7.12062 31.9526 6.97456 31.9412C6.82849 31.9299 6.68164 31.9485 6.54308 31.9961L2.24537 33.4729L3.72214 29.1753C3.76974 29.0367 3.78843 28.8898 3.77703 28.7438C3.76564 28.5977 3.72442 28.4555 3.65591 28.326C2.98217 27.0525 2.62484 25.6132 2.62259 24.1637C2.61901 21.8322 3.52597 19.6224 5.11201 17.9676C5.63007 21.1258 7.13525 24.036 9.46836 26.3277C11.7842 28.6023 14.6953 30.0506 17.8363 30.5241C16.1778 32.1588 13.9421 33.0956 11.5685 33.0956ZM33.7942 29.1656C33.7332 29.2266 33.6609 29.2432 33.5796 29.2152L27.0653 26.9767C26.9268 26.9291 26.7799 26.9104 26.6339 26.9218C26.4878 26.9332 26.3456 26.9744 26.2162 27.043C24.3562 28.0269 22.2544 28.5488 20.1379 28.552H20.1176C13.0257 28.552 7.16774 22.791 7.05538 15.7008C6.99877 12.13 8.35707 8.77401 10.88 6.25112C13.4028 3.72824 16.7593 2.37044 20.3297 2.42669C27.4267 2.53926 33.1917 8.40803 33.1807 15.5092C33.1774 17.6258 32.6556 19.7276 31.6717 21.5875C31.6032 21.717 31.562 21.8592 31.5506 22.0052C31.5392 22.1513 31.5579 22.2981 31.6055 22.4367L33.8439 28.951C33.8718 29.0326 33.8551 29.1048 33.7942 29.1656Z"/>
+                            <path d="M26.5002 9.80957H13.7343C13.1426 9.80957 12.6629 10.2893 12.6629 10.881C12.6629 11.4727 13.1426 11.9524 13.7343 11.9524H26.5002C27.092 11.9524 27.5717 11.4727 27.5717 10.881C27.5717 10.2893 27.092 9.80957 26.5002 9.80957ZM26.5002 14.2161H13.7343C13.1426 14.2161 12.6629 14.6959 12.6629 15.2875C12.6629 15.8792 13.1426 16.359 13.7343 16.359H26.5002C27.092 16.359 27.5717 15.8792 27.5717 15.2875C27.5717 14.6959 27.092 14.2161 26.5002 14.2161ZM21.5862 18.6225H13.7342C13.1425 18.6225 12.6628 19.1023 12.6628 19.694C12.6628 20.2857 13.1426 20.7654 13.7342 20.7654H21.5862C22.1779 20.7654 22.6576 20.2856 22.6576 19.694C22.6576 19.1023 22.178 18.6225 21.5862 18.6225Z"/>
+                        </g>
+                    </svg>
+                    <div class="content">
+                        <h6>To More Inquiry</h6>
+                        <span>Don't hesitate Call to Travel Bliss.</span>
+                    </div>
+                </div>
+                <ul class="contact-area">
+                    <li class="single-contact">
+                        <div class="icon">
+                            <img src="assets/img/home1/icon/whatsapp-icon2.svg" alt="">
+                        </div>
+                        <div class="content">
+                            <span>WhatsApp</span>
+                            <a href="https://wa.me/998901234567">+998 90 123 45 67</a>
+                        </div>
+                    </li>
+                    <li class="single-contact">
+                        <div class="icon">
+                            <img src="assets/img/home1/icon/mail-icon2.svg" alt="">
+                        </div>
+                        <div class="content">
+                            <span>Mail Us</span>
+                            <a href="mailto:info@travelbliss.uz">info@travelbliss.uz</a>
+                        </div>
+                    </li>
+                    <li class="single-contact">
+                        <div class="icon">
+                            <img src="assets/img/home1/icon/call-icon.svg" alt="">
+                        </div>
+                        <div class="content">
+                            <span>Call Us</span>
+                            <a href="tel:+998901234567">+998 90 123 45 67</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <svg class="divider" width="1320" height="6" viewBox="0 0 1320 6" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 2.5L0 0.113249V5.88675L5 3.5V2.5ZM1315 3.5L1320 5.88675V0.113249L1315 2.5V3.5ZM4.5 3.5H1315.5V2.5H4.5V3.5Z"/>
+            </svg>
+            <div class="footer-menu-wrap">
+                <div class="row gy-md-4 gy-5">
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="footer-logo-and-addition-info">
+                            <a href="travel-agency-03.html" class="footer-logo">
+                                <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 80px; width: auto; max-width: 280px; object-fit: contain;">
+                            </a>
+                            <div class="address-area">
+                                <span>Travel Bliss Uzbekistan</span>
+                                <a href="#">Amir Temur Street, Tashkent 100000, Uzbekistan</a>
+                            </div>
+                            <ul class="social-list">
+                                <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
+                                <li><a href="https://www.linkedin.com/"><i class="bx bxl-linkedin"></i></a></li>
+                                <li><a href="https://www.youtube.com/"><i class="bx bxl-youtube"></i></a></li>
+                                <li><a href="https://www.instagram.com/"><i class="bx bxl-instagram-alt"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6 d-flex justify-content-md-end">
+                        <div class="footer-widget">
+                            <div class="widget-title">
+                                <h5>Top Destinations</h5>
+                            </div>
+                            <ul class="widget-list">
+                                <li><a href="destination-details.html?slug=samarkand">Samarkand</a></li>
+                                <li><a href="destination-details.html?slug=bukhara">Bukhara</a></li>
+                                <li><a href="destination-details.html?slug=khiva">Khiva</a></li>
+                                <li><a href="destination-details.html?slug=tashkent">Tashkent</a></li>
+                                <li><a href="destination-details.html?slug=fergana">Fergana Valley</a></li>
+                                <li><a href="destination-details.html?slug=nukus">Nukus</a></li>
+                                <li><a href="destination-details.html?slug=termez">Termez</a></li>
+                                <li><a href="destination-details.html?slug=shakhrisabz">Shakhrisabz</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6 d-flex justify-content-md-end">
+                        <div class="footer-widget">
+                            <div class="widget-title">
+                                <h5>Popular Tours</h5>
+                            </div>
+                            <ul class="widget-list">
+                                <li><a href="#">Silk Road Adventure</a></li>
+                                <li><a href="#">Historical Uzbekistan</a></li>
+                                <li><a href="#">Desert Safari</a></li>
+                                <li><a href="#">Cultural Experience</a></li>
+                                <li><a href="#">Mountain Trekking</a></li>
+                                <li><a href="#">Culinary Tour</a></li>
+                                <li><a href="#">Photography Tour</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 d-flex justify-content-lg-end">
+                        <div class="footer-widget">
+                            <div class="widget-title">
+                                <h5>Quick Links</h5>
+                            </div>
+                            <ul class="widget-list">
+                                <li><a href="about.html">About Travel Bliss</a></li>
+                                <li><a href="#">Health & Safety</a></li>
+                                <li><a href="visa.html">Visa Processing</a></li>
+                                <li><a href="contact.html">Customize Tour</a></li>
+                                <li><a href="#">Travel Inspirations</a></li>
+                                <li><a href="#">Traveler Reviews</a></li>
+                                <li><a href="#">Terms & Conditions</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="copyright-and-payment-method-area">
+                    <p>Copyright 2025 <a href="#">Travel Bliss</a> | All Rights Reserved.</p>
+                    <div class="payment-method-area">
+                        <span>Accepted Payment Methods :</span>
+                        <ul>
+                            <li><img src="assets/img/home1/icon/mastar-card-icon.svg" alt=""></li>
+                            <li><img src="assets/img/home1/icon/visa-icon.svg" alt=""></li>
+                            <li><img src="assets/img/home1/icon/paypal-icon.svg" alt=""></li>
+                            <li><img src="assets/img/home1/icon/gpay-icon.svg" alt=""></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
 </body>
 </html>

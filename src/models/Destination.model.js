@@ -1,12 +1,35 @@
 const mongoose = require('mongoose');
 
+// Popular Place Sub-schema
+const popularPlaceSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  description: { type: String, default: '' },
+  image: { type: String, default: '' },
+  map_link: { type: String, default: '' }
+}, { _id: false });
+
+// Season Sub-schema
+const seasonSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  icon: { type: String, default: '🌸' },
+  months: { type: String, default: '' },
+  temperature: { type: String, default: '' },
+  description: { type: String, default: '' }
+}, { _id: false });
+
+// FAQ Sub-schema
+const faqSchema = new mongoose.Schema({
+  question: { type: String, required: true },
+  answer: { type: String, default: '' }
+}, { _id: false });
+
 const destinationSchema = new mongoose.Schema({
-  name: {
+  // Main Fields
+  title: {
     type: String,
-    required: [true, 'A destination must have a name'],
+    required: [true, 'Destination title is required'],
     trim: true,
-    minlength: [3, 'Destination name must be at least 3 characters long'],
-    maxlength: [100, 'Destination name cannot exceed 100 characters']
+    maxlength: [100, 'Title cannot exceed 100 characters']
   },
   slug: {
     type: String,
@@ -16,108 +39,114 @@ const destinationSchema = new mongoose.Schema({
   },
   tagline: {
     type: String,
-    required: [true, 'A destination must have a tagline'],
-    trim: true,
-    maxlength: [200, 'Tagline cannot exceed 200 characters']
+    maxlength: [200, 'Tagline cannot exceed 200 characters'],
+    default: ''
   },
-  description: {
+  country_code: {
     type: String,
-    required: [true, 'A destination must have a description'],
-    minlength: [50, 'Description must be at least 50 characters long']
+    uppercase: true,
+    maxlength: [3, 'Country code cannot exceed 3 characters'],
+    default: 'UZ'
   },
-  country: {
+  city: {
     type: String,
-    required: [true, 'A destination must have a country'],
-    trim: true
+    default: ''
   },
+
+  // Country Info
   capital: {
     type: String,
-    required: true,
-    trim: true
+    default: 'Tashkent'
   },
   currency: {
     type: String,
-    required: true,
-    trim: true
+    default: 'UZS (Som)'
   },
   language: {
     type: String,
-    required: true,
-    trim: true
+    default: 'Uzbek, Russian'
   },
-  heroImage: {
+
+  // Images
+  main_image: {
     type: String,
-    default: 'default-destination.jpg'
+    default: ''
   },
-  popularPlaces: [{
-    name: {
-      type: String,
-      required: true
-    },
-    description: {
-      type: String,
-      required: true
-    },
-    image: {
-      type: String,
-      required: true
-    },
-    mapLink: {
-      type: String,
-      required: true
-    }
+  gallery_images: [{
+    type: String
   }],
-  features: [{
-    icon: {
-      type: String,
-      required: true
-    },
-    title: {
-      type: String,
-      required: true
-    },
-    description: {
-      type: String,
-      required: true
-    }
-  }],
-  seasons: [{
-    name: {
-      type: String,
-      required: true
-    },
-    icon: {
-      type: String,
-      required: true
-    },
-    months: {
-      type: String,
-      required: true
-    },
-    temperature: {
-      type: String,
-      required: true
-    },
-    description: {
-      type: String,
-      required: true
-    }
-  }],
-  faq: [{
-    question: {
-      type: String,
-      required: true
-    },
-    answer: {
-      type: String,
-      required: true
-    }
-  }],
-  isActive: {
-    type: Boolean,
-    default: true
+  thumbnail_image: {
+    type: String,
+    default: ''
   },
-  isFeatured: {
+
+  // Descriptions
+  short_description: {
+    type: String,
+    maxlength: [500, 'Short description cannot exceed 500 characters'],
+    default: ''
+  },
+  long_description: {
+    type: String,
+    default: ''
+  },
+
+  // Popular Tourist Places
+  popular_places: [popularPlaceSchema],
+
+  // Seasonal Guide
+  seasons: [seasonSchema],
+
+  // FAQ
+  faqs: [faqSchema],
+
+  // Stats
+  trips_count: {
+    type: Number,
+    default: 0,
+    min: 0
+  },
+  rating: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 5
+  },
+
+  // Geo Location
+  latitude: {
+    type: Number,
+    default: null
+  },
+  longitude: {
+    type: Number,
+    default: null
+  },
+
+  // SEO
+  seo: {
+    meta_title: {
+      type: String,
+      maxlength: [70, 'Meta title cannot exceed 70 characters'],
+      default: ''
+    },
+    meta_description: {
+      type: String,
+      maxlength: [160, 'Meta description cannot exceed 160 characters'],
+      default: ''
+    },
+    meta_keywords: [{
+      type: String
+    }]
+  },
+
+  // Status
+  status: {
+    type: String,
+    enum: ['active', 'draft', 'archived'],
+    default: 'draft'
+  },
+  featured: {
     type: Boolean,
     default: false
   }
@@ -127,23 +156,31 @@ const destinationSchema = new mongoose.Schema({
   toObject: { virtuals: true }
 });
 
-// Create slug from name before saving
+// Create slug from title before saving
 destinationSchema.pre('save', function(next) {
-  if (this.isModified('name')) {
-    this.slug = this.name
+  if (this.isModified('title') || !this.slug) {
+    this.slug = this.title
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, '')
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-')
       .trim();
   }
+  // Auto-generate SEO if empty
+  if (this.seo && !this.seo.meta_title && this.title) {
+    this.seo.meta_title = this.title.substring(0, 60) + ' - Travel Bliss';
+  }
+  if (this.seo && !this.seo.meta_description && this.short_description) {
+    this.seo.meta_description = this.short_description.substring(0, 160);
+  }
   next();
 });
 
 // Index for better performance
 destinationSchema.index({ slug: 1 });
-destinationSchema.index({ country: 1 });
-destinationSchema.index({ isActive: 1 });
+destinationSchema.index({ country_code: 1 });
+destinationSchema.index({ status: 1 });
+destinationSchema.index({ featured: 1 });
 
 const Destination = mongoose.model('Destination', destinationSchema);
 
