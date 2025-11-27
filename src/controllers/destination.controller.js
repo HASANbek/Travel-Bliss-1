@@ -48,10 +48,10 @@ exports.getDestination = asyncHandler(async (req, res) => {
 
   // Check if identifier is a valid MongoDB ObjectId
   if (identifier.match(/^[0-9a-fA-F]{24}$/)) {
-    destination = await Destination.findById(identifier);
+    destination = await Destination.findById(identifier).populate('available_tours');
   } else {
     // Otherwise, treat it as a slug
-    destination = await Destination.findOne({ slug: identifier });
+    destination = await Destination.findOne({ slug: identifier }).populate('available_tours');
   }
 
   if (!destination) {
@@ -86,6 +86,7 @@ exports.createDestination = asyncHandler(async (req, res) => {
     currency: req.body.currency || 'UZS (Som)',
     language: req.body.language || 'Uzbek, Russian',
     popular_places: req.body.popular_places || [],
+    available_tours: req.body.available_tours || [],
     seasons: req.body.seasons || [],
     faqs: req.body.faqs || [],
     seo: {
@@ -141,6 +142,7 @@ exports.updateDestination = asyncHandler(async (req, res) => {
   if (req.body.currency !== undefined) updateData.currency = req.body.currency;
   if (req.body.language !== undefined) updateData.language = req.body.language;
   if (req.body.popular_places !== undefined) updateData.popular_places = req.body.popular_places;
+  if (req.body.available_tours !== undefined) updateData.available_tours = req.body.available_tours;
   if (req.body.seasons !== undefined) updateData.seasons = req.body.seasons;
   if (req.body.faqs !== undefined) updateData.faqs = req.body.faqs;
 

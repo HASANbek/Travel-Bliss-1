@@ -5,7 +5,8 @@ const popularPlaceSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, default: '' },
   image: { type: String, default: '' },
-  map_link: { type: String, default: '' }
+  map_link: { type: String, default: '' },
+  tour_slug: { type: String, default: '' }
 }, { _id: false });
 
 // Season Sub-schema
@@ -93,6 +94,12 @@ const destinationSchema = new mongoose.Schema({
 
   // Popular Tourist Places
   popular_places: [popularPlaceSchema],
+
+  // Available Tours (references to Tour IDs)
+  available_tours: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Tour'
+  }],
 
   // Seasonal Guide
   seasons: [seasonSchema],

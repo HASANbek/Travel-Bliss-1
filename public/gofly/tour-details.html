@@ -1559,11 +1559,11 @@
 
     <!-- Tour Details Loading Script -->
     <script>
-        const API_BASE = 'http://localhost:4000';
+        const API_BASE = 'http://localhost:5000';
 
-        // Get tour ID from URL
+        // Get tour ID or slug from URL
         const urlParams = new URLSearchParams(window.location.search);
-        const tourId = urlParams.get('id');
+        const tourId = urlParams.get('id') || urlParams.get('slug');
 
         // Global variable to store current tour
         let currentTour = null;
@@ -1765,7 +1765,7 @@
 
             // If it's an uploaded file path, prepend API base URL
             if (imageName.startsWith('/uploads/')) {
-                return 'http://localhost:4000' + imageName;
+                return 'http://localhost:5000' + imageName;
             }
 
             // Otherwise, prepend the assets path (images are in home1 folder)

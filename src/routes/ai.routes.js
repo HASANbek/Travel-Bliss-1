@@ -11,4 +11,10 @@ router.post('/quick-suggestions', aiController.quickSuggestions);
 // Generate SEO for tour
 router.post('/generate-seo', aiController.generateSEO);
 
+// Generate Seasons for destination
+router.post('/generate-seasons', aiController.generateSeasons);
+
+// Generate FAQs for destination
+router.post('/generate-faqs', aiController.generateFaqs);
+
 module.exports = router;

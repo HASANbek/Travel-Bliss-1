@@ -391,7 +391,16 @@ exports.getTour = asyncHandler(async (req, res) => {
     });
   }
 
-  const tour = await Tour.findById(id);
+  // Try to find by MongoDB ObjectId first, then by slug
+  let tour;
+  if (id.match(/^[0-9a-fA-F]{24}$/)) {
+    tour = await Tour.findById(id);
+  }
+
+  // If not found by ID, try by slug
+  if (!tour) {
+    tour = await Tour.findOne({ slug: id });
+  }
 
   if (!tour) {
     throw new ApiError(404, 'Tour not found');

@@ -8,6 +8,13 @@ const tourSchema = new mongoose.Schema({
     minlength: [3, 'Tour title must be at least 3 characters long'],
     maxlength: [100, 'Tour title cannot exceed 100 characters']
   },
+  slug: {
+    type: String,
+    unique: true,
+    sparse: true,
+    trim: true,
+    lowercase: true
+  },
   summary: {
     type: String,
     trim: true,
@@ -212,9 +219,23 @@ tourSchema.virtual('durationWeeks').get(function() {
   return Math.round(this.duration / 7 * 10) / 10;
 });
 
+// Create slug from title before saving
+tourSchema.pre('save', function(next) {
+  if (this.isModified('title') || !this.slug) {
+    this.slug = this.title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .trim();
+  }
+  next();
+});
+
 // Index for better performance
 tourSchema.index({ destination: 1, price: 1 });
 tourSchema.index({ category: 1 });
+tourSchema.index({ slug: 1 });
 
 const Tour = mongoose.model('Tour', tourSchema);
 

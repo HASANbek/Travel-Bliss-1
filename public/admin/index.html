@@ -4630,7 +4630,238 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                 metaKeywordsEl.value = keywords.join(', ');
             }
         }
-        
+
+        // AI SEO Generation
+        async function generateAISEO() {
+            var title = document.getElementById('destTitle').value;
+            var shortDesc = document.getElementById('destShortDesc').value;
+            var longDesc = document.getElementById('destLongDesc').value;
+            var countryCode = document.getElementById('destCountryCode').value || document.getElementById('destCountry').value;
+            var city = document.getElementById('destCity') ? document.getElementById('destCity').value : '';
+
+            if (!title) {
+                alert('Please enter a destination title first');
+                return;
+            }
+
+            // Show loading
+            var loadingEl = document.getElementById('aiSeoLoading');
+            var aiBtn = document.getElementById('aiSeoBtn');
+            loadingEl.style.display = 'block';
+            aiBtn.disabled = true;
+            aiBtn.style.opacity = '0.6';
+
+            try {
+                var response = await fetch(API_URL + '/ai/generate-seo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        title: title,
+                        shortDescription: shortDesc,
+                        longDescription: longDesc,
+                        countryCode: countryCode,
+                        city: city,
+                        type: 'destination'
+                    })
+                });
+
+                var result = await response.json();
+
+                if (result.success && result.data) {
+                    // Fill in the SEO fields
+                    if (result.data.metaTitle) {
+                        document.getElementById('destMetaTitle').value = result.data.metaTitle;
+                    }
+                    if (result.data.metaDescription) {
+                        document.getElementById('destMetaDesc').value = result.data.metaDescription;
+                    }
+                    if (result.data.metaKeywords) {
+                        document.getElementById('destMetaKeywords').value = result.data.metaKeywords;
+                    }
+
+                    alert('AI SEO generated successfully!');
+                } else {
+                    alert('Error: ' + (result.message || 'Failed to generate AI SEO'));
+                }
+            } catch (error) {
+                console.error('AI SEO Error:', error);
+                alert('Error generating AI SEO. Please try again.');
+            } finally {
+                // Hide loading
+                loadingEl.style.display = 'none';
+                aiBtn.disabled = false;
+                aiBtn.style.opacity = '1';
+            }
+        }
+
+        // AI Generate Seasons
+        async function generateAISeasons() {
+            var title = document.getElementById('destTitle').value;
+            var countryCode = document.getElementById('destCountryCode').value || document.getElementById('destCountry').value;
+
+            if (!title) {
+                alert('Please enter a destination title first (Step 1)');
+                return;
+            }
+
+            var loadingEl = document.getElementById('aiSeasonsLoading');
+            var btn = document.getElementById('aiSeasonsBtn');
+            loadingEl.style.display = 'block';
+            btn.disabled = true;
+            btn.style.opacity = '0.6';
+
+            try {
+                var response = await fetch(API_URL + '/ai/generate-seasons', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        destination: title,
+                        countryCode: countryCode
+                    })
+                });
+
+                var result = await response.json();
+
+                if (result.success && result.data && result.data.seasons) {
+                    // Clear existing seasons
+                    document.getElementById('seasonsContainer').innerHTML = '';
+
+                    // Add generated seasons
+                    result.data.seasons.forEach(function(season) {
+                        addSeason(season);
+                    });
+
+                    alert('AI generated ' + result.data.seasons.length + ' seasons!');
+                } else {
+                    alert('Error: ' + (result.message || 'Failed to generate seasons'));
+                }
+            } catch (error) {
+                console.error('AI Seasons Error:', error);
+                alert('Error generating seasons. Please try again.');
+            } finally {
+                loadingEl.style.display = 'none';
+                btn.disabled = false;
+                btn.style.opacity = '1';
+            }
+        }
+
+        // AI Generate FAQs
+        async function generateAIFaqs() {
+            var title = document.getElementById('destTitle').value;
+            var countryCode = document.getElementById('destCountryCode').value || document.getElementById('destCountry').value;
+            var shortDesc = document.getElementById('destShortDesc').value;
+
+            if (!title) {
+                alert('Please enter a destination title first (Step 1)');
+                return;
+            }
+
+            var loadingEl = document.getElementById('aiFaqLoading');
+            var btn = document.getElementById('aiFaqBtn');
+            loadingEl.style.display = 'block';
+            btn.disabled = true;
+            btn.style.opacity = '0.6';
+
+            try {
+                var response = await fetch(API_URL + '/ai/generate-faqs', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        destination: title,
+                        countryCode: countryCode,
+                        description: shortDesc
+                    })
+                });
+
+                var result = await response.json();
+
+                if (result.success && result.data && result.data.faqs) {
+                    // Clear existing FAQs
+                    document.getElementById('faqsContainer').innerHTML = '';
+
+                    // Add generated FAQs
+                    result.data.faqs.forEach(function(faq) {
+                        addFaq(faq);
+                    });
+
+                    alert('AI generated ' + result.data.faqs.length + ' FAQs!');
+                } else {
+                    alert('Error: ' + (result.message || 'Failed to generate FAQs'));
+                }
+            } catch (error) {
+                console.error('AI FAQs Error:', error);
+                alert('Error generating FAQs. Please try again.');
+            } finally {
+                loadingEl.style.display = 'none';
+                btn.disabled = false;
+                btn.style.opacity = '1';
+            }
+        }
+
+        // Tours list for popular places selection
+        var availableToursForPlaces = [];
+
+        // Load tours for dropdown
+        async function loadToursForPlaces() {
+            try {
+                var response = await fetch(API_URL + '/tours');
+                var result = await response.json();
+                if (result.success && result.data) {
+                    // API returns data.tours array
+                    availableToursForPlaces = result.data.tours || result.data || [];
+                    populateTourDropdown();
+                }
+            } catch (error) {
+                console.error('Error loading tours:', error);
+            }
+        }
+
+        // Populate tour dropdown
+        function populateTourDropdown() {
+            var select = document.getElementById('tourSelectForPlace');
+            if (!select) return;
+
+            select.innerHTML = '<option value="">-- Select a Tour --</option>';
+            availableToursForPlaces.forEach(function(tour) {
+                var option = document.createElement('option');
+                option.value = tour._id;
+                option.textContent = tour.title + (tour.destination ? ' (' + tour.destination + ')' : '');
+                option.dataset.tour = JSON.stringify(tour);
+                select.appendChild(option);
+            });
+        }
+
+        // Add place from selected tour
+        function addPlaceFromTour() {
+            var select = document.getElementById('tourSelectForPlace');
+            if (!select || !select.value) {
+                alert('Please select a tour first');
+                return;
+            }
+
+            var selectedOption = select.options[select.selectedIndex];
+            var tour = JSON.parse(selectedOption.dataset.tour);
+
+            // Create place data from tour
+            var placeData = {
+                title: tour.title || '',
+                description: tour.summary || tour.description || '',
+                image: tour.imageCover || tour.main_image || tour.thumbnail || '',
+                map_link: '',
+                tour_slug: tour.slug || ''
+            };
+
+            addPopularPlace(placeData);
+
+            // Reset dropdown
+            select.value = '';
+
+            // Show success message
+            alert('Tour "' + tour.title + '" added as a place!');
+        }
+
         // Dynamic Popular Places
         function addPopularPlace(data) {
             var container = document.getElementById('popularPlacesContainer');
@@ -4638,7 +4869,10 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             var div = document.createElement('div');
             div.className = 'popular-place-item';
             div.style.cssText = 'background: #f9fafb; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #e5e7eb;';
-            div.innerHTML = '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;"><strong style="color: #374151;">Place #' + (index + 1) + '</strong><button type="button" onclick="this.parentElement.parentElement.remove()" style="background: #ef4444; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer;">Remove</button></div>' +
+            var tourSlugValue = (data && data.tour_slug) || '';
+            var tourBadge = tourSlugValue ? '<span style="background: #10b981; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-left: 10px;">Linked to Tour</span>' : '';
+            div.innerHTML = '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;"><strong style="color: #374151;">Place #' + (index + 1) + tourBadge + '</strong><button type="button" onclick="this.parentElement.parentElement.remove()" style="background: #ef4444; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer;">Remove</button></div>' +
+                '<input type="hidden" class="place-tour-slug" value="' + tourSlugValue + '">' +
                 '<div class="form-row"><div class="form-group"><label>Title</label><input type="text" class="place-title" value="' + (data && data.title || '') + '" placeholder="e.g. Registan Square" style="padding: 10px; border: 1px solid #e5e7eb; border-radius: 6px; width: 100%;"></div><div class="form-group"><label>Image URL</label><input type="text" class="place-image" value="' + (data && data.image || '') + '" placeholder="https://..." style="padding: 10px; border: 1px solid #e5e7eb; border-radius: 6px; width: 100%;"></div></div>' +
                 '<div class="form-group"><label>Description</label><input type="text" class="place-description" value="' + (data && data.description || '') + '" placeholder="Brief description" style="padding: 10px; border: 1px solid #e5e7eb; border-radius: 6px; width: 100%;"></div>' +
                 '<div class="form-group"><label>Google Maps Link</label><input type="text" class="place-map-link" value="' + (data && data.map_link || '') + '" placeholder="https://www.google.com/maps/..." style="padding: 10px; border: 1px solid #e5e7eb; border-radius: 6px; width: 100%;"></div>';
@@ -4650,11 +4884,13 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             document.querySelectorAll('.popular-place-item').forEach(function(item) {
                 var title = item.querySelector('.place-title').value;
                 if (title) {
+                    var tourSlugInput = item.querySelector('.place-tour-slug');
                     places.push({
                         title: title,
                         description: item.querySelector('.place-description').value,
                         image: item.querySelector('.place-image').value,
-                        map_link: item.querySelector('.place-map-link').value
+                        map_link: item.querySelector('.place-map-link').value,
+                        tour_slug: tourSlugInput ? tourSlugInput.value : ''
                     });
                 }
             });
@@ -4721,9 +4957,179 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             return faqs;
         }
 
+        // Available Tours Selection
+        var allToursForSelection = [];
+        var selectedTourIds = [];
+
+        async function loadAvailableToursForSelection() {
+            var container = document.getElementById('availableToursCheckboxes');
+            if (!container) return;
+
+            container.innerHTML = '<p style="color: #6b7280; text-align: center; padding: 20px;">Loading tours...</p>';
+
+            try {
+                var response = await fetch(API_URL + '/tours');
+                var result = await response.json();
+
+                if (result.success && result.data) {
+                    allToursForSelection = result.data.tours || result.data || [];
+
+                    if (allToursForSelection.length === 0) {
+                        container.innerHTML = '<p style="color: #ef4444; text-align: center; padding: 20px;">No tours found. Create some tours first.</p>';
+                        return;
+                    }
+
+                    container.innerHTML = allToursForSelection.map(function(tour) {
+                        var tourId = tour._id || tour.id;
+                        var isChecked = selectedTourIds.includes(tourId);
+                        var price = tour.price ? '$' + tour.price : '';
+                        var duration = tour.duration ? tour.duration + ' days' : '';
+
+                        return '<label style="display: flex; align-items: flex-start; padding: 12px; margin-bottom: 8px; background: ' + (isChecked ? '#ecfdf5' : '#f9fafb') + '; border: 2px solid ' + (isChecked ? '#10b981' : '#e5e7eb') + '; border-radius: 8px; cursor: pointer; transition: all 0.2s;">' +
+                            '<input type="checkbox" class="tour-checkbox" value="' + tourId + '" ' + (isChecked ? 'checked' : '') + ' onchange="toggleTourSelection(this)" style="margin-right: 12px; margin-top: 3px; width: 18px; height: 18px; cursor: pointer;">' +
+                            '<div style="flex: 1;">' +
+                            '<div style="font-weight: 600; color: #1f2937; margin-bottom: 4px;">' + tour.title + '</div>' +
+                            '<div style="font-size: 13px; color: #6b7280;">' + (tour.destination || '') + (duration ? ' • ' + duration : '') + (price ? ' • ' + price : '') + '</div>' +
+                            '</div>' +
+                            '</label>';
+                    }).join('');
+
+                    // Update total count
+                    var totalCountEl = document.getElementById('toursTotalCount');
+                    if (totalCountEl) totalCountEl.textContent = 'Total: ' + allToursForSelection.length;
+
+                    // Clear search input
+                    var searchInput = document.getElementById('tourSearchInput');
+                    if (searchInput) searchInput.value = '';
+
+                    updateSelectedToursPreview();
+                } else {
+                    container.innerHTML = '<p style="color: #ef4444; text-align: center; padding: 20px;">Failed to load tours</p>';
+                }
+            } catch (error) {
+                console.error('Error loading tours:', error);
+                container.innerHTML = '<p style="color: #ef4444; text-align: center; padding: 20px;">Error loading tours</p>';
+            }
+        }
+
+        function toggleTourSelection(checkbox) {
+            var tourId = checkbox.value;
+            var label = checkbox.closest('label');
+
+            if (checkbox.checked) {
+                if (!selectedTourIds.includes(tourId)) {
+                    selectedTourIds.push(tourId);
+                }
+                label.style.background = '#ecfdf5';
+                label.style.borderColor = '#10b981';
+            } else {
+                selectedTourIds = selectedTourIds.filter(function(id) { return id !== tourId; });
+                label.style.background = '#f9fafb';
+                label.style.borderColor = '#e5e7eb';
+            }
+
+            updateSelectedToursPreview();
+        }
+
+        function updateSelectedToursPreview() {
+            var countEl = document.getElementById('selectedToursCount');
+            var previewEl = document.getElementById('selectedToursPreview');
+
+            if (countEl) countEl.textContent = selectedTourIds.length;
+
+            if (previewEl) {
+                if (selectedTourIds.length === 0) {
+                    previewEl.innerHTML = '<span style="color: #9ca3af; font-style: italic;">No tours selected</span>';
+                } else {
+                    var selectedTours = allToursForSelection.filter(function(tour) {
+                        return selectedTourIds.includes(tour._id || tour.id);
+                    });
+                    previewEl.innerHTML = selectedTours.map(function(tour) {
+                        return '<span style="background: #10b981; color: white; padding: 4px 10px; border-radius: 15px; font-size: 12px; font-weight: 500;">' + tour.title + '</span>';
+                    }).join('');
+                }
+            }
+        }
+
+        function getSelectedTourIds() {
+            return selectedTourIds;
+        }
+
+        function filterToursList() {
+            var searchInput = document.getElementById('tourSearchInput');
+            var searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+            var container = document.getElementById('availableToursCheckboxes');
+            var labels = container.querySelectorAll('label');
+            var visibleCount = 0;
+
+            labels.forEach(function(label) {
+                var titleDiv = label.querySelector('div > div:first-child');
+                var title = titleDiv ? titleDiv.textContent.toLowerCase() : '';
+                var infoDiv = label.querySelector('div > div:last-child');
+                var info = infoDiv ? infoDiv.textContent.toLowerCase() : '';
+
+                if (searchTerm === '' || title.includes(searchTerm) || info.includes(searchTerm)) {
+                    label.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    label.style.display = 'none';
+                }
+            });
+
+            // Update stats
+            var filteredCountEl = document.getElementById('toursFilteredCount');
+            if (filteredCountEl) {
+                if (searchTerm !== '') {
+                    filteredCountEl.style.display = 'inline';
+                    filteredCountEl.textContent = 'Showing: ' + visibleCount;
+                } else {
+                    filteredCountEl.style.display = 'none';
+                }
+            }
+        }
+
+        function selectAllVisibleTours() {
+            var container = document.getElementById('availableToursCheckboxes');
+            var checkboxes = container.querySelectorAll('.tour-checkbox');
+
+            checkboxes.forEach(function(checkbox) {
+                var label = checkbox.closest('label');
+                if (label.style.display !== 'none') {
+                    if (!checkbox.checked) {
+                        checkbox.checked = true;
+                        var tourId = checkbox.value;
+                        if (!selectedTourIds.includes(tourId)) {
+                            selectedTourIds.push(tourId);
+                        }
+                        label.style.background = '#ecfdf5';
+                        label.style.borderColor = '#10b981';
+                    }
+                }
+            });
+
+            updateSelectedToursPreview();
+        }
+
+        function deselectAllTours() {
+            var container = document.getElementById('availableToursCheckboxes');
+            var checkboxes = container.querySelectorAll('.tour-checkbox');
+
+            checkboxes.forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    checkbox.checked = false;
+                    var label = checkbox.closest('label');
+                    label.style.background = '#f9fafb';
+                    label.style.borderColor = '#e5e7eb';
+                }
+            });
+
+            selectedTourIds = [];
+            updateSelectedToursPreview();
+        }
+
         // Step Navigation Variables and Functions
         var currentDestStep = 1;
-        var totalDestSteps = 7;
+        var totalDestSteps = 8;
 
         function goToDestStep(step) {
             currentDestStep = step;
@@ -4731,6 +5137,10 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             if (step === 3) {
                 // Initialize map when entering Step 3
                 setTimeout(initDestLocationMap, 200);
+            }
+            if (step === 5) {
+                // Load tours when entering Step 5
+                loadAvailableToursForSelection();
             }
         }
 
@@ -4741,7 +5151,11 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                     // Initialize map when entering Step 3
                     setTimeout(initDestLocationMap, 100);
                 }
-                if (currentDestStep === 7) {
+                if (currentDestStep === 5) {
+                    // Load tours when entering Step 5
+                    loadAvailableToursForSelection();
+                }
+                if (currentDestStep === 8) {
                     autoGenerateSEO();
                 }
                 updateDestStepUI();
@@ -4754,6 +5168,10 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                 if (currentDestStep === 3) {
                     // Initialize map when entering Step 3
                     setTimeout(initDestLocationMap, 100);
+                }
+                if (currentDestStep === 5) {
+                    // Load tours when entering Step 5
+                    loadAvailableToursForSelection();
                 }
                 updateDestStepUI();
             }
@@ -4876,7 +5294,15 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             if (destination && destination.popular_places) {
                 destination.popular_places.forEach(function(place) { addPopularPlace(place); });
             }
-        
+
+            // Available Tours - reset and set selected tours
+            selectedTourIds = [];
+            if (destination && destination.available_tours) {
+                selectedTourIds = destination.available_tours.map(function(t) {
+                    return typeof t === 'object' ? (t._id || t.id) : t;
+                });
+            }
+
             // Seasons
             document.getElementById('seasonsContainer').innerHTML = '';
             if (destination && destination.seasons) {
@@ -4898,6 +5324,9 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             updateDestImagePreview('destMainImage', 'mainImagePreview');
             updateDestImagePreview('destThumbnail', 'thumbnailPreview');
             document.getElementById('destinationModal').style.display = 'flex';
+
+            // Load tours for popular places dropdown
+            loadToursForPlaces();
         }
         
         function closeDestinationModal() {
@@ -4925,6 +5354,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                 short_description: document.getElementById('destShortDesc').value,
                 long_description: document.getElementById('destLongDesc').value,
                 popular_places: getPopularPlaces(),
+                available_tours: getSelectedTourIds(),
                 seasons: getSeasons(),
                 faqs: getFaqs(),
                 trips_count: parseInt(document.getElementById('destTripsCount').value) || 0,
@@ -7037,41 +7467,46 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                 <button class="close-btn" onclick="closeDestinationModal()" style="color: white; font-size: 28px;">&times;</button>
             </div>
 
-            <!-- Step Indicator - 7 Steps -->
-            <div class="dest-step-indicator" style="display: flex; justify-content: center; padding: 20px; background: #f8f9fa; border-bottom: 1px solid #e9ecef; flex-wrap: wrap; gap: 10px;">
+            <!-- Step Indicator - 8 Steps -->
+            <div class="dest-step-indicator" style="display: flex; justify-content: center; padding: 20px; background: #f8f9fa; border-bottom: 1px solid #e9ecef; flex-wrap: wrap; gap: 8px;">
                 <div class="dest-step active" onclick="goToDestStep(1)" style="display: flex; flex-direction: column; align-items: center; cursor: pointer;">
-                    <div class="dest-step-num" id="destStepNum1" style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px;">1</div>
-                    <span id="destStepLabel1" style="font-size: 11px; color: #495057; font-weight: 600; margin-top: 5px;">Basic</span>
+                    <div class="dest-step-num" id="destStepNum1" style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13px;">1</div>
+                    <span id="destStepLabel1" style="font-size: 10px; color: #495057; font-weight: 600; margin-top: 4px;">Basic</span>
                 </div>
-                <div class="dest-step-line" style="width: 30px; height: 2px; background: #dee2e6; margin-top: 18px;"></div>
+                <div class="dest-step-line" style="width: 20px; height: 2px; background: #dee2e6; margin-top: 16px;"></div>
                 <div class="dest-step" onclick="goToDestStep(2)" style="display: flex; flex-direction: column; align-items: center; cursor: pointer;">
-                    <div class="dest-step-num" id="destStepNum2" style="width: 36px; height: 36px; border-radius: 50%; background: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px;">2</div>
-                    <span id="destStepLabel2" style="font-size: 11px; color: #6c757d; margin-top: 5px;">Images</span>
+                    <div class="dest-step-num" id="destStepNum2" style="width: 32px; height: 32px; border-radius: 50%; background: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13px;">2</div>
+                    <span id="destStepLabel2" style="font-size: 10px; color: #6c757d; margin-top: 4px;">Images</span>
                 </div>
-                <div class="dest-step-line" style="width: 30px; height: 2px; background: #dee2e6; margin-top: 18px;"></div>
+                <div class="dest-step-line" style="width: 20px; height: 2px; background: #dee2e6; margin-top: 16px;"></div>
                 <div class="dest-step" onclick="goToDestStep(3)" style="display: flex; flex-direction: column; align-items: center; cursor: pointer;">
-                    <div class="dest-step-num" id="destStepNum3" style="width: 36px; height: 36px; border-radius: 50%; background: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px;">3</div>
-                    <span id="destStepLabel3" style="font-size: 11px; color: #6c757d; margin-top: 5px;">Description</span>
+                    <div class="dest-step-num" id="destStepNum3" style="width: 32px; height: 32px; border-radius: 50%; background: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13px;">3</div>
+                    <span id="destStepLabel3" style="font-size: 10px; color: #6c757d; margin-top: 4px;">Description</span>
                 </div>
-                <div class="dest-step-line" style="width: 30px; height: 2px; background: #dee2e6; margin-top: 18px;"></div>
+                <div class="dest-step-line" style="width: 20px; height: 2px; background: #dee2e6; margin-top: 16px;"></div>
                 <div class="dest-step" onclick="goToDestStep(4)" style="display: flex; flex-direction: column; align-items: center; cursor: pointer;">
-                    <div class="dest-step-num" id="destStepNum4" style="width: 36px; height: 36px; border-radius: 50%; background: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px;">4</div>
-                    <span id="destStepLabel4" style="font-size: 11px; color: #6c757d; margin-top: 5px;">Places</span>
+                    <div class="dest-step-num" id="destStepNum4" style="width: 32px; height: 32px; border-radius: 50%; background: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13px;">4</div>
+                    <span id="destStepLabel4" style="font-size: 10px; color: #6c757d; margin-top: 4px;">Places</span>
                 </div>
-                <div class="dest-step-line" style="width: 30px; height: 2px; background: #dee2e6; margin-top: 18px;"></div>
+                <div class="dest-step-line" style="width: 20px; height: 2px; background: #dee2e6; margin-top: 16px;"></div>
                 <div class="dest-step" onclick="goToDestStep(5)" style="display: flex; flex-direction: column; align-items: center; cursor: pointer;">
-                    <div class="dest-step-num" id="destStepNum5" style="width: 36px; height: 36px; border-radius: 50%; background: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px;">5</div>
-                    <span id="destStepLabel5" style="font-size: 11px; color: #6c757d; margin-top: 5px;">Seasons</span>
+                    <div class="dest-step-num" id="destStepNum5" style="width: 32px; height: 32px; border-radius: 50%; background: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13px;">5</div>
+                    <span id="destStepLabel5" style="font-size: 10px; color: #6c757d; margin-top: 4px;">Tours</span>
                 </div>
-                <div class="dest-step-line" style="width: 30px; height: 2px; background: #dee2e6; margin-top: 18px;"></div>
+                <div class="dest-step-line" style="width: 20px; height: 2px; background: #dee2e6; margin-top: 16px;"></div>
                 <div class="dest-step" onclick="goToDestStep(6)" style="display: flex; flex-direction: column; align-items: center; cursor: pointer;">
-                    <div class="dest-step-num" id="destStepNum6" style="width: 36px; height: 36px; border-radius: 50%; background: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px;">6</div>
-                    <span id="destStepLabel6" style="font-size: 11px; color: #6c757d; margin-top: 5px;">FAQ</span>
+                    <div class="dest-step-num" id="destStepNum6" style="width: 32px; height: 32px; border-radius: 50%; background: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13px;">6</div>
+                    <span id="destStepLabel6" style="font-size: 10px; color: #6c757d; margin-top: 4px;">Seasons</span>
                 </div>
-                <div class="dest-step-line" style="width: 30px; height: 2px; background: #dee2e6; margin-top: 18px;"></div>
+                <div class="dest-step-line" style="width: 20px; height: 2px; background: #dee2e6; margin-top: 16px;"></div>
                 <div class="dest-step" onclick="goToDestStep(7)" style="display: flex; flex-direction: column; align-items: center; cursor: pointer;">
-                    <div class="dest-step-num" id="destStepNum7" style="width: 36px; height: 36px; border-radius: 50%; background: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px;">7</div>
-                    <span id="destStepLabel7" style="font-size: 11px; color: #6c757d; margin-top: 5px;">SEO</span>
+                    <div class="dest-step-num" id="destStepNum7" style="width: 32px; height: 32px; border-radius: 50%; background: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13px;">7</div>
+                    <span id="destStepLabel7" style="font-size: 10px; color: #6c757d; margin-top: 4px;">FAQ</span>
+                </div>
+                <div class="dest-step-line" style="width: 20px; height: 2px; background: #dee2e6; margin-top: 16px;"></div>
+                <div class="dest-step" onclick="goToDestStep(8)" style="display: flex; flex-direction: column; align-items: center; cursor: pointer;">
+                    <div class="dest-step-num" id="destStepNum8" style="width: 32px; height: 32px; border-radius: 50%; background: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13px;">8</div>
+                    <span id="destStepLabel8" style="font-size: 10px; color: #6c757d; margin-top: 4px;">SEO</span>
                 </div>
             </div>
 
@@ -7282,28 +7717,133 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                 <!-- Step 4: Popular Places -->
                 <div class="dest-form-step" id="destStep4" style="display: none;">
                     <h3 style="color: #374151; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e9ecef;">🏛️ Popular Tourist Places</h3>
+
+                    <!-- Select from Tours -->
+                    <div style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 2px solid #0ea5e9;">
+                        <h4 style="color: #0369a1; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 20px;">🎯</span> Select from Existing Tours
+                        </h4>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <select id="tourSelectForPlace" style="flex: 1; min-width: 250px; padding: 12px; border: 2px solid #0ea5e9; border-radius: 8px; font-size: 14px; background: white;">
+                                <option value="">-- Select a Tour --</option>
+                            </select>
+                            <button type="button" onclick="addPlaceFromTour()" style="padding: 12px 24px; background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; white-space: nowrap;">
+                                + Add Selected Tour
+                            </button>
+                        </div>
+                        <p style="color: #64748b; font-size: 12px; margin-top: 10px;">Select a tour to automatically add it as a popular place with tour details</p>
+                    </div>
+
+                    <!-- Manual Add -->
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="color: #6b7280; font-size: 14px;">or add manually:</span>
+                        <button type="button" onclick="addPopularPlace()" style="padding: 10px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">+ Add Place Manually</button>
+                    </div>
+
                     <div id="popularPlacesContainer"></div>
-                    <button type="button" onclick="addPopularPlace()" style="margin-top: 15px; padding: 10px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">+ Add Place</button>
                 </div>
 
-                <!-- Step 5: Seasons -->
+                <!-- Step 5: Available Tours -->
                 <div class="dest-form-step" id="destStep5" style="display: none;">
-                    <h3 style="color: #374151; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e9ecef;">🌤️ Best Time to Visit (Seasons)</h3>
-                    <div id="seasonsContainer"></div>
-                    <button type="button" onclick="addSeason()" style="margin-top: 15px; padding: 10px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">+ Add Season</button>
+                    <h3 style="color: #374151; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e9ecef;">🎯 Available Tours</h3>
+                    <p style="color: #6b7280; margin-bottom: 20px;">Select tours that are available for this destination. These will be displayed on the destination page.</p>
+
+                    <!-- Tours Selection -->
+                    <div style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 2px solid #10b981;">
+                        <h4 style="color: #065f46; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                            <span>📋</span> Select Tours for this Destination
+                        </h4>
+
+                        <!-- Search/Filter Box -->
+                        <div style="margin-bottom: 15px;">
+                            <input type="text" id="tourSearchInput" placeholder="🔍 Search tours by name..." oninput="filterToursList()" style="width: 100%; padding: 12px 15px; border: 2px solid #d1fae5; border-radius: 8px; font-size: 14px; outline: none; transition: border-color 0.2s;">
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap;">
+                            <span id="toursTotalCount" style="background: #10b981; color: white; padding: 4px 12px; border-radius: 15px; font-size: 12px; font-weight: 500;">Total: 0</span>
+                            <span id="toursFilteredCount" style="background: #6366f1; color: white; padding: 4px 12px; border-radius: 15px; font-size: 12px; font-weight: 500; display: none;">Showing: 0</span>
+                            <button type="button" onclick="selectAllVisibleTours()" style="background: #065f46; color: white; padding: 4px 12px; border-radius: 15px; font-size: 12px; font-weight: 500; border: none; cursor: pointer;">Select All Visible</button>
+                            <button type="button" onclick="deselectAllTours()" style="background: #dc2626; color: white; padding: 4px 12px; border-radius: 15px; font-size: 12px; font-weight: 500; border: none; cursor: pointer;">Clear All</button>
+                        </div>
+
+                        <div id="availableToursCheckboxes" style="max-height: 300px; overflow-y: auto; padding: 10px; background: white; border-radius: 8px;">
+                            <p style="color: #6b7280; text-align: center; padding: 20px;">Loading tours...</p>
+                        </div>
+                    </div>
+
+                    <!-- Selected Tours Preview -->
+                    <div style="background: #f3f4f6; padding: 15px; border-radius: 8px;">
+                        <h4 style="color: #374151; margin-bottom: 10px;">Selected Tours: <span id="selectedToursCount">0</span></h4>
+                        <div id="selectedToursPreview" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span style="color: #9ca3af; font-style: italic;">No tours selected</span>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Step 6: FAQ -->
+                <!-- Step 6: Seasons -->
                 <div class="dest-form-step" id="destStep6" style="display: none;">
-                    <h3 style="color: #374151; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e9ecef;">❓ Frequently Asked Questions</h3>
-                    <div id="faqsContainer"></div>
-                    <button type="button" onclick="addFaq()" style="margin-top: 15px; padding: 10px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">+ Add FAQ</button>
+                    <h3 style="color: #374151; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e9ecef;">🌤️ Best Time to Visit (Seasons)</h3>
+
+                    <!-- AI Generate Seasons -->
+                    <div style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 2px solid #8b5cf6;">
+                        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                            <button type="button" id="aiSeasonsBtn" onclick="generateAISeasons()" style="padding: 12px 20px; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                                <span>🤖</span> AI Generate Seasons
+                            </button>
+                            <span style="color: #6b7280; font-size: 13px;">AI will generate seasonal info based on destination</span>
+                        </div>
+                        <div id="aiSeasonsLoading" style="display: none; margin-top: 10px; color: #7c3aed; font-weight: 500;">
+                            ⏳ Generating seasons info...
+                        </div>
+                    </div>
+
+                    <div id="seasonsContainer"></div>
+                    <button type="button" onclick="addSeason()" style="margin-top: 15px; padding: 10px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">+ Add Season Manually</button>
                 </div>
 
-                <!-- Step 7: SEO -->
+                <!-- Step 7: FAQ -->
                 <div class="dest-form-step" id="destStep7" style="display: none;">
+                    <h3 style="color: #374151; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e9ecef;">❓ Frequently Asked Questions</h3>
+
+                    <!-- AI Generate FAQs -->
+                    <div style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 2px solid #8b5cf6;">
+                        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                            <button type="button" id="aiFaqBtn" onclick="generateAIFaqs()" style="padding: 12px 20px; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                                <span>🤖</span> AI Generate FAQs
+                            </button>
+                            <span style="color: #6b7280; font-size: 13px;">AI will generate common travel questions</span>
+                        </div>
+                        <div id="aiFaqLoading" style="display: none; margin-top: 10px; color: #7c3aed; font-weight: 500;">
+                            ⏳ Generating FAQs...
+                        </div>
+                    </div>
+
+                    <div id="faqsContainer"></div>
+                    <button type="button" onclick="addFaq()" style="margin-top: 15px; padding: 10px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">+ Add FAQ Manually</button>
+                </div>
+
+                <!-- Step 8: SEO -->
+                <div class="dest-form-step" id="destStep8" style="display: none;">
                     <h3 style="color: #374151; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e9ecef;">🔍 SEO Settings</h3>
-                    <button type="button" onclick="autoGenerateSEO()" style="margin-bottom: 20px; padding: 10px 20px; background: #10b981; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">✨ Auto Generate SEO</button>
+
+                    <!-- AI SEO Generation Button -->
+                    <div style="margin-bottom: 20px;">
+                        <button type="button" id="aiSeoBtn" onclick="generateAISEO()" style="padding: 12px 24px; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px; font-size: 15px;">
+                            <span>🤖</span> AI Generate SEO
+                        </button>
+                    </div>
+
+                    <!-- AI SEO Loading indicator -->
+                    <div id="aiSeoLoading" style="display: none; padding: 15px; background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); border-radius: 8px; margin-bottom: 20px; border: 2px solid #8b5cf6;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 20px; height: 20px; border: 3px solid #8b5cf6; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                            <span style="color: #7c3aed; font-weight: 600;">AI is generating optimized SEO content...</span>
+                        </div>
+                    </div>
+                    <style>
+                        @keyframes spin { to { transform: rotate(360deg); } }
+                    </style>
                     <div class="form-group">
                         <label style="font-weight: 600; color: #374151;">Meta Title</label>
                         <input type="text" id="destMetaTitle" placeholder="SEO title (max 70 chars)" maxlength="70" style="padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px;">
