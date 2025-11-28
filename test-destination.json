@@ -1,0 +1,47 @@
+{
+  "title": "Kokand",
+  "slug": "kokand",
+  "country_code": "UZ",
+  "main_image": "https://images.unsplash.com/photo-1598963757845-ba29d211348f?w=1200",
+  "thumbnail_image": "https://images.unsplash.com/photo-1598963757845-ba29d211348f?w=400",
+  "short_description": "Heart of the Fergana Valley",
+  "long_description": "Kokand, known as the City of Winds, was once the capital of the powerful Kokand Khanate. Today it offers beautiful palaces, mosques and a glimpse into the regions rich history.",
+  "trips_count": 7,
+  "rating": 4.4,
+  "latitude": 40.5286,
+  "longitude": 70.9428,
+  "tagline": "The City of Winds",
+  "capital": "Kokand",
+  "currency": "UZS (Som)",
+  "language": "Uzbek, Russian",
+  "popular_places": [
+    {
+      "title": "Khudayar Khan Palace",
+      "description": "Magnificent 19th century palace with 114 rooms",
+      "image": "https://images.unsplash.com/photo-1598963757845-ba29d211348f?w=600",
+      "map_link": "https://maps.google.com/?q=Khudayar+Khan+Palace"
+    }
+  ],
+  "seasons": [
+    {
+      "name": "Spring",
+      "icon": "spring",
+      "months": "March - May",
+      "temperature": "18-28C",
+      "description": "Beautiful weather with blooming orchards"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How do I get to Kokand?",
+      "answer": "Kokand is accessible by train or shared taxi from Tashkent through the Fergana Valley."
+    }
+  ],
+  "seo": {
+    "meta_title": "Visit Kokand - City of Winds | Travel Bliss",
+    "meta_description": "Explore Kokand, the historic capital of the Kokand Khanate in the Fergana Valley.",
+    "meta_keywords": ["Kokand", "Fergana Valley", "Khanate", "Uzbekistan"]
+  },
+  "status": "active",
+  "featured": false
+}

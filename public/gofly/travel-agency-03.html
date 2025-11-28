@@ -1981,22 +1981,19 @@ a.primary-btn1 {
 
         <div class="destination-slider-wrapper">
             <div class="swiper explore-destinations-slider">
-                <div class="swiper-wrapper">
-                    <!-- Samarkand -->
+                <div class="swiper-wrapper" id="destinationsSliderWrapper">
+                    <!-- Destinations will be loaded dynamically -->
                     <div class="swiper-slide">
                         <div class="destination-card-overlay">
                             <div class="destination-flag">🇺🇿</div>
-                            <div class="destination-trips-badge">12 Trips</div>
-                            <img src="assets/img/home2/destination-img1.jpg" alt="Samarkand">
+                            <div class="destination-trips-badge">Loading...</div>
+                            <img src="assets/img/home2/destination-img1.jpg" alt="Loading">
                             <div class="destination-overlay"></div>
                             <div class="destination-card-content">
-                                <h3>Samarkand</h3>
-                                <p>Explore ancient Samarkand, famous for its stunning Islamic architecture, including the Registan, thousands of historical monuments, and rich cultural heritage.</p>
-                                <a href="destination-details.html" class="destination-link">
-                                    See destination
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                    </svg>
+                                <h3>Loading destinations...</h3>
+                                <p>Please wait while we load the destinations from the database.</p>
+                                <a href="#" class="destination-link">
+                                    Loading...
                                 </a>
                             </div>
                         </div>
@@ -2194,7 +2191,7 @@ a.primary-btn1 {
 
         <!-- See All Destinations Link -->
         <div class="text-center" style="margin-top: 50px;">
-            <a href="destination-details.html" class="see-all-link">
+            <a href="all-destinations.html" class="see-all-link">
                 See all destinations
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -2207,8 +2204,11 @@ a.primary-btn1 {
 <!-- Swiper Initialization Script -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Load destinations from API
+    loadDestinationsForSlider();
+
     // Initialize Swiper
-    const destinationsSwiper = new Swiper('.explore-destinations-slider', {
+    window.destinationsSwiper = new Swiper('.explore-destinations-slider', {
         slidesPerView: 1,
         spaceBetween: 30,
         loop: true,
@@ -3563,7 +3563,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Load Popular Tours
 async function loadPopularTours() {
     try {
-        const response = await fetch('http://localhost:4000/api/tours');
+        const response = await fetch('http://localhost:5000/api/tours');
         const data = await response.json();
 
         if (data.success && data.data.tours) {
@@ -3580,7 +3580,7 @@ async function loadPopularTours() {
 // Load Popular Packages
 async function loadPopularPackages() {
     try {
-        const response = await fetch('http://localhost:4000/api/tours');
+        const response = await fetch('http://localhost:5000/api/tours');
         const data = await response.json();
 
         if (data.success && data.data.tours) {
@@ -3610,7 +3610,7 @@ function displayTours(tours, containerId = 'toursContainer') {
         const img = tour.imageCover || tour.image;
         if (!img) return 'assets/img/home1/tour-package-img1.jpg';
         if (img.startsWith('http')) return img;
-        if (img.startsWith('/uploads/')) return `http://localhost:4000${img}`;
+        if (img.startsWith('/uploads/')) return `http://localhost:5000${img}`;
         if (img.startsWith('assets/')) return img;
         return `assets/img/home1/${img}`;
     };
@@ -3834,7 +3834,7 @@ if (document.readyState === 'loading') {
 // Load categories and populate menu with dropdowns
 async function loadCategoryMenu() {
     try {
-        const response = await fetch('http://localhost:4000/api/categories?active=true');
+        const response = await fetch('http://localhost:5000/api/categories?active=true');
         const result = await response.json();
 
         if (result.success && result.data.categories) {
@@ -3863,7 +3863,7 @@ async function loadCategoryMenu() {
                 };
 
                 const categoryValue = categoryMap[category.slug];
-                const toursResponse = await fetch(`http://localhost:4000/api/tours?category=${categoryValue}`);
+                const toursResponse = await fetch(`http://localhost:5000/api/tours?category=${categoryValue}`);
                 const toursResult = await toursResponse.json();
 
                 const li = document.createElement('li');
@@ -4104,7 +4104,7 @@ async function loadBlogs() {
             return;
         }
 
-        const response = await fetch('http://localhost:4000/api/blogs');
+        const response = await fetch('http://localhost:5000/api/blogs');
         const data = await response.json();
 
         let blogs = [];
@@ -4229,6 +4229,71 @@ document.getElementById('blogModal').addEventListener('click', function(e) {
     if (e.target === this) closeBlogModal();
 });
 </script>
+
+<!-- Load Destinations from API -->
+<script>
+async function loadDestinationsForSlider() {
+    try {
+        const response = await fetch('/api/destinations?status=active');
+        const data = await response.json();
+
+        if (data.success && data.data.destinations && data.data.destinations.length > 0) {
+            const wrapper = document.getElementById('destinationsSliderWrapper');
+            const destinations = data.data.destinations;
+
+            // Generate slides HTML
+            const slidesHTML = destinations.map(dest => {
+                const flag = getCountryFlag(dest.country_code);
+                const image = dest.thumbnail_image || dest.main_image || 'assets/img/home2/destination-img1.jpg';
+                const trips = dest.trips_count || 0;
+                const description = dest.short_description || dest.tagline || 'Discover this amazing destination';
+
+                return `
+                    <div class="swiper-slide">
+                        <div class="destination-card-overlay">
+                            <div class="destination-flag">${flag}</div>
+                            <div class="destination-trips-badge">${trips} Trips</div>
+                            <img src="${image}" alt="${dest.title}" onerror="this.src='assets/img/home2/destination-img1.jpg'">
+                            <div class="destination-overlay"></div>
+                            <div class="destination-card-content">
+                                <h3>${dest.title}</h3>
+                                <p>${description}</p>
+                                <a href="destination-details.html?slug=${dest.slug}" class="destination-link">
+                                    See destination
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            wrapper.innerHTML = slidesHTML;
+
+            // Reinitialize swiper after loading destinations
+            if (window.destinationsSwiper) {
+                window.destinationsSwiper.update();
+            }
+        }
+    } catch (error) {
+        console.error('Error loading destinations:', error);
+    }
+}
+
+function getCountryFlag(countryCode) {
+    const flags = {
+        'UZ': '🇺🇿',
+        'TJ': '🇹🇯',
+        'KZ': '🇰🇿',
+        'KG': '🇰🇬',
+        'TM': '🇹🇲'
+    };
+    return flags[countryCode] || '🏳️';
+}
+</script>
+
 </body>
 
 </html>

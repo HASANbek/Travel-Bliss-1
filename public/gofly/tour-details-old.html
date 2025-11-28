@@ -2095,7 +2095,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <script>
-        const API_BASE = 'http://localhost:4000';
+        const API_BASE = 'http://localhost:5000';
         let currentTour = null;
 
         // Helper function to get correct image path
@@ -2104,7 +2104,7 @@
 
             // If image starts with /uploads, it's an uploaded image - add base URL
             if (image.startsWith('/uploads/')) {
-                return `http://localhost:4000${image}`;
+                return `http://localhost:5000${image}`;
             }
 
             // If image starts with http:// or https://, it's an external URL
@@ -3342,8 +3342,8 @@
                 try {
                     // Use backend proxy to avoid CORS issues
                     const url = cityContext
-                        ? `http://localhost:4000/api/geocoding/search?q=${encodeURIComponent(attractionName)}&city=${encodeURIComponent(cityContext)}`
-                        : `http://localhost:4000/api/geocoding/search?q=${encodeURIComponent(attractionName)}`;
+                        ? `http://localhost:5000/api/geocoding/search?q=${encodeURIComponent(attractionName)}&city=${encodeURIComponent(cityContext)}`
+                        : `http://localhost:5000/api/geocoding/search?q=${encodeURIComponent(attractionName)}`;
 
                     const response = await fetch(url);
                     const result = await response.json();
@@ -3807,7 +3807,7 @@
         // Load categories and populate menu with dropdowns
         async function loadCategoryMenu() {
             try {
-                const response = await fetch('http://localhost:4000/api/categories?active=true');
+                const response = await fetch('http://localhost:5000/api/categories?active=true');
                 const result = await response.json();
 
                 if (result.success && result.data.categories) {
@@ -3836,7 +3836,7 @@
                         };
 
                         const categoryValue = categoryMap[category.slug];
-                        const toursResponse = await fetch(`http://localhost:4000/api/tours?category=${categoryValue}`);
+                        const toursResponse = await fetch(`http://localhost:5000/api/tours?category=${categoryValue}`);
                         const toursResult = await toursResponse.json();
 
                         const li = document.createElement('li');

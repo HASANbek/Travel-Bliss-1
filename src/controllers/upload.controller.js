@@ -13,11 +13,11 @@ const uploadImage = asyncHandler(async (req, res) => {
         throw new ApiError(400, 'Please upload an image file');
     }
 
-    // Return the file path
+    // Return the file path (url for frontend compatibility)
     const filePath = `/uploads/${req.file.filename}`;
 
     res.status(200).json(
-        new ApiResponse(200, { filePath }, 'Image uploaded successfully')
+        new ApiResponse(200, { filePath, url: filePath }, 'Image uploaded successfully')
     );
 });
 
