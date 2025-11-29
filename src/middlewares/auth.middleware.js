@@ -103,3 +103,15 @@ exports.cookieParser = (req, res, next) => {
   req.cookies = cookies;
   next();
 };
+
+/**
+ * Admin rolini tekshirish middleware
+ */
+exports.isAdmin = (req, res, next) => {
+  if (req.user && req.user.role === 'admin') {
+    next();
+  } else {
+    const ApiError = require('../utils/ApiError');
+    return next(new ApiError(403, 'Bu amal faqat adminlar uchun ruxsat etilgan'));
+  }
+};

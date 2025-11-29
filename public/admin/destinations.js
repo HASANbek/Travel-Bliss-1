@@ -1,4 +1,5 @@
 // Destinations Management Module
+const API_URL = typeof window.API_URL !== 'undefined' ? window.API_URL : '/api';
 let allDestinations = [];
 let currentDestinationId = null;
 

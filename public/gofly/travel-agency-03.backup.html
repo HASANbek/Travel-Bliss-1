@@ -25,8 +25,6 @@
     <link href="assets/css/boxicons.min.css" rel="stylesheet">
     <!--  Style CSS  -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <!-- Custom Menu CSS -->
-    <link rel="stylesheet" href="assets/css/menu-custom.css">
     <!-- Title -->
     <title>Travel Bliss - Uzbekistan Silk Road Tours & Travel Agency</title>
     <link rel="icon" href="assets/img/fav-icon.svg" type="image/gif" sizes="20x20">
@@ -109,6 +107,77 @@ a.primary-btn1 {
     font-size: 18px;
 }
 
+.header-area.style-2 {
+    background: linear-gradient(to right, #f0f9ff 0%, #e0f2fe 100%);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    padding: 15px 0;
+}
+
+.header-area.style-2 .header-logo img {
+    width: auto !important;
+    height: 60px !important;
+    max-width: 250px !important;
+    transform: none !important;
+    margin: 8px 0;
+    object-fit: contain !important;
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: crisp-edges !important;
+    mix-blend-mode: multiply !important;
+    background: transparent !important;
+}
+
+.header-area.style-2 .menu-list {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.header-area.style-2 .menu-list {
+    display: flex !important;
+    gap: 40px !important;
+    align-items: center !important;
+    list-style: none !important;
+}
+
+.header-area.style-2 .menu-list > li {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.header-area.style-2 .menu-list > li > a {
+    font-size: 17px;
+    font-weight: 600;
+    color: #1f2937 !important;
+    padding: 12px 22px !important;
+    text-decoration: none;
+    transition: all 0.3s;
+    letter-spacing: 0.3px;
+    background: transparent !important;
+    border-radius: 8px !important;
+}
+
+.header-area.style-2 .menu-list > li.active > a {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    color: white !important;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.header-area.style-2 .nav-right .contact-area a {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+}
+
+.header-area.style-2 .nav-right .language-btn span {
+    font-size: 16px !important;
+}
+
+.header-area.style-2 .menu-list > li > a:hover {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
 
 /* Mobile menu contact area should be visible only on mobile */
 @media (max-width: 1199px) {
@@ -526,12 +595,16 @@ a.primary-btn1 {
                         </div>
                     </div>
                     <ul class="menu-list">
-                        <li class="active"><a href="travel-agency-03.html">Home</a></li>
-                        <li><a href="all-destinations.html">Destinations</a></li>
-                        <li><a href="tours.html">Tours</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li class="active">
+                            <a href="travel-agency-03.html">Home</a>
+                        </li>
+                        <!-- Categories will be loaded dynamically here -->
+                        <li>
+                            <a href="about.html">About</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">Contact Us</a>
+                        </li>
                     </ul>
                     <div class="contact-area d-xl-none d-flex" style="gap: 15px; align-items: center; flex-direction: column; padding: 15px 0;">
                         <div style="display: flex; align-items: center; gap: 10px;">
@@ -552,12 +625,16 @@ a.primary-btn1 {
                                     <line x1="2" y1="12" x2="22" y2="12"></line>
                                     <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                                 </svg>
-                                <span id="currentFlagMobile" style="font-size: 20px;">🇺🇸</span><span id="currentLangMobile">English</span>
+                                <span id="currentLangMobile">English</span>
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polyline points="6 9 12 15 18 9"></polyline>
                                 </svg>
                             </button>
-                            <div class="language-dropdown-mobile" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 5px; z-index: 1000;"></div>
+                            <div class="language-dropdown-mobile" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 5px; z-index: 1000;">
+                                <a href="#" class="lang-option-mobile" data-lang="English" style="display: block; padding: 12px 15px; color: #1f2937; text-decoration: none; transition: all 0.2s; border-bottom: 1px solid #f3f4f6;">English</a>
+                                <a href="#" class="lang-option-mobile" data-lang="O'zbekcha" style="display: block; padding: 12px 15px; color: #1f2937; text-decoration: none; transition: all 0.2s; border-bottom: 1px solid #f3f4f6;">O'zbekcha</a>
+                                <a href="#" class="lang-option-mobile" data-lang="Русский" style="display: block; padding: 12px 15px; color: #1f2937; text-decoration: none; transition: all 0.2s;">Русский</a>
+                            </div>
                         </div>
                     </div>
                     <a href="#" class="primary-btn1 black-bg d-xl-none d-flex">
@@ -598,13 +675,46 @@ a.primary-btn1 {
                         </div>
                         <div class="language-selector" style="position: relative;">
                             <button class="language-btn" style="background: transparent; border: none; cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 600; color: #1f2937; padding: 5px 10px; border-radius: 6px; transition: all 0.3s;">
-                                <span id="currentFlag" style="font-size: 20px;">🇺🇸</span>
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 30'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Crect width='50' height='30'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Crect width='50' height='30' fill='%23012169'/%3E%3Cpath d='M0,0 L50,30 M50,0 L0,30' stroke='%23FFF' stroke-width='6'/%3E%3Cpath d='M0,0 L50,30 M50,0 L0,30' stroke='%23C8102E' stroke-width='4' clip-path='url(%23a)'/%3E%3Cpath d='M25,0 V30 M0,15 H50' stroke='%23FFF' stroke-width='10'/%3E%3Cpath d='M25,0 V30 M0,15 H50' stroke='%23C8102E' stroke-width='6'/%3E%3C/g%3E%3C/svg%3E" alt="UK Flag" width="24" height="16" style="border-radius: 2px; border: 1px solid rgba(0,0,0,0.1);">
                                 <span id="currentLang">EN</span>
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polyline points="6 9 12 15 18 9"></polyline>
                                 </svg>
                             </button>
-                            <div class="language-dropdown" style="display: none; position: absolute; top: 100%; right: 0; background: white; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 5px; width: max-content; min-width: 180px; z-index: 1000; padding: 8px;"></div>
+                            <div class="language-dropdown" style="display: none; position: absolute; top: 100%; right: 0; background: white; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 5px; width: max-content; z-index: 1000;">
+                                <a href="#" class="lang-option" data-lang="EN" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 30'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Crect width='50' height='30'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Crect width='50' height='30' fill='%23012169'/%3E%3Cpath d='M0,0 L50,30 M50,0 L0,30' stroke='%23FFF' stroke-width='6'/%3E%3Cpath d='M0,0 L50,30 M50,0 L0,30' stroke='%23C8102E' stroke-width='4' clip-path='url(%23a)'/%3E%3Cpath d='M25,0 V30 M0,15 H50' stroke='%23FFF' stroke-width='10'/%3E%3Cpath d='M25,0 V30 M0,15 H50' stroke='%23C8102E' stroke-width='6'/%3E%3C/g%3E%3C/svg%3E" alt="UK" width="24" height="16" style="border-radius: 2px; border: 1px solid rgba(0,0,0,0.1);">
+                                    <span>English</span>
+                                </a>
+                                <a href="#" class="lang-option" data-lang="IT" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='1' height='2' fill='%23009246'/%3E%3Crect x='1' width='1' height='2' fill='%23fff'/%3E%3Crect x='2' width='1' height='2' fill='%23ce2b37'/%3E%3C/svg%3E" alt="Italy" width="24" height="16" style="border-radius: 2px;">
+                                    <span>Italiano</span>
+                                </a>
+                                <a href="#" class="lang-option" data-lang="FR" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='1' height='2' fill='%23002395'/%3E%3Crect x='1' width='1' height='2' fill='%23fff'/%3E%3Crect x='2' width='1' height='2' fill='%23ED2939'/%3E%3C/svg%3E" alt="France" width="24" height="16" style="border-radius: 2px;">
+                                    <span>Français</span>
+                                </a>
+                                <a href="#" class="lang-option" data-lang="DE" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 3'%3E%3Crect width='5' height='1' fill='%23000'/%3E%3Crect y='1' width='5' height='1' fill='%23D00'/%3E%3Crect y='2' width='5' height='1' fill='%23FFCE00'/%3E%3C/svg%3E" alt="Germany" width="24" height="16" style="border-radius: 2px;">
+                                    <span>Deutsch</span>
+                                </a>
+                                <a href="#" class="lang-option" data-lang="ES" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='3' height='2' fill='%23c60b1e'/%3E%3Crect y='0.5' width='3' height='1' fill='%23ffc400'/%3E%3C/svg%3E" alt="Spain" width="24" height="16" style="border-radius: 2px;">
+                                    <span>Español</span>
+                                </a>
+                                <a href="#" class="lang-option" data-lang="JP" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='3' height='2' fill='%23fff'/%3E%3Ccircle cx='1.5' cy='1' r='0.6' fill='%23bc002d'/%3E%3C/svg%3E" alt="Japan" width="24" height="16" style="border-radius: 2px;">
+                                    <span>日本語</span>
+                                </a>
+                                <a href="#" class="lang-option" data-lang="RU" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 6'%3E%3Crect width='9' height='2' fill='%23fff'/%3E%3Crect y='2' width='9' height='2' fill='%230039a6'/%3E%3Crect y='4' width='9' height='2' fill='%23d52b1e'/%3E%3C/svg%3E" alt="Russia" width="24" height="16" style="border-radius: 2px;">
+                                    <span>Русский</span>
+                                </a>
+                                <a href="#" class="lang-option" data-lang="UZ" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 250'%3E%3Crect width='500' height='80' fill='%231EB53A'/%3E%3Crect y='80' width='500' height='3' fill='%23FF0000'/%3E%3Crect y='83' width='500' height='84' fill='%23FFFFFF'/%3E%3Crect y='167' width='500' height='3' fill='%23FF0000'/%3E%3Crect y='170' width='500' height='80' fill='%230099B5'/%3E%3Ccircle cx='100' cy='40' r='25' fill='%23FFFFFF'/%3E%3Ccircle cx='110' cy='40' r='20' fill='%231EB53A'/%3E%3Cpolygon points='150,25 153,34 162,34 155,40 158,49 150,43 142,49 145,40 138,34 147,34' fill='%23FFFFFF'/%3E%3Cpolygon points='180,25 183,34 192,34 185,40 188,49 180,43 172,49 175,40 168,34 177,34' fill='%23FFFFFF'/%3E%3Cpolygon points='210,25 213,34 222,34 215,40 218,49 210,43 202,49 205,40 198,34 207,34' fill='%23FFFFFF'/%3E%3Cpolygon points='165,50 168,59 177,59 170,65 173,74 165,68 157,74 160,65 153,59 162,59' fill='%23FFFFFF'/%3E%3Cpolygon points='195,50 198,59 207,59 200,65 203,74 195,68 187,74 190,65 183,59 192,59' fill='%23FFFFFF'/%3E%3C/svg%3E" alt="Uzbekistan" width="24" height="16" style="border-radius: 2px;">
+                                    <span>Uzbek</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="search-bar">
@@ -2433,15 +2543,16 @@ document.addEventListener('DOMContentLoaded', function() {
     <!-- Backend API Integration -->
     <script src="gofly-api.js"></script>
     <!-- Settings Integration -->
-    <script src="settings-integration.js?v=20251130"></script>
-    <script src="language-loader.js"></script>
+    <script src="settings-integration.js"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"70834e4b23964a2eaf7cf4ec0e5e9a84","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 
 <script>
-// Language selector - dropdown toggle only (options handled by language-loader.js)
+// Language selector functionality
 document.addEventListener('DOMContentLoaded', function() {
     const languageBtn = document.querySelector('.language-btn');
     const languageDropdown = document.querySelector('.language-dropdown');
+    const langOptions = document.querySelectorAll('.lang-option');
+    const currentLangSpan = document.getElementById('currentLang');
 
     if (languageBtn && languageDropdown) {
         languageBtn.addEventListener('click', function(e) {
@@ -2449,10 +2560,31 @@ document.addEventListener('DOMContentLoaded', function() {
             languageDropdown.style.display = languageDropdown.style.display === 'none' ? 'block' : 'none';
         });
 
-        document.addEventListener('click', function(e) {
-            if (!languageDropdown.contains(e.target)) {
+        document.addEventListener('click', function() {
+            languageDropdown.style.display = 'none';
+        });
+
+        langOptions.forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.preventDefault();
+                const selectedLang = this.getAttribute('data-lang');
+                const flagImg = this.querySelector('img').cloneNode(true);
+                const btn = document.querySelector('.language-btn');
+                const oldFlag = btn.querySelector('img');
+                btn.replaceChild(flagImg, oldFlag);
+                currentLangSpan.textContent = selectedLang;
                 languageDropdown.style.display = 'none';
-            }
+            });
+
+            option.addEventListener('mouseenter', function() {
+                this.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
+                this.style.color = 'white';
+            });
+
+            option.addEventListener('mouseleave', function() {
+                this.style.background = 'transparent';
+                this.style.color = '#1f2937';
+            });
         });
 
         languageBtn.addEventListener('mouseenter', function() {
@@ -2464,9 +2596,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Mobile language selector - dropdown toggle only
+    // Mobile language selector
     const languageBtnMobile = document.querySelector('.language-btn-mobile');
     const languageDropdownMobile = document.querySelector('.language-dropdown-mobile');
+    const langOptionsMobile = document.querySelectorAll('.lang-option-mobile');
+    const currentLangMobileSpan = document.getElementById('currentLangMobile');
 
     if (languageBtnMobile && languageDropdownMobile) {
         languageBtnMobile.addEventListener('click', function(e) {
@@ -2474,10 +2608,27 @@ document.addEventListener('DOMContentLoaded', function() {
             languageDropdownMobile.style.display = languageDropdownMobile.style.display === 'none' ? 'block' : 'none';
         });
 
-        document.addEventListener('click', function(e) {
-            if (!languageDropdownMobile.contains(e.target)) {
+        document.addEventListener('click', function() {
+            languageDropdownMobile.style.display = 'none';
+        });
+
+        langOptionsMobile.forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.preventDefault();
+                const selectedLang = this.getAttribute('data-lang');
+                currentLangMobileSpan.textContent = selectedLang;
                 languageDropdownMobile.style.display = 'none';
-            }
+            });
+
+            option.addEventListener('mouseenter', function() {
+                this.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
+                this.style.color = 'white';
+            });
+
+            option.addEventListener('mouseleave', function() {
+                this.style.background = 'transparent';
+                this.style.color = '#1f2937';
+            });
         });
 
         languageBtnMobile.addEventListener('mouseenter', function() {
@@ -2488,6 +2639,7 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.background = 'transparent';
         });
     }
+
     // ============================================
     // LOAD POPULAR TOURS FROM BACKEND API
     // ============================================
@@ -2768,6 +2920,119 @@ if (document.readyState === 'loading') {
     loadHomeBlogs();
 }
 
+// ========== DYNAMIC CATEGORY MENU WITH DROPDOWN ==========
+
+// Load categories and populate menu with dropdowns
+async function loadCategoryMenu() {
+    try {
+        const response = await fetch('http://localhost:5000/api/categories?active=true');
+        const result = await response.json();
+
+        if (result.success && result.data.categories) {
+            const categories = result.data.categories;
+            const menuList = document.querySelector('.menu-list');
+
+            if (!menuList) return;
+
+            // Remove existing category items to prevent duplicates
+            menuList.querySelectorAll('.has-dropdown').forEach(item => item.remove());
+
+            // Find the "About" link to insert categories before it
+            const aboutLink = Array.from(menuList.querySelectorAll('a')).find(a => a.textContent.includes('About'));
+            const aboutLi = aboutLink ? aboutLink.parentElement : null;
+
+            if (!aboutLi) return;
+
+            // Load tours for each category and create dropdown
+            for (const category of categories.reverse()) {
+                // Fetch tours for this category
+                const categoryMap = {
+                    'cultural-tours': 'cultural',
+                    'adventure-tours': 'adventure',
+                    'homestays-hiking': 'hiking',
+                    'day-trips': 'day-trip'
+                };
+
+                const categoryValue = categoryMap[category.slug];
+                const toursResponse = await fetch(`http://localhost:5000/api/tours?category=${categoryValue}`);
+                const toursResult = await toursResponse.json();
+
+                const li = document.createElement('li');
+                li.className = 'has-dropdown';
+
+                const a = document.createElement('a');
+                a.href = `#${category.slug}`;
+                a.textContent = category.name;
+
+                // Add click event for mobile to toggle dropdown
+                a.addEventListener('click', function(e) {
+                    // On mobile, toggle dropdown
+                    if (window.innerWidth < 1200) {
+                        e.preventDefault();
+                        li.classList.toggle('open');
+                    }
+                });
+
+                li.appendChild(a);
+
+                // Create dropdown submenu if tours exist
+                if (toursResult.success && toursResult.data.tours.length > 0) {
+                    const submenu = document.createElement('ul');
+                    submenu.className = 'submenu';
+
+                    toursResult.data.tours.forEach(tour => {
+                        const subLi = document.createElement('li');
+                        const subA = document.createElement('a');
+                        subA.href = `tour-details.html?id=${tour.id}`;
+                        subA.textContent = tour.title;
+                        subLi.appendChild(subA);
+                        submenu.appendChild(subLi);
+                    });
+
+                    li.appendChild(submenu);
+                }
+
+                // Insert before "About" li
+                menuList.insertBefore(li, aboutLi);
+            }
+        }
+    } catch (error) {
+        console.error('Error loading category menu:', error);
+    }
+}
+
+// Filter tours by category
+function filterToursByCategory(categorySlug) {
+    // console.log('Filtering tours by category:', categorySlug); // Debug only
+
+    // Remove active class from all menu items
+    document.querySelectorAll('.menu-list li').forEach(li => li.classList.remove('active'));
+
+    // Add active class to clicked category
+    const activeLink = document.querySelector(`a[data-category="${categorySlug}"]`);
+    if (activeLink) {
+        activeLink.parentElement.classList.add('active');
+    }
+
+    // Scroll to tours section
+    const toursSection = document.querySelector('.package-area');
+    if (toursSection) {
+        toursSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Load tours with category filter (if loadTours function exists)
+    if (typeof window.loadToursWithCategory === 'function') {
+        window.loadToursWithCategory(categorySlug);
+    }
+}
+
+// Load category menu when page loads
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadCategoryMenu);
+} else {
+    loadCategoryMenu();
+}
+</script>
 
 <script>
 // Main function to load tours from backend

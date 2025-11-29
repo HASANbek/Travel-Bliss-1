@@ -80,6 +80,9 @@ const categoryRoutes = require('./routes/category.routes');
 const aiRoutes = require('./routes/ai.routes');
 const bookingRoutes = require('./routes/booking.routes');
 const sitemapRoutes = require('./routes/sitemap.routes');
+const settingsRoutes = require('./routes/settings.routes');
+const homeSettingsRoutes = require('./routes/homeSettings.routes');
+const languageRoutes = require('./routes/language.routes');
 
 // Use routes
 app.use('/api/demo', demoRoutes);
@@ -93,6 +96,9 @@ app.use('/api/destinations', destinationRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/bookings', bookingRoutes);
+app.use('/api/settings', settingsRoutes);
+app.use('/api/home-settings', homeSettingsRoutes);
+app.use('/api/languages', languageRoutes);
 
 // SEO routes (sitemap.xml and robots.txt)
 app.use('/', sitemapRoutes);
@@ -100,7 +106,10 @@ app.use('/', sitemapRoutes);
 // Static files (uploads)
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-// Admin panel route - MUST be before static files
+// Admin panel static files (JS, CSS)
+app.use('/admin', express.static(path.join(__dirname, '../public/admin')));
+
+// Admin panel route - serve index.html
 app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/admin/index.html'));
 });
