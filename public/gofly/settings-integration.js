@@ -340,7 +340,36 @@ async function loadHomeSettings() { console.log('HOME SETTINGS LOADING...');
 /**
  * Apply home settings to the page
  */
-function applyHomeSettings(settings) { if (!settings) return; // Navigation menu is now static    // Apply phone number (on all pages)    applyPhoneNumber(settings);    // Apply language settings (on all pages)    applyLanguageSettings(settings);    // Only apply rest on homepage    const isHomePage = window.location.pathname === "/" ||                       window.location.pathname.includes("index.html") || window.location.pathname.includes("travel-agency") ||                       window.location.pathname.endsWith("/gofly/") ||                       window.location.pathname.endsWith("/gofly");    if (!isHomePage) return;    // Apply hero settings (new)    applyHeroSettings(settings);    // Apply background settings (legacy)    applyBackgroundSettings(settings);    // Hero Banner (legacy)    applyBannerSettings(settings);    // Apply sections order and visibility    applySectionsOrder(settings);    // Section visibility (legacy support)    applySectionVisibility(settings);    // Section titles and subtitles    applySectionTitles(settings);    // Statistics    applyStatistics(settings);    // Why Choose Us items    applyWhyChooseItems(settings);}
+function applyHomeSettings(settings) {
+    if (!settings) return;
+    // Apply phone number (on all pages)
+    applyPhoneNumber(settings);
+    // Apply language settings (on all pages)
+    applyLanguageSettings(settings);
+    // Only apply rest on homepage
+    const isHomePage = window.location.pathname === "/" ||
+                       window.location.pathname.includes("index.html") ||
+                       window.location.pathname.includes("travel-agency") ||
+                       window.location.pathname.endsWith("/gofly/") ||
+                       window.location.pathname.endsWith("/gofly");
+    if (!isHomePage) return;
+    // Apply hero settings
+    applyHeroSettings(settings);
+    // Apply background settings
+    applyBackgroundSettings(settings);
+    // Hero Banner
+    applyBannerSettings(settings);
+    // Apply sections order and visibility
+    applySectionsOrder(settings);
+    // Section visibility
+    applySectionVisibility(settings);
+    // Section titles and subtitles
+    applySectionTitles(settings);
+    // Statistics
+    applyStatistics(settings);
+    // Why Choose Us items
+    applyWhyChooseItems(settings);
+}
 
 /**
  * Apply homepage background settings
@@ -1044,7 +1073,7 @@ function updateLangDropdowns(languages, defaultLang) {
         var html = '';
         languages.forEach(function(lang) {
             html += '<a href="#" class="lang-option" data-lang="' + lang.code.toUpperCase() + '" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">' +
-                '<span style="font-size: 20px;">' + (lang.flag || '🌐') + '</span>' +
+                ((lang.flag && lang.flag.startsWith('http')) ? '<img src="' + lang.flag + '" style="width:24px;height:16px;object-fit:cover;border-radius:2px;">' : '<span style="font-size: 20px;">' + (lang.flag || '🌐') + '</span>') +
                 '<span>' + lang.name + '</span>' +
             '</a>';
         });
@@ -1070,7 +1099,7 @@ function updateLangDropdowns(languages, defaultLang) {
         languages.forEach(function(lang, index) {
             var borderStyle = index < languages.length - 1 ? 'border-bottom: 1px solid #f3f4f6;' : '';
             html += '<a href="#" class="lang-option-mobile" data-lang="' + lang.name + '" style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; color: #1f2937; text-decoration: none; transition: all 0.2s; ' + borderStyle + '">' +
-                '<span style="font-size: 20px;">' + (lang.flag || '🌐') + '</span>' +
+                ((lang.flag && lang.flag.startsWith('http')) ? '<img src="' + lang.flag + '" style="width:24px;height:16px;object-fit:cover;border-radius:2px;">' : '<span style="font-size: 20px;">' + (lang.flag || '🌐') + '</span>') +
                 '<span>' + lang.name + '</span>' +
             '</a>';
         });

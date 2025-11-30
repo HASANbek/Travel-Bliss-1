@@ -110,133 +110,6 @@ a.primary-btn1 {
 }
 
 
-/* Mobile menu contact area should be visible only on mobile */
-@media (max-width: 1199px) {
-    .header-area.style-2 .main-menu .contact-area {
-        display: flex !important;
-    }
-
-    /* Modern mobile menu styling */
-    .main-menu {
-        background: white;
-        padding: 20px;
-    }
-
-    .main-menu .menu-list {
-        flex-direction: column !important;
-        gap: 0 !important;
-        padding: 20px 0 !important;
-    }
-
-    .main-menu .menu-list > li {
-        width: 100% !important;
-        border-bottom: 1px solid #f3f4f6;
-    }
-
-    .main-menu .menu-list > li:last-child {
-        border-bottom: none;
-    }
-
-    .main-menu .menu-list > li > a {
-        display: block !important;
-        width: 100% !important;
-        padding: 16px 20px !important;
-        font-size: 16px !important;
-        font-weight: 600 !important;
-        color: #1f2937 !important;
-        background: transparent !important;
-        border-radius: 0 !important;
-        text-align: left !important;
-        position: relative;
-        transition: all 0.3s ease;
-    }
-
-    .main-menu .menu-list > li > a:hover,
-    .main-menu .menu-list > li.active > a {
-        background: linear-gradient(90deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%) !important;
-        color: #6366f1 !important;
-        padding-left: 30px !important;
-        transform: none !important;
-        box-shadow: none !important;
-    }
-
-    .main-menu .menu-list > li > a:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 0;
-        height: 100%;
-        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-        transition: width 0.3s ease;
-    }
-
-    .main-menu .menu-list > li > a:hover:before,
-    .main-menu .menu-list > li.active > a:before {
-        width: 4px;
-    }
-
-    /* Contact area in mobile */
-    .main-menu .contact-area {
-        border-top: 2px solid #f3f4f6;
-        border-bottom: 2px solid #f3f4f6;
-        padding: 20px 0 !important;
-        margin: 10px 0 !important;
-        background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-        border-radius: 12px;
-    }
-
-    .main-menu .contact-area > div:first-child {
-        margin-bottom: 15px !important;
-    }
-
-    .main-menu .contact-area a[href^="tel"] {
-        font-size: 18px !important;
-        color: #6366f1 !important;
-        font-weight: 700 !important;
-    }
-
-    /* Mobile dropdown */
-    .main-menu .has-dropdown {
-        position: relative;
-    }
-
-    .main-menu .submenu {
-        list-style: none;
-        padding-left: 20px !important;
-        margin: 0;
-        display: none;
-        background: rgba(99, 102, 241, 0.05);
-        border-left: 3px solid #6366f1;
-    }
-
-    .main-menu .has-dropdown.open .submenu {
-        display: block;
-    }
-
-    .main-menu .submenu li {
-        border-bottom: 1px solid rgba(99, 102, 241, 0.1);
-    }
-
-    .main-menu .submenu li:last-child {
-        border-bottom: none;
-    }
-
-    .main-menu .submenu li a {
-        padding: 12px 15px !important;
-        font-size: 14px !important;
-        font-weight: 300 !important;
-        color: #4b5563 !important;
-    }
-
-    .main-menu .submenu li a:hover {
-        color: #6366f1 !important;
-        background: rgba(99, 102, 241, 0.1) !important;
-        padding-left: 25px !important;
-    }
-
-}
 
 /* Desktop dropdown */
 @media (min-width: 1200px) {
@@ -303,6 +176,27 @@ a.primary-btn1 {
 
 .header-area.style-2 .nav-right * {
     color: #000000 !important;
+}
+
+@media(max-width:1199px){
+    .header-area.style-2 .nav-right *,
+    .header-area.style-2 .nav-right i,
+    .header-area.style-2 .nav-right svg,
+    .header-area.style-2 .sidebar-button i {
+        color: #ffffff !important;
+        stroke: #ffffff !important;
+    }
+    .header-area.style-2 .sidebar-button {
+        background: rgba(255,255,255,0.9) !important;
+        border-radius: 8px !important;
+        padding: 8px 10px !important;
+    }
+    .header-area.style-2 .sidebar-button i {
+        color: #1a1a2e !important;
+    }
+    .header-area.style-2 .header-logo img {
+        filter: drop-shadow(0 0 8px rgba(255,255,255,0.9)) drop-shadow(0 0 15px rgba(255,255,255,0.7)) !important;
+    }
 }
 
 /* Hide search icon and sign in button */
@@ -521,8 +415,8 @@ a.primary-btn1 {
                         <a href="travel-agency-03.html" class="mobile-logo-wrap">
                             <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 40px; width: auto; max-width: 60%; object-fit: contain;">
                         </a>
-                        <div class="menu-close-btn">
-                            <i class="bi bi-x"></i>
+                        <div class="menu-close-btn" id="menuCloseBtn">
+                            <span style="font-size:28px;font-weight:bold;color:#1a3a6e;line-height:1;">×</span>
                         </div>
                     </div>
                     <ul class="menu-list">
@@ -661,7 +555,7 @@ a.primary-btn1 {
                         Login
                     </span>
                 </a>
-                <div class="sidebar-button mobile-menu-btn">
+                <div class="sidebar-button mobile-menu-btn" onclick="document.querySelector('.main-menu').classList.add('show-menu')">
                     <svg width="20" height="18" viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.29445 2.8421H10.5237C11.2389 2.8421 11.8182 2.2062 11.8182 1.42105C11.8182 0.635903 11.2389 0 10.5237 0H1.29445C0.579249 0 0 0.635903 0 1.42105C0 2.2062 0.579249 2.8421 1.29445 2.8421Z"></path>
                         <path d="M1.23002 10.421H18.77C19.4496 10.421 20 9.78506 20 8.99991C20 8.21476 19.4496 7.57886 18.77 7.57886H1.23002C0.550421 7.57886 0 8.21476 0 8.99991C0 9.78506 0.550421 10.421 1.23002 10.421Z"></path>
@@ -674,7 +568,7 @@ a.primary-btn1 {
     <!-- header Section End-->
 
     <!-- home4 Banner Section Start - IndyGuide Style Swiper Gallery -->
-    <div class="home4-banner-section mb-100">
+    <div class="home4-banner-section">
         <!-- Main Banner Swiper -->
         <div class="banner-swiper-container">
             <div class="swiper banner-main-swiper">
@@ -741,6 +635,22 @@ a.primary-btn1 {
 .explore-destinations-section {
     padding: 80px 0;
     background: #ffffff;
+}
+
+@media (max-width: 1199px) {
+    .explore-destinations-section {
+        padding: 20px 0 !important;
+    }
+    .explore-destinations-section .section-title h2 {
+        margin-bottom: 15px !important;
+        font-size: 28px !important;
+    }
+    .explore-destinations-section .row.mb-50 {
+        margin-bottom: 10px !important;
+    }
+    .home4-banner-section {
+        margin-bottom: 0 !important;
+    }
 }
 
 .explore-destinations-section .section-title h2 {
@@ -2433,7 +2343,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <!-- Backend API Integration -->
     <script src="gofly-api.js"></script>
     <!-- Settings Integration -->
-    <script src="settings-integration.js?v=20251130"></script>
+    <script src="settings-integration.js?v=20251130c"></script>
     <script src="language-loader.js"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"70834e4b23964a2eaf7cf4ec0e5e9a84","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 
@@ -2767,7 +2677,7 @@ if (document.readyState === 'loading') {
 } else {
     loadHomeBlogs();
 }
-
+</script>
 
 <script>
 // Main function to load tours from backend
@@ -3120,6 +3030,43 @@ function getCountryFlag(countryCode) {
 }
 </script>
 
+
+<script>
+// Menu open/close functionality
+document.addEventListener('DOMContentLoaded', function() {
+    var closeBtn = document.getElementById('menuCloseBtn');
+    var mainMenu = document.querySelector('.main-menu');
+    var sidebarBtn = document.querySelector('.sidebar-button');
+    
+    // Open menu
+    if (sidebarBtn && mainMenu) {
+        sidebarBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            mainMenu.classList.add('show-menu');
+            sidebarBtn.classList.add('active');
+        });
+    }
+    
+    // Close menu
+    if (closeBtn && mainMenu) {
+        closeBtn.addEventListener('click', function() {
+            mainMenu.classList.remove('show-menu');
+            if (sidebarBtn) sidebarBtn.classList.remove('active');
+        });
+    }
+    
+    // Close on outside click
+    document.addEventListener('click', function(e) {
+        if (mainMenu && mainMenu.classList.contains('show-menu')) {
+            if (!mainMenu.contains(e.target) && !e.target.closest('.sidebar-button')) {
+                mainMenu.classList.remove('show-menu');
+                if (sidebarBtn) sidebarBtn.classList.remove('active');
+            }
+        }
+    });
+});
+</script>
 </body>
 
 </html>

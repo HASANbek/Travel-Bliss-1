@@ -1,7 +1,7 @@
 (function ($) {
   ("use strict");
 
-  $(".sidebar-button").on("click", function () {
+  $(".sidebar-button").on("click", function (e) { e.stopPropagation();
     $(this).toggleClass("active");
   });
 
@@ -13,31 +13,43 @@
     });
   }
 
-  $(".menu-close-btn").on("click", function () {
+  $(".menu-close-btn").on("click", function (e) {
+    e.stopPropagation();
     $(".main-menu").removeClass("show-menu");
+    $(".sidebar-button").removeClass("active");
+  });
+
+  // Close menu on outside click
+  $(document).on("click touchstart", function (e) {
+    if ($(".main-menu").hasClass("show-menu")) {
+      if (!$(e.target).closest(".main-menu").length && !$(e.target).closest(".sidebar-button").length) {
+        $(".main-menu").removeClass("show-menu");
+        $(".sidebar-button").removeClass("active");
+      }
+    }
   });
 
   // sidebar
-  $(".right-sidebar-button").on("click", function () {
+  $(".right-sidebar-button").on("click", function (e) { e.stopPropagation();
     $(".right-sidebar-menu").addClass("show-right-menu");
   });
-  $(".right-sidebar-close-btn").on("click", function () {
+  $(".right-sidebar-close-btn").on("click", function (e) { e.stopPropagation();
     $(".right-sidebar-menu").removeClass("show-right-menu");
   });
 
-  $(".menu-btn").on("click", function () {
+  $(".menu-btn").on("click", function (e) { e.stopPropagation();
     $(".sidebar-menu").addClass("active");
   });
-  $(".sidebar-menu-close").on("click", function () {
+  $(".sidebar-menu-close").on("click", function (e) { e.stopPropagation();
     $(".sidebar-menu").removeClass("active");
   });
 
-  jQuery(".dropdown-icon").on("click", function () {
+  jQuery(".dropdown-icon").on("click", function (e) { e.stopPropagation();
     jQuery(this).toggleClass("active").next("ul, .mega-menu").slideToggle();
     jQuery(this).parent().siblings().children("ul, .mega-menu").slideUp();
     jQuery(this).parent().siblings().children(".active").removeClass("active");
   });
-  jQuery(".dropdown-icon2").on("click", function () {
+  jQuery(".dropdown-icon2").on("click", function (e) { e.stopPropagation();
     jQuery(this).toggleClass("active").next(".submenu-list").slideToggle();
     jQuery(this).parent().siblings().children(".submenu-list").slideUp();
     jQuery(this).parent().siblings().children(".active").removeClass("active");
@@ -64,7 +76,7 @@
     // Update button click event to open only its own first image
     $(this)
       .find(".img-album-btn")
-      .on("click", function () {
+      .on("click", function (e) { e.stopPropagation();
         startedFromIndexPage = true;
         $(this)
           .closest(".location-card")
@@ -1428,7 +1440,7 @@
   });
 
   // Handle click on the input item
-  $(".custom-select-dropdown").on("click", function () {
+  $(".custom-select-dropdown").on("click", function (e) { e.stopPropagation();
     $(".custom-select-wrap").toggleClass("active");
   });
 
@@ -1447,7 +1459,7 @@
     });
 
     // Handle option click
-    $wrap.find(".option-list-destination li").on("click", function () {
+    $wrap.find(".option-list-destination li").on("click", function (e) { e.stopPropagation();
       var country = $(this).find(".destination h6").text();
       var destination = $(this).find(".destination span").text();
       const countryDestinationHtml = `<div class="destination"><h6>${country}</h6> <span>${destination}</span></div>`;
@@ -1456,7 +1468,7 @@
       $wrap.removeClass("active");
     });
 
-    $wrap.find(".option-list li").on("click", function () {
+    $wrap.find(".option-list li").on("click", function (e) { e.stopPropagation();
       var value = $(this).find("h6").text();
       $input.val(value);
       $wrap.removeClass("active");
@@ -1670,7 +1682,7 @@
   // Add new room
   const maxRooms = 5;
 
-  $(".add-btn").on("click", function () {
+  $(".add-btn").on("click", function (e) { e.stopPropagation();
     const roomCount = $(".room-list .single-room").length;
 
     if (roomCount >= maxRooms) {
@@ -1774,7 +1786,7 @@
   });
 
   $(document).ready(function () {
-    $(".filter-item-list .single-item").on("click", function () {
+    $(".filter-item-list .single-item").on("click", function (e) { e.stopPropagation();
       var $clickedItem = $(this);
       var index = $clickedItem.index();
 
@@ -1790,7 +1802,7 @@
   });
 
   // sidebar activities expand
-  $(".checkbox-container span.expand").on("click", function () {
+  $(".checkbox-container span.expand").on("click", function (e) { e.stopPropagation();
     $(".checkbox-container.two ul").height("auto");
     $(".expand").hide();
   });
@@ -1871,7 +1883,7 @@
       $(".star-icon").removeClass("hovered");
     });
 
-    self.on("click", function () {
+    self.on("click", function (e) { e.stopPropagation();
       const rating = $(this).prevAll().length + 1;
       const parent = $(this).parent();
       parent.attr("data-rating", rating);
@@ -1895,7 +1907,7 @@
   });
 
   //list grid view
-  $(".grid-view li").on("click", function () {
+  $(".grid-view li").on("click", function (e) { e.stopPropagation();
     // Get the class of the clicked li element
     var clickedClass = $(this).attr("class");
     // Extract the class name without "item-" prefix
@@ -1911,7 +1923,7 @@
   });
 
   //Package Details Checkbox
-  jQuery(".sidebar-category-icon").on("click", function () {
+  jQuery(".sidebar-category-icon").on("click", function (e) { e.stopPropagation();
     jQuery(this).toggleClass("active");
     jQuery(this).siblings(".sub-category").stop(true, true).slideToggle();
   });
@@ -1999,7 +2011,7 @@
 
   // Payment Method
   $(function () {
-    $(".choose-payment-method ul li").on("click", function () {
+    $(".choose-payment-method ul li").on("click", function (e) { e.stopPropagation();
       $(".choose-payment-method ul li").removeClass("active"); // Remove active class from all list items
       if ($(this).hasClass("stripe")) {
         $("#StripePayment").show();
@@ -2345,7 +2357,7 @@
       $('a[href^="#"]')
         .not('[href$="#"]') // omit from selection
         .not('[href$="#0"]') // omit from selection
-        .on("click", function () {
+        .on("click", function (e) { e.stopPropagation();
           var target = this.hash;
 
           // If fixed header position enabled.
@@ -2389,7 +2401,7 @@
         .not(".lg-trigger") // omit from selection.
         .not(".video-player") // omit from selection.
         .not(".tt-btn-disabled") // omit from selection.
-        .on("click", function () {
+        .on("click", function (e) { e.stopPropagation();
           gsap.to($ball, { duration: 0.3, scale: 1.3, autoAlpha: 0 });
         });
 
@@ -2445,7 +2457,7 @@
         jQuery(".progress-wrap").removeClass("active-progress");
       }
     });
-    jQuery(".progress-wrap").on("click", function () {
+    jQuery(".progress-wrap").on("click", function (e) { e.stopPropagation();
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   });
