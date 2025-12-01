@@ -1,0 +1,87 @@
+/* Trusted Worldwide Section */
+.trusted-worldwide-section {
+    padding: 80px 0;
+    background: #f8fafc;
+}
+
+.trusted-worldwide-section h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 15px;
+}
+
+.trusted-worldwide-section > .container > .row:first-child p {
+    color: #6b7280;
+    font-size: 16px;
+}
+
+.rating-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 30px 25px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 2px solid transparent;
+    transition: all 0.3s;
+    height: 100%;
+}
+
+.rating-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.rating-card.tripadvisor:hover { border-color: #00aa6c; }
+.rating-card.getyourguide:hover { border-color: #ff5533; }
+.rating-card.google:hover { border-color: #4285f4; }
+.rating-card.indyguide:hover { border-color: #8b5cf6; }
+
+.rating-card .brand-name {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.rating-card .rating-number {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.rating-card .stars {
+    color: #ffc107;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.rating-card .review-count {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.rating-card .badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.rating-card .btn-review {
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+.rating-card .btn-review:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}

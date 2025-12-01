@@ -23,3 +23,50 @@ body {
     background: rgba(255, 255, 255, 0.98) !important;
     box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
 }
+
+/* Hide decorative balloon/parachute elements */
+.home4-destination-section::before,
+.home4-destination-section::after,
+.home3-destination-section::before,
+.home3-destination-section::after,
+.destination-section::before,
+.destination-section::after,
+[class*="travel-element"],
+[class*="floating-element"],
+[class*="parachute"],
+[class*="air-balloon"],
+img[src*="travel-element"],
+img[src*="parachute"],
+img[src*="balloon"] {
+    display: none !important;
+}
+
+/* Hide balloon background from why-choose section */
+.home4-why-choose-us-section {
+    background-image: none !important;
+    background-color: #f8fafc !important;
+}
+
+/* Force hide all decorative balloon/vector elements */
+.section-vector,
+.section-vector2,
+.vector,
+img[class*="vector"],
+img[src*="vector"],
+img[src*="element"],
+.home4-travel-package-section::before,
+.home4-travel-package-section::after,
+.home4-blog-section::before,
+.home4-blog-section::after,
+.mb-100::before,
+.mb-100::after {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Remove all background images with balloons */
+[style*="hom4-why-choose"],
+[style*="feature-section-vector"] {
+    background-image: none !important;
+}
