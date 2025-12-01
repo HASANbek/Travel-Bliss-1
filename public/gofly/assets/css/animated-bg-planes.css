@@ -1,0 +1,183 @@
+/* ========== ANIMATED BACKGROUND WITH AIRPLANES & TRAILS ========== */
+body {
+    background: linear-gradient(180deg, #e8f4fc 0%, #d6ebf8 30%, #c4e2f4 60%, #e8f4fc 100%) !important;
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.flying-planes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 99;
+    overflow: hidden;
+}
+
+/* Samolyot konteyner - iz bilan birga */
+.plane-container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+}
+
+/* Samolyot emoji */
+.plane {
+    font-size: 35px;
+    filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.2));
+    z-index: 2;
+    position: relative;
+}
+
+/* Samolyot izi (contrail) */
+.plane-trail {
+    position: absolute;
+    right: 30px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.8) 20%, rgba(255,255,255,0.9) 100%);
+    border-radius: 3px;
+    filter: blur(1px);
+    animation: trailPulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes trailPulse {
+    0% { opacity: 0.6; height: 2px; }
+    100% { opacity: 0.9; height: 4px; }
+}
+
+/* ===== SAMOLYOT 1 - Chapdan o'ngga, yuqorida ===== */
+.plane-container:nth-child(1) {
+    top: 5%;
+    animation: flyRight1 20s linear infinite;
+}
+.plane-container:nth-child(1) .plane { font-size: 40px; }
+.plane-container:nth-child(1) .plane-trail { width: 120px; }
+
+@keyframes flyRight1 {
+    0% { left: -150px; transform: translateY(0) rotate(5deg); }
+    20% { transform: translateY(30px) rotate(8deg); }
+    40% { transform: translateY(-20px) rotate(2deg); }
+    60% { transform: translateY(15px) rotate(6deg); }
+    80% { transform: translateY(-10px) rotate(4deg); }
+    100% { left: calc(100% + 150px); transform: translateY(0) rotate(5deg); }
+}
+
+/* ===== SAMOLYOT 2 - O'ngdan chapga, pastroqda ===== */
+.plane-container:nth-child(2) {
+    top: 20%;
+    animation: flyLeft1 25s linear infinite;
+    animation-delay: 3s;
+}
+.plane-container:nth-child(2) .plane { font-size: 50px; transform: scaleX(-1); }
+.plane-container:nth-child(2) .plane-trail { width: 150px; left: 40px; right: auto; transform: scaleX(-1); }
+
+@keyframes flyLeft1 {
+    0% { left: calc(100% + 150px); transform: translateY(0) rotate(-3deg); }
+    25% { transform: translateY(-40px) rotate(-6deg); }
+    50% { transform: translateY(30px) rotate(0deg); }
+    75% { transform: translateY(-20px) rotate(-4deg); }
+    100% { left: -200px; transform: translateY(0) rotate(-3deg); }
+}
+
+/* ===== SAMOLYOT 3 - Diagonal yuqoridan ===== */
+.plane-container:nth-child(3) {
+    animation: flyDiagonal1 18s linear infinite;
+    animation-delay: 7s;
+}
+.plane-container:nth-child(3) .plane { font-size: 30px; }
+.plane-container:nth-child(3) .plane-trail { width: 80px; }
+
+@keyframes flyDiagonal1 {
+    0% { left: -100px; top: 60%; transform: rotate(15deg); }
+    100% { left: calc(100% + 100px); top: 10%; transform: rotate(15deg); }
+}
+
+/* ===== SAMOLYOT 4 - Katta, sekin, markazda ===== */
+.plane-container:nth-child(4) {
+    top: 45%;
+    animation: flyRight2 30s linear infinite;
+    animation-delay: 10s;
+}
+.plane-container:nth-child(4) .plane { font-size: 55px; }
+.plane-container:nth-child(4) .plane-trail { width: 180px; height: 4px; }
+
+@keyframes flyRight2 {
+    0% { left: -200px; transform: translateY(0) rotate(3deg); }
+    15% { transform: translateY(-50px) rotate(7deg); }
+    30% { transform: translateY(40px) rotate(0deg); }
+    45% { transform: translateY(-30px) rotate(5deg); }
+    60% { transform: translateY(20px) rotate(2deg); }
+    75% { transform: translateY(-15px) rotate(4deg); }
+    100% { left: calc(100% + 200px); transform: translateY(0) rotate(3deg); }
+}
+
+/* ===== SAMOLYOT 5 - Tez, kichik, pastda ===== */
+.plane-container:nth-child(5) {
+    top: 75%;
+    animation: flyRight3 12s linear infinite;
+    animation-delay: 5s;
+}
+.plane-container:nth-child(5) .plane { font-size: 28px; }
+.plane-container:nth-child(5) .plane-trail { width: 60px; }
+
+@keyframes flyRight3 {
+    0% { left: -80px; transform: translateY(0) rotate(2deg); }
+    50% { transform: translateY(-25px) rotate(5deg); }
+    100% { left: calc(100% + 80px); transform: translateY(0) rotate(2deg); }
+}
+
+/* ===== SAMOLYOT 6 - O'ngdan chapga, pastda ===== */
+.plane-container:nth-child(6) {
+    top: 85%;
+    animation: flyLeft2 22s linear infinite;
+    animation-delay: 15s;
+}
+.plane-container:nth-child(6) .plane { font-size: 38px; transform: scaleX(-1); }
+.plane-container:nth-child(6) .plane-trail { width: 100px; left: 30px; right: auto; transform: scaleX(-1); }
+
+@keyframes flyLeft2 {
+    0% { left: calc(100% + 120px); transform: translateY(0); }
+    30% { transform: translateY(20px); }
+    60% { transform: translateY(-30px); }
+    100% { left: -150px; transform: translateY(0); }
+}
+
+/* ===== SAMOLYOT 7 - Diagonal pastdan yuqoriga ===== */
+.plane-container:nth-child(7) {
+    animation: flyDiagonal2 24s linear infinite;
+    animation-delay: 12s;
+}
+.plane-container:nth-child(7) .plane { font-size: 32px; }
+.plane-container:nth-child(7) .plane-trail { width: 90px; }
+
+@keyframes flyDiagonal2 {
+    0% { left: -100px; top: 90%; transform: rotate(-20deg); }
+    100% { left: calc(100% + 100px); top: 20%; transform: rotate(-20deg); }
+}
+
+/* Bulutlar effekti */
+.cloud {
+    position: absolute;
+    font-size: 80px;
+    opacity: 0.15;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255,255,255,0.8);
+    animation: floatCloud linear infinite;
+}
+
+.cloud:nth-child(8) { top: 15%; animation-duration: 60s; font-size: 100px; }
+.cloud:nth-child(9) { top: 40%; animation-duration: 80s; animation-delay: 20s; font-size: 70px; }
+.cloud:nth-child(10) { top: 65%; animation-duration: 70s; animation-delay: 10s; font-size: 90px; }
+
+@keyframes floatCloud {
+    0% { left: -150px; }
+    100% { left: calc(100% + 150px); }
+}
+
+.header-area, main, section, footer, .home4-banner-section {
+    position: relative;
+    z-index: 1;
+}
