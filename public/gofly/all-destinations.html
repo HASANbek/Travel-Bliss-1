@@ -848,65 +848,15 @@ a.primary-btn1 {
         </div>
     </header>
 
-    <!-- home4 Banner Section Start - IndyGuide Style Swiper Gallery -->
-    <div class="home4-banner-section">
-        <!-- Main Banner Swiper -->
-        <div class="banner-swiper-container">
-            <div class="swiper banner-main-swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="/images/tours/samarkand-registan.jpg" alt="Samarkand Registan">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="/images/tours/bukhara-kalyan.jpg" alt="Bukhara">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="/images/tours/khiva-minaret.jpg" alt="Khiva">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="/images/tours/tashkent-metro.jpg" alt="Tashkent">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="/images/tours/chimgan-mountains.jpg" alt="Chimgan Mountains">
-                    </div>
-                </div>
-                <!-- Navigation buttons -->
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-
-            <!-- Thumbnail Swiper -->
-            <div class="swiper banner-thumb-swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="/images/tours/samarkand-registan.jpg" alt="Samarkand">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="/images/tours/bukhara-kalyan.jpg" alt="Bukhara">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="/images/tours/khiva-minaret.jpg" alt="Khiva">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="/images/tours/tashkent-metro.jpg" alt="Tashkent">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="/images/tours/chimgan-mountains.jpg" alt="Chimgan Mountains">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="banner-content-wrap">
-            <div class="container">
-                <div class="banner-content">
-                    <h1>Explore All Destinations</h1>
-                    <p>Discover amazing places across Central Asia with our curated travel experiences</p>
-                </div>
-            </div>
+    <!-- Hero Banner Section -->
+    <div class="hero-banner-section" id="heroBanner" style="position: relative; height: 500px; background: url('http://localhost:5000/uploads/registon-1764689562739-647287587.jpg') center/cover no-repeat; display: flex; align-items: center; justify-content: center;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3);"></div>
+        <div class="banner-content-wrap" style="position: relative; z-index: 2; text-align: center; color: white;">
+            <h1 style="font-size: 3rem; font-weight: 700; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Explore All Destinations</h1>
+            <p style="font-size: 1.2rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">Discover amazing places across Central Asia with our curated travel experiences</p>
         </div>
     </div>
-    <!-- home4 Banner Section End-->
+    <!-- Hero Banner Section End-->
 
     <!-- Destinations Section -->
     <section class="destinations-section">
@@ -2078,42 +2028,39 @@ function getCountryFlag(countryCode) {
     </script>
 
 <script>
+<script>
 // Banner Swiper initialization with dynamic image loading from Admin Panel
 document.addEventListener('DOMContentLoaded', async function() {
     // Load banner images from Home Settings API (Admin Panel)
     async function loadBannerImages() {
         try {
-            const response = await fetch('http://localhost:5000/api/home-settings');
-            const data = await response.json();
+            var response = await fetch('http://localhost:5000/api/home-settings');
+            var data = await response.json();
 
             if (data.success && data.data.heroSlides && data.data.heroSlides.length > 0) {
-                const slides = data.data.heroSlides.filter(s => s.enabled);
+                var slides = data.data.heroSlides.filter(function(s) { return s.enabled; });
 
-                const getImageUrl = (img) => {
+                function getImageUrl(img) {
                     if (!img) return '/images/tours/samarkand-registan.jpg';
                     if (img.startsWith('http')) return img;
-                    if (img.startsWith('/uploads/') || img.startsWith('/images/')) return \`http://localhost:5000\${img}\`;
+                    if (img.startsWith('/uploads/') || img.startsWith('/images/')) return 'http://localhost:5000' + img;
                     return img;
-                };
+                }
 
                 // Update main swiper
-                const mainWrapper = document.querySelector('.banner-main-swiper .swiper-wrapper');
+                var mainWrapper = document.querySelector('.banner-main-swiper .swiper-wrapper');
                 if (mainWrapper) {
-                    mainWrapper.innerHTML = slides.map((slide, index) => \`
-                        <div class="swiper-slide">
-                            <img src="\${getImageUrl(slide.image)}" alt="Slide \${index + 1}">
-                        </div>
-                    \`).join('');
+                    mainWrapper.innerHTML = slides.map(function(slide, index) {
+                        return '<div class="swiper-slide"><img src="' + getImageUrl(slide.image) + '" alt="Slide ' + (index + 1) + '"></div>';
+                    }).join('');
                 }
 
                 // Update thumbnail swiper
-                const thumbWrapper = document.querySelector('.banner-thumb-swiper .swiper-wrapper');
+                var thumbWrapper = document.querySelector('.banner-thumb-swiper .swiper-wrapper');
                 if (thumbWrapper) {
-                    thumbWrapper.innerHTML = slides.map((slide, index) => \`
-                        <div class="swiper-slide">
-                            <img src="\${getImageUrl(slide.image)}" alt="Slide \${index + 1}">
-                        </div>
-                    \`).join('');
+                    thumbWrapper.innerHTML = slides.map(function(slide, index) {
+                        return '<div class="swiper-slide"><img src="' + getImageUrl(slide.image) + '" alt="Slide ' + (index + 1) + '"></div>';
+                    }).join('');
                 }
             }
         } catch (error) {
@@ -2125,7 +2072,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     await loadBannerImages();
 
     // Initialize thumbnail swiper first
-    const bannerThumbSwiper = new Swiper('.banner-thumb-swiper', {
+    var bannerThumbSwiper = new Swiper('.banner-thumb-swiper', {
         spaceBetween: 10,
         slidesPerView: 5,
         watchSlidesProgress: true,
@@ -2137,7 +2084,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
 
     // Initialize main swiper
-    const bannerMainSwiper = new Swiper('.banner-main-swiper', {
+    var bannerMainSwiper = new Swiper('.banner-main-swiper', {
         effect: 'fade',
         fadeEffect: { crossFade: true },
         speed: 800,
@@ -2155,7 +2102,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         },
     });
 });
-</script>
 </script>
 </body>
 </html>
