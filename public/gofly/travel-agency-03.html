@@ -1180,7 +1180,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 </div>
                 <!-- Navigation -->
                 <div class="package-navigation" style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 40px;">
-                    <button class="package-nav-arrow package-prev-btn" style="width: 50px; height: 50px; border-radius: 50%; background: white; border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                    <button class="package-nav-arrow package-nav-prev" style="width: 50px; height: 50px; border-radius: 50%; background: white; border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                         <svg viewBox="0 0 24 24" fill="none" style="width: 24px; height: 24px; stroke: #333; stroke-width: 2.5;">
                             <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -1188,7 +1188,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
                     <div class="package-pagination" style="display: flex; gap: 8px;"></div>
 
-                    <button class="package-nav-arrow package-next-btn" style="width: 50px; height: 50px; border-radius: 50%; background: white; border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                    <button class="package-nav-arrow package-nav-next" style="width: 50px; height: 50px; border-radius: 50%; background: white; border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                         <svg viewBox="0 0 24 24" fill="none" style="width: 24px; height: 24px; stroke: #333; stroke-width: 2.5;">
                             <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -2478,10 +2478,60 @@ function displayTours(tours, containerId = 'toursContainer') {
 
     // Re-initialize Swiper after content update
     setTimeout(() => {
-        if (containerId === 'toursContainer' && window.popularToursSwiper) {
-            window.popularToursSwiper.update();
-        } else if (containerId === 'tours-container' && window.popularPackageSwiper) {
-            window.popularPackageSwiper.update();
+        if (containerId === 'toursContainer') {
+            // Destroy old swiper if exists
+            if (window.popularToursSwiper) {
+                window.popularToursSwiper.destroy(true, true);
+            }
+            // Create new swiper
+            window.popularToursSwiper = new Swiper('.popular-tours-slider', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: tours.length > 3,
+                navigation: {
+                    nextEl: '.tours-nav-next',
+                    prevEl: '.tours-nav-prev',
+                },
+                pagination: {
+                    el: '.tours-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                    }
+                }
+            });
+        } else if (containerId === 'tours-container') {
+            // Destroy old swiper if exists
+            if (window.popularPackageSwiper) {
+                window.popularPackageSwiper.destroy(true, true);
+            }
+            // Create new swiper
+            window.popularPackageSwiper = new Swiper('.popular-package-slider', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: tours.length > 3,
+                navigation: {
+                    nextEl: '.package-nav-next',
+                    prevEl: '.package-nav-prev',
+                },
+                pagination: {
+                    el: '.package-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                    }
+                }
+            });
         }
     }, 100);
 }
