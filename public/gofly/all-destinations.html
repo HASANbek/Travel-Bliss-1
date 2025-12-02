@@ -2078,16 +2078,16 @@ function getCountryFlag(countryCode) {
     </script>
 
 <script>
-// Banner Swiper initialization with dynamic image loading
+// Banner Swiper initialization with dynamic image loading from Admin Panel
 document.addEventListener('DOMContentLoaded', async function() {
-    // Load banner images from API
+    // Load banner images from Home Settings API (Admin Panel)
     async function loadBannerImages() {
         try {
-            const response = await fetch('http://localhost:5000/api/tours');
+            const response = await fetch('http://localhost:5000/api/home-settings');
             const data = await response.json();
 
-            if (data.success && data.data.tours && data.data.tours.length > 0) {
-                const tours = data.data.tours.slice(0, 5); // Get first 5 tours
+            if (data.success && data.data.heroSlides && data.data.heroSlides.length > 0) {
+                const slides = data.data.heroSlides.filter(s => s.enabled);
 
                 const getImageUrl = (img) => {
                     if (!img) return '/images/tours/samarkand-registan.jpg';
@@ -2099,9 +2099,9 @@ document.addEventListener('DOMContentLoaded', async function() {
                 // Update main swiper
                 const mainWrapper = document.querySelector('.banner-main-swiper .swiper-wrapper');
                 if (mainWrapper) {
-                    mainWrapper.innerHTML = tours.map(tour => \`
+                    mainWrapper.innerHTML = slides.map((slide, index) => \`
                         <div class="swiper-slide">
-                            <img src="\${getImageUrl(tour.imageCover)}" alt="\${tour.title}">
+                            <img src="\${getImageUrl(slide.image)}" alt="Slide \${index + 1}">
                         </div>
                     \`).join('');
                 }
@@ -2109,9 +2109,9 @@ document.addEventListener('DOMContentLoaded', async function() {
                 // Update thumbnail swiper
                 const thumbWrapper = document.querySelector('.banner-thumb-swiper .swiper-wrapper');
                 if (thumbWrapper) {
-                    thumbWrapper.innerHTML = tours.map(tour => \`
+                    thumbWrapper.innerHTML = slides.map((slide, index) => \`
                         <div class="swiper-slide">
-                            <img src="\${getImageUrl(tour.imageCover)}" alt="\${tour.title}">
+                            <img src="\${getImageUrl(slide.image)}" alt="Slide \${index + 1}">
                         </div>
                     \`).join('');
                 }

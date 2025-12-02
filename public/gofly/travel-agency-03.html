@@ -1097,7 +1097,7 @@ a.primary-btn1 {
 
 <!-- Swiper Initialization Script -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     // Load destinations from API
     loadDestinationsForSlider();
 
@@ -2294,7 +2294,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script>
 // Language selector - dropdown toggle only (options handled by language-loader.js)
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     const languageBtn = document.querySelector('.language-btn');
     const languageDropdown = document.querySelector('.language-dropdown');
 
@@ -2646,8 +2646,52 @@ if (document.readyState === 'loading') {
 
 <script>
 // ========== INDYGUIDE STYLE BANNER SWIPER GALLERY ==========
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     // Initialize thumbnail swiper first
+// ========== LOAD BANNER IMAGES FROM ADMIN PANEL ==========
+    async function loadBannerImages() {
+        try {
+            const response = await fetch('http://localhost:5000/api/home-settings');
+            const data = await response.json();
+
+            if (data.success && data.data.heroSlides && data.data.heroSlides.length > 0) {
+                const slides = data.data.heroSlides.filter(s => s.enabled);
+
+                const getImageUrl = (img) => {
+                    if (!img) return '/images/tours/samarkand-registan.jpg';
+                    if (img.startsWith('http')) return img;
+                    if (img.startsWith('/uploads/') || img.startsWith('/images/')) return \`http://localhost:5000\${img}\`;
+                    return img;
+                };
+
+                // Update main swiper
+                const mainWrapper = document.querySelector('.banner-main-swiper .swiper-wrapper');
+                if (mainWrapper) {
+                    mainWrapper.innerHTML = slides.map((slide, index) => \`
+                        <div class="swiper-slide">
+                            <img src="\${getImageUrl(slide.image)}" alt="Slide \${index + 1}">
+                        </div>
+                    \`).join('');
+                }
+
+                // Update thumbnail swiper
+                const thumbWrapper = document.querySelector('.banner-thumb-swiper .swiper-wrapper');
+                if (thumbWrapper) {
+                    thumbWrapper.innerHTML = slides.map((slide, index) => \`
+                        <div class="swiper-slide">
+                            <img src="\${getImageUrl(slide.image)}" alt="Slide \${index + 1}">
+                        </div>
+                    \`).join('');
+                }
+                console.log('Banner images loaded from Admin Panel');
+            }
+        } catch (error) {
+            console.log('Using default banner images');
+        }
+    }
+
+    // Load banner images first, then initialize swipers
+    await loadBannerImages();
     const bannerThumbSwiper = new Swiper('.banner-thumb-swiper', {
         spaceBetween: 10,
         slidesPerView: 5,
@@ -2742,7 +2786,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Force update button and badge colors to match logo
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     console.log('Forcing color update...');
 
     // Update all primary buttons
@@ -2978,7 +3022,7 @@ function getCountryFlag(countryCode) {
 
 <script>
 // Menu open/close functionality
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     var closeBtn = document.getElementById('menuCloseBtn');
     var mainMenu = document.querySelector('.main-menu');
     var sidebarBtn = document.querySelector('.sidebar-button');
