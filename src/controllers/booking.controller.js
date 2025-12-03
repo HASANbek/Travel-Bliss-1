@@ -66,8 +66,8 @@ exports.createBooking = asyncHandler(async (req, res, next) => {
     userId
   } = req.body;
 
-  // Validation
-  if (!tourId || !tourName || !customerName || !customerEmail || !customerPhone || !date || !guests || !totalPrice) {
+  // Validation - tourId is optional now (for website booking forms)
+  if (!tourName || !customerName || !customerEmail || !customerPhone || !date || !guests) {
     return next(new ApiError(400, 'Barcha maydonlarni to\'ldiring'));
   }
 
@@ -101,21 +101,23 @@ exports.createBooking = asyncHandler(async (req, res, next) => {
     return next(new ApiError(400, 'Bolalar soni manfiy bo\'lishi mumkin emas'));
   }
 
-  // Check availability
-  const tour = await toursStorage.findById(tourId);
-  if (!tour) {
-    return next(new ApiError(404, 'Tur topilmadi'));
-  }
+  // Check availability only if tourId is provided
+  let tour = null;
+  if (tourId) {
+    tour = await toursStorage.findById(tourId);
 
-  // Use maxGroupSize or default to 50 if not specified
-  const maxCapacity = tour.maxCapacity || tour.maxGroupSize || 50;
-  const availability = await bookingsStorage.checkAvailability(tourId, date, maxCapacity);
-  const requestedGuests = (guests.adults || 0) + (guests.children || 0);
+    if (tour) {
+      // Use maxGroupSize or default to 50 if not specified
+      const maxCapacity = tour.maxCapacity || tour.maxGroupSize || 50;
+      const availability = await bookingsStorage.checkAvailability(tourId, date, maxCapacity);
+      const requestedGuests = (guests.adults || 0) + (guests.children || 0);
 
-  if (availability.availableSpots < requestedGuests) {
-    return next(
-      new ApiError(400, `Bu sana uchun faqat ${availability.availableSpots} ta joy mavjud`)
-    );
+      if (availability.availableSpots < requestedGuests) {
+        return next(
+          new ApiError(400, `Bu sana uchun faqat ${availability.availableSpots} ta joy mavjud`)
+        );
+      }
+    }
   }
 
   // Create booking
@@ -138,18 +140,25 @@ exports.createBooking = asyncHandler(async (req, res, next) => {
 
   const booking = await bookingsStorage.create(bookingData);
 
+  console.log('📧 Booking created, sending emails...');
+  console.log('📧 Customer email:', booking.customerEmail);
+
   // Send confirmation email to customer
   try {
-    await sendBookingConfirmationEmail(booking);
+    console.log('📧 Sending email to customer:', booking.customerEmail);
+    const customerResult = await sendBookingConfirmationEmail(booking);
+    console.log('📧 Customer email result:', customerResult);
   } catch (error) {
-    console.error('Failed to send customer confirmation email:', error);
+    console.error('❌ Failed to send customer confirmation email:', error);
   }
 
   // Send notification to admin
   try {
-    await sendAdminBookingNotification(booking);
+    console.log('📧 Sending email to admin...');
+    const adminResult = await sendAdminBookingNotification(booking);
+    console.log('📧 Admin email result:', adminResult);
   } catch (error) {
-    console.error('Failed to send admin notification:', error);
+    console.error('❌ Failed to send admin notification:', error);
   }
 
   res.status(201).json(

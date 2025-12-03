@@ -32,6 +32,9 @@ function createTransporter() {
     auth: {
       user: EMAIL_USER,
       pass: EMAIL_PASSWORD
+    },
+    tls: {
+      rejectUnauthorized: false // Allow self-signed certificates
     }
   };
 
@@ -106,7 +109,7 @@ async function sendEmail({ to, subject, html, text }) {
  * @returns {Promise<Object>}
  */
 async function sendBookingConfirmationEmail(booking) {
-  const subject = `Buyurtma tasdiqlandi - ${booking.tourName}`;
+  const subject = `Booking Confirmed - ${booking.tourName}`;
 
   const html = `
 <!DOCTYPE html>
@@ -173,31 +176,31 @@ async function sendBookingConfirmationEmail(booking) {
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎉 Buyurtmangiz qabul qilindi!</h1>
-            <p>Travel Bliss bilan sayohat qiling</p>
+            <h1>🎉 Your Booking Has Been Received!</h1>
+            <p>Travel with Travel Bliss</p>
         </div>
 
         <div class="content">
-            <p>Hurmatli <strong>${booking.customerName}</strong>,</p>
+            <p>Dear <strong>${booking.customerName}</strong>,</p>
 
-            <p>Sizning buyurtmangiz muvaffaqiyatli qabul qilindi. Quyida buyurtma tafsilotlari:</p>
+            <p>Your booking request has been successfully received. Here are your booking details:</p>
 
             <div class="booking-details">
-                <h2 style="color: #0F16E6; margin-top: 0;">📋 Buyurtma Tafsilotlari</h2>
+                <h2 style="color: #0F16E6; margin-top: 0;">📋 Booking Details</h2>
 
                 <div class="detail-row">
-                    <span class="detail-label">Buyurtma ID:</span>
+                    <span class="detail-label">Booking ID:</span>
                     <span class="detail-value">${booking.id}</span>
                 </div>
 
                 <div class="detail-row">
-                    <span class="detail-label">Tur nomi:</span>
+                    <span class="detail-label">Tour Name:</span>
                     <span class="detail-value">${booking.tourName}</span>
                 </div>
 
                 <div class="detail-row">
-                    <span class="detail-label">Sana:</span>
-                    <span class="detail-value">${new Date(booking.date).toLocaleDateString('uz-UZ', {
+                    <span class="detail-label">Date:</span>
+                    <span class="detail-value">${new Date(booking.date).toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric'
@@ -205,37 +208,37 @@ async function sendBookingConfirmationEmail(booking) {
                 </div>
 
                 <div class="detail-row">
-                    <span class="detail-label">Mehmonlar:</span>
-                    <span class="detail-value">${booking.guests.adults} kattalar${booking.guests.children > 0 ? `, ${booking.guests.children} bolalar` : ''}</span>
+                    <span class="detail-label">Guests:</span>
+                    <span class="detail-value">${booking.guests.adults} adult${booking.guests.adults > 1 ? 's' : ''}${booking.guests.children > 0 ? `, ${booking.guests.children} child${booking.guests.children > 1 ? 'ren' : ''}` : ''}</span>
                 </div>
 
                 <div class="detail-row">
-                    <span class="detail-label">Telefon:</span>
+                    <span class="detail-label">Phone:</span>
                     <span class="detail-value">${booking.customerPhone}</span>
                 </div>
 
                 <div class="detail-row" style="border-bottom: none;">
-                    <span class="detail-label">Holat:</span>
-                    <span class="detail-value" style="color: #ff9800; font-weight: bold;">Kutilmoqda</span>
+                    <span class="detail-label">Status:</span>
+                    <span class="detail-value" style="color: #ff9800; font-weight: bold;">Pending</span>
                 </div>
             </div>
 
             <div class="total">
-                💰 Jami: $${booking.totalPrice}
+                💰 Total: $${booking.totalPrice}
             </div>
 
-            <p>Bizning menejerlarimiz tez orada siz bilan bog'lanadi va buyurtmani tasdiqlaydi.</p>
+            <p>Our team will review your booking and contact you <strong>within 24 hours</strong> to confirm your reservation.</p>
 
-            <p>Agar savollaringiz bo'lsa, biz bilan bog'laning:</p>
+            <p>If you have any questions, please contact us:</p>
             <ul>
-                <li>📧 Email: info@travelbliss.uz</li>
-                <li>📱 Telefon: +998 90 123 45 67</li>
+                <li>📧 Email: info@travel-bliss.uz</li>
+                <li>📱 Phone: +998 93 224 43 33</li>
             </ul>
         </div>
 
         <div class="footer">
-            <p>© 2025 Travel Bliss. Barcha huquqlar himoyalangan.</p>
-            <p>Bu avtomatik xabar. Iltimos, javob bermang.</p>
+            <p>© 2025 Travel Bliss. All rights reserved.</p>
+            <p>This is an automated message. Please do not reply.</p>
         </div>
     </div>
 </body>
@@ -540,8 +543,8 @@ async function sendBookingCancelledNotification(booking) {
 
             <p>Agar bu xato bo'lsa yoki savollaringiz bo'lsa, biz bilan bog'laning:</p>
             <ul>
-                <li>📧 Email: info@travelbliss.uz</li>
-                <li>📱 Telefon: +998 90 123 45 67</li>
+                <li>📧 Email: info@travel-bliss.uz</li>
+                <li>📱 Telefon: +998 93 224 43 33</li>
             </ul>
 
             <p>Hurmat bilan,<br><strong>Travel Bliss jamoasi</strong></p>

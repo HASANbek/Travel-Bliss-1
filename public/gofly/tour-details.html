@@ -44,6 +44,67 @@
             border-radius: 8px !important;
         }
 
+        /* Center Menu - Like Main Page */
+        @media (min-width: 1200px) {
+            .header-area.style-2.travel-agency3 {
+                padding: 18px 0;
+            }
+            .header-area.style-2.travel-agency3 .container-fluid {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .header-area.style-2.travel-agency3 .header-logo img {
+                height: 55px !important;
+            }
+            .header-area.style-2.travel-agency3 .logo-and-menu-area {
+                display: flex;
+                align-items: center;
+                flex: 1;
+            }
+            .header-area.style-2.travel-agency3 .main-menu {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                align-items: center;
+            }
+            .header-area.style-2.travel-agency3 .menu-list {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                margin: 0;
+                padding: 0;
+            }
+            .header-area.style-2.travel-agency3 .menu-list li {
+                list-style: none;
+            }
+            .header-area.style-2.travel-agency3 .menu-list li a {
+                padding: 12px 22px;
+                color: #333;
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 16px;
+                display: block;
+            }
+            .header-area.style-2.travel-agency3 .menu-list li.active a {
+                background: #2563eb !important;
+                color: white !important;
+                border-radius: 8px !important;
+                padding: 12px 22px !important;
+            }
+            .header-area.style-2.travel-agency3 .nav-right .contact-area a {
+                font-size: 16px !important;
+            }
+            .header-area.style-2.travel-agency3 .language-btn {
+                font-size: 16px !important;
+            }
+            .header-area.style-2.travel-agency3 #currentFlag {
+                font-size: 24px !important;
+                display: inline-block !important;
+            }
+        }
+
         /* Photo Grid Gallery */
         .photo-grid-container {
             max-width: 1400px;
@@ -110,16 +171,17 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
-            padding: 40px 20px 20px;
-            color: white;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+            padding: 60px 20px 20px;
+            color: white !important;
         }
 
         .title-overlay h1 {
             font-size: 42px;
             font-weight: 700;
             margin: 0 0 10px 0;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            color: white !important;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
         }
 
         .rating-badge {
@@ -279,143 +341,877 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
-        /* Sidebar Booking Card */
+        /* Sidebar Booking Card - New Design */
         .booking-sidebar {
             position: sticky;
             top: 90px;
             background: white;
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 24px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
         }
 
-        .price-section {
+        .booking-sidebar > * {
+            flex-shrink: 0;
+        }
+
+        /* Price Header */
+        .price-header {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
             margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
         }
 
-        .price-from {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 5px;
+        .price-header .price-from {
+            font-size: 13px;
+            color: #F97316;
+            font-weight: 500;
         }
 
-        .price-amount {
-            font-size: 36px;
+        .price-header .price-amount {
+            font-size: 28px;
             font-weight: 700;
-            color: var(--text-primary);
+            color: #1e293b;
         }
 
-        .price-amount small {
-            font-size: 16px;
-            font-weight: 400;
-            color: var(--text-secondary);
-        }
-
-        .per-person {
+        .price-header .price-per {
             font-size: 14px;
-            color: var(--text-secondary);
+            color: #64748b;
         }
 
-        .booking-form {
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 15px;
-            transition: all 0.3s;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--travel-bliss-blue);
-            box-shadow: 0 0 0 3px rgba(0, 170, 108, 0.1);
-        }
-
-        .check-availability-btn {
-            width: 100%;
-            background: var(--travel-bliss-blue);
-            color: white;
-            border: none;
+        /* Price Breakdown */
+        .price-breakdown-section {
+            background: #FFF7ED;
+            border-radius: 12px;
             padding: 16px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #FFEDD5;
         }
 
-        .check-availability-btn:hover {
-            background: var(--travel-bliss-blue-dark);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 170, 108, 0.3);
-        }
-
-        .cancellation-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px;
-            background: #F0FFF8;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            color: var(--travel-bliss-blue);
+        .breakdown-title {
             font-size: 14px;
-            font-weight: 600;
-        }
-
-        .tripadvisor-rating {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 15px;
-            background: #F7F7F7;
-            border-radius: 8px;
-        }
-
-        .rating-bubble {
-            width: 50px;
-            height: 50px;
-            background: var(--travel-bliss-blue);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
             font-weight: 700;
-            font-size: 20px;
+            color: #1e293b;
+            margin: 0 0 12px 0;
         }
 
-        .rating-details {
+        .breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 10px;
+        }
+
+        .breakdown-total {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 10px;
+            border-top: 1px dashed #FDBA74;
+            margin-bottom: 10px;
+        }
+
+        .breakdown-total span:first-child {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .breakdown-total .total-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: #F97316;
+        }
+
+        .cancellation-note {
+            font-size: 11px;
+            color: #64748b;
+            text-align: center;
+            margin: 0;
+        }
+
+        /* Booking Inputs */
+        .booking-input-section {
+            margin-bottom: 16px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        .booking-input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #1e293b;
+            background: white;
+            transition: all 0.2s;
+        }
+
+        .booking-input:focus {
+            outline: none;
+            border-color: #F97316;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            margin-left: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .action-btn {
+            padding: 16px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 10px;
+            flex: 1;
+            min-height: 90px;
+        }
+
+        .book-btn {
+            background: #FFF7ED;
+            border: 1px solid #FFEDD5;
             flex: 1;
         }
 
-        .rating-details .rating-circles {
-            color: var(--travel-bliss-blue);
-            font-size: 16px;
+        .book-btn:hover {
+            background: #FFEDD5;
+        }
+
+        .ask-btn {
+            background: #F0FDF4;
+            border: 1px solid #DCFCE7;
+            flex: 1;
+        }
+
+        .ask-btn:hover {
+            background: #DCFCE7;
+        }
+
+        .action-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        .book-icon {
+            background: #F97316;
+            color: white;
+        }
+
+        .ask-icon {
+            background: #22C55E;
+            color: white;
+        }
+
+        .action-btn-text {
+            flex: 1;
+            padding-top: 5px;
+        }
+
+        .action-btn strong {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 6px;
+            text-align: left;
+            line-height: 1.2;
+        }
+
+        .action-btn small {
+            font-size: 11px;
+            color: #64748b;
+            display: block;
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        /* Features List */
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+            padding: 12px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .feature-item i {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Confirmation Box */
+        .confirmation-box {
+            background: #FEF3C7;
+            border: 1px solid #FDE68A;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 16px;
+        }
+
+        .confirm-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .confirm-item strong {
+            display: block;
+            font-size: 12px;
+            color: #B45309;
+            font-weight: 700;
+        }
+
+        .confirm-item span {
+            font-size: 11px;
+            color: #92400E;
+        }
+
+        .confirm-note {
+            font-size: 11px;
+            color: #92400E;
+            margin: 0;
+            padding-top: 8px;
+            border-top: 1px dashed #FDE68A;
+        }
+
+        /* Request to Book Button */
+        .request-book-btn {
+            width: 100%;
+            background: #F97316;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .request-book-btn:hover {
+            background: #EA580C;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.35);
+        }
+
+        .request-book-btn i {
+            font-size: 18px;
+        }
+
+        /* Why Book Section */
+        .why-book-section {
+            margin-bottom: 16px;
+        }
+
+        .why-book-section h5 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 0 0 12px 0;
+        }
+
+        .why-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .why-list li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .why-list li i {
+            color: #22C55E;
+            font-size: 14px;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+        }
+
+        .contact-section p {
+            font-size: 12px;
+            color: #64748b;
+            margin: 0 0 10px 0;
+        }
+
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            background: #25D366;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .whatsapp-btn i {
+            font-size: 18px;
+        }
+
+        /* Booking Modal Styles */
+        .booking-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .booking-modal-overlay.active {
+            display: flex;
+        }
+
+        .booking-modal {
+            background: white;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 420px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: #f1f5f9;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            transition: all 0.2s;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        .modal-action-buttons {
+            display: flex;
+            gap: 10px;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-action-btn {
+            flex: 1;
+            padding: 12px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .modal-action-btn:first-child {
+            background: #FFF7ED;
+            border-color: #FFEDD5;
+        }
+
+        .modal-action-btn:first-child.active {
+            border-color: #F97316;
+        }
+
+        .modal-action-btn:last-child {
+            background: #F0FDF4;
+            border-color: #DCFCE7;
+        }
+
+        .modal-action-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .modal-action-text strong {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #1e293b;
             margin-bottom: 2px;
         }
 
-        .rating-details .rating-text {
+        .modal-action-text small {
+            font-size: 10px;
+            color: #64748b;
+        }
+
+        .modal-form-section {
+            padding: 20px;
+        }
+
+        .modal-form-section h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 0 0 16px 0;
+        }
+
+        .modal-form-section .form-group {
+            margin-bottom: 14px;
+        }
+
+        .modal-form-section label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        .modal-form-section label .required {
+            color: #ef4444;
+        }
+
+        .modal-form-section input,
+        .modal-form-section textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #1e293b;
+            transition: all 0.2s;
+        }
+
+        .modal-form-section input:focus,
+        .modal-form-section textarea:focus {
+            outline: none;
+            border-color: #F97316;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+        }
+
+        .modal-form-section textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-top: 3px;
+        }
+
+        .checkbox-group label {
             font-size: 12px;
-            color: var(--text-secondary);
+            font-weight: 400;
+            color: #64748b;
+            margin: 0;
+        }
+
+        .checkbox-group label a {
+            color: #F97316;
+            text-decoration: none;
+        }
+
+        .checkbox-group label a:hover {
+            text-decoration: underline;
+        }
+
+        .submit-booking-btn {
+            width: 100%;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .submit-booking-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .modal-features {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 16px 20px;
+            background: #f8fafc;
+            border-top: 1px solid #eee;
+            border-radius: 0 0 16px 16px;
+        }
+
+        .modal-feature {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        .modal-feature i {
+            font-size: 14px;
+        }
+
+        /* Inline Booking Form (dropdown style) */
+        .inline-booking-form {
+            display: none;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            animation: slideDown 0.3s ease;
+        }
+
+        .inline-booking-form.active {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .inline-booking-form h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 0 0 16px 0;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .inline-booking-form .form-group {
+            margin-bottom: 14px;
+        }
+
+        .inline-booking-form label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        .inline-booking-form label .required {
+            color: #ef4444;
+        }
+
+        .inline-booking-form input,
+        .inline-booking-form textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #1e293b;
+            transition: all 0.2s;
+            box-sizing: border-box;
+        }
+
+        .inline-booking-form input:focus,
+        .inline-booking-form textarea:focus {
+            outline: none;
+            border-color: #F97316;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+        }
+
+        .inline-booking-form textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .inline-booking-form .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .inline-booking-form .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-top: 3px;
+        }
+
+        .inline-booking-form .checkbox-group label {
+            font-size: 12px;
+            font-weight: 400;
+            color: #64748b;
+            margin: 0;
+        }
+
+        .inline-booking-form .checkbox-group label a {
+            color: #F97316;
+            text-decoration: none;
+        }
+
+        .inline-booking-form .checkbox-group label a:hover {
+            text-decoration: underline;
+        }
+
+        .inline-booking-form .submit-booking-btn {
+            width: 100%;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .inline-booking-form .submit-booking-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Success Message Styles */
+        .booking-success-message {
+            display: none;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .booking-success-message.active {
+            display: block;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            animation: scaleIn 0.5s ease;
+        }
+
+        .success-icon i {
+            font-size: 40px;
+            color: white;
+        }
+
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 10px;
+        }
+
+        .success-subtitle {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .success-time-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            color: #166534;
+            font-weight: 500;
+        }
+
+        .success-time-badge i {
+            font-size: 18px;
+        }
+
+        .success-close-btn {
+            margin-top: 20px;
+            background: #f1f5f9;
+            color: #64748b;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .success-close-btn:hover {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        /* Ask Form specific styles */
+        .ask-form-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .ask-form-header h4 {
+            margin: 0;
+            padding: 0;
+            border: none;
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .ask-form-desc {
+            font-size: 13px;
+            color: #64748b;
+            margin: 0 0 16px 0;
+            line-height: 1.5;
+        }
+
+        .ask-form-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-top: 16px;
+            padding: 12px;
+            background: #FEF3C7;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #92400E;
+        }
+
+        .ask-form-note i {
+            font-size: 14px;
+            margin-top: 1px;
+        }
+
+        /* Tour Sections - All visible, stacked */
+        .tour-section {
+            display: block;
+            padding: 40px 0;
+            border-bottom: 1px solid #eee;
+            scroll-margin-top: 80px;
+        }
+
+        .tour-section:last-child {
+            border-bottom: none;
         }
 
         /* Overview Section */
@@ -1029,58 +1825,24 @@
         <div class="container-fluid d-flex flex-nowrap align-items-center justify-content-between">
             <div class="logo-and-menu-area">
                 <a href="travel-agency-03.html" class="header-logo">
-                    <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 45px; width: auto; max-width: 200px; object-fit: contain;">
+                    <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 45px; width: auto; max-width: 200px; object-fit: contain; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
                 </a>
                 <div class="main-menu">
                     <div class="mobile-logo-area d-xl-none d-flex align-items-center justify-content-between">
                         <a href="travel-agency-03.html" class="mobile-logo-wrap">
                             <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 40px; width: auto; max-width: 60%; object-fit: contain;">
                         </a>
-                        <div class="menu-close-btn">
-                            <i class="bi bi-x"></i>
+                        <div class="menu-close-btn" id="menuCloseBtn">
+                            <span style="font-size:28px;font-weight:bold;color:#1a3a6e;line-height:1;">×</span>
                         </div>
                     </div>
                     <ul class="menu-list">
-                        <li class="active">
-                            <a href="travel-agency-03.html">Home</a>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="travel-agency-03.html#day-trips" class="drop-down">Day Trips<i class="bi bi-caret-down-fill"></i></a>
-                            <i class="bi bi-plus dropdown-icon"></i>
-                            <ul class="sub-menu">
-                                <li><a href="tour-details.html?id=1">Samarkand City Tour</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="travel-agency-03.html#homestays" class="drop-down">Homestays & Hiking<i class="bi bi-caret-down-fill"></i></a>
-                            <i class="bi bi-plus dropdown-icon"></i>
-                            <ul class="sub-menu">
-                                <li><a href="tour-details.html?id=3">Chimgan Mountains Adventure</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="travel-agency-03.html#adventure" class="drop-down">Adventure Tours<i class="bi bi-caret-down-fill"></i></a>
-                            <i class="bi bi-plus dropdown-icon"></i>
-                            <ul class="sub-menu">
-                                <li><a href="tour-details.html?id=3">Chimgan Mountains Adventure</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="travel-agency-03.html#cultural" class="drop-down">Cultural Tours<i class="bi bi-caret-down-fill"></i></a>
-                            <i class="bi bi-plus dropdown-icon"></i>
-                            <ul class="sub-menu" id="culturalToursDropdown">
-                                <!-- Tours will be loaded here dynamically -->
-                                <li><a href="tour-details.html?id=1">Samarkand City Tour</a></li>
-                                <li><a href="tour-details.html?id=2">Bukhara Historical Safari</a></li>
-                                <li><a href="tour-details.html?id=4">10-Day Uzbekistan Grand Tour</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="about.html">About</a>
-                        </li>
-                        <li>
-                            <a href="contact.html">Contact Us</a>
-                        </li>
+                        <li><a href="travel-agency-03.html">Home</a></li>
+                        <li><a href="all-destinations.html">Destinations</a></li>
+                        <li class="active"><a href="tours.html">Tours</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
                     </ul>
                     <div class="contact-area d-xl-none d-flex" style="gap: 15px; align-items: center; flex-direction: column; padding: 15px 0;">
                         <div style="display: flex; align-items: center; gap: 10px;">
@@ -1091,7 +1853,21 @@
                                     </g>
                                 </svg>
                             </div>
-                            <a href="tel:998901234567" style="color: #1f2937; font-weight: 600; text-decoration: none; font-size: 16px;">+998 90 123 45 67</a>
+                            <a href="tel:998932244333" style="color: #1f2937; font-weight: 600; text-decoration: none; font-size: 16px;">+998 93 224 4333</a>
+                        </div>
+                        <div class="language-selector-mobile" style="position: relative; width: 100%;">
+                            <button class="language-btn-mobile" style="background: transparent; border: 1px solid #e5e7eb; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; color: #1f2937; padding: 10px 20px; border-radius: 8px; transition: all 0.3s; width: 100%;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                </svg>
+                                <span id="currentFlagMobile"><img src="https://flagcdn.com/w40/gb.png" alt="EN" style="width: 24px; height: 18px; object-fit: cover; border-radius: 2px;"></span><span id="currentLangMobile">English</span>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="language-dropdown-mobile" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 5px; z-index: 1000;"></div>
                         </div>
                     </div>
                 </div>
@@ -1107,24 +1883,25 @@
                                     </g>
                                 </svg>
                             </div>
-                            <a href="tel:998901234567" style="color: #1f2937; font-weight: 600; text-decoration: none;">+998 90 123 45 67</a>
+                            <a href="tel:998932244333" style="color: #1f2937; font-weight: 600; text-decoration: none;">+998 93 224 4333</a>
                         </div>
                         <div class="language-selector" style="position: relative;">
                             <button class="language-btn" style="background: transparent; border: none; cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 600; color: #1f2937; padding: 5px 10px; border-radius: 6px; transition: all 0.3s;">
-                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 30'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Crect width='50' height='30'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Crect width='50' height='30' fill='%23012169'/%3E%3Cpath d='M0,0 L50,30 M50,0 L0,30' stroke='%23FFF' stroke-width='6'/%3E%3Cpath d='M0,0 L50,30 M50,0 L0,30' stroke='%23C8102E' stroke-width='4' clip-path='url(%23a)'/%3E%3Cpath d='M25,0 V30 M0,15 H50' stroke='%23FFF' stroke-width='10'/%3E%3Cpath d='M25,0 V30 M0,15 H50' stroke='%23C8102E' stroke-width='6'/%3E%3C/g%3E%3C/svg%3E" alt="UK Flag" width="24" height="16" style="border-radius: 2px; border: 1px solid rgba(0,0,0,0.1);">
+                                <span id="currentFlag"><img src="https://flagcdn.com/w40/gb.png" alt="EN" style="width: 24px; height: 18px; object-fit: cover; border-radius: 2px;"></span>
                                 <span id="currentLang">EN</span>
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polyline points="6 9 12 15 18 9"></polyline>
                                 </svg>
                             </button>
+                            <div class="language-dropdown" style="display: none; position: absolute; top: 100%; right: 0; background: white; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 5px; width: max-content; min-width: 180px; z-index: 1000; padding: 8px;"></div>
                         </div>
                     </div>
                 </div>
-                <div class="sidebar-button mobile-menu-btn">
+                <div class="sidebar-button mobile-menu-btn" onclick="document.querySelector('.main-menu').classList.add('show-menu')">
                     <svg width="20" height="18" viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.29445 2.8421H10.5237C11.2389 2.8421 11.8182 2.2062 11.8182 1.42105C11.8182 0.635903 11.2389 0 10.5237 0H1.29445C0.579249 0 0 0.635903 0 1.42105C0 2.2062 0.579249 2.8421 1.29445 2.8421Z"></path>
                         <path d="M1.23002 10.421H18.77C19.4496 10.421 20 9.78506 20 8.99991C20 8.21476 19.4496 7.57886 18.77 7.57886H1.23002C0.550421 7.57886 0 8.21476 0 8.99991C0 9.78506 0.550421 10.421 1.23002 10.421Z"></path>
-                        <path d="M18.77 15.1579H9.54076C8.86116 15.1579 8.31074 15.7938 8.31074 16.579C8.31074 17.3641 8.86116 18 9.54076 18H18.77C19.4496 18 20 17.3641 20 16.579C20 15.7938 19.4496 15.1579 18.77 15.1579Z"></path>
+                        <path d="M18.8052 15.1579H10.2858C9.62563 15.1579 9.09094 15.7938 9.09094 16.5789C9.09094 17.3641 9.62563 18 10.2858 18H18.8052C19.4653 18 20 17.3641 20 16.5789C20 15.7938 19.4653 15.1579 18.8052 15.1579Z"></path>
                     </svg>
                 </div>
             </div>
@@ -1165,33 +1942,13 @@
         </div>
     </div>
 
-    <!-- Sticky Navigation -->
+    <!-- Download PDF Button -->
     <div class="sticky-nav">
         <div class="container">
-            <div class="sticky-nav-content">
-                <ul class="nav nav-tabs" id="tourTabs" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">Overview</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="itinerary-tab" data-bs-toggle="tab" data-bs-target="#itinerary" type="button" role="tab">Itinerary</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="included-tab" data-bs-toggle="tab" data-bs-target="#included" type="button" role="tab">What's Included</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">Reviews</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="photos-tab" data-bs-toggle="tab" data-bs-target="#photos" type="button" role="tab">Photos</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="faq-tab" data-bs-toggle="tab" data-bs-target="#faq" type="button" role="tab">FAQ</button>
-                    </li>
-                </ul>
+            <div class="sticky-nav-content" style="justify-content: flex-end;">
                 <button class="btn-download-pdf" id="downloadPdfBtn">
                     <i class="bi bi-file-earmark-pdf"></i>
-                    <span>Download PDF</span>
+                    <span>Download tour details as PDF</span>
                 </button>
             </div>
         </div>
@@ -1201,9 +1958,9 @@
     <div class="content-wrapper">
         <!-- Main Content Area -->
         <div class="main-content">
-            <div class="tab-content" id="tourTabContent">
-                <!-- Overview Tab -->
-                <div class="tab-pane fade show active" id="overview" role="tabpanel">
+            <div class="all-sections" id="tourTabContent">
+                <!-- Overview Section -->
+                <section class="tour-section active" id="overview">
                     <h2 class="section-title">Tour Overview</h2>
                     <p id="tourDescription" style="color: var(--text-secondary); line-height: 1.8; font-size: 15px;">
                         Loading tour description...
@@ -1232,10 +1989,10 @@
                             <span>Best Price Guarantee</span>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <!-- Itinerary Tab -->
-                <div class="tab-pane fade" id="itinerary" role="tabpanel">
+                <!-- Itinerary Section -->
+                <section class="tour-section" id="itinerary">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
                         <h2 class="section-title" style="margin-bottom: 0;">Tour Itinerary</h2>
                         <div class="itinerary-controls">
@@ -1250,10 +2007,10 @@
                     <div class="timeline-itinerary" id="itineraryTimeline">
                         <!-- Timeline items will be loaded here -->
                     </div>
-                </div>
+                </section>
 
-                <!-- What's Included Tab -->
-                <div class="tab-pane fade" id="included" role="tabpanel">
+                <!-- What's Included Section -->
+                <section class="tour-section" id="included">
                     <h2 class="section-title">What's Included</h2>
                     <div class="inclusion-grid">
                         <div class="inclusion-section">
@@ -1269,10 +2026,10 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <!-- Reviews Tab -->
-                <div class="tab-pane fade" id="reviews" role="tabpanel">
+                <!-- Reviews Section -->
+                <section class="tour-section" id="reviews">
                     <h2 class="section-title">Traveler Reviews</h2>
 
                     <!-- TripAdvisor Header -->
@@ -1316,84 +2073,329 @@
                     <div id="reviewCardsContainer">
                         <!-- Review cards will be loaded here -->
                     </div>
-                </div>
+                </section>
 
-                <!-- Photos Tab -->
-                <div class="tab-pane fade" id="photos" role="tabpanel">
+                <!-- Photos Section -->
+                <section class="tour-section" id="photos">
                     <h2 class="section-title">Photo Gallery</h2>
                     <div class="photo-gallery-grid" id="photoGallery">
                         <!-- Photos will be loaded here -->
                     </div>
-                </div>
+                </section>
 
-                <!-- FAQ Tab -->
-                <div class="tab-pane fade" id="faq" role="tabpanel">
+                <!-- FAQ Section -->
+                <section class="tour-section" id="faq">
                     <h2 class="section-title">Frequently Asked Questions</h2>
                     <div class="accordion faq-accordion" id="faqAccordion">
                         <!-- FAQ items will be loaded here -->
                     </div>
-                </div>
+                </section>
             </div>
         </div>
 
         <!-- Sidebar Booking Card -->
         <aside class="booking-sidebar">
-            <div class="price-section">
-                <div class="price-from">From</div>
-                <div class="price-amount">
-                    <small>$</small><span id="tourPrice">0</span>
-                </div>
-                <div class="per-person">per person</div>
+            <!-- Price Header -->
+            <div class="price-header">
+                <span class="price-from">from</span>
+                <span class="price-amount">$<span id="tourPrice">0</span>.00</span>
+                <span class="price-per">/person</span>
             </div>
 
-            <div class="tripadvisor-rating">
-                <div class="rating-bubble" id="sidebarRating">0.0</div>
-                <div class="rating-details">
-                    <div class="rating-circles">●●●●●</div>
-                    <div class="rating-text" id="sidebarReviews">0 reviews</div>
+            <!-- Price Breakdown -->
+            <div class="price-breakdown-section">
+                <h4 class="breakdown-title">Price Breakdown</h4>
+                <div class="breakdown-row">
+                    <span id="guestCalculation">2 guests × $0.00</span>
+                    <span id="subtotalPrice">$0.00</span>
+                </div>
+                <div class="breakdown-total">
+                    <span>Total</span>
+                    <span class="total-amount" id="totalPrice">$0.00</span>
+                </div>
+                <p class="cancellation-note">Free cancellation up to 24 hours before the tour</p>
+            </div>
+
+            <!-- Date Input -->
+            <div class="booking-input-section">
+                <label class="input-label">Date</label>
+                <input type="date" class="booking-input" id="checkInDate" required>
+            </div>
+
+            <!-- Guest Select -->
+            <div class="booking-input-section">
+                <label class="input-label">Guest</label>
+                <select class="booking-input" id="guestCount" required>
+                    <option value="1">1 guest</option>
+                    <option value="2" selected>2 guests</option>
+                    <option value="3">3 guests</option>
+                    <option value="4">4 guests</option>
+                    <option value="5">5 guests</option>
+                    <option value="6">6 guests</option>
+                    <option value="7">7 guests</option>
+                    <option value="8">8 guests</option>
+                    <option value="9">9 guests</option>
+                    <option value="10">10+ guests</option>
+                </select>
+            </div>
+
+            <!-- Action Buttons - yonma-yon -->
+            <div class="action-buttons">
+                <div class="action-btn book-btn" onclick="toggleBookingForm()">
+                    <div class="action-icon book-icon">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+                    <div class="action-btn-text">
+                        <strong>Book This Tour</strong>
+                        <small>Confirm your dates & guests</small>
+                    </div>
+                </div>
+                <div class="action-btn ask-btn" onclick="toggleAskForm()">
+                    <div class="action-icon ask-icon">
+                        <i class="bi bi-question-circle"></i>
+                    </div>
+                    <div class="action-btn-text">
+                        <strong>Ask a Question</strong>
+                        <small>Get personalized information</small>
+                    </div>
                 </div>
             </div>
 
-            <form class="booking-form">
-                <div class="form-group">
-                    <label for="checkInDate">Check-in</label>
-                    <input type="date" class="form-control" id="checkInDate" required>
+            <!-- Inline Ask Question Form (dropdown) -->
+            <div class="inline-booking-form" id="inlineAskForm">
+                <div class="ask-form-header">
+                    <i class="bi bi-arrow-left" onclick="toggleAskForm()" style="cursor: pointer; font-size: 18px;"></i>
+                    <h4>Ask Us About This Tour</h4>
                 </div>
-                <div class="form-group">
-                    <label for="guestCount">Guests</label>
-                    <select class="form-control" id="guestCount" required>
-                        <option value="1">1 Guest</option>
-                        <option value="2" selected>2 Guests</option>
-                        <option value="3">3 Guests</option>
-                        <option value="4">4 Guests</option>
-                        <option value="5">5 Guests</option>
-                        <option value="6">6 Guests</option>
-                        <option value="7">7 Guests</option>
-                        <option value="8">8 Guests</option>
-                        <option value="9">9 Guests</option>
-                        <option value="10">10+ Guests</option>
-                    </select>
+                <p class="ask-form-desc">Have questions? We're here to help! We'll respond to your email within 24 hours.</p>
+
+                <form id="askQuestionForm" onsubmit="submitQuestion(event)">
+                    <div class="form-group">
+                        <label>Your Name <span class="required">*</span></label>
+                        <input type="text" id="askName" placeholder="Enter your name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email Address <span class="required">*</span></label>
+                        <input type="email" id="askEmail" placeholder="email@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Your Question <span class="required">*</span></label>
+                        <textarea id="askQuestion" placeholder="What would you like to know about this tour?" rows="4" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-booking-btn" style="background: #F97316;">
+                        Send Question
+                    </button>
+                </form>
+
+                <div class="ask-form-note">
+                    <i class="bi bi-info-circle"></i>
+                    <span>No dates or guest counts needed - just ask your question and we'll help!</span>
                 </div>
-            </form>
-
-            <button class="check-availability-btn" id="checkAvailabilityBtn" onclick="handleCheckAvailability()">Check Availability</button>
-
-            <div class="cancellation-badge">
-                <i class="bi bi-check-circle-fill"></i>
-                <span>Free cancellation up to 24 hours before</span>
             </div>
 
-            <div class="trust-badges" style="margin-top: 0; flex-direction: column; align-items: flex-start; gap: 10px;">
-                <div class="trust-badge" style="font-size: 12px;">
-                    <i class="bi bi-award"></i>
-                    <span>Reserve now & pay later</span>
+            <!-- Inline Booking Form (dropdown) -->
+            <div class="inline-booking-form" id="inlineBookingForm">
+                <!-- Form Content -->
+                <div id="bookingFormContent">
+                    <h4>Your Information</h4>
+
+                    <form id="bookingForm" onsubmit="submitBookingRequest(event)">
+                        <div class="form-group">
+                            <label>Full Name <span class="required">*</span></label>
+                            <input type="text" id="modalFullName" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email <span class="required">*</span></label>
+                            <input type="email" id="modalEmail" placeholder="email@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phone <span class="required">*</span></label>
+                            <input type="tel" id="modalPhone" placeholder="+998 93 224 43 33" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Country (Optional)</label>
+                            <input type="text" id="modalCountry" placeholder="Enter your country">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Special Requests (Optional)</label>
+                            <textarea id="modalRequests" placeholder="Any special requests or preferences?" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="agreeTerms" required>
+                            <label for="agreeTerms">I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></label>
+                        </div>
+
+                        <button type="submit" class="submit-booking-btn">
+                            Send Booking Request
+                        </button>
+                    </form>
                 </div>
-                <div class="trust-badge" style="font-size: 12px;">
-                    <i class="bi bi-lightning-charge"></i>
-                    <span>Instant confirmation</span>
+
+                <!-- Success Message -->
+                <div class="booking-success-message" id="bookingSuccessMessage">
+                    <div class="success-icon">
+                        <i class="bi bi-check-lg"></i>
+                    </div>
+                    <h3 class="success-title">Confirmed!</h3>
+                    <p class="success-subtitle">Your booking request has been sent successfully.<br>We will contact you shortly.</p>
+                    <div class="success-time-badge">
+                        <i class="bi bi-clock"></i>
+                        <span>Response within 24 hours</span>
+                    </div>
+                    <button class="success-close-btn" onclick="closeSuccessMessage()">Close</button>
                 </div>
+            </div>
+
+            <!-- Features List -->
+            <div class="features-list">
+                <div class="feature-item">
+                    <i class="bi bi-shield-check"></i>
+                    <span>Secure payments</span>
+                </div>
+                <div class="feature-item">
+                    <i class="bi bi-headset"></i>
+                    <span>24/7 support</span>
+                </div>
+                <div class="feature-item">
+                    <i class="bi bi-x-circle"></i>
+                    <span>Free cancellation</span>
+                </div>
+            </div>
+
+            <!-- Confirmation Box -->
+            <div class="confirmation-box">
+                <div class="confirm-header">
+                    <div class="confirm-item">
+                        <strong>Confirmation</strong>
+                        <span>within 24 hours</span>
+                    </div>
+                    <div class="confirm-item">
+                        <span>— we'll verify availability and send you a confirmation.</span>
+                    </div>
+                </div>
+                <p class="confirm-note">No payment required now. Pay after confirmation.</p>
+            </div>
+
+            <!-- Request to Book Button -->
+            <button class="request-book-btn" id="checkAvailabilityBtn" onclick="handleCheckAvailability()">
+                <i class="bi bi-arrow-right-circle"></i>
+                Request to Book
+            </button>
+
+            <!-- Why Book Section -->
+            <div class="why-book-section">
+                <h5>Why book with Jahongir Travel?</h5>
+                <ul class="why-list">
+                    <li><i class="bi bi-check-circle-fill"></i> Best price guarantee</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Free cancellation (24h)</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Expert local guides</li>
+                    <li><i class="bi bi-check-circle-fill"></i> 24/7 customer support</li>
+                </ul>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="contact-section">
+                <p>Questions? Contact us directly:</p>
+                <a href="https://wa.me/998932244333" class="whatsapp-btn" target="_blank">
+                    <i class="bi bi-whatsapp"></i>
+                    WhatsApp: +998 93 224 43 33
+                </a>
             </div>
         </aside>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="booking-modal-overlay" id="bookingModal">
+        <div class="booking-modal">
+            <button class="modal-close" onclick="closeBookingModal()">&times;</button>
+
+            <!-- Modal Header with Action Buttons -->
+            <div class="modal-action-buttons">
+                <div class="modal-action-btn active" id="bookTourBtn">
+                    <div class="modal-action-icon book-icon">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+                    <div class="modal-action-text">
+                        <strong>Book This Tour</strong>
+                        <small>Confirm your dates & guests</small>
+                    </div>
+                </div>
+                <div class="modal-action-btn" id="askQuestionBtn" onclick="openWhatsApp()">
+                    <div class="modal-action-icon ask-icon">
+                        <i class="bi bi-question-circle"></i>
+                    </div>
+                    <div class="modal-action-text">
+                        <strong>Ask a Question</strong>
+                        <small>Get personalized information</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Your Information Form -->
+            <div class="modal-form-section">
+                <h4>Your Information</h4>
+
+                <form id="bookingForm" onsubmit="submitBookingRequest(event)">
+                    <div class="form-group">
+                        <label>Full Name <span class="required">*</span></label>
+                        <input type="text" id="modalFullName" placeholder="John Doe" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email <span class="required">*</span></label>
+                        <input type="email" id="modalEmail" placeholder="john@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone <span class="required">*</span></label>
+                        <input type="tel" id="modalPhone" placeholder="+998 91 123 45 67" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Country (Optional)</label>
+                        <input type="text" id="modalCountry" placeholder="United States">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Special Requests (Optional)</label>
+                        <textarea id="modalRequests" placeholder="Any special requirements or preferences?" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="agreeTerms" required>
+                        <label for="agreeTerms">I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></label>
+                    </div>
+
+                    <button type="submit" class="submit-booking-btn">
+                        Send Booking Request
+                    </button>
+                </form>
+            </div>
+
+            <!-- Features -->
+            <div class="modal-features">
+                <div class="modal-feature">
+                    <i class="bi bi-shield-check"></i>
+                    <span>Secure payments</span>
+                </div>
+                <div class="modal-feature">
+                    <i class="bi bi-headset"></i>
+                    <span>24/7 support</span>
+                </div>
+                <div class="modal-feature">
+                    <i class="bi bi-x-circle"></i>
+                    <span>Free cancellation</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Footer Section Start -->
@@ -1408,8 +2410,8 @@
                         </g>
                     </svg>
                     <div class="content">
-                        <h6>To More Inquiry</h6>
-                        <span>Don't hesitate Call to GoFly.</span>
+                        <h6>Contact Us</h6>
+                        <span>Don't hesitate to contact Travel Bliss.</span>
                     </div>
                 </div>
                 <ul class="contact-area">
@@ -1419,7 +2421,7 @@
                         </div>
                         <div class="content">
                             <span>WhatsApp</span>
-                            <a href="https://wa.me/91345533865">+91 345 533 865</a>
+                            <a href="https://wa.me/998932244333">+998932244333</a>
                         </div>
                     </li>
                     <li class="single-contact">
@@ -1428,7 +2430,7 @@
                         </div>
                         <div class="content">
                             <span>Mail Us</span>
-                            <a href="mailto:info@example.com">info@example.com</a>
+                            <a href="mailto:info@travel-bliss.uz">info@travel-bliss.uz</a>
                         </div>
                     </li>
                     <li class="single-contact">
@@ -1437,7 +2439,7 @@
                         </div>
                         <div class="content">
                             <span>Call Us</span>
-                            <a href="tel:+91456453345">+91 456 453 345</a>
+                            <a href="tel:+998932244333">+998932244333</a>
                         </div>
                     </li>
                 </ul>
@@ -1449,12 +2451,12 @@
                 <div class="row gy-md-4 gy-5">
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="footer-logo-and-addition-info">
-                            <a href="index.html" class="footer-logo">
-                                <img src="assets/img/footer-logo.svg" alt="">
+                            <a href="travel-agency-03.html" class="footer-logo">
+                                <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 80px; width: auto; max-width: 280px; object-fit: contain;">
                             </a>
                             <div class="address-area">
-                                <span>GoFly Travel Agency</span>
-                                <a href="#">Skyline Plaza, 5th Floor, 123 Main Street Los Angeles, CA 90001, USA</a>
+                                <span>Travel Bliss Uzbekistan</span>
+                                <a href="#">Samarkand city, Rudaki street 172A</a>
                             </div>
                             <ul class="social-list">
                                 <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
@@ -1462,6 +2464,22 @@
                                 <li><a href="https://www.youtube.com/"><i class="bx bxl-youtube"></i></a></li>
                                 <li><a href="https://www.instagram.com/"><i class="bx bxl-instagram-alt"></i></a></li>
                             </ul>
+                            <div class="language-area">
+                                <div class="language-btn">
+                                    <div class="icon-and-content">
+                                        <svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+                                            <g>
+                                                <path d="M7 14C5.13023 14 3.37239 13.2719 2.05023 11.9498C0.728137 10.6276 0 8.86977 0 7C0 5.13023 0.728137 3.37239 2.05023 2.05023C3.37239 0.728137 5.13023 0 7 0C8.86977 0 10.6276 0.728137 11.9498 2.05023C13.2719 3.37239 14 5.13023 14 7C14 8.86977 13.2719 10.6276 11.9498 11.9498C10.6276 13.2719 8.86977 14 7 14ZM7 0.583324C3.46183 0.583324 0.583324 3.46183 0.583324 7C0.583324 10.5382 3.46183 13.4166 7 13.4166C10.5382 13.4166 13.4166 10.5382 13.4166 7C13.4166 3.46183 10.5382 0.583324 7 0.583324Z"/>
+                                                <path d="M7 14C5.90297 14 4.8854 13.2486 4.13468 11.8841C3.41431 10.5747 3.01758 8.84018 3.01758 7C3.01758 5.15982 3.41431 3.42527 4.13468 2.11589C4.8854 0.751433 5.90297 0 7 0C8.09704 0 9.11461 0.751433 9.8653 2.11589C10.5857 3.42527 10.9824 5.15982 10.9824 7C10.9824 8.84018 10.5857 10.5747 9.8653 11.8841C9.11461 13.2486 8.09704 14 7 14ZM7 0.583324C6.12536 0.583324 5.2893 1.22746 4.64579 2.39709C3.97198 3.62179 3.6009 5.25645 3.6009 7C3.6009 8.74355 3.97198 10.3782 4.64576 11.6029C5.28927 12.7725 6.12533 13.4166 6.99998 13.4166C7.87462 13.4166 8.71068 12.7725 9.35419 11.6029C10.028 10.3782 10.3991 8.74355 10.3991 7C10.3991 5.25645 10.028 3.62179 9.35419 2.39709C8.71071 1.22746 7.87462 0.583324 7 0.583324Z"/>
+                                                <path d="M6.99968 13.9573C6.8386 13.9573 6.70801 13.8267 6.70801 13.6657V0.334156C6.70801 0.173074 6.83857 0.0424805 6.99968 0.0424805C7.16077 0.0424805 7.29136 0.173074 7.29136 0.334156V13.6657C7.29136 13.8267 7.16077 13.9573 6.99968 13.9573Z"/>
+                                                <path d="M13.6661 7.29147H0.334644C0.173562 7.29147 0.0429688 7.16088 0.0429688 6.99979C0.0429688 6.83871 0.173562 6.70812 0.334644 6.70812H13.6661C13.8272 6.70812 13.9578 6.83868 13.9578 6.99979C13.9578 7.16088 13.8272 7.29147 13.6661 7.29147ZM12.7022 3.81187H1.29862C1.13754 3.81187 1.00695 3.6813 1.00695 3.52019C1.00695 3.35908 1.13751 3.22852 1.29862 3.22852H12.7022C12.8633 3.22852 12.9939 3.35908 12.9939 3.52019C12.9939 3.6813 12.8632 3.81187 12.7022 3.81187ZM12.7022 10.771H1.29862C1.13754 10.771 1.00695 10.6404 1.00695 10.4794C1.00695 10.3183 1.13751 10.1877 1.29862 10.1877H12.7022C12.8633 10.1877 12.9939 10.3183 12.9939 10.4794C12.9939 10.6404 12.8632 10.771 12.7022 10.771Z"/>
+                                            </g>
+                                        </svg>
+                                        <span>Language</span>
+                                    </div>
+                                    <span style="font-size: 10px;">▼</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6 d-flex justify-content-md-end">
@@ -1470,11 +2488,16 @@
                                 <h5>Top Destination</h5>
                             </div>
                             <ul class="widget-list">
-                                <li><a href="travel-package-01.html">Maldives Tour</a></li>
-                                <li><a href="travel-package-01.html">Bali, Indonesia Tour</a></li>
-                                <li><a href="travel-package-01.html">Thailand Tour</a></li>
-                                <li><a href="travel-package-01.html">Philippines Tour</a></li>
-                                <li><a href="travel-package-01.html">Hawaii, USA Tour</a></li>
+                                <li><a href="tours.html">Samarkand Tours</a></li>
+                                <li><a href="tours.html">Bukhara Tours</a></li>
+                                <li><a href="tours.html">Tashkent Tours</a></li>
+                                <li><a href="tours.html">Khiva Tours</a></li>
+                                <li><a href="tours.html">Shakhrisabz Tours</a></li>
+                                <li><a href="tours.html">Fergana Valley</a></li>
+                                <li><a href="tours.html">Nukus & Aral Sea</a></li>
+                                <li><a href="tours.html">Termez Tours</a></li>
+                                <li><a href="tours.html">Nurata & Yurt Camp</a></li>
+                                <li><a href="tours.html">Silk Road Tours</a></li>
                             </ul>
                         </div>
                     </div>
@@ -1484,11 +2507,16 @@
                                 <h5>Popular Search</h5>
                             </div>
                             <ul class="widget-list">
-                                <li><a href="travel-package-02.html">Adventure</a></li>
-                                <li><a href="travel-package-02.html">Hiking & Trekking</a></li>
-                                <li><a href="travel-package-02.html">Holiday Packages</a></li>
-                                <li><a href="travel-package-02.html">Honeymoon Trip</a></li>
-                                <li><a href="travel-package-02.html">Desert Safari</a></li>
+                                <li><a href="tours.html">Silk Road Tours</a></li>
+                                <li><a href="tours.html">Day Excursions</a></li>
+                                <li><a href="tours.html">Cultural Tours</a></li>
+                                <li><a href="tours.html">Historical Sites</a></li>
+                                <li><a href="tours.html">Yurt Camp Stay</a></li>
+                                <li><a href="tours.html">Train Travel</a></li>
+                                <li><a href="tours.html">Homestay Experience</a></li>
+                                <li><a href="tours.html">Group Tours</a></li>
+                                <li><a href="tours.html">Private Tours</a></li>
+                                <li><a href="tours.html">Multi-day Tours</a></li>
                             </ul>
                         </div>
                     </div>
@@ -1498,10 +2526,14 @@
                                 <h5>Resources</h5>
                             </div>
                             <ul class="widget-list">
-                                <li><a href="about.html">About GoFly</a></li>
+                                <li><a href="about.html">About Travel Bliss</a></li>
+                                <li><a href="#">Health & Safety Measure</a></li>
                                 <li><a href="visa.html">Visa Processing</a></li>
                                 <li><a href="contact.html">Customize Tour</a></li>
+                                <li><a href="travel-inspiration-01.html">Travel Inspirations</a></li>
+                                <li><a href="#">Traveler Reviews</a></li>
                                 <li><a href="#">Terms & Condition</a></li>
+                                <li><a href="#">Sitemap</a></li>
                             </ul>
                         </div>
                     </div>
@@ -1511,7 +2543,7 @@
         <div class="footer-bottom">
             <div class="container">
                 <div class="copyright-and-payment-method-area">
-                    <p>Copyright 2025 <a href="https://www.egenslab.com/">Egens Lab</a> | All Right Reserved.</p>
+                    <p>Copyright 2025 <a href="https://travel-bliss.uz/">Travel Bliss LLC</a> | All Right Reserved.</p>
                     <div class="payment-method-area">
                         <span>Accepted Payment Methods :</span>
                         <ul>
@@ -1526,6 +2558,41 @@
         </div>
     </footer>
     <!-- Footer Section End -->
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/998932244333" target="_blank" class="whatsapp-float" title="Chat on WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+    <style>
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 100px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 9999;
+            transition: all 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+        }
+    </style>
 
     <!-- Main jQuery -->
     <script src="assets/js/jquery-3.7.1.min.js"></script>
@@ -1648,8 +2715,12 @@
 
             // Update sidebar
             if (tourPrice) tourPrice.textContent = tour.price || '0';
-            if (sidebarRating) sidebarRating.textContent = rating.toFixed(1);
-            if (sidebarReviews) sidebarReviews.textContent = `${reviewCount} reviews`;
+
+            // Store price globally for calculations
+            window.currentTourPrice = parseFloat(tour.price) || 0;
+
+            // Initialize price breakdown
+            updatePriceBreakdown();
 
             // Update reviews section
             if (avgRatingScore) avgRatingScore.textContent = rating.toFixed(1);
@@ -2895,18 +3966,317 @@
         // Booking functionality
         // currentTour is already declared above, no need to redeclare
 
-        // Handle check availability button click
-        function handleCheckAvailability() {
-            if (!currentTour) {
-                alert('Tour ma\'lumotlari yuklanmoqda. Iltimos, kuting...');
-                return;
+        // Price breakdown calculation
+        function updatePriceBreakdown() {
+            const guestCount = parseInt(document.getElementById('guestCount').value) || 2;
+            const price = window.currentTourPrice || 0;
+            const subtotal = price * guestCount;
+
+            // Update guest calculation text
+            const guestCalculation = document.getElementById('guestCalculation');
+            if (guestCalculation) {
+                guestCalculation.textContent = `${guestCount} guest${guestCount > 1 ? 's' : ''} × $${price.toFixed(2)}`;
             }
 
-            const tourId = currentTour.id || currentTour._id;
-            const tourName = currentTour.title;
-            const pricePerPerson = currentTour.price || 0;
+            // Update subtotal
+            const subtotalPrice = document.getElementById('subtotalPrice');
+            if (subtotalPrice) {
+                subtotalPrice.textContent = `$${subtotal.toFixed(2)}`;
+            }
 
-            openBookingModal(tourId, tourName, pricePerPerson);
+            // Update total
+            const totalPrice = document.getElementById('totalPrice');
+            if (totalPrice) {
+                totalPrice.textContent = `$${subtotal.toFixed(2)}`;
+            }
+        }
+
+        // Add event listener to guest count dropdown
+        document.addEventListener('DOMContentLoaded', function() {
+            const guestSelect = document.getElementById('guestCount');
+            if (guestSelect) {
+                guestSelect.addEventListener('change', updatePriceBreakdown);
+            }
+
+            // Set default date to today
+            const dateInput = document.getElementById('checkInDate');
+            if (dateInput) {
+                const today = new Date();
+                const yyyy = today.getFullYear();
+                const mm = String(today.getMonth() + 1).padStart(2, '0');
+                const dd = String(today.getDate()).padStart(2, '0');
+                dateInput.value = `${yyyy}-${mm}-${dd}`;
+                dateInput.min = `${yyyy}-${mm}-${dd}`;
+            }
+
+            // Add scroll functionality to tabs
+            initTabNavigation();
+        });
+
+        // Tab navigation function
+        function initTabNavigation() {
+            const tourTabs = document.getElementById('tourTabs');
+            if (!tourTabs) return;
+
+            // Tab click - scroll to section
+            tourTabs.addEventListener('click', function(e) {
+                const link = e.target.closest('.nav-link');
+                if (!link) return;
+
+                e.preventDefault();
+
+                // Remove active from all tabs
+                tourTabs.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                // Add active to clicked tab
+                link.classList.add('active');
+
+                // Get target section and scroll to it
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+
+                if (targetSection) {
+                    const navHeight = document.querySelector('.sticky-nav')?.offsetHeight || 70;
+                    const targetPosition = targetSection.offsetTop - navHeight - 10;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+
+            // Update active tab on scroll
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('.tour-section');
+                const navHeight = document.querySelector('.sticky-nav')?.offsetHeight || 70;
+                let current = 'overview';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - navHeight - 100;
+                    if (window.pageYOffset >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                tourTabs.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // Open WhatsApp for questions
+        function openWhatsApp() {
+            const tourName = currentTour ? currentTour.title : 'Tour';
+            const message = encodeURIComponent(`Salom! Men "${tourName}" turi haqida savol bermoqchiman.`);
+            window.open(`https://wa.me/998932244333?text=${message}`, '_blank');
+        }
+
+        // Toggle Inline Booking Form
+        function toggleBookingForm() {
+            const form = document.getElementById('inlineBookingForm');
+            const askForm = document.getElementById('inlineAskForm');
+
+            // Close ask form if open
+            if (askForm) askForm.classList.remove('active');
+
+            if (form) {
+                form.classList.toggle('active');
+
+                // Scroll form into view if opened
+                if (form.classList.contains('active')) {
+                    setTimeout(() => {
+                        form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 100);
+                }
+            }
+        }
+
+        // Toggle Inline Ask Question Form
+        function toggleAskForm() {
+            const form = document.getElementById('inlineAskForm');
+            const bookingForm = document.getElementById('inlineBookingForm');
+
+            // Close booking form if open
+            if (bookingForm) bookingForm.classList.remove('active');
+
+            if (form) {
+                form.classList.toggle('active');
+
+                // Scroll form into view if opened
+                if (form.classList.contains('active')) {
+                    setTimeout(() => {
+                        form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 100);
+                }
+            }
+        }
+
+        // Submit question via email
+        async function submitQuestion(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('askName').value;
+            const email = document.getElementById('askEmail').value;
+            const question = document.getElementById('askQuestion').value;
+
+            const tourName = currentTour ? currentTour.title : 'Tour';
+
+            // Disable submit button while processing
+            const submitBtn = document.querySelector('#askQuestionForm button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> Sending...';
+            submitBtn.disabled = true;
+
+            try {
+                // Send question as a booking request with $0 price (just a question)
+                const questionData = {
+                    tourId: currentTour ? currentTour._id : null,
+                    tourName: tourName,
+                    customerName: name,
+                    customerEmail: email,
+                    customerPhone: '+998000000000', // Placeholder for questions
+                    date: new Date().toISOString().split('T')[0],
+                    guests: { adults: 1, children: 0 },
+                    totalPrice: 0,
+                    specialRequests: `[QUESTION]\n\n${question}\n\nReply to: ${email}`
+                };
+
+                const response = await fetch('http://localhost:5000/api/bookings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(questionData)
+                });
+
+                if (response.ok) {
+                    // Close form and show success message
+                    toggleAskForm();
+                    alert('Savolingiz yuborildi! 24 soat ichida javob beramiz.');
+                    document.getElementById('askQuestionForm').reset();
+                } else {
+                    const result = await response.json();
+                    alert('Xatolik: ' + (result.message || 'Noma\'lum xatolik'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Server bilan aloqa yo\'q. Iltimos, info@travel-bliss.uz ga email yuboring.');
+            } finally {
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Submit booking request
+        async function submitBookingRequest(event) {
+            event.preventDefault();
+
+            const fullName = document.getElementById('modalFullName').value;
+            const email = document.getElementById('modalEmail').value;
+            let phone = document.getElementById('modalPhone').value;
+            const country = document.getElementById('modalCountry').value;
+            const requests = document.getElementById('modalRequests').value;
+
+            // Get tour info from currentTour or DOM elements
+            const tourName = currentTour ? currentTour.title : (document.querySelector('.tour-title h2')?.textContent || 'Tour');
+
+            // Get tourId from URL or currentTour
+            const urlParams = new URLSearchParams(window.location.search);
+            const tourId = currentTour ? currentTour._id : urlParams.get('id');
+
+            const tourDate = document.getElementById('checkInDate').value;
+            const guestCount = parseInt(document.getElementById('guestCount').value) || 1;
+
+            // Get price from currentTour or DOM
+            let pricePerPerson = 0;
+            if (currentTour) {
+                pricePerPerson = currentTour.discountedPrice || currentTour.price || 0;
+            } else {
+                const priceText = document.querySelector('.current-price')?.textContent || '0';
+                pricePerPerson = parseFloat(priceText.replace(/[^0-9.]/g, '')) || 0;
+            }
+            const totalPrice = pricePerPerson * guestCount;
+
+            // Format phone number for API (must be +998XXXXXXXXX)
+            phone = phone.replace(/\s/g, ''); // Remove spaces
+            if (!phone.startsWith('+998')) {
+                if (phone.startsWith('998')) {
+                    phone = '+' + phone;
+                } else if (phone.startsWith('9') && phone.length === 9) {
+                    phone = '+998' + phone;
+                }
+            }
+
+            // Disable submit button while processing
+            const submitBtn = document.querySelector('#bookingForm .submit-booking-btn');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> Sending...';
+            submitBtn.disabled = true;
+
+            try {
+                // Send to Admin Panel API (API will send email to info@travel-bliss.uz)
+                const bookingData = {
+                    tourId: tourId,
+                    tourName: tourName,
+                    customerName: fullName,
+                    customerEmail: email,
+                    customerPhone: phone,
+                    date: tourDate,
+                    guests: {
+                        adults: guestCount,
+                        children: 0
+                    },
+                    totalPrice: totalPrice,
+                    specialRequests: requests ? `${requests}\n\nCountry: ${country || 'Not specified'}` : `Country: ${country || 'Not specified'}`,
+                    pickupLocation: country || ''
+                };
+
+                const response = await fetch('http://localhost:5000/api/bookings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(bookingData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    console.log('Booking saved and email sent:', result);
+
+                    // Hide form and show success message
+                    document.getElementById('bookingFormContent').style.display = 'none';
+                    document.getElementById('bookingSuccessMessage').classList.add('active');
+
+                    // Reset form
+                    document.getElementById('bookingForm').reset();
+                } else {
+                    // API error - show error message
+                    console.error('API Error:', result);
+                    alert('Xatolik yuz berdi: ' + (result.message || 'Noma\'lum xatolik') + '\n\nIltimos, qaytadan urinib ko\'ring.');
+                }
+            } catch (error) {
+                console.error('Network error:', error);
+                alert('Server bilan aloqa yo\'q. Iltimos, keyinroq qaytadan urinib ko\'ring yoki info@travel-bliss.uz ga email yuboring.');
+            } finally {
+                // Re-enable submit button
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Close success message and reset form view
+        function closeSuccessMessage() {
+            document.getElementById('bookingSuccessMessage').classList.remove('active');
+            document.getElementById('bookingFormContent').style.display = 'block';
+            document.getElementById('inlineBookingForm').classList.remove('active');
+        }
+
+        // Handle check availability button click
+        function handleCheckAvailability() {
+            toggleBookingForm();
         }
 
         // Store tour data when loaded
@@ -2922,6 +4292,117 @@
     <!-- Include Booking Widget -->
     <script src="booking-widget.js"></script>
     <link rel="stylesheet" href="booking-widget.css">
+
+    <!-- Language Dropdown Functions -->
+    <script>
+    const languages = [
+        { flag: 'https://flagcdn.com/w40/gb.png', code: 'EN', name: 'English' },
+        { flag: 'https://flagcdn.com/w40/uz.png', code: 'UZ', name: "O'zbekcha" },
+        { flag: 'https://flagcdn.com/w40/ru.png', code: 'RU', name: 'Русский' },
+        { flag: 'https://flagcdn.com/w40/cn.png', code: 'ZH', name: '中文' },
+        { flag: 'https://flagcdn.com/w40/jp.png', code: 'JA', name: '日本語' },
+        { flag: 'https://flagcdn.com/w40/de.png', code: 'DE', name: 'Deutsch' },
+        { flag: 'https://flagcdn.com/w40/fr.png', code: 'FR', name: 'Français' },
+        { flag: 'https://flagcdn.com/w40/kr.png', code: 'KO', name: '한국어' },
+        { flag: 'https://flagcdn.com/w40/it.png', code: 'IT', name: 'Italiano' }
+    ];
+
+    function createLanguageOptions(container, isMobile = false) {
+        container.innerHTML = languages.map(lang => `
+            <div onclick="selectLanguage('${lang.flag}', '${lang.code}', '${lang.name}', ${isMobile})"
+                 style="display: flex; align-items: center; gap: 10px; padding: 10px 15px; cursor: pointer; transition: background 0.2s;"
+                 onmouseover="this.style.background='#f3f4f6'"
+                 onmouseout="this.style.background='transparent'">
+                <img src="${lang.flag}" alt="${lang.code}" style="width: 24px; height: 18px; object-fit: cover; border-radius: 2px;">
+                <span style="font-weight: 500;">${lang.name}</span>
+            </div>
+        `).join('');
+    }
+
+    function selectLanguage(flagUrl, code, name, isMobile = false) {
+        // Update desktop
+        const currentFlag = document.getElementById('currentFlag');
+        const currentLang = document.getElementById('currentLang');
+        if (currentFlag) currentFlag.innerHTML = `<img src="${flagUrl}" alt="${code}" style="width: 24px; height: 18px; object-fit: cover; border-radius: 2px;">`;
+        if (currentLang) currentLang.textContent = code;
+
+        // Update mobile
+        const currentFlagMobile = document.getElementById('currentFlagMobile');
+        const currentLangMobile = document.getElementById('currentLangMobile');
+        if (currentFlagMobile) currentFlagMobile.innerHTML = `<img src="${flagUrl}" alt="${code}" style="width: 24px; height: 18px; object-fit: cover; border-radius: 2px;">`;
+        if (currentLangMobile) currentLangMobile.textContent = name;
+
+        // Close dropdowns
+        const desktopDropdown = document.querySelector('.language-dropdown');
+        const mobileDropdown = document.querySelector('.language-dropdown-mobile');
+        if (desktopDropdown) desktopDropdown.style.display = 'none';
+        if (mobileDropdown) mobileDropdown.style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize desktop dropdown
+        const desktopDropdown = document.querySelector('.language-dropdown');
+        const desktopBtn = document.querySelector('.language-btn');
+        if (desktopDropdown) {
+            createLanguageOptions(desktopDropdown, false);
+        }
+        if (desktopBtn) {
+            desktopBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const dropdown = document.querySelector('.language-dropdown');
+                dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+            });
+        }
+
+        // Initialize mobile dropdown
+        const mobileDropdown = document.querySelector('.language-dropdown-mobile');
+        const mobileBtn = document.querySelector('.language-btn-mobile');
+        if (mobileDropdown) {
+            createLanguageOptions(mobileDropdown, true);
+        }
+        if (mobileBtn) {
+            mobileBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const dropdown = document.querySelector('.language-dropdown-mobile');
+                dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+            });
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            const desktopSelector = document.querySelector('.language-selector');
+            const mobileSelector = document.querySelector('.language-selector-mobile');
+
+            if (desktopSelector && !desktopSelector.contains(e.target)) {
+                const dropdown = document.querySelector('.language-dropdown');
+                if (dropdown) dropdown.style.display = 'none';
+            }
+            if (mobileSelector && !mobileSelector.contains(e.target)) {
+                const dropdown = document.querySelector('.language-dropdown-mobile');
+                if (dropdown) dropdown.style.display = 'none';
+            }
+        });
+
+        // Mobile menu toggle
+        const menuBtn = document.querySelector('.sidebar-button');
+        const menu = document.querySelector('.main-menu');
+        const closeBtn = document.getElementById('menuCloseBtn');
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                menu.classList.remove('show-menu');
+            });
+        }
+    });
+
+    // Keep old function for backwards compatibility
+    function toggleLanguageDropdown() {
+        const dropdown = document.querySelector('.language-dropdown');
+        if (dropdown) {
+            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        }
+    }
+    </script>
 
 </body>
 </html>
