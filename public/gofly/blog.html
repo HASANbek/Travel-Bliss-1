@@ -1,0 +1,1107 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/jquery-ui.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/css/animate.min.css" rel="stylesheet">
+    <link href="assets/css/jquery.fancybox.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="assets/css/slick-theme.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/menu-custom.css">
+
+    <title>Blog - Travel Bliss | Travel Stories & Tips</title>
+    <link rel="icon" href="assets/img/fav-icon.svg" type="image/gif" sizes="20x20">
+
+<style>
+:root {
+    --primary-color1: #0F16E6 !important;
+    --primary-color1-opc: 15, 22, 230 !important;
+}
+
+/* Header Styles */
+.header-area .search-btn,
+.header-area .eg-btn,
+.header-area .primary-btn1:not(.mobile-menu-btn),
+.header-area a[href*="sign"],
+.header-area a[href*="login"],
+.nav-right .eg-btn,
+.nav-right .primary-btn1,
+.sidebar-button:not(.mobile-menu-btn) {
+    display: none !important;
+}
+
+@media(max-width:1199px){
+    .header-area.style-2 .nav-right *,
+    .header-area.style-2 .nav-right i,
+    .header-area.style-2 .nav-right svg,
+    .header-area.style-2 .sidebar-button i {
+        color: #1a1a2e !important;
+        stroke: #1a1a2e !important;
+    }
+    .header-area.style-2 .sidebar-button {
+        background: rgba(255,255,255,0.9) !important;
+        border-radius: 8px !important;
+        padding: 8px 10px !important;
+    }
+}
+
+/* Blog Hero Section */
+.blog-hero {
+    background: url('/uploads/registon-1764689562739-647287587.jpg') center/cover no-repeat;
+    padding: 120px 0 80px;
+    position: relative;
+    overflow: hidden;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blog-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5));
+}
+
+.blog-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-style: italic;
+}
+
+.blog-hero p {
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.95);
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Category Filter */
+.category-filter {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.category-btn {
+    padding: 10px 24px;
+    border: 2px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1);
+    color: white;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.category-btn:hover,
+.category-btn.active {
+    background: white;
+    color: #764ba2;
+    border-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Blog Section */
+.blog-section {
+    padding: 80px 0;
+    background: #f8fafc;
+}
+
+/* Featured Post */
+.featured-post {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    height: 500px;
+    margin-bottom: 50px;
+    cursor: pointer;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+}
+
+.featured-post img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.featured-post:hover img {
+    transform: scale(1.05);
+}
+
+.featured-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 40px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+}
+
+.featured-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.featured-overlay h2 {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.featured-overlay p {
+    color: rgba(255,255,255,0.8);
+    font-size: 1rem;
+    margin-bottom: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.featured-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+}
+
+.featured-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Blog Grid */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+@media (max-width: 992px) {
+    .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .blog-hero h1 {
+        font-size: 2rem;
+    }
+
+    .featured-post {
+        height: 350px;
+    }
+
+    .featured-overlay h2 {
+        font-size: 1.4rem;
+    }
+}
+
+/* Blog Card */
+.blog-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.blog-card-image {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.blog-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.blog-card:hover .blog-card-image img {
+    transform: scale(1.1);
+}
+
+.blog-category {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.blog-card-content {
+    padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-card-content h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 12px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.3s;
+}
+
+.blog-card:hover .blog-card-content h3 {
+    color: #667eea;
+}
+
+.blog-card-content p {
+    color: #64748b;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+}
+
+.blog-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 15px;
+    border-top: 1px solid #f1f5f9;
+    margin-top: auto;
+}
+
+.blog-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.blog-author img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.blog-author-info span {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.blog-author-info small {
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.blog-read-time {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+/* Pagination */
+.pagination-area {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 50px;
+}
+
+.pagination-btn {
+    width: 45px;
+    height: 45px;
+    border: none;
+    background: white;
+    border-radius: 12px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.pagination-btn:hover,
+.pagination-btn.active {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Newsletter Section */
+.newsletter-section {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    padding: 80px 0;
+}
+
+.newsletter-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.newsletter-content h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.newsletter-content p {
+    color: #94a3b8;
+    margin-bottom: 30px;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 15px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 16px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    background: white;
+}
+
+.newsletter-form button {
+    padding: 16px 32px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.newsletter-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+}
+
+@media (max-width: 576px) {
+    .newsletter-form {
+        flex-direction: column;
+    }
+
+    .newsletter-content h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Loading & Empty States */
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f4f6;
+    border-top-color: #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    color: #cbd5e1;
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    color: #64748b;
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: #94a3b8;
+}
+
+/* Footer */
+.footer-area.style-3 {
+    background: #1e293b;
+    padding: 0;
+}
+
+.footer-area.style-3 a:hover {
+    color: white !important;
+}
+
+.footer-area.style-3 .footer-social a:hover {
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+    .footer-contact-row {
+        gap: 30px !important;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+</style>
+</head>
+
+<body>
+<!-- Header -->
+<header class="header-area style-2" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: white; box-shadow: 0 2px 20px rgba(0,0,0,0.1);">
+    <div class="container-fluid d-flex flex-nowrap align-items-center justify-content-between" style="padding: 10px 30px;">
+        <div class="logo-and-menu-area d-flex align-items-center">
+            <a href="travel-agency-03.html" class="header-logo">
+                <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 45px; width: auto; max-width: 180px; object-fit: contain;">
+            </a>
+            <div class="main-menu">
+                <div class="mobile-logo-area d-xl-none d-flex align-items-center justify-content-between">
+                    <a href="travel-agency-03.html" class="mobile-logo-wrap">
+                        <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 40px;">
+                    </a>
+                    <div class="menu-close-btn" id="menuCloseBtn">
+                        <i class="bi bi-x" style="font-size: 28px;"></i>
+                    </div>
+                </div>
+                <ul class="menu-list">
+                    <li><a href="travel-agency-03.html">Home</a></li>
+                    <li><a href="all-destinations.html">Destinations</a></li>
+                    <li><a href="tours.html">Tours</a></li>
+                    <li class="active"><a href="blog.html">Blog</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+                <!-- Mobile Language Selector -->
+                <div class="contact-area d-xl-none d-flex" style="padding: 20px 15px; border-top: 1px solid #e5e7eb; margin-top: 15px;">
+                    <div class="language-selector-mobile" style="position: relative; width: 100%;">
+                        <button class="language-btn-mobile" onclick="toggleMobileLanguageDropdown(event)" style="background: white; border: 1px solid #e5e7eb; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; color: #1f2937; padding: 12px 20px; border-radius: 10px; transition: all 0.3s; width: 100%;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                            </svg>
+                            <img id="currentFlagMobile" src="https://flagcdn.com/w40/gb.png" alt="EN" width="24" height="16" style="border-radius: 2px;">
+                            <span id="currentLangMobile">English</span>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="language-dropdown-mobile" id="languageDropdownMobile" style="display: none; position: absolute; bottom: 100%; left: 0; right: 0; background: white; border-radius: 10px; box-shadow: 0 -4px 20px rgba(0,0,0,0.15); margin-bottom: 8px; z-index: 1000; overflow: hidden;">
+                            <!-- Languages loaded by language-loader.js -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="nav-right d-flex align-items-center">
+            <!-- Desktop Phone & Language -->
+            <div class="contact-area d-xl-flex d-none" style="gap: 20px; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div class="icon" style="color: #667eea;">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.5646 11.7424L13.3317 9.50954C12.5343 8.7121 11.1786 9.03111 10.8596 10.0678C10.6204 10.7855 9.82296 11.1842 9.10526 11.0247C7.51037 10.626 5.35726 8.55261 4.95854 6.87797C4.71931 6.16024 5.19778 5.36279 5.91548 5.12359C6.95216 4.80461 7.27113 3.44895 6.47369 2.65151L4.24084 0.418659C3.60288 -0.139553 2.64595 -0.139553 2.08774 0.418659L0.572591 1.93381C-0.942555 3.5287 0.73208 7.75516 4.48007 11.5032C8.22807 15.2512 12.4545 17.0056 14.0494 15.4106L15.5646 13.8955C16.1228 13.2575 16.1228 12.3006 15.5646 11.7424Z"/>
+                        </svg>
+                    </div>
+                    <a href="tel:+998932244333" style="color: #1f2937; font-weight: 600; text-decoration: none;">+998 93 224 4333</a>
+                </div>
+                <div class="language-selector" style="position: relative;">
+                    <button class="language-btn" onclick="toggleDesktopLanguage(event)" style="background: transparent; border: none; cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 600; color: #1f2937; padding: 5px 10px; border-radius: 6px; transition: all 0.3s;">
+                        <img id="currentFlag" src="https://flagcdn.com/w40/gb.png" alt="EN" width="24" height="16" style="border-radius: 2px; border: 1px solid rgba(0,0,0,0.1);">
+                        <span id="currentLang">EN</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="language-dropdown" style="display: none; position: absolute; top: 100%; right: 0; background: white; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 5px; width: max-content; z-index: 1000;">
+                        <!-- Languages will be loaded by language-loader.js -->
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu Button -->
+            <div class="sidebar-button mobile-menu-btn d-xl-none" style="background: rgba(102, 126, 234, 0.1); border-radius: 10px; padding: 10px 12px; cursor: pointer;">
+                <svg width="22" height="18" viewBox="0 0 20 18" fill="#667eea">
+                    <path d="M1.29445 2.8421H10.5237C11.2389 2.8421 11.8182 2.2062 11.8182 1.42105C11.8182 0.635903 11.2389 0 10.5237 0H1.29445C0.579249 0 0 0.635903 0 1.42105C0 2.2062 0.579249 2.8421 1.29445 2.8421Z"></path>
+                    <path d="M1.23002 10.421H18.77C19.4496 10.421 20 9.78506 20 8.99991C20 8.21476 19.4496 7.57886 18.77 7.57886H1.23002C0.550421 7.57886 0 8.21476 0 8.99991C0 9.78506 0.550421 10.421 1.23002 10.421Z"></path>
+                    <path d="M18.8052 15.1579H10.2858C9.62563 15.1579 9.09094 15.7938 9.09094 16.5789C9.09094 17.3641 9.62563 18 10.2858 18H18.8052C19.4653 18 20 17.3641 20 16.5789C20 15.7938 19.4653 15.1579 18.8052 15.1579Z"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Blog Hero -->
+<section class="blog-hero text-center">
+    <div class="container">
+        <h1>Travel Stories & Tips</h1>
+        <p>Discover travel inspiration, destination guides, and insider tips from our travel experts</p>
+        <div class="category-filter" id="categoryFilter">
+            <button class="category-btn active" data-category="all">All Posts</button>
+            <button class="category-btn" data-category="Travel Tips">Travel Tips</button>
+            <button class="category-btn" data-category="Destinations">Destinations</button>
+            <button class="category-btn" data-category="Culture">Culture</button>
+            <button class="category-btn" data-category="Food">Food & Cuisine</button>
+        </div>
+    </div>
+</section>
+
+<!-- Blog Section -->
+<section class="blog-section">
+    <div class="container">
+        <!-- Featured Post -->
+        <div id="featuredPost" class="featured-post" style="display: none;">
+            <img id="featuredImage" src="" alt="">
+            <div class="featured-overlay">
+                <span class="featured-badge">Featured</span>
+                <h2 id="featuredTitle"></h2>
+                <p id="featuredExcerpt"></p>
+                <div class="featured-meta">
+                    <span><i class="bi bi-person"></i> <span id="featuredAuthor"></span></span>
+                    <span><i class="bi bi-calendar3"></i> <span id="featuredDate"></span></span>
+                    <span><i class="bi bi-clock"></i> <span id="featuredReadTime">5 min read</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="loading-spinner">
+            <div class="spinner"></div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <i class="bi bi-journal-x"></i>
+            <h3>No blog posts found</h3>
+            <p>Check back later for new travel stories and tips</p>
+        </div>
+
+        <!-- Blog Grid -->
+        <div id="blogGrid" class="blog-grid">
+            <!-- Blog cards will be loaded here -->
+        </div>
+
+        <!-- Pagination -->
+        <div id="paginationArea" class="pagination-area" style="display: none;">
+            <!-- Pagination buttons will be added here -->
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter-section">
+    <div class="container">
+        <div class="newsletter-content">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for the latest travel tips, destination guides, and exclusive offers</p>
+            <form class="newsletter-form" onsubmit="return subscribeNewsletter(event)">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer-area style-3">
+    <!-- Contact Us Top Section -->
+    <div class="footer-top" style="background: #0d0d18; padding: 35px 0;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 30px; padding-bottom: 35px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <!-- Contact Us -->
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                        <svg width="36" height="36" viewBox="0 0 36 36" fill="#3b82f6" xmlns="http://www.w3.org/2000/svg">
+                            <g>
+                                <path d="M35.8703 28.2548L33.7795 22.1697C34.7873 20.1094 35.3199 17.8181 35.3235 15.5126C35.3297 11.5039 33.7788 7.71355 30.9563 4.83988C28.1332 1.96565 24.3714 0.347686 20.3636 0.284193C16.2077 0.218522 12.3015 1.79929 9.36472 4.73596C6.53295 7.56766 4.96231 11.3008 4.9126 15.29C2.12162 17.3914 0.474267 20.6676 0.479681 24.167C0.482282 25.8045 0.850861 27.4323 1.54927 28.9043L0.109064 33.0955C-0.138507 33.816 0.0423371 34.5983 0.581071 35.1371C0.960196 35.5162 1.46005 35.7181 1.9741 35.7181C2.19038 35.7181 2.4092 35.6824 2.62259 35.6091L6.81385 34.1688C8.28584 34.8673 9.91365 35.2358 11.5512 35.2384H11.5687C15.1201 35.2383 18.4213 33.5485 20.515 30.6891C22.6938 30.6317 24.8495 30.1043 26.7983 29.1509L32.8835 31.2419C33.1314 31.3274 33.3918 31.3712 33.654 31.3715C34.2649 31.3715 34.8589 31.1316 35.3095 30.6809C35.9497 30.0407 36.1645 29.1111 35.8703 28.2548ZM11.5685 33.0956H11.5545C10.1051 33.0934 8.66574 32.7361 7.39231 32.0624C7.2628 31.9939 7.12062 31.9526 6.97456 31.9412C6.82849 31.9299 6.68164 31.9485 6.54308 31.9961L2.24537 33.4729L3.72214 29.1753C3.76974 29.0367 3.78843 28.8898 3.77703 28.7438C3.76564 28.5977 3.72442 28.4555 3.65591 28.326C2.98217 27.0525 2.62484 25.6132 2.62259 24.1637C2.61901 21.8322 3.52597 19.6224 5.11201 17.9676C5.63007 21.1258 7.13525 24.036 9.46836 26.3277C11.7842 28.6023 14.6953 30.0506 17.8363 30.5241C16.1778 32.1588 13.9421 33.0956 11.5685 33.0956ZM33.7942 29.1656C33.7332 29.2266 33.6609 29.2432 33.5796 29.2152L27.0653 26.9767C26.9268 26.9291 26.7799 26.9104 26.6339 26.9218C26.4878 26.9332 26.3456 26.9744 26.2162 27.043C24.3562 28.0269 22.2544 28.5488 20.1379 28.552H20.1176C13.0257 28.552 7.16774 22.791 7.05538 15.7008C6.99877 12.13 8.35707 8.77401 10.88 6.25112C13.4028 3.72824 16.7593 2.37044 20.3297 2.42669C27.4267 2.53926 33.1917 8.40803 33.1807 15.5092C33.1774 17.6258 32.6556 19.7276 31.6717 21.5875C31.6032 21.717 31.562 21.8592 31.5506 22.0052C31.5392 22.1513 31.5579 22.2981 31.6055 22.4367L33.8439 28.951C33.8718 29.0326 33.8551 29.1048 33.7942 29.1656Z"/>
+                                <path d="M26.5002 9.80957H13.7343C13.1426 9.80957 12.6629 10.2893 12.6629 10.881C12.6629 11.4727 13.1426 11.9524 13.7343 11.9524H26.5002C27.092 11.9524 27.5717 11.4727 27.5717 10.881C27.5717 10.2893 27.092 9.80957 26.5002 9.80957ZM26.5002 14.2161H13.7343C13.1426 14.2161 12.6629 14.6959 12.6629 15.2875C12.6629 15.8792 13.1426 16.359 13.7343 16.359H26.5002C27.092 16.359 27.5717 15.8792 27.5717 15.2875C27.5717 14.6959 27.092 14.2161 26.5002 14.2161ZM21.5862 18.6225H13.7342C13.1425 18.6225 12.6628 19.1023 12.6628 19.694C12.6628 20.2857 13.1426 20.7654 13.7342 20.7654H21.5862C22.1779 20.7654 22.6576 20.2856 22.6576 19.694C22.6576 19.1023 22.178 18.6225 21.5862 18.6225Z"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div>
+                        <h6 style="color: #3b82f6; font-size: 16px; font-weight: 600; margin: 0 0 5px 0;">Contact Us</h6>
+                        <span style="color: white; font-size: 13px;">Don't hesitate to contact Travel Bliss.</span>
+                    </div>
+                </div>
+                <!-- WhatsApp -->
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 45px; height: 45px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span style="color: white; font-size: 12px; display: block;">WhatsApp</span>
+                        <a href="https://wa.me/998932244333" style="color: white; font-size: 17px; font-weight: 700; text-decoration: none;">+998932244333</a>
+                    </div>
+                </div>
+                <!-- Mail Us -->
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 45px; height: 45px; background: #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
+                    <div>
+                        <span style="color: white; font-size: 12px; display: block;">Mail Us</span>
+                        <a href="mailto:info@travel-bliss.uz" style="color: white; font-size: 17px; font-weight: 700; text-decoration: none;">info@travel-bliss.uz</a>
+                    </div>
+                </div>
+                <!-- Call Us -->
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 45px; height: 45px; background: #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <span style="color: white; font-size: 12px; display: block;">Call Us</span>
+                        <a href="tel:+998932244333" style="color: white; font-size: 17px; font-weight: 700; text-decoration: none;">+998932244333</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Footer Content -->
+    <div class="footer-main" style="background: #12121f; padding: 60px 0;">
+        <div class="container">
+            <div class="row">
+                <!-- Logo & About -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <a href="travel-agency-03.html" class="footer-logo" style="display: inline-block; margin-bottom: 25px;">
+                        <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 55px;">
+                    </a>
+                    <h6 style="color: white; font-weight: 600; margin-bottom: 10px;">Travel Bliss Uzbekistan</h6>
+                    <p style="color: #94a3b8; margin-bottom: 25px; line-height: 1.7; font-size: 14px;">Rudaki street 172A, Samarkand, Uzbekistan</p>
+                    <div class="footer-social" style="display: flex; gap: 10px; margin-bottom: 25px;">
+                        <a href="#" style="width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; transition: all 0.3s;"><i class="bi bi-facebook"></i></a>
+                        <a href="#" style="width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; transition: all 0.3s;"><i class="bi bi-instagram"></i></a>
+                        <a href="#" style="width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; transition: all 0.3s;"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" style="width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; transition: all 0.3s;"><i class="bi bi-youtube"></i></a>
+                    </div>
+                    <!-- Language Button -->
+                    <button class="footer-lang-btn" onclick="toggleDesktopLanguage(event)" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 10px 20px; border-radius: 8px; color: white; display: inline-flex; align-items: center; gap: 10px; cursor: pointer; transition: all 0.3s; font-size: 14px;">
+                        <i class="bi bi-globe"></i>
+                        <span>Language</span>
+                        <i class="bi bi-chevron-down" style="font-size: 10px;"></i>
+                    </button>
+                </div>
+
+                <!-- Top Destination -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h4 style="color: white; font-size: 18px; font-weight: 600; margin-bottom: 25px;">Top Destination</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Maldives Tour</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Bali, Indonesia Tour</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Thailand Tour</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Philippines Tour</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Hawaii, USA Tour</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Switzerland Tour</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">New Zealand Tour</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Costa Rica Tour</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Peru (Machu Picchu)</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Paris, France Tour</a></li>
+                        <li style="margin-bottom: 0;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Rome, Italy Tour</a></li>
+                    </ul>
+                </div>
+
+                <!-- Popular Search -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h4 style="color: white; font-size: 18px; font-weight: 600; margin-bottom: 25px;">Popular Search</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Adventure</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Hiking & Stiking</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Holiday Packages</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Flights And Hotels</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Honeymoon Trip</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Bali Vacation Package</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Desert Safari</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Last-Minute Deals</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Summer Vacation</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Wildlife Safari</a></li>
+                        <li style="margin-bottom: 0;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Dubai Luxury Tours</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h4 style="color: white; font-size: 18px; font-weight: 600; margin-bottom: 25px;">Resources</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 14px;"><a href="about.html" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">About Travel Bliss</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Health & Safety Measure</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Visa Processing</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Customize Tour</a></li>
+                        <li style="margin-bottom: 14px;"><a href="blog.html" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Travel Inspirations</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Traveler Reviews</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Terms & Condition</a></li>
+                        <li style="margin-bottom: 0;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom-bar" style="background: #0d0d18; padding: 20px 0;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                <p style="color: #64748b; margin: 0; font-size: 14px;">Copyright 2025 <a href="#" style="color: #f59e0b; text-decoration: none;">Travel Bliss</a> | All Rights Reserved.</p>
+                <div class="payment-methods" style="display: flex; align-items: center; gap: 8px;">
+                    <span style="color: #64748b; font-size: 13px; margin-right: 10px;">Accepted Payment Methods :</span>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" style="height: 28px; background: white; padding: 5px 10px; border-radius: 4px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" style="height: 28px; background: white; padding: 5px 10px; border-radius: 4px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" style="height: 28px; background: white; padding: 5px 10px; border-radius: 4px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="GPay" style="height: 28px; background: white; padding: 5px 10px; border-radius: 4px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="assets/js/jquery-3.7.1.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="language-loader.js"></script>
+
+<script>
+// Global variables
+let allBlogs = [];
+let currentPage = 1;
+let currentCategory = 'all';
+const blogsPerPage = 6;
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+    loadBlogs();
+    setupCategoryFilter();
+    setupMobileMenu();
+});
+
+// Load blogs from API
+async function loadBlogs() {
+    try {
+        const response = await fetch('/api/blogs');
+        const data = await response.json();
+
+        document.getElementById('loadingState').style.display = 'none';
+
+        if (data.success && data.data.blogs && data.data.blogs.length > 0) {
+            allBlogs = data.data.blogs;
+            renderBlogs();
+        } else {
+            document.getElementById('emptyState').style.display = 'block';
+        }
+    } catch (error) {
+        console.error('Error loading blogs:', error);
+        document.getElementById('loadingState').style.display = 'none';
+        document.getElementById('emptyState').style.display = 'block';
+    }
+}
+
+// Render blogs
+function renderBlogs() {
+    const blogGrid = document.getElementById('blogGrid');
+    const featuredPost = document.getElementById('featuredPost');
+
+    // Filter by category
+    let filteredBlogs = currentCategory === 'all'
+        ? allBlogs
+        : allBlogs.filter(blog => blog.category === currentCategory);
+
+    if (filteredBlogs.length === 0) {
+        blogGrid.innerHTML = '';
+        featuredPost.style.display = 'none';
+        document.getElementById('emptyState').style.display = 'block';
+        document.getElementById('paginationArea').style.display = 'none';
+        return;
+    }
+
+    document.getElementById('emptyState').style.display = 'none';
+
+    // Show featured post (first blog)
+    if (currentPage === 1 && filteredBlogs.length > 0) {
+        const featured = filteredBlogs[0];
+        featuredPost.style.display = 'block';
+        featuredPost.onclick = () => window.location.href = `blog-details.html?id=${featured._id || featured.slug}`;
+        document.getElementById('featuredImage').src = featured.image || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200';
+        document.getElementById('featuredTitle').textContent = featured.title;
+        document.getElementById('featuredExcerpt').textContent = featured.excerpt || '';
+        document.getElementById('featuredAuthor').textContent = (typeof featured.author === 'object' ? featured.author.name : featured.author) || 'Admin';
+        document.getElementById('featuredDate').textContent = formatDate(featured.createdAt || featured.publishedAt);
+        filteredBlogs = filteredBlogs.slice(1); // Remove featured from grid
+    } else {
+        featuredPost.style.display = 'none';
+    }
+
+    // Pagination
+    const startIndex = (currentPage - 1) * blogsPerPage;
+    const paginatedBlogs = filteredBlogs.slice(startIndex, startIndex + blogsPerPage);
+
+    // Render grid
+    blogGrid.innerHTML = paginatedBlogs.map(blog => createBlogCard(blog)).join('');
+
+    // Render pagination
+    renderPagination(filteredBlogs.length);
+}
+
+// Create blog card HTML
+function createBlogCard(blog) {
+    const defaultImg = 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800';
+    const image = blog.image || defaultImg;
+    const category = blog.categoryDisplay || blog.category || 'Travel';
+    const date = formatDate(blog.createdAt || blog.publishedAt);
+    const excerpt = blog.excerpt || (blog.content ? blog.content.substring(0, 150) + '...' : '');
+    const authorName = (typeof blog.author === 'object' ? blog.author.name : blog.author) || 'Admin';
+
+    return `
+        <div class="blog-card" onclick="window.location.href='blog-details.html?id=${blog._id || blog.slug}'">
+            <div class="blog-card-image">
+                <img src="${image}" alt="${blog.title}" onerror="this.src='${defaultImg}'">
+                <span class="blog-category">${category}</span>
+            </div>
+            <div class="blog-card-content">
+                <h3>${blog.title}</h3>
+                <p>${excerpt}</p>
+                <div class="blog-meta">
+                    <div class="blog-author">
+                        <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(authorName)}&background=667eea&color=fff" alt="${authorName}">
+                        <div class="blog-author-info">
+                            <span>${authorName}</span>
+                            <small>${date}</small>
+                        </div>
+                    </div>
+                    <div class="blog-read-time">
+                        <i class="bi bi-clock"></i>
+                        ${blog.readingTime || 5} min
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Render pagination
+function renderPagination(totalBlogs) {
+    const paginationArea = document.getElementById('paginationArea');
+    const totalPages = Math.ceil(totalBlogs / blogsPerPage);
+
+    if (totalPages <= 1) {
+        paginationArea.style.display = 'none';
+        return;
+    }
+
+    paginationArea.style.display = 'flex';
+    let html = '';
+
+    // Previous button
+    if (currentPage > 1) {
+        html += `<button class="pagination-btn" onclick="changePage(${currentPage - 1})"><i class="bi bi-chevron-left"></i></button>`;
+    }
+
+    // Page numbers
+    for (let i = 1; i <= totalPages; i++) {
+        if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+            html += `<button class="pagination-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+        } else if (i === currentPage - 2 || i === currentPage + 2) {
+            html += `<button class="pagination-btn" disabled>...</button>`;
+        }
+    }
+
+    // Next button
+    if (currentPage < totalPages) {
+        html += `<button class="pagination-btn" onclick="changePage(${currentPage + 1})"><i class="bi bi-chevron-right"></i></button>`;
+    }
+
+    paginationArea.innerHTML = html;
+}
+
+// Change page
+function changePage(page) {
+    currentPage = page;
+    renderBlogs();
+    window.scrollTo({ top: 400, behavior: 'smooth' });
+}
+
+// Setup category filter
+function setupCategoryFilter() {
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentCategory = this.dataset.category;
+            currentPage = 1;
+            renderBlogs();
+        });
+    });
+}
+
+// Format date
+function formatDate(dateString) {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+// Newsletter subscription
+function subscribeNewsletter(e) {
+    e.preventDefault();
+    const email = e.target.querySelector('input').value;
+    alert('Thank you for subscribing! We\'ll send travel tips to ' + email);
+    e.target.reset();
+    return false;
+}
+
+// Mobile menu
+function setupMobileMenu() {
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const mainMenu = document.querySelector('.main-menu');
+    const closeBtn = document.getElementById('menuCloseBtn');
+
+    if (menuBtn && mainMenu) {
+        menuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            mainMenu.classList.add('show-menu');
+        });
+    }
+
+    if (closeBtn && mainMenu) {
+        closeBtn.addEventListener('click', function() {
+            mainMenu.classList.remove('show-menu');
+        });
+    }
+
+    document.addEventListener('click', function(e) {
+        if (mainMenu && mainMenu.classList.contains('show-menu')) {
+            if (e.target.closest('.language-selector-mobile')) return;
+            if (!mainMenu.contains(e.target) && !e.target.closest('.mobile-menu-btn')) {
+                mainMenu.classList.remove('show-menu');
+            }
+        }
+    });
+}
+
+// Mobile Language Dropdown
+function toggleMobileLanguageDropdown(e) {
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    const dropdown = document.getElementById('languageDropdownMobile');
+    if (dropdown) {
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
+// Desktop Language Dropdown
+function toggleDesktopLanguage(e) {
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    const dropdown = document.querySelector('.language-selector .language-dropdown');
+    if (dropdown) {
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
+// Close dropdowns on outside click
+document.addEventListener('click', function(e) {
+    const desktopDropdown = document.querySelector('.language-selector .language-dropdown');
+    const mobileDropdown = document.getElementById('languageDropdownMobile');
+
+    if (desktopDropdown && !e.target.closest('.language-selector')) {
+        desktopDropdown.style.display = 'none';
+    }
+    if (mobileDropdown && !e.target.closest('.language-selector-mobile')) {
+        mobileDropdown.style.display = 'none';
+    }
+});
+</script>
+</body>
+</html>

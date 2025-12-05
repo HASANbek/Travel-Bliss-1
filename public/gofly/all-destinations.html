@@ -672,34 +672,37 @@ a.primary-btn1 {
                         <li><a href="about.html">About</a></li>
                         <li><a href="contact.html">Contact Us</a></li>
                     </ul>
-                    <div class="contact-area d-xl-none d-flex" style="gap: 15px; align-items: center; flex-direction: column; padding: 15px 0;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <div class="icon">
-                                <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                                    <g>
-                                        <path
-                                            d="M15.5646 11.7424L13.3317 9.50954C12.5343 8.7121 11.1786 9.03111 10.8596 10.0678C10.6204 10.7855 9.82296 11.1842 9.10526 11.0247C7.51037 10.626 5.35726 8.55261 4.95854 6.87797C4.71931 6.16024 5.19778 5.36279 5.91548 5.12359C6.95216 4.80461 7.27113 3.44895 6.47369 2.65151L4.24084 0.418659C3.60288 -0.139553 2.64595 -0.139553 2.08774 0.418659L0.572591 1.93381C-0.942555 3.5287 0.73208 7.75516 4.48007 11.5032C8.22807 15.2512 12.4545 17.0056 14.0494 15.4106L15.5646 13.8955C16.1228 13.2575 16.1228 12.3006 15.5646 11.7424Z"/>
-                                    </g>
-                                </svg>
-                            </div>
-                            <a href="tel:998901234567" style="color: #1f2937; font-weight: 600; text-decoration: none; font-size: 16px;">+998 93 224 4333</a>
-                        </div>
+                    <!-- Mobile Language Selector -->
+                    <div class="contact-area d-xl-none d-flex" style="padding: 20px 15px; border-top: 1px solid #e5e7eb; margin-top: 15px;">
                         <div class="language-selector-mobile" style="position: relative; width: 100%;">
-                            <button class="language-btn-mobile" style="background: transparent; border: 1px solid #e5e7eb; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; color: #1f2937; padding: 10px 20px; border-radius: 8px; transition: all 0.3s; width: 100%;">
+                            <button class="language-btn-mobile" onclick="toggleMobileLanguageDropdown(event)" style="background: white; border: 1px solid #e5e7eb; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; color: #1f2937; padding: 12px 20px; border-radius: 10px; transition: all 0.3s; width: 100%;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <circle cx="12" cy="12" r="10"></circle>
                                     <line x1="2" y1="12" x2="22" y2="12"></line>
                                     <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                                 </svg>
-                                <span id="currentLangMobile">English</span>
+                                <img id="currentFlagMobile" src="https://flagcdn.com/w40/uz.png" alt="UZ" width="24" height="16" style="border-radius: 2px; border: 1px solid rgba(0,0,0,0.1);">
+                                <span id="currentLangMobile">O'zbekcha</span>
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polyline points="6 9 12 15 18 9"></polyline>
                                 </svg>
                             </button>
-                            <div class="language-dropdown-mobile" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 5px; z-index: 1000;">
-                                <a href="#" class="lang-option-mobile" data-lang="English" style="display: block; padding: 12px 15px; color: #1f2937; text-decoration: none; transition: all 0.2s; border-bottom: 1px solid #f3f4f6;">English</a>
-                                <a href="#" class="lang-option-mobile" data-lang="O'zbekcha" style="display: block; padding: 12px 15px; color: #1f2937; text-decoration: none; transition: all 0.2s; border-bottom: 1px solid #f3f4f6;">O'zbekcha</a>
-                                <a href="#" class="lang-option-mobile" data-lang="Русский" style="display: block; padding: 12px 15px; color: #1f2937; text-decoration: none; transition: all 0.2s;">Русский</a>
+                            <div class="language-dropdown-mobile" id="languageDropdownMobile" style="display: none; position: absolute; bottom: 100%; left: 0; right: 0; background: white; border-radius: 10px; box-shadow: 0 -4px 20px rgba(0,0,0,0.15); margin-bottom: 8px; z-index: 1000; overflow: hidden; max-height: 250px; overflow-y: auto;">
+                                <a href="javascript:void(0)" class="lang-option-mobile" onclick="selectLanguageMobile('uz', 'O\'zbekcha', event)" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; text-decoration: none; color: #1f2937; font-weight: 500; transition: background 0.2s; border-bottom: 1px solid #f3f4f6;">
+                                    <img src="https://flagcdn.com/w20/uz.png" style="width: 24px; height: 16px; object-fit: cover; border-radius: 2px;">O'zbekcha
+                                </a>
+                                <a href="javascript:void(0)" class="lang-option-mobile" onclick="selectLanguageMobile('gb', 'English', event)" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; text-decoration: none; color: #1f2937; font-weight: 500; transition: background 0.2s; border-bottom: 1px solid #f3f4f6;">
+                                    <img src="https://flagcdn.com/w20/gb.png" style="width: 24px; height: 16px; object-fit: cover; border-radius: 2px;">English
+                                </a>
+                                <a href="javascript:void(0)" class="lang-option-mobile" onclick="selectLanguageMobile('ru', 'Русский', event)" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; text-decoration: none; color: #1f2937; font-weight: 500; transition: background 0.2s; border-bottom: 1px solid #f3f4f6;">
+                                    <img src="https://flagcdn.com/w20/ru.png" style="width: 24px; height: 16px; object-fit: cover; border-radius: 2px;">Русский
+                                </a>
+                                <a href="javascript:void(0)" class="lang-option-mobile" onclick="selectLanguageMobile('cn', '中文', event)" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; text-decoration: none; color: #1f2937; font-weight: 500; transition: background 0.2s; border-bottom: 1px solid #f3f4f6;">
+                                    <img src="https://flagcdn.com/w20/cn.png" style="width: 24px; height: 16px; object-fit: cover; border-radius: 2px;">中文
+                                </a>
+                                <a href="javascript:void(0)" class="lang-option-mobile" onclick="selectLanguageMobile('de', 'Deutsch', event)" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; text-decoration: none; color: #1f2937; font-weight: 500; transition: background 0.2s;">
+                                    <img src="https://flagcdn.com/w20/de.png" style="width: 24px; height: 16px; object-fit: cover; border-radius: 2px;">Deutsch
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -837,13 +840,12 @@ a.primary-btn1 {
                         Login
                     </span>
                 </a>
-                <div class="sidebar-button mobile-menu-btn">
-                    <svg width="20" height="18" viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1.29445 2.8421H10.5237C11.2389 2.8421 11.8182 2.2062 11.8182 1.42105C11.8182 0.635903 11.2389 0 10.5237 0H1.29445C0.579249 0 0 0.635903 0 1.42105C0 2.2062 0.579249 2.8421 1.29445 2.8421Z"></path>
-                        <path d="M1.23002 10.421H18.77C19.4496 10.421 20 9.78506 20 8.99991C20 8.21476 19.4496 7.57886 18.77 7.57886H1.23002C0.550421 7.57886 0 8.21476 0 8.99991C0 9.78506 0.550421 10.421 1.23002 10.421Z"></path>
-                        <path d="M18.8052 15.1579H10.2858C9.62563 15.1579 9.09094 15.7938 9.09094 16.5789C9.09094 17.3641 9.62563 18 10.2858 18H18.8052C19.4653 18 20 17.3641 20 16.5789C20 15.7938 19.4653 15.1579 18.8052 15.1579Z"></path>
-                    </svg>
-                </div>
+            </div>
+            <!-- Mobile Menu Button (Hamburger) -->
+            <div class="sidebar-button mobile-menu-btn d-xl-none" style="background: rgba(255,255,255,0.9); border-radius: 8px; padding: 10px 12px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1H21M1 9H21M1 17H21" stroke="#1a1a2e" stroke-width="2" stroke-linecap="round"/>
+                </svg>
             </div>
         </div>
     </header>
@@ -885,55 +887,61 @@ a.primary-btn1 {
 
     <footer class="footer-section">
         <div class="container">
-            <div class="footer-contact-wrap">
-                <div class="inquiry-area">
-                    <svg width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-                        <g>
-                            <path
-                                d="M35.8703 28.2548L33.7795 22.1697C34.7873 20.1094 35.3199 17.8181 35.3235 15.5126C35.3297 11.5039 33.7788 7.71355 30.9563 4.83988C28.1332 1.96565 24.3714 0.347686 20.3636 0.284193C16.2077 0.218522 12.3015 1.79929 9.36472 4.73596C6.53295 7.56766 4.96231 11.3008 4.9126 15.29C2.12162 17.3914 0.474267 20.6676 0.479681 24.167C0.482282 25.8045 0.850861 27.4323 1.54927 28.9043L0.109064 33.0955C-0.138507 33.816 0.0423371 34.5983 0.581071 35.1371C0.960196 35.5162 1.46005 35.7181 1.9741 35.7181C2.19038 35.7181 2.4092 35.6824 2.62259 35.6091L6.81385 34.1688C8.28584 34.8673 9.91365 35.2358 11.5512 35.2384H11.5687C15.1201 35.2383 18.4213 33.5485 20.515 30.6891C22.6938 30.6317 24.8495 30.1043 26.7983 29.1509L32.8835 31.2419C33.1314 31.3274 33.3918 31.3712 33.654 31.3715C34.2649 31.3715 34.8589 31.1316 35.3095 30.6809C35.9497 30.0407 36.1645 29.1111 35.8703 28.2548ZM11.5685 33.0956H11.5545C10.1051 33.0934 8.66574 32.7361 7.39231 32.0624C7.2628 31.9939 7.12062 31.9526 6.97456 31.9412C6.82849 31.9299 6.68164 31.9485 6.54308 31.9961L2.24537 33.4729L3.72214 29.1753C3.76974 29.0367 3.78843 28.8898 3.77703 28.7438C3.76564 28.5977 3.72442 28.4555 3.65591 28.326C2.98217 27.0525 2.62484 25.6132 2.62259 24.1637C2.61901 21.8322 3.52597 19.6224 5.11201 17.9676C5.63007 21.1258 7.13525 24.036 9.46836 26.3277C11.7842 28.6023 14.6953 30.0506 17.8363 30.5241C16.1778 32.1588 13.9421 33.0956 11.5685 33.0956ZM33.7942 29.1656C33.7332 29.2266 33.6609 29.2432 33.5796 29.2152L27.0653 26.9767C26.9268 26.9291 26.7799 26.9104 26.6339 26.9218C26.4878 26.9332 26.3456 26.9744 26.2162 27.043C24.3562 28.0269 22.2544 28.5488 20.1379 28.552H20.1176C13.0257 28.552 7.16774 22.791 7.05538 15.7008C6.99877 12.13 8.35707 8.77401 10.88 6.25112C13.4028 3.72824 16.7593 2.37044 20.3297 2.42669C27.4267 2.53926 33.1917 8.40803 33.1807 15.5092C33.1774 17.6258 32.6556 19.7276 31.6717 21.5875C31.6032 21.717 31.562 21.8592 31.5506 22.0052C31.5392 22.1513 31.5579 22.2981 31.6055 22.4367L33.8439 28.951C33.8718 29.0326 33.8551 29.1048 33.7942 29.1656Z"/>
-                            <path
-                                d="M26.5002 9.80957H13.7343C13.1426 9.80957 12.6629 10.2893 12.6629 10.881C12.6629 11.4727 13.1426 11.9524 13.7343 11.9524H26.5002C27.092 11.9524 27.5717 11.4727 27.5717 10.881C27.5717 10.2893 27.092 9.80957 26.5002 9.80957ZM26.5002 14.2161H13.7343C13.1426 14.2161 12.6629 14.6959 12.6629 15.2875C12.6629 15.8792 13.1426 16.359 13.7343 16.359H26.5002C27.092 16.359 27.5717 15.8792 27.5717 15.2875C27.5717 14.6959 27.092 14.2161 26.5002 14.2161ZM21.5862 18.6225H13.7342C13.1425 18.6225 12.6628 19.1023 12.6628 19.694C12.6628 20.2857 13.1426 20.7654 13.7342 20.7654H21.5862C22.1779 20.7654 22.6576 20.2856 22.6576 19.694C22.6576 19.1023 22.178 18.6225 21.5862 18.6225Z"/>
-                        </g>
-                    </svg>
-                    <div class="content">
-                        <h6>Contact Us</h6>
-                        <span>Don't hesitate to contact Travel Bliss.</span>
+            <!-- Contact Us Top Section - New Design -->
+            <div class="footer-contact-wrap" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 30px; padding-bottom: 35px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <!-- Contact Us -->
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                        <svg width="36" height="36" viewBox="0 0 36 36" fill="#3b82f6" xmlns="http://www.w3.org/2000/svg">
+                            <g>
+                                <path d="M35.8703 28.2548L33.7795 22.1697C34.7873 20.1094 35.3199 17.8181 35.3235 15.5126C35.3297 11.5039 33.7788 7.71355 30.9563 4.83988C28.1332 1.96565 24.3714 0.347686 20.3636 0.284193C16.2077 0.218522 12.3015 1.79929 9.36472 4.73596C6.53295 7.56766 4.96231 11.3008 4.9126 15.29C2.12162 17.3914 0.474267 20.6676 0.479681 24.167C0.482282 25.8045 0.850861 27.4323 1.54927 28.9043L0.109064 33.0955C-0.138507 33.816 0.0423371 34.5983 0.581071 35.1371C0.960196 35.5162 1.46005 35.7181 1.9741 35.7181C2.19038 35.7181 2.4092 35.6824 2.62259 35.6091L6.81385 34.1688C8.28584 34.8673 9.91365 35.2358 11.5512 35.2384H11.5687C15.1201 35.2383 18.4213 33.5485 20.515 30.6891C22.6938 30.6317 24.8495 30.1043 26.7983 29.1509L32.8835 31.2419C33.1314 31.3274 33.3918 31.3712 33.654 31.3715C34.2649 31.3715 34.8589 31.1316 35.3095 30.6809C35.9497 30.0407 36.1645 29.1111 35.8703 28.2548ZM11.5685 33.0956H11.5545C10.1051 33.0934 8.66574 32.7361 7.39231 32.0624C7.2628 31.9939 7.12062 31.9526 6.97456 31.9412C6.82849 31.9299 6.68164 31.9485 6.54308 31.9961L2.24537 33.4729L3.72214 29.1753C3.76974 29.0367 3.78843 28.8898 3.77703 28.7438C3.76564 28.5977 3.72442 28.4555 3.65591 28.326C2.98217 27.0525 2.62484 25.6132 2.62259 24.1637C2.61901 21.8322 3.52597 19.6224 5.11201 17.9676C5.63007 21.1258 7.13525 24.036 9.46836 26.3277C11.7842 28.6023 14.6953 30.0506 17.8363 30.5241C16.1778 32.1588 13.9421 33.0956 11.5685 33.0956ZM33.7942 29.1656C33.7332 29.2266 33.6609 29.2432 33.5796 29.2152L27.0653 26.9767C26.9268 26.9291 26.7799 26.9104 26.6339 26.9218C26.4878 26.9332 26.3456 26.9744 26.2162 27.043C24.3562 28.0269 22.2544 28.5488 20.1379 28.552H20.1176C13.0257 28.552 7.16774 22.791 7.05538 15.7008C6.99877 12.13 8.35707 8.77401 10.88 6.25112C13.4028 3.72824 16.7593 2.37044 20.3297 2.42669C27.4267 2.53926 33.1917 8.40803 33.1807 15.5092C33.1774 17.6258 32.6556 19.7276 31.6717 21.5875C31.6032 21.717 31.562 21.8592 31.5506 22.0052C31.5392 22.1513 31.5579 22.2981 31.6055 22.4367L33.8439 28.951C33.8718 29.0326 33.8551 29.1048 33.7942 29.1656Z"/>
+                                <path d="M26.5002 9.80957H13.7343C13.1426 9.80957 12.6629 10.2893 12.6629 10.881C12.6629 11.4727 13.1426 11.9524 13.7343 11.9524H26.5002C27.092 11.9524 27.5717 11.4727 27.5717 10.881C27.5717 10.2893 27.092 9.80957 26.5002 9.80957ZM26.5002 14.2161H13.7343C13.1426 14.2161 12.6629 14.6959 12.6629 15.2875C12.6629 15.8792 13.1426 16.359 13.7343 16.359H26.5002C27.092 16.359 27.5717 15.8792 27.5717 15.2875C27.5717 14.6959 27.092 14.2161 26.5002 14.2161ZM21.5862 18.6225H13.7342C13.1425 18.6225 12.6628 19.1023 12.6628 19.694C12.6628 20.2857 13.1426 20.7654 13.7342 20.7654H21.5862C22.1779 20.7654 22.6576 20.2856 22.6576 19.694C22.6576 19.1023 22.178 18.6225 21.5862 18.6225Z"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div>
+                        <h6 style="color: #3b82f6; font-size: 16px; font-weight: 600; margin: 0 0 5px 0;">Contact Us</h6>
+                        <span style="color: white; font-size: 13px;">Don't hesitate to contact Travel Bliss.</span>
                     </div>
                 </div>
-                <ul class="contact-area">
-                    <li class="single-contact">
-                        <div class="icon">
-                            <img src="assets/img/home1/icon/whatsapp-icon2.svg" alt="">
-                        </div>
-                        <div class="content">
-                            <span>WhatsApp</span>
-                            <a href="https://wa.me/998932244333">+998 93 224 4333</a>
-                        </div>
-                    </li>
-                    <li class="single-contact">
-                        <div class="icon">
-                            <img src="assets/img/home1/icon/mail-icon2.svg" alt="">
-                        </div>
-                        <div class="content">
-                            <span>Mail Us</span>
-                            <a href="mailto:travelblissoffice@gmail.com">travelblissoffice@gmail.com</a>
-                        </div>
-                    </li>
-                    <li class="single-contact">
-                        <div class="icon">
-                            <img src="assets/img/home1/icon/call-icon.svg" alt="">
-                        </div>
-                        <div class="content">
-                            <span>Call Us</span>
-                            <a href="tel:+998932244333">+998 93 224 4333</a>
-                        </div>
-                    </li>
-                </ul>
+                <!-- WhatsApp -->
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 45px; height: 45px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span style="color: white; font-size: 12px; display: block;">WhatsApp</span>
+                        <a href="https://wa.me/998932244333" style="color: white; font-size: 17px; font-weight: 700; text-decoration: none;">+998932244333</a>
+                    </div>
+                </div>
+                <!-- Mail Us -->
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 45px; height: 45px; background: #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
+                    <div>
+                        <span style="color: white; font-size: 12px; display: block;">Mail Us</span>
+                        <a href="mailto:info@travel-bliss.uz" style="color: white; font-size: 17px; font-weight: 700; text-decoration: none;">info@travel-bliss.uz</a>
+                    </div>
+                </div>
+                <!-- Call Us -->
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 45px; height: 45px; background: #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <span style="color: white; font-size: 12px; display: block;">Call Us</span>
+                        <a href="tel:+998932244333" style="color: white; font-size: 17px; font-weight: 700; text-decoration: none;">+998932244333</a>
+                    </div>
+                </div>
             </div>
-            <svg class="divider" width="1320" height="6" viewBox="0 0 1320 6" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M5 2.5L0 0.113249V5.88675L5 3.5V2.5ZM1315 3.5L1320 5.88675V0.113249L1315 2.5V3.5ZM4.5 3.5H1315.5V2.5H4.5V3.5Z"/>
-            </svg>
             <div class="footer-menu-wrap">
                 <div class="row gy-md-4 gy-5">
                     <div class="col-lg-3 col-md-4 col-sm-6">
@@ -978,7 +986,6 @@ a.primary-btn1 {
                                     <li><a href="#"><img src="assets/img/home1/china-flag.png" alt="">Chinese</a></li>
                                 </ul>
                             </div>
-                            <a href="#"><img src="assets/img/home1/icon/google-play.svg" alt=""></a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6 d-flex justify-content-md-end">
@@ -1138,49 +1145,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Mobile language selector
-    const languageBtnMobile = document.querySelector('.language-btn-mobile');
-    const languageDropdownMobile = document.querySelector('.language-dropdown-mobile');
-    const langOptionsMobile = document.querySelectorAll('.lang-option-mobile');
-    const currentLangMobileSpan = document.getElementById('currentLangMobile');
-
-    if (languageBtnMobile && languageDropdownMobile) {
-        languageBtnMobile.addEventListener('click', function(e) {
-            e.stopPropagation();
-            languageDropdownMobile.style.display = languageDropdownMobile.style.display === 'none' ? 'block' : 'none';
-        });
-
-        document.addEventListener('click', function() {
-            languageDropdownMobile.style.display = 'none';
-        });
-
-        langOptionsMobile.forEach(option => {
-            option.addEventListener('click', function(e) {
-                e.preventDefault();
-                const selectedLang = this.getAttribute('data-lang');
-                currentLangMobileSpan.textContent = selectedLang;
-                languageDropdownMobile.style.display = 'none';
-            });
-
-            option.addEventListener('mouseenter', function() {
-                this.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
-                this.style.color = 'white';
-            });
-
-            option.addEventListener('mouseleave', function() {
-                this.style.background = 'transparent';
-                this.style.color = '#1f2937';
-            });
-        });
-
-        languageBtnMobile.addEventListener('mouseenter', function() {
-            this.style.background = 'rgba(99, 102, 241, 0.1)';
-        });
-
-        languageBtnMobile.addEventListener('mouseleave', function() {
-            this.style.background = 'transparent';
-        });
-    }
 
     // ============================================
     // LOAD POPULAR TOURS FROM BACKEND API
@@ -2101,6 +2065,59 @@ document.addEventListener('DOMContentLoaded', async function() {
             swiper: bannerThumbSwiper,
         },
     });
+});
+
+</script>
+
+<!-- Mobile Language Functions -->
+<script>
+// Mobile Language Dropdown Toggle
+function toggleMobileLanguageDropdown(e) {
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    var dropdown = document.getElementById('languageDropdownMobile');
+    if (dropdown) {
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
+// Mobile Language Selection
+function selectLanguageMobile(code, name, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    var flagImg = document.getElementById('currentFlagMobile');
+    var langSpan = document.getElementById('currentLangMobile');
+    var dropdown = document.getElementById('languageDropdownMobile');
+
+    if (flagImg) {
+        flagImg.src = 'https://flagcdn.com/w40/' + code + '.png';
+        flagImg.alt = code.toUpperCase();
+    }
+    if (langSpan) {
+        langSpan.textContent = name;
+    }
+    if (dropdown) {
+        dropdown.style.display = 'none';
+    }
+
+    // Save selection
+    localStorage.setItem('selectedLanguage', code);
+    localStorage.setItem('selectedLanguageName', name);
+    return false;
+}
+
+// Close dropdown on outside click
+document.addEventListener('click', function(e) {
+    var dropdown = document.getElementById('languageDropdownMobile');
+    var btn = document.querySelector('.language-btn-mobile');
+    if (dropdown && btn && !btn.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.style.display = 'none';
+    }
 });
 </script>
 </body>
