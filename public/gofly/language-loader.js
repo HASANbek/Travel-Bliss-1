@@ -1,1 +1,193 @@
-(function(){const API_URL="/api/languages/public";let currentLanguage=null;let defaultLanguage="en";function getSavedLanguage(){return localStorage.getItem("site_language")||getCookie("site_language")}function saveLanguage(code,name,flag){localStorage.setItem("site_language",code.toLowerCase());localStorage.setItem("site_language_name",name);localStorage.setItem("site_language_flag",flag);setCookie("site_language",code.toLowerCase(),365)}function setCookie(name,value,days){var expires="";if(days){var date=new Date();date.setTime(date.getTime()+(days*24*60*60*1000));expires="; expires="+date.toUTCString()}document.cookie=name+"="+(value||"")+expires+"; path=/"}function getCookie(name){var nameEQ=name+"=";var ca=document.cookie.split(";");for(var i=0;i<ca.length;i++){var c=ca[i];while(c.charAt(0)==" ")c=c.substring(1,c.length);if(c.indexOf(nameEQ)==0)return c.substring(nameEQ.length,c.length)}return null}async function loadLanguages(){try{const response=await fetch(API_URL);const data=await response.json();if(data.success&&data.data){const languages=data.data.languages||[];defaultLanguage=data.data.defaultLanguage||"en";const savedLang=getSavedLanguage();const matchedLang=languages.find(l=>l.code.toLowerCase()===savedLang);const defaultLang=languages.find(l=>l.code.toLowerCase()===defaultLanguage)||languages[0];currentLanguage=matchedLang||defaultLang;if(currentLanguage&&!savedLang){saveLanguage(currentLanguage.code,currentLanguage.name,currentLanguage.flag)}updateDropdowns(languages,currentLanguage);updateCurrentLanguageDisplay(currentLanguage)}}catch(error){console.error("Error loading languages:",error)}}function updateCurrentLanguageDisplay(lang){if(!lang)return;var currentLangSpan=document.getElementById("currentLang");var currentFlagSpan=document.getElementById("currentFlag");if(currentLangSpan)currentLangSpan.textContent=lang.code.toUpperCase();if(currentFlagSpan){if(lang.flag&&lang.flag.startsWith("http")){currentFlagSpan.innerHTML="<img src=\""+lang.flag+"\" style=\"width:24px;height:16px;object-fit:cover;border-radius:2px;vertical-align:middle;\">"}else{currentFlagSpan.textContent=lang.flag||""}};var currentLangMobile=document.getElementById("currentLangMobile");var currentFlagMobile=document.getElementById("currentFlagMobile");if(currentLangMobile)currentLangMobile.textContent=lang.name;if(currentFlagMobile){if(lang.flag&&lang.flag.startsWith("http")){currentFlagMobile.innerHTML="<img src=\""+lang.flag+"\" style=\"width:28px;height:18px;object-fit:cover;border-radius:2px;vertical-align:middle;\">"}else{currentFlagMobile.textContent=lang.flag||""}}}function updateDropdowns(languages,selected){var desktopDropdown=document.querySelector(".language-dropdown");if(desktopDropdown){var html="";languages.forEach(function(lang){var isActive=selected&&lang.code===selected.code;var activeStyle=isActive?"background:#f3f4f6;font-weight:600;":"";html+="<a href=\"#\" class=\"lang-option\" data-code=\""+lang.code+"\" data-name=\""+lang.name+"\" data-flag=\""+(lang.flag||"")+"\" style=\"display:flex;align-items:center;gap:10px;padding:10px 14px;color:#1f2937;text-decoration:none;transition:all 0.2s;border-radius:6px;"+activeStyle+"\">";html+=(lang.flag&&lang.flag.startsWith("http"))?"<img src=\""+lang.flag+"\" style=\"width:28px;height:20px;object-fit:cover;border-radius:2px;\">": "<span style=\"font-size:22px;\">"+(lang.flag||"")+"</span>";html+="<span style=\"flex:1;\">"+lang.name+"</span>";html+="<span style=\"color:#6b7280;font-size:13px;\">"+lang.code.toUpperCase()+"</span>";if(isActive)html+="<span style=\"color:#10b981;\">✓</span>";html+="</a>"});desktopDropdown.innerHTML=html;desktopDropdown.querySelectorAll(".lang-option").forEach(function(opt){opt.addEventListener("click",function(e){e.preventDefault();var code=this.getAttribute("data-code");var name=this.getAttribute("data-name");var flag=this.getAttribute("data-flag");saveLanguage(code,name,flag);currentLanguage={code:code,name:name,flag:flag};updateCurrentLanguageDisplay(currentLanguage);updateDropdowns(languages,currentLanguage);desktopDropdown.style.display="none";window.dispatchEvent(new CustomEvent("languageChanged",{detail:{code,name,flag}}))})})}var mobileDropdown=document.querySelector(".language-dropdown-mobile");if(mobileDropdown){var html="";languages.forEach(function(lang,i){var isActive=selected&&lang.code===selected.code;var border=i<languages.length-1?"border-bottom:1px solid #f3f4f6;":"";var activeStyle=isActive?"background:#f3f4f6;font-weight:600;":"";html+="<a href=\"#\" class=\"lang-option-mobile\" data-code=\""+lang.code+"\" data-name=\""+lang.name+"\" data-flag=\""+(lang.flag||"")+"\" style=\"display:flex;align-items:center;gap:12px;padding:14px 16px;color:#1f2937;text-decoration:none;"+border+activeStyle+"\">";html+=(lang.flag&&lang.flag.startsWith("http"))?"<img src=\""+lang.flag+"\" style=\"width:28px;height:20px;object-fit:cover;border-radius:3px;\">":"<span style=\"font-size:24px;\">"+(lang.flag||"")+"</span>";html+="<span style=\"flex:1;\">"+lang.name+"</span>";if(isActive)html+="<span style=\"color:#10b981;font-size:18px;\">✓</span>";html+="</a>"});mobileDropdown.innerHTML=html;mobileDropdown.querySelectorAll(".lang-option-mobile").forEach(function(opt){opt.addEventListener("click",function(e){e.preventDefault();var code=this.getAttribute("data-code");var name=this.getAttribute("data-name");var flag=this.getAttribute("data-flag");saveLanguage(code,name,flag);currentLanguage={code:code,name:name,flag:flag};updateCurrentLanguageDisplay(currentLanguage);updateDropdowns(languages,currentLanguage);mobileDropdown.style.display="none";window.dispatchEvent(new CustomEvent("languageChanged",{detail:{code,name,flag}}))})})}}window.LanguageSwitcher={getCurrentLanguage:function(){return currentLanguage},getDefaultLanguage:function(){return defaultLanguage},reload:loadLanguages};if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",loadLanguages)}else{loadLanguages()}})();
+(function() {
+    const API_URL = "/api/languages/public";
+    let currentLanguage = null;
+    let defaultLanguage = "en";
+
+    function getSavedLanguage() {
+        return localStorage.getItem("site_language") || getCookie("site_language");
+    }
+
+    function saveLanguage(code, name, flag) {
+        localStorage.setItem("site_language", code.toLowerCase());
+        localStorage.setItem("site_language_name", name);
+        localStorage.setItem("site_language_flag", flag);
+        setCookie("site_language", code.toLowerCase(), 365);
+    }
+
+    function setCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(";");
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == " ") c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    async function loadLanguages() {
+        try {
+            const response = await fetch(API_URL);
+            const data = await response.json();
+            if (data.success && data.data) {
+                const languages = data.data.languages || [];
+                defaultLanguage = data.data.defaultLanguage || "en";
+                const savedLang = getSavedLanguage();
+                const matchedLang = languages.find(l => l.code.toLowerCase() === savedLang);
+                const defaultLang = languages.find(l => l.code.toLowerCase() === defaultLanguage) || languages[0];
+                currentLanguage = matchedLang || defaultLang;
+                if (currentLanguage && !savedLang) {
+                    saveLanguage(currentLanguage.code, currentLanguage.name, currentLanguage.flag);
+                }
+                updateDropdowns(languages, currentLanguage);
+                updateCurrentLanguageDisplay(currentLanguage);
+            }
+        } catch (error) {
+            console.error("Error loading languages:", error);
+        }
+    }
+
+    function updateCurrentLanguageDisplay(lang) {
+        if (!lang) return;
+
+        console.log("Updating language display:", lang);
+
+        // Desktop elements
+        var currentLangSpan = document.getElementById("currentLang");
+        var currentFlagSpan = document.getElementById("currentFlag");
+
+        if (currentLangSpan) {
+            currentLangSpan.textContent = lang.code.toUpperCase();
+        }
+
+        if (currentFlagSpan && lang.flag) {
+            if (lang.flag.startsWith("http")) {
+                // Agar currentFlagSpan IMG element bo'lsa, src ni o'zgartir
+                if (currentFlagSpan.tagName === 'IMG') {
+                    currentFlagSpan.src = lang.flag;
+                } else {
+                    currentFlagSpan.innerHTML = '<img src="' + lang.flag + '" style="width:24px;height:16px;object-fit:cover;border-radius:2px;border:1px solid rgba(0,0,0,0.1);">';
+                }
+            } else {
+                currentFlagSpan.textContent = lang.flag || "";
+            }
+        }
+
+        // Mobile elements
+        var currentLangMobile = document.getElementById("currentLangMobile");
+        var currentFlagMobile = document.getElementById("currentFlagMobile");
+
+        if (currentLangMobile) {
+            currentLangMobile.textContent = lang.name;
+        }
+
+        if (currentFlagMobile && lang.flag) {
+            if (lang.flag.startsWith("http")) {
+                // Agar currentFlagMobile IMG element bo'lsa, src ni o'zgartir
+                if (currentFlagMobile.tagName === 'IMG') {
+                    currentFlagMobile.src = lang.flag;
+                } else {
+                    currentFlagMobile.innerHTML = '<img src="' + lang.flag + '" style="width:28px;height:18px;object-fit:cover;border-radius:3px;border:1px solid rgba(0,0,0,0.1);">';
+                }
+            } else {
+                currentFlagMobile.textContent = lang.flag || "";
+            }
+        }
+    }
+
+    function updateDropdowns(languages, selected) {
+        var desktopDropdown = document.querySelector(".language-dropdown");
+
+        if (desktopDropdown) {
+            var html = "";
+            languages.forEach(function(lang) {
+                var isActive = selected && lang.code === selected.code;
+                var activeStyle = isActive ? "background:#f3f4f6;font-weight:600;" : "";
+                html += '<a href="#" class="lang-option" data-code="' + lang.code + '" data-name="' + lang.name + '" data-flag="' + (lang.flag || "") + '" style="display:flex;align-items:center;gap:10px;padding:10px 14px;color:#1f2937;text-decoration:none;transition:all 0.2s;border-radius:6px;' + activeStyle + '">';
+                html += (lang.flag && lang.flag.startsWith("http")) ? '<img src="' + lang.flag + '" style="width:28px;height:20px;object-fit:cover;border-radius:2px;">' : '<span style="font-size:22px;">' + (lang.flag || "") + '</span>';
+                html += '<span style="flex:1;">' + lang.name + '</span>';
+                html += '<span style="color:#6b7280;font-size:13px;">' + lang.code.toUpperCase() + '</span>';
+                if (isActive) html += '<span style="color:#10b981;">✓</span>';
+                html += '</a>';
+            });
+            desktopDropdown.innerHTML = html;
+
+            desktopDropdown.querySelectorAll(".lang-option").forEach(function(opt) {
+                opt.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var code = this.getAttribute("data-code");
+                    var name = this.getAttribute("data-name");
+                    var flag = this.getAttribute("data-flag");
+
+                    console.log("Language selected:", { code, name, flag });
+
+                    saveLanguage(code, name, flag);
+                    currentLanguage = { code: code, name: name, flag: flag };
+                    updateCurrentLanguageDisplay(currentLanguage);
+                    updateDropdowns(languages, currentLanguage);
+                    desktopDropdown.style.display = "none";
+                    window.dispatchEvent(new CustomEvent("languageChanged", { detail: { code, name, flag } }));
+                });
+            });
+        }
+
+        var mobileDropdown = document.querySelector(".language-dropdown-mobile");
+
+        if (mobileDropdown) {
+            var html = "";
+            languages.forEach(function(lang, i) {
+                var isActive = selected && lang.code === selected.code;
+                var border = i < languages.length - 1 ? "border-bottom:1px solid #f3f4f6;" : "";
+                var activeStyle = isActive ? "background:#f3f4f6;font-weight:600;" : "";
+                html += '<a href="#" class="lang-option-mobile" data-code="' + lang.code + '" data-name="' + lang.name + '" data-flag="' + (lang.flag || "") + '" style="display:flex;align-items:center;gap:12px;padding:14px 16px;color:#1f2937;text-decoration:none;' + border + activeStyle + '">';
+                html += (lang.flag && lang.flag.startsWith("http")) ? '<img src="' + lang.flag + '" style="width:28px;height:20px;object-fit:cover;border-radius:3px;">' : '<span style="font-size:24px;">' + (lang.flag || "") + '</span>';
+                html += '<span style="flex:1;">' + lang.name + '</span>';
+                if (isActive) html += '<span style="color:#10b981;font-size:18px;">✓</span>';
+                html += '</a>';
+            });
+            mobileDropdown.innerHTML = html;
+
+            mobileDropdown.querySelectorAll(".lang-option-mobile").forEach(function(opt) {
+                opt.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var code = this.getAttribute("data-code");
+                    var name = this.getAttribute("data-name");
+                    var flag = this.getAttribute("data-flag");
+
+                    console.log("Mobile language selected:", { code, name, flag });
+
+                    saveLanguage(code, name, flag);
+                    currentLanguage = { code: code, name: name, flag: flag };
+                    updateCurrentLanguageDisplay(currentLanguage);
+                    updateDropdowns(languages, currentLanguage);
+                    mobileDropdown.style.display = "none";
+                    window.dispatchEvent(new CustomEvent("languageChanged", { detail: { code, name, flag } }));
+                });
+            });
+        }
+    }
+
+    window.LanguageSwitcher = {
+        getCurrentLanguage: function() { return currentLanguage; },
+        getDefaultLanguage: function() { return defaultLanguage; },
+        reload: loadLanguages
+    };
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", loadLanguages);
+    } else {
+        loadLanguages();
+    }
+})();

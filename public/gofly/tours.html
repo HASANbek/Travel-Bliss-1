@@ -58,7 +58,11 @@
                 url('http://localhost:5000/uploads/registon-1764689562739-647287587.jpg');
     background-size: cover;
     background-position: center;
-    padding: 220px 0 180px;
+    padding: 240px 0 240px;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     color: white;
 }
@@ -542,10 +546,38 @@
                         <li><a href="about.html">About</a></li>
                         <li><a href="contact.html">Contact Us</a></li>
                     </ul>
-                    <div class="contact-area d-xl-none d-flex" style="gap: 15px; align-items: center; flex-direction: column; padding: 15px 0;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <i class="bi bi-telephone-fill" style="color: var(--primary-color);"></i>
-                            <a href="tel:998932244333" style="color: #1f2937; font-weight: 600; text-decoration: none;">+998932244333</a>
+                    <!-- Mobile Language Selector -->
+                    <div class="contact-area d-xl-none d-flex" style="padding: 20px 15px; border-top: 1px solid #e5e7eb; margin-top: 15px;">
+                        <div class="language-selector-mobile" style="position: relative; width: 100%;">
+                            <button class="language-btn-mobile" onclick="toggleMobileLanguageDropdown(event)" style="background: white; border: 1px solid #e5e7eb; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; color: #1f2937; padding: 12px 20px; border-radius: 10px; transition: all 0.3s; width: 100%;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                </svg>
+                                <img id="currentFlagMobile" src="https://flagcdn.com/w40/uz.png" alt="UZ" width="24" height="16" style="border-radius: 2px; border: 1px solid rgba(0,0,0,0.1);">
+                                <span id="currentLangMobile">O'zbekcha</span>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="language-dropdown-mobile" id="languageDropdownMobile" style="display: none; position: absolute; bottom: 100%; left: 0; right: 0; background: white; border-radius: 10px; box-shadow: 0 -4px 20px rgba(0,0,0,0.15); margin-bottom: 8px; z-index: 1000; overflow: hidden; max-height: 250px; overflow-y: auto;">
+                                <a href="javascript:void(0)" class="lang-option-mobile" onclick="selectLanguageMobile('uz', 'O\'zbekcha', event)" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; text-decoration: none; color: #1f2937; font-weight: 500; transition: background 0.2s; border-bottom: 1px solid #f3f4f6;">
+                                    <img src="https://flagcdn.com/w20/uz.png" style="width: 24px; height: 16px; object-fit: cover; border-radius: 2px;">O'zbekcha
+                                </a>
+                                <a href="javascript:void(0)" class="lang-option-mobile" onclick="selectLanguageMobile('gb', 'English', event)" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; text-decoration: none; color: #1f2937; font-weight: 500; transition: background 0.2s; border-bottom: 1px solid #f3f4f6;">
+                                    <img src="https://flagcdn.com/w20/gb.png" style="width: 24px; height: 16px; object-fit: cover; border-radius: 2px;">English
+                                </a>
+                                <a href="javascript:void(0)" class="lang-option-mobile" onclick="selectLanguageMobile('ru', 'Русский', event)" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; text-decoration: none; color: #1f2937; font-weight: 500; transition: background 0.2s; border-bottom: 1px solid #f3f4f6;">
+                                    <img src="https://flagcdn.com/w20/ru.png" style="width: 24px; height: 16px; object-fit: cover; border-radius: 2px;">Русский
+                                </a>
+                                <a href="javascript:void(0)" class="lang-option-mobile" onclick="selectLanguageMobile('cn', '中文', event)" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; text-decoration: none; color: #1f2937; font-weight: 500; transition: background 0.2s; border-bottom: 1px solid #f3f4f6;">
+                                    <img src="https://flagcdn.com/w20/cn.png" style="width: 24px; height: 16px; object-fit: cover; border-radius: 2px;">中文
+                                </a>
+                                <a href="javascript:void(0)" class="lang-option-mobile" onclick="selectLanguageMobile('de', 'Deutsch', event)" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; text-decoration: none; color: #1f2937; font-weight: 500; transition: background 0.2s;">
+                                    <img src="https://flagcdn.com/w20/de.png" style="width: 24px; height: 16px; object-fit: cover; border-radius: 2px;">Deutsch
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -601,9 +633,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="sidebar-button mobile-menu-btn d-xl-none">
-                    <i class="bi bi-list" style="font-size: 28px;"></i>
-                </div>
+            </div>
+            <!-- Mobile Menu Button (Hamburger) -->
+            <div class="sidebar-button mobile-menu-btn d-xl-none" style="background: rgba(255,255,255,0.9); border-radius: 8px; padding: 10px 12px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1H21M1 9H21M1 17H21" stroke="#1a1a2e" stroke-width="2" stroke-linecap="round"/>
+                </svg>
             </div>
         </div>
     </header>
@@ -952,7 +987,8 @@
 
     <!-- Scripts -->
     <script src="assets/js/jquery-3.7.1.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/swiper-bundle.min.js"></script>
     <script src="assets/js/custom.js"></script>
     <script src="settings-integration.js"></script>
@@ -1283,22 +1319,55 @@
         }
     });
 
-    function selectLanguage(code, name) {
-        const flagImg = document.getElementById('currentFlag');
-        const langSpan = document.getElementById('currentLang');
+    </script>
 
-        flagImg.src = `https://flagcdn.com/w20/${code}.png`;
-        langSpan.textContent = name.substring(0, 2).toUpperCase();
+    <!-- Mobile Language Functions -->
+    <script>
+    // Mobile Language Dropdown Toggle
+    function toggleMobileLanguageDropdown(e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        var dropdown = document.getElementById('languageDropdownMobile');
+        if (dropdown) {
+            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        }
+    }
 
-        document.getElementById('languageDropdown').style.display = 'none';
+    // Mobile Language Selection
+    function selectLanguageMobile(code, name, event) {
+        if (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        var flagImg = document.getElementById('currentFlagMobile');
+        var langSpan = document.getElementById('currentLangMobile');
+        var dropdown = document.getElementById('languageDropdownMobile');
+
+        if (flagImg) {
+            flagImg.src = 'https://flagcdn.com/w40/' + code + '.png';
+            flagImg.alt = code.toUpperCase();
+        }
+        if (langSpan) {
+            langSpan.textContent = name;
+        }
+        if (dropdown) {
+            dropdown.style.display = 'none';
+        }
+
+        // Save selection
+        localStorage.setItem('selectedLanguage', code);
+        localStorage.setItem('selectedLanguageName', name);
         return false;
     }
 
-    // Close dropdown when clicking outside
+    // Close dropdown on outside click
     document.addEventListener('click', function(e) {
-        const langSelector = document.querySelector('.language-selector');
-        const dropdown = document.getElementById('languageDropdown');
-        if (langSelector && dropdown && !langSelector.contains(e.target)) {
+        var dropdown = document.getElementById('languageDropdownMobile');
+        var btn = document.querySelector('.language-btn-mobile');
+        if (dropdown && btn && !btn.contains(e.target) && !dropdown.contains(e.target)) {
             dropdown.style.display = 'none';
         }
     });

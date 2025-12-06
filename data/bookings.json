@@ -42,5 +42,27 @@
     "updatedAt": "2025-11-21T08:54:15.801Z",
     "confirmedAt": "2025-11-21T08:54:15.801Z",
     "cancelledAt": null
+  },
+  {
+    "id": "BOOK-20251205-XDYX",
+    "tourId": "692546d4b6c20b42bcba89c0",
+    "tourName": "Khiva - Open Air Museum Full Day Tour",
+    "customerName": "Hasan",
+    "customerEmail": "hmuzaffarov02@gmail.com",
+    "customerPhone": "+998933514448",
+    "pickupLocation": "uzbekistan",
+    "date": "2025-12-11T00:00:00.000Z",
+    "guests": {
+      "adults": 2,
+      "children": 0
+    },
+    "totalPrice": 1100000,
+    "specialRequests": "wefwefwef\n\nCountry: uzbekistan",
+    "userId": null,
+    "status": "pending",
+    "createdAt": "2025-12-05T07:22:02.456Z",
+    "updatedAt": "2025-12-05T07:22:02.456Z",
+    "confirmedAt": null,
+    "cancelledAt": null
   }
 ]

@@ -6,6 +6,9 @@
     <title id="pageTitle">Tour Details - Travel Bliss</title>
     <link rel="icon" href="assets/img/fav-icon.svg" type="image/svg+xml">
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
     <!-- CSS Files -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -103,6 +106,40 @@
                 font-size: 24px !important;
                 display: inline-block !important;
             }
+        }
+
+        /* Tour Hero Section */
+        .tour-hero {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)),
+                        url('/uploads/registon-1764689562739-647287587.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 700px;
+            padding: 240px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .tour-hero h1 {
+            font-family: 'Playfair Display', 'Merriweather', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            margin-bottom: 15px;
+        }
+
+        .tour-hero h1 .amp {
+            font-style: italic;
+        }
+
+        .tour-hero p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.9);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         /* Photo Grid Gallery */
@@ -1909,50 +1946,13 @@
     </header>
     <!-- Header Section End -->
 
-    <!-- Photo Grid Gallery -->
-    <div class="photo-grid-container">
-        <div class="photo-grid" id="photoGrid">
-            <div class="photo-grid-item">
-                <img src="assets/img/home1/tour-package-img1.jpg" alt="Tour Photo 1" class="skeleton">
-                <div class="title-overlay">
-                    <h1 id="tourTitle">Loading...</h1>
-                    <div class="rating-badge">
-                        <span class="stars" id="tourStars">★★★★★</span>
-                        <span id="tourRating">0.0</span>
-                        <span class="review-count" id="reviewCount">(0 reviews)</span>
-                    </div>
-                </div>
-            </div>
-            <div class="photo-grid-item">
-                <img src="assets/img/home1/tour-package-img2.jpg" alt="Tour Photo 2" class="skeleton">
-            </div>
-            <div class="photo-grid-item">
-                <img src="assets/img/home1/tour-package-img3.jpg" alt="Tour Photo 3" class="skeleton">
-            </div>
-            <div class="photo-grid-item">
-                <img src="assets/img/home1/tour-package-img4.jpg" alt="Tour Photo 4" class="skeleton">
-            </div>
-            <div class="photo-grid-item">
-                <img src="assets/img/home1/tour-package-img5.jpg" alt="Tour Photo 5" class="skeleton">
-            </div>
-            <button class="show-all-photos">
-                <i class="bi bi-grid-3x3-gap"></i>
-                Show all photos
-            </button>
-        </div>
-    </div>
-
-    <!-- Download PDF Button -->
-    <div class="sticky-nav">
+    <!-- Tour Hero Section -->
+    <section class="tour-hero">
         <div class="container">
-            <div class="sticky-nav-content" style="justify-content: flex-end;">
-                <button class="btn-download-pdf" id="downloadPdfBtn">
-                    <i class="bi bi-file-earmark-pdf"></i>
-                    <span>Download tour details as PDF</span>
-                </button>
-            </div>
+            <h1 id="heroTourTitle">Loading...</h1>
+            <p id="heroTourSubtitle">Unforgettable journeys through Uzbekistan</p>
         </div>
-    </div>
+    </section>
 
     <!-- Main Content -->
     <div class="content-wrapper">
@@ -1988,6 +1988,14 @@
                             <i class="bi bi-star-fill"></i>
                             <span>Best Price Guarantee</span>
                         </div>
+                    </div>
+                </section>
+
+                <!-- Photos Section -->
+                <section class="tour-section" id="photos">
+                    <h2 class="section-title">Photo Gallery</h2>
+                    <div class="photo-gallery-grid" id="photoGallery">
+                        <!-- Photos will be loaded here -->
                     </div>
                 </section>
 
@@ -2075,14 +2083,6 @@
                     </div>
                 </section>
 
-                <!-- Photos Section -->
-                <section class="tour-section" id="photos">
-                    <h2 class="section-title">Photo Gallery</h2>
-                    <div class="photo-gallery-grid" id="photoGallery">
-                        <!-- Photos will be loaded here -->
-                    </div>
-                </section>
-
                 <!-- FAQ Section -->
                 <section class="tour-section" id="faq">
                     <h2 class="section-title">Frequently Asked Questions</h2>
@@ -2095,6 +2095,16 @@
 
         <!-- Sidebar Booking Card -->
         <aside class="booking-sidebar">
+            <!-- Download PDF Button -->
+            <div style="margin-bottom: 20px;">
+                <button onclick="downloadTourPDF()" style="width: 100%; padding: 14px 20px; background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                    Download tour details as PDF
+                </button>
+            </div>
+
             <!-- Price Header -->
             <div class="price-header">
                 <span class="price-from">from</span>
@@ -2694,6 +2704,16 @@
             if (pageTitle) pageTitle.textContent = (tour.title || 'Tour') + ' - Travel Bliss';
             if (tourTitle) tourTitle.textContent = tour.title || 'Loading...';
 
+            // Update hero section with tour name
+            const heroTourTitle = document.getElementById('heroTourTitle');
+            const heroTourSubtitle = document.getElementById('heroTourSubtitle');
+            if (heroTourTitle) heroTourTitle.textContent = tour.title || 'Tour Details';
+            if (heroTourSubtitle) {
+                const duration = tour.duration ? `${tour.duration} Days` : '';
+                const location = tour.startLocation || tour.location || 'Uzbekistan';
+                heroTourSubtitle.textContent = duration ? `${duration} • ${location}` : location;
+            }
+
             // Update rating
             const rating = tour.rating || 4.8;
             const reviewCount = tour.ratingsCount || tour.reviewCount || 127;
@@ -2750,10 +2770,9 @@
 
         function loadPhotoGallery(tour) {
             const gallery = document.getElementById('photoGallery');
-            const photoGrid = document.getElementById('photoGrid');
 
-            if (!gallery || !photoGrid) {
-                console.error('Gallery elements not found');
+            if (!gallery) {
+                console.error('Gallery element not found');
                 return;
             }
 
@@ -2763,23 +2782,16 @@
             if (tour.images && Array.isArray(tour.images) && tour.images.length > 0) {
                 // Map tour images to correct paths
                 images = tour.images.map(img => getImagePath(img));
-
-                // If less than 5 images, fill with related images
-                while (images.length < 5) {
-                    const tourNum = tour.id || '3';
-                    const imgNum = images.length + 1;
-                    images.push(`assets/img/home1/tour-package-img${tourNum}.jpg`);
-                }
             } else if (tour.imageCover) {
                 // Use cover image and add similar ones
                 const coverImg = getImagePath(tour.imageCover);
-                const tourNum = tour.id || '3';
                 images = [
                     coverImg,
-                    `assets/img/home1/tour-package-img${tourNum}.jpg`,
-                    `assets/img/home1/tour-package-img1.jpg`,
-                    `assets/img/home1/tour-package-img2.jpg`,
-                    `assets/img/home1/tour-package-img4.jpg`
+                    'assets/img/home1/tour-package-img1.jpg',
+                    'assets/img/home1/tour-package-img2.jpg',
+                    'assets/img/home1/tour-package-img3.jpg',
+                    'assets/img/home1/tour-package-img4.jpg',
+                    'assets/img/home1/tour-package-img5.jpg'
                 ];
             } else {
                 // Default fallback images
@@ -2788,36 +2800,19 @@
                     'assets/img/home1/tour-package-img2.jpg',
                     'assets/img/home1/tour-package-img3.jpg',
                     'assets/img/home1/tour-package-img4.jpg',
-                    'assets/img/home1/tour-package-img5.jpg'
+                    'assets/img/home1/tour-package-img5.jpg',
+                    'assets/img/home1/tour-package-img6.jpg'
                 ];
             }
 
             console.log('Gallery images:', images);
 
-            // Update photo grid - safely
-            const gridItems = photoGrid.querySelectorAll('.photo-grid-item img');
-            if (gridItems && gridItems.length > 0) {
-                images.slice(0, 5).forEach((img, index) => {
-                    if (gridItems[index]) {
-                        gridItems[index].src = img;
-                        gridItems[index].classList.remove('skeleton');
-                        gridItems[index].onerror = function() {
-                            // If image fails to load, use placeholder
-                            this.src = getPlaceholder(index);
-                            this.onerror = null; // Prevent infinite loop
-                        };
-                    }
-                });
-            }
-
             // Load photo gallery section
-            if (gallery) {
-                gallery.innerHTML = images.map((img, index) => `
-                    <div class="gallery-photo">
-                        <img src="${img}" alt="Tour Photo" onerror="this.src=getPlaceholder(${index}); this.onerror=null;">
-                    </div>
-                `).join('');
-            }
+            gallery.innerHTML = images.map((img, index) => `
+                <div class="gallery-photo">
+                    <img src="${img}" alt="Tour Photo" onerror="this.src='assets/img/home1/tour-package-img${index + 1}.jpg'; this.onerror=null;">
+                </div>
+            `).join('');
         }
 
         // Helper function to get correct image path
@@ -3488,6 +3483,21 @@
             }
         });
 
+        // Download Tour PDF (sidebar button)
+        async function downloadTourPDF() {
+            if (!currentTour) {
+                alert('Tour data not loaded yet. Please wait...');
+                return;
+            }
+
+            try {
+                await generatePDF(currentTour);
+            } catch (error) {
+                console.error('PDF generation error:', error);
+                alert('Error generating PDF. Please try again.');
+            }
+        }
+
         // PDF Download Functionality
         function initPDFDownload() {
             const pdfBtn = document.getElementById('downloadPdfBtn');
@@ -3577,21 +3587,20 @@
                 const logoUrl = '/assets/img/logo.png';
                 const logoImg = await loadImage(logoUrl);
                 if (logoImg) {
-                    // Add logo image on the left (optimal size - not stretched)
-                    pdf.addImage(logoImg, 'PNG', 15, 10, 30, 30);
+                    // Add logo image with correct proportions (width: 40, height: 25)
+                    pdf.addImage(logoImg, 'PNG', 15, 8, 40, 25);
                 } else {
                     throw new Error('Logo not found');
                 }
             } catch (error) {
-                // Fallback: Draw TB logo (optimal size)
-                // Blue circle background
+                // Fallback: Draw TB logo
                 pdf.setFillColor(99, 102, 241);
-                pdf.circle(30, 25, 15, 'F');
+                pdf.circle(28, 25, 12, 'F');
 
-                pdf.setFontSize(22);
+                pdf.setFontSize(16);
                 pdf.setFont('helvetica', 'bold');
                 pdf.setTextColor(255, 255, 255);
-                pdf.text('TB', 21, 29);
+                pdf.text('TB', 22, 28);
             }
 
             // Tour Title - Center

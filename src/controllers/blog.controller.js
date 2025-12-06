@@ -130,14 +130,19 @@ exports.updateBlog = asyncHandler(async (req, res) => {
 
   // Try to update in database
   if (mongoose.connection.readyState === 1) {
-    const blog = await Blog.findByIdAndUpdate(id, req.body, {
-      new: true,
-      runValidators: true
-    });
+    const blog = await Blog.findById(id);
 
     if (!blog) {
       throw new ApiError(404, 'Blog not found');
     }
+
+    // Update fields
+    Object.keys(req.body).forEach(key => {
+      blog[key] = req.body[key];
+    });
+
+    // Save to trigger pre-save hook for slug generation
+    await blog.save();
 
     res.status(200).json(new ApiResponse(200, blog, 'Blog updated successfully'));
   } else {

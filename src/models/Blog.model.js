@@ -117,12 +117,12 @@ const blogSchema = new mongoose.Schema({
   metaTitle: {
     type: String,
     trim: true,
-    maxlength: [70, 'Meta title cannot exceed 70 characters']
+    maxlength: [200, 'Meta title cannot exceed 200 characters']
   },
   metaDescription: {
     type: String,
     trim: true,
-    maxlength: [160, 'Meta description cannot exceed 160 characters']
+    maxlength: [500, 'Meta description cannot exceed 500 characters']
   },
   metaKeywords: {
     type: [String],
@@ -156,14 +156,25 @@ const blogSchema = new mongoose.Schema({
 });
 
 // Create slug from title before saving
-blogSchema.pre('save', function(next) {
-  if (this.isModified('title') && !this.slug) {
-    this.slug = this.title
+blogSchema.pre('save', async function(next) {
+  if (this.isModified('title')) {
+    let baseSlug = this.title
       .toLowerCase()
       .replace(/[^\w\s-]/g, '')
       .replace(/\s+/g, '-')
       .replace(/--+/g, '-')
       .trim();
+
+    // Check if slug exists and add random suffix if needed
+    let slug = baseSlug;
+    let counter = 1;
+    while (true) {
+      const existing = await this.constructor.findOne({ slug: slug, _id: { $ne: this._id } });
+      if (!existing) break;
+      slug = `${baseSlug}-${counter}`;
+      counter++;
+    }
+    this.slug = slug;
   }
 
   // Set published date when status changes to published

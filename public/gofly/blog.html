@@ -17,6 +17,7 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/menu-custom.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
     <title>Blog - Travel Bliss | Travel Stories & Tips</title>
     <link rel="icon" href="assets/img/fav-icon.svg" type="image/gif" sizes="20x20">
@@ -57,10 +58,10 @@
 /* Blog Hero Section */
 .blog-hero {
     background: url('/uploads/registon-1764689562739-647287587.jpg') center/cover no-repeat;
-    padding: 120px 0 80px;
+    padding: 240px 0 240px;
     position: relative;
     overflow: hidden;
-    min-height: 350px;
+    min-height: 700px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,24 +78,30 @@
 }
 
 .blog-hero h1 {
-    font-size: 3.5rem;
-    font-weight: 800;
+    font-family: 'Playfair Display', 'Merriweather', serif;
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: 1px;
     color: white;
-    margin-bottom: 20px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    margin-bottom: 15px;
     position: relative;
     z-index: 1;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.blog-hero h1 .amp {
     font-style: italic;
 }
 
 .blog-hero p {
-    font-size: 1.2rem;
-    color: rgba(255,255,255,0.95);
-    max-width: 600px;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.9);
+    max-width: 500px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    font-weight: 400;
 }
 
 /* Category Filter */
@@ -129,10 +136,393 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
+/* Blog Filter Section */
+.blog-filter-section {
+    background: white;
+    padding: 30px 0 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* Breadcrumb */
+.blog-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.blog-breadcrumb a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.blog-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.blog-breadcrumb span {
+    color: #6b7280;
+}
+
+.blog-breadcrumb .current {
+    color: #374151;
+    font-weight: 500;
+}
+
+/* Search Box */
+.blog-search-wrapper {
+    margin-bottom: 25px;
+}
+
+.blog-search-box {
+    display: flex;
+    max-width: 100%;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.blog-search-box:focus-within {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.blog-search-box input {
+    flex: 1;
+    padding: 14px 20px;
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    color: #374151;
+    outline: none;
+}
+
+.blog-search-box input::placeholder {
+    color: #9ca3af;
+}
+
+.blog-search-box button {
+    padding: 14px 20px;
+    background: #3b82f6;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.blog-search-box button:hover {
+    background: #2563eb;
+}
+
+/* Category Pills */
+.category-pills-wrapper {
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.category-pills-wrapper::-webkit-scrollbar {
+    height: 6px;
+}
+
+.category-pills-wrapper::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+
+.category-pills-wrapper::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.category-pills {
+    display: flex;
+    gap: 12px;
+    flex-wrap: nowrap;
+    min-width: max-content;
+}
+
+.category-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.category-pill i {
+    font-size: 16px;
+    color: #6b7280;
+}
+
+.category-pill:hover {
+    border-color: #3b82f6;
+    color: #3b82f6;
+}
+
+.category-pill:hover i {
+    color: #3b82f6;
+}
+
+.category-pill.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+}
+
+.category-pill.active i {
+    color: white;
+}
+
+.pill-count {
+    background: rgba(0,0,0,0.1);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.category-pill.active .pill-count {
+    background: rgba(255,255,255,0.2);
+}
+
+/* Sort Wrapper */
+.blog-sort-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.blog-sort-wrapper label {
+    font-size: 14px;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.blog-sort-wrapper select {
+    padding: 8px 32px 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #374151;
+    background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236b7280' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E") no-repeat right 12px center;
+    appearance: none;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.blog-sort-wrapper select:focus {
+    border-color: #3b82f6;
+}
+
 /* Blog Section */
 .blog-section {
-    padding: 80px 0;
+    padding: 50px 0 80px;
     background: #f8fafc;
+}
+
+/* Blog Layout with Sidebar */
+.blog-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 40px;
+}
+
+.blog-main {
+    min-width: 0;
+}
+
+/* Sidebar */
+.blog-sidebar {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+
+.sidebar-widget {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.widget-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f3f4f6;
+}
+
+/* Recent Posts */
+.recent-posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.recent-post-item {
+    display: flex;
+    gap: 12px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.recent-post-item:hover {
+    background: #f8fafc;
+}
+
+.recent-post-item img {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.recent-post-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.recent-post-info h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.recent-post-info .post-date {
+    font-size: 12px;
+    color: #9ca3af;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Popular Tours */
+.popular-tours-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.popular-tour-item {
+    display: flex;
+    gap: 12px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 12px;
+    background: #f8fafc;
+    transition: all 0.3s ease;
+}
+
+.popular-tour-item:hover {
+    background: #f1f5f9;
+    transform: translateX(4px);
+}
+
+.popular-tour-item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.popular-tour-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.popular-tour-info h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 4px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.popular-tour-info .tour-price {
+    font-size: 13px;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.popular-tour-info .tour-price span {
+    font-size: 11px;
+    font-weight: 400;
+    color: #9ca3af;
+}
+
+.view-all-tours {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 16px;
+    padding: 10px;
+    color: #3b82f6;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.view-all-tours:hover {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+/* Responsive Sidebar */
+@media (max-width: 1024px) {
+    .blog-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .blog-sidebar {
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .sidebar-widget {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 640px) {
+    .blog-sidebar {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Featured Post */
@@ -398,72 +788,6 @@
     box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
 }
 
-/* Newsletter Section */
-.newsletter-section {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    padding: 80px 0;
-}
-
-.newsletter-content {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.newsletter-content h2 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: white;
-    margin-bottom: 15px;
-}
-
-.newsletter-content p {
-    color: #94a3b8;
-    margin-bottom: 30px;
-}
-
-.newsletter-form {
-    display: flex;
-    gap: 15px;
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.newsletter-form input {
-    flex: 1;
-    padding: 16px 24px;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    background: white;
-}
-
-.newsletter-form button {
-    padding: 16px 32px;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.newsletter-form button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
-}
-
-@media (max-width: 576px) {
-    .newsletter-form {
-        flex-direction: column;
-    }
-
-    .newsletter-content h2 {
-        font-size: 1.8rem;
-    }
-}
-
 /* Loading & Empty States */
 .loading-spinner {
     display: flex;
@@ -618,14 +942,75 @@
 <!-- Blog Hero -->
 <section class="blog-hero text-center">
     <div class="container">
-        <h1>Travel Stories & Tips</h1>
-        <p>Discover travel inspiration, destination guides, and insider tips from our travel experts</p>
-        <div class="category-filter" id="categoryFilter">
-            <button class="category-btn active" data-category="all">All Posts</button>
-            <button class="category-btn" data-category="Travel Tips">Travel Tips</button>
-            <button class="category-btn" data-category="Destinations">Destinations</button>
-            <button class="category-btn" data-category="Culture">Culture</button>
-            <button class="category-btn" data-category="Food">Food & Cuisine</button>
+        <h1>Travel Insights <span class="amp">&</span> Tips</h1>
+        <p>Expert travel advice and destination guides</p>
+    </div>
+</section>
+
+<!-- Search & Filter Section -->
+<section class="blog-filter-section">
+    <div class="container">
+        <!-- Breadcrumb -->
+        <nav class="blog-breadcrumb">
+            <a href="travel-agency-03.html">Home</a>
+            <span>/</span>
+            <span class="current">Blog</span>
+        </nav>
+
+        <!-- Search Bar -->
+        <div class="blog-search-wrapper">
+            <div class="blog-search-box">
+                <input type="text" id="blogSearchInput" placeholder="Search articles..." onkeyup="handleSearch(event)">
+                <button type="button" onclick="performSearch()">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Category Pills with counts -->
+        <div class="category-pills-wrapper">
+            <div class="category-pills" id="categoryPills">
+                <button class="category-pill active" data-category="all">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3z"/></svg>
+                    <span>All Articles</span>
+                    <span class="pill-count" id="countAll">0</span>
+                </button>
+                <button class="category-pill" data-category="adventure-tours">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/><path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z"/></svg>
+                    <span>Adventure Tours</span>
+                    <span class="pill-count" id="countAdventure">0</span>
+                </button>
+                <button class="category-pill" data-category="cultural-tours">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v1H1V2zm0 2h13v9a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4zm3.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/></svg>
+                    <span>Cultural Tours</span>
+                    <span class="pill-count" id="countCultural">0</span>
+                </button>
+                <button class="category-pill" data-category="destination-guides">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103zM10 1.91l-4-.8v12.98l4 .8V1.91zm1 12.98 4-.8V1.11l-4 .8v12.98zm-6-.8V1.11l-4 .8v12.98l4-.8z"/></svg>
+                    <span>Destination Guides</span>
+                    <span class="pill-count" id="countDestination">0</span>
+                </button>
+                <button class="category-pill" data-category="travel-tips">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z"/></svg>
+                    <span>Travel Tips</span>
+                    <span class="pill-count" id="countTips">0</span>
+                </button>
+                <button class="category-pill" data-category="beach-holidays">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0a.5.5 0 0 1 .5.5v.514C12.625 1.238 16 4.22 16 8c0 0 0 .5-.5.5-.149 0-.352-.145-.352-.145-.172-.178-.5-.7-.5-.7-.235-.447-.5-1-.5-1-.195-.533-.5-1.155-.5-1.155C13.648 4.22 12.625 3.5 12.5 3.5c-.149 0-.352.145-.352.145C10 5.033 8 8 8 8s-2-2.967-4.148-4.355C3.705 3.645 3.5 3.5 3.5 3.5c-.125 0-1.148.72-1.148 2S1.805 7 1.5 7.5c0 0-.265.553-.5 1 0 0-.305.622-.5 1.155 0 0-.328.553-.5.7 0 0-.203.145-.5.145C-.5 8.5 0 8 0 8c0-3.78 3.375-6.762 7.5-6.986V.5A.5.5 0 0 1 8 0z"/></svg>
+                    <span>Beach Holidays</span>
+                    <span class="pill-count" id="countBeach">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Sort Dropdown -->
+        <div class="blog-sort-wrapper">
+            <label>Sort by:</label>
+            <select id="blogSortSelect" onchange="handleSort()">
+                <option value="latest">Latest</option>
+                <option value="popular">Most Popular</option>
+                <option value="oldest">Oldest</option>
+            </select>
         </div>
     </div>
 </section>
@@ -633,55 +1018,52 @@
 <!-- Blog Section -->
 <section class="blog-section">
     <div class="container">
-        <!-- Featured Post -->
-        <div id="featuredPost" class="featured-post" style="display: none;">
-            <img id="featuredImage" src="" alt="">
-            <div class="featured-overlay">
-                <span class="featured-badge">Featured</span>
-                <h2 id="featuredTitle"></h2>
-                <p id="featuredExcerpt"></p>
-                <div class="featured-meta">
-                    <span><i class="bi bi-person"></i> <span id="featuredAuthor"></span></span>
-                    <span><i class="bi bi-calendar3"></i> <span id="featuredDate"></span></span>
-                    <span><i class="bi bi-clock"></i> <span id="featuredReadTime">5 min read</span></span>
+        <div class="blog-layout">
+            <!-- Main Content -->
+            <div class="blog-main">
+
+                <!-- Loading State -->
+                <div id="loadingState" class="loading-spinner">
+                    <div class="spinner"></div>
+                </div>
+
+                <!-- Empty State -->
+                <div id="emptyState" class="empty-state" style="display: none;">
+                    <i class="bi bi-journal-x"></i>
+                    <h3>No blog posts found</h3>
+                    <p>Check back later for new travel stories and tips</p>
+                </div>
+
+                <!-- Blog Grid -->
+                <div id="blogGrid" class="blog-grid">
+                    <!-- Blog cards will be loaded here -->
+                </div>
+
+                <!-- Pagination -->
+                <div id="paginationArea" class="pagination-area" style="display: none;">
+                    <!-- Pagination buttons will be added here -->
                 </div>
             </div>
-        </div>
 
-        <!-- Loading State -->
-        <div id="loadingState" class="loading-spinner">
-            <div class="spinner"></div>
-        </div>
+            <!-- Sidebar -->
+            <aside class="blog-sidebar">
+                <!-- Recent Posts -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Recent Posts</h3>
+                    <div id="recentPostsList" class="recent-posts-list">
+                        <!-- Recent posts will be loaded here -->
+                    </div>
+                </div>
 
-        <!-- Empty State -->
-        <div id="emptyState" class="empty-state" style="display: none;">
-            <i class="bi bi-journal-x"></i>
-            <h3>No blog posts found</h3>
-            <p>Check back later for new travel stories and tips</p>
-        </div>
-
-        <!-- Blog Grid -->
-        <div id="blogGrid" class="blog-grid">
-            <!-- Blog cards will be loaded here -->
-        </div>
-
-        <!-- Pagination -->
-        <div id="paginationArea" class="pagination-area" style="display: none;">
-            <!-- Pagination buttons will be added here -->
-        </div>
-    </div>
-</section>
-
-<!-- Newsletter Section -->
-<section class="newsletter-section">
-    <div class="container">
-        <div class="newsletter-content">
-            <h2>Stay Updated</h2>
-            <p>Subscribe to our newsletter for the latest travel tips, destination guides, and exclusive offers</p>
-            <form class="newsletter-form" onsubmit="return subscribeNewsletter(event)">
-                <input type="email" placeholder="Enter your email" required>
-                <button type="submit">Subscribe</button>
-            </form>
+                <!-- Popular Tours -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Popular Tours</h3>
+                    <div id="popularToursList" class="popular-tours-list">
+                        <!-- Popular tours will be loaded here -->
+                    </div>
+                    <a href="package.html" class="view-all-tours">All tours <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </aside>
         </div>
     </div>
 </section>
@@ -760,17 +1142,19 @@
                     <h6 style="color: white; font-weight: 600; margin-bottom: 10px;">Travel Bliss Uzbekistan</h6>
                     <p style="color: #94a3b8; margin-bottom: 25px; line-height: 1.7; font-size: 14px;">Rudaki street 172A, Samarkand, Uzbekistan</p>
                     <div class="footer-social" style="display: flex; gap: 10px; margin-bottom: 25px;">
-                        <a href="#" style="width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; transition: all 0.3s;"><i class="bi bi-facebook"></i></a>
-                        <a href="#" style="width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; transition: all 0.3s;"><i class="bi bi-instagram"></i></a>
-                        <a href="#" style="width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; transition: all 0.3s;"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#" style="width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; transition: all 0.3s;"><i class="bi bi-youtube"></i></a>
+                        <a href="#" style="width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; transition: all 0.3s;">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="#" style="width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; transition: all 0.3s;">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="#" style="width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; transition: all 0.3s;">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="#" style="width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; transition: all 0.3s;">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        </a>
                     </div>
-                    <!-- Language Button -->
-                    <button class="footer-lang-btn" onclick="toggleDesktopLanguage(event)" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 10px 20px; border-radius: 8px; color: white; display: inline-flex; align-items: center; gap: 10px; cursor: pointer; transition: all 0.3s; font-size: 14px;">
-                        <i class="bi bi-globe"></i>
-                        <span>Language</span>
-                        <i class="bi bi-chevron-down" style="font-size: 10px;"></i>
-                    </button>
                 </div>
 
                 <!-- Top Destination -->
@@ -854,11 +1238,14 @@
 let allBlogs = [];
 let currentPage = 1;
 let currentCategory = 'all';
-const blogsPerPage = 6;
+let currentSort = 'latest';
+let searchQuery = '';
+const blogsPerPage = 12;
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
     loadBlogs();
+    setupCategoryPills();
     setupCategoryFilter();
     setupMobileMenu();
 });
@@ -866,14 +1253,17 @@ document.addEventListener('DOMContentLoaded', function() {
 // Load blogs from API
 async function loadBlogs() {
     try {
-        const response = await fetch('/api/blogs');
+        const response = await fetch('/api/blogs?limit=1000');
         const data = await response.json();
 
         document.getElementById('loadingState').style.display = 'none';
 
         if (data.success && data.data.blogs && data.data.blogs.length > 0) {
             allBlogs = data.data.blogs;
+            updateCategoryCounts();
             renderBlogs();
+            loadRecentPosts();
+            loadPopularTours();
         } else {
             document.getElementById('emptyState').style.display = 'block';
         }
@@ -884,40 +1274,150 @@ async function loadBlogs() {
     }
 }
 
+// Update category counts
+function updateCategoryCounts() {
+    const counts = {
+        all: allBlogs.length,
+        'adventure-tours': 0,
+        'cultural-tours': 0,
+        'destination-guides': 0,
+        'travel-tips': 0,
+        'beach-holidays': 0
+    };
+
+    allBlogs.forEach(blog => {
+        if (counts.hasOwnProperty(blog.category)) {
+            counts[blog.category]++;
+        }
+    });
+
+    document.getElementById('countAll').textContent = counts.all;
+    document.getElementById('countAdventure').textContent = counts['adventure-tours'];
+    document.getElementById('countCultural').textContent = counts['cultural-tours'];
+    document.getElementById('countDestination').textContent = counts['destination-guides'];
+    document.getElementById('countTips').textContent = counts['travel-tips'];
+    document.getElementById('countBeach').textContent = counts['beach-holidays'];
+}
+
+// Load Recent Posts for sidebar
+function loadRecentPosts() {
+    const recentPosts = allBlogs.slice(0, 6);
+    const container = document.getElementById('recentPostsList');
+    const defaultImg = 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=200';
+
+    container.innerHTML = recentPosts.map(post => `
+        <div class="recent-post-item" onclick="window.location.href='blog-details.html?id=${post._id || post.slug}'">
+            <img src="${post.featuredImage || defaultImg}" alt="${post.title}" onerror="this.src='${defaultImg}'">
+            <div class="recent-post-info">
+                <h4>${post.title}</h4>
+                <div class="post-date">
+                    <i class="bi bi-calendar3"></i>
+                    ${formatDate(post.publishedAt || post.createdAt)}
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Load Popular Tours for sidebar
+async function loadPopularTours() {
+    try {
+        const response = await fetch('/api/tours?limit=5&sort=-rating');
+        const data = await response.json();
+
+        if (data.success && data.data && data.data.tours) {
+            const tours = data.data.tours.slice(0, 5);
+            const container = document.getElementById('popularToursList');
+            const defaultImg = 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=200';
+
+            container.innerHTML = tours.map(tour => `
+                <div class="popular-tour-item" onclick="window.location.href='package-details.html?id=${tour._id || tour.slug}'">
+                    <img src="${tour.mainImage || tour.images?.[0] || defaultImg}" alt="${tour.title}" onerror="this.src='${defaultImg}'">
+                    <div class="popular-tour-info">
+                        <h4>${tour.title}</h4>
+                        <div class="tour-price">
+                            <span>from</span> $${tour.price || tour.priceAdult || 0}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    } catch (error) {
+        console.error('Error loading popular tours:', error);
+    }
+}
+
+// Setup category pills
+function setupCategoryPills() {
+    const pills = document.querySelectorAll('.category-pill');
+    pills.forEach(pill => {
+        pill.addEventListener('click', function() {
+            pills.forEach(p => p.classList.remove('active'));
+            this.classList.add('active');
+            currentCategory = this.dataset.category;
+            currentPage = 1;
+            renderBlogs();
+        });
+    });
+}
+
+// Search functions
+function handleSearch(event) {
+    if (event.key === 'Enter') {
+        performSearch();
+    }
+}
+
+function performSearch() {
+    searchQuery = document.getElementById('blogSearchInput').value.trim().toLowerCase();
+    currentPage = 1;
+    renderBlogs();
+}
+
+// Sort function
+function handleSort() {
+    currentSort = document.getElementById('blogSortSelect').value;
+    renderBlogs();
+}
+
 // Render blogs
 function renderBlogs() {
     const blogGrid = document.getElementById('blogGrid');
-    const featuredPost = document.getElementById('featuredPost');
 
     // Filter by category
     let filteredBlogs = currentCategory === 'all'
-        ? allBlogs
+        ? [...allBlogs]
         : allBlogs.filter(blog => blog.category === currentCategory);
+
+    // Filter by search query
+    if (searchQuery) {
+        filteredBlogs = filteredBlogs.filter(blog =>
+            blog.title.toLowerCase().includes(searchQuery) ||
+            (blog.excerpt && blog.excerpt.toLowerCase().includes(searchQuery)) ||
+            (blog.content && blog.content.toLowerCase().includes(searchQuery))
+        );
+    }
+
+    // Sort blogs
+    filteredBlogs.sort((a, b) => {
+        if (currentSort === 'latest') {
+            return new Date(b.publishedAt || b.createdAt) - new Date(a.publishedAt || a.createdAt);
+        } else if (currentSort === 'oldest') {
+            return new Date(a.publishedAt || a.createdAt) - new Date(b.publishedAt || b.createdAt);
+        } else if (currentSort === 'popular') {
+            return (b.views || 0) - (a.views || 0);
+        }
+        return 0;
+    });
 
     if (filteredBlogs.length === 0) {
         blogGrid.innerHTML = '';
-        featuredPost.style.display = 'none';
         document.getElementById('emptyState').style.display = 'block';
         document.getElementById('paginationArea').style.display = 'none';
         return;
     }
 
     document.getElementById('emptyState').style.display = 'none';
-
-    // Show featured post (first blog)
-    if (currentPage === 1 && filteredBlogs.length > 0) {
-        const featured = filteredBlogs[0];
-        featuredPost.style.display = 'block';
-        featuredPost.onclick = () => window.location.href = `blog-details.html?id=${featured._id || featured.slug}`;
-        document.getElementById('featuredImage').src = featured.image || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200';
-        document.getElementById('featuredTitle').textContent = featured.title;
-        document.getElementById('featuredExcerpt').textContent = featured.excerpt || '';
-        document.getElementById('featuredAuthor').textContent = (typeof featured.author === 'object' ? featured.author.name : featured.author) || 'Admin';
-        document.getElementById('featuredDate').textContent = formatDate(featured.createdAt || featured.publishedAt);
-        filteredBlogs = filteredBlogs.slice(1); // Remove featured from grid
-    } else {
-        featuredPost.style.display = 'none';
-    }
 
     // Pagination
     const startIndex = (currentPage - 1) * blogsPerPage;
@@ -933,7 +1433,7 @@ function renderBlogs() {
 // Create blog card HTML
 function createBlogCard(blog) {
     const defaultImg = 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800';
-    const image = blog.image || defaultImg;
+    const image = blog.featuredImage || defaultImg;
     const category = blog.categoryDisplay || blog.category || 'Travel';
     const date = formatDate(blog.createdAt || blog.publishedAt);
     const excerpt = blog.excerpt || (blog.content ? blog.content.substring(0, 150) + '...' : '');
@@ -948,17 +1448,13 @@ function createBlogCard(blog) {
             <div class="blog-card-content">
                 <h3>${blog.title}</h3>
                 <p>${excerpt}</p>
-                <div class="blog-meta">
-                    <div class="blog-author">
-                        <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(authorName)}&background=667eea&color=fff" alt="${authorName}">
-                        <div class="blog-author-info">
-                            <span>${authorName}</span>
-                            <small>${date}</small>
-                        </div>
+                <div class="blog-meta" style="justify-content: flex-start; gap: 20px;">
+                    <div class="blog-date" style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #64748b;">
+                        ${date}
                     </div>
-                    <div class="blog-read-time">
-                        <i class="bi bi-clock"></i>
-                        ${blog.readingTime || 5} min
+                    <div class="blog-read-time" style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #64748b;">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        ${blog.readingTime || 5} min read
                     </div>
                 </div>
             </div>

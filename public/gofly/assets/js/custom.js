@@ -9,7 +9,14 @@
 
   if (sidebarButton) {
     sidebarButton.addEventListener("click", () => {
-      document.querySelector(".main-menu").classList.toggle("show-menu");
+      var mainMenu = document.querySelector(".main-menu");
+      mainMenu.classList.toggle("show-menu");
+
+      if (mainMenu.classList.contains("show-menu")) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "";
+      }
     });
   }
 
@@ -19,12 +26,24 @@
     $(".sidebar-button").removeClass("active");
   });
 
-  // Close menu on outside click
-  $(document).on("click touchstart", function (e) {
+  // Close menu on outside click - faqat click ishlatamiz, touchstart emas
+  $(document).on("click", function (e) {
     if ($(".main-menu").hasClass("show-menu")) {
-      if (!$(e.target).closest(".main-menu").length && !$(e.target).closest(".sidebar-button").length) {
+      var isInsideMenu = $(e.target).closest(".main-menu").length > 0;
+      var isSidebarButton = $(e.target).closest(".sidebar-button").length > 0;
+      var isMenuCloseBtn = $(e.target).closest(".menu-close-btn").length > 0;
+
+      // Agar menu ichida (close button dan tashqari) yoki sidebar button bosilsa - yopilmasin
+      if (isInsideMenu && !isMenuCloseBtn) {
+        // Menu ichida bosildi, hech narsa qilma
+        return;
+      }
+
+      // Close button yoki tashqarida bosilganda yopilsin
+      if (isMenuCloseBtn || (!isInsideMenu && !isSidebarButton)) {
         $(".main-menu").removeClass("show-menu");
         $(".sidebar-button").removeClass("active");
+        $("body").css("overflow", "");
       }
     }
   });
@@ -119,10 +138,12 @@
   });
 
   //Counter up
-  $(".counter").counterUp({
-    delay: 10,
-    time: 1000,
-  });
+  if (typeof $.fn.counterUp !== 'undefined') {
+    $(".counter").counterUp({
+      delay: 10,
+      time: 1000,
+    });
+  }
 
   // Home1 Offer Slider
   var swiper = new Swiper(".home1-offer-slider", {
@@ -1394,16 +1415,18 @@
 
   //wow js
   jQuery(window).on("load", function () {
-    new WOW().init();
-    window.wow = new WOW({
-      boxClass: "wow",
-      animateClass: "animated",
-      offset: 0,
-      mobile: true,
-      live: true,
-      offset: 80,
-    });
-    window.wow.init();
+    if (typeof WOW !== 'undefined') {
+      new WOW().init();
+      window.wow = new WOW({
+        boxClass: "wow",
+        animateClass: "animated",
+        offset: 0,
+        mobile: true,
+        live: true,
+        offset: 80,
+      });
+      window.wow.init();
+    }
   });
 
   // niceSelect
@@ -1498,6 +1521,7 @@
 
   // calender
   $(function () {
+    if (typeof moment === 'undefined') return;
     const today = moment();
     const checkOutDefault = moment().add(3, "days");
     const tomorrow = moment().add(1, "days");

@@ -19,10 +19,12 @@
     <!-- Slick slider CSS -->
     <link rel="stylesheet" href="assets/css/slick.css">
     <link rel="stylesheet" href="assets/css/slick-theme.css">
-    <!-- BoxIcon CSS -->
-    <link href="assets/css/boxicons.min.css" rel="stylesheet">
+    <!-- BoxIcon CSS (CDN) -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <!-- Style CSS -->
     <link rel="stylesheet" href="assets/css/style.css?v=2">
+    <!-- Menu Custom CSS -->
+    <link rel="stylesheet" href="assets/css/menu-custom.css">
     <link rel="icon" href="assets/img/fav-icon.svg" type="image/gif" sizes="20x20">
     <!-- Leaflet CSS for Maps -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -68,6 +70,50 @@ a.primary-btn1 {
     color: #065F46 !important;
 }
 
+/* Header styles handled by menu-custom.css */
+
+/* Desktop Header Phone & Language */
+.header-phone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.header-phone svg {
+    width: 32px;
+    height: 32px;
+    padding: 8px;
+    background: #0066ff;
+    fill: white;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+.header-phone a {
+    color: #1f2937;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.language-selector .language-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.language-selector .language-btn img {
+    width: 24px;
+    height: 16px;
+    border-radius: 2px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 /* Custom Header Styling - Nuratau Style */
 .top-info-bar {
     background: #0d8b7a;
@@ -104,197 +150,6 @@ a.primary-btn1 {
 .top-info-right a {
     color: white;
     font-size: 18px;
-}
-
-.header-area.style-2 {
-    background: linear-gradient(to right, #f0f9ff 0%, #e0f2fe 100%);
-    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-    padding: 6px 0;
-}
-
-.header-area.style-2 .header-logo img {
-    width: auto !important;
-    height: 45px !important;
-    max-width: 200px !important;
-    transform: none !important;
-    margin: 6px 0;
-    object-fit: contain !important;
-    image-rendering: -webkit-optimize-contrast !important;
-    image-rendering: crisp-edges !important;
-    mix-blend-mode: multiply !important;
-    background: transparent !important;
-}
-
-.header-area.style-2 .menu-list {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-}
-
-.header-area.style-2 .menu-list {
-    display: flex !important;
-    gap: 35px !important;
-    align-items: center !important;
-    list-style: none !important;
-}
-
-.header-area.style-2 .menu-list > li {
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-.header-area.style-2 .menu-list > li > a {
-    font-size: 16px;
-    font-weight: 600;
-    color: #1f2937 !important;
-    padding: 8px 18px !important;
-    text-decoration: none;
-    transition: all 0.3s;
-    letter-spacing: 0.3px;
-    background: transparent !important;
-    border-radius: 8px !important;
-}
-
-.header-area.style-2 .menu-list > li.active > a {
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
-    color: white !important;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.header-area.style-2 .menu-list > li > a:hover {
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
-    color: white !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-}
-
-/* Mobile menu contact area should be visible only on mobile */
-@media (max-width: 1199px) {
-    .header-area.style-2 .main-menu .contact-area {
-        display: flex !important;
-    }
-
-    /* Modern mobile menu styling */
-    .main-menu {
-        background: white;
-        padding: 20px;
-    }
-
-    .main-menu .menu-list {
-        flex-direction: column !important;
-        gap: 0 !important;
-        padding: 20px 0 !important;
-    }
-
-    .main-menu .menu-list > li {
-        width: 100% !important;
-        border-bottom: 1px solid #f3f4f6;
-    }
-
-    .main-menu .menu-list > li:last-child {
-        border-bottom: none;
-    }
-
-    .main-menu .menu-list > li > a {
-        display: block !important;
-        width: 100% !important;
-        padding: 16px 20px !important;
-        font-size: 16px !important;
-        font-weight: 600 !important;
-        color: #1f2937 !important;
-        background: transparent !important;
-        border-radius: 0 !important;
-        text-align: left !important;
-        position: relative;
-        transition: all 0.3s ease;
-    }
-
-    .main-menu .menu-list > li > a:hover,
-    .main-menu .menu-list > li.active > a {
-        background: linear-gradient(90deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%) !important;
-        color: #6366f1 !important;
-        padding-left: 30px !important;
-        transform: none !important;
-        box-shadow: none !important;
-    }
-
-    .main-menu .menu-list > li > a:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 0;
-        height: 100%;
-        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-        transition: width 0.3s ease;
-    }
-
-    .main-menu .menu-list > li > a:hover:before,
-    .main-menu .menu-list > li.active > a:before {
-        width: 4px;
-    }
-
-    /* Contact area in mobile */
-    .main-menu .contact-area {
-        border-top: 2px solid #f3f4f6;
-        border-bottom: 2px solid #f3f4f6;
-        padding: 20px 0 !important;
-        margin: 10px 0 !important;
-        background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-        border-radius: 12px;
-    }
-
-    .main-menu .contact-area > div:first-child {
-        margin-bottom: 15px !important;
-    }
-
-    .main-menu .contact-area a[href^="tel"] {
-        font-size: 18px !important;
-        color: #6366f1 !important;
-        font-weight: 700 !important;
-    }
-
-    /* Mobile dropdown */
-    .main-menu .has-dropdown {
-        position: relative;
-    }
-
-    .main-menu .submenu {
-        list-style: none;
-        padding-left: 20px !important;
-        margin: 0;
-        display: none;
-        background: rgba(99, 102, 241, 0.05);
-        border-left: 3px solid #6366f1;
-    }
-
-    .main-menu .has-dropdown.open .submenu {
-        display: block;
-    }
-
-    .main-menu .submenu li {
-        border-bottom: 1px solid rgba(99, 102, 241, 0.1);
-    }
-
-    .main-menu .submenu li:last-child {
-        border-bottom: none;
-    }
-
-    .main-menu .submenu li a {
-        padding: 12px 15px !important;
-        font-size: 14px !important;
-        font-weight: 300 !important;
-        color: #4b5563 !important;
-    }
-
-    .main-menu .submenu li a:hover {
-        color: #6366f1 !important;
-        background: rgba(99, 102, 241, 0.1) !important;
-        padding-left: 25px !important;
-    }
-
 }
 
 /* Desktop dropdown */
@@ -362,6 +217,27 @@ a.primary-btn1 {
 
 .header-area.style-2 .nav-right * {
     color: #000000 !important;
+}
+
+@media(max-width:1199px){
+    .header-area.style-2 .nav-right *,
+    .header-area.style-2 .nav-right i,
+    .header-area.style-2 .nav-right svg,
+    .header-area.style-2 .sidebar-button i {
+        color: #ffffff !important;
+        stroke: #ffffff !important;
+    }
+    .header-area.style-2 .sidebar-button {
+        background: rgba(255,255,255,0.9) !important;
+        border-radius: 8px !important;
+        padding: 8px 10px !important;
+    }
+    .header-area.style-2 .sidebar-button i {
+        color: #1a1a2e !important;
+    }
+    .header-area.style-2 .header-logo img {
+        filter: drop-shadow(0 0 8px rgba(255,255,255,0.9)) drop-shadow(0 0 15px rgba(255,255,255,0.7)) !important;
+    }
 }
 
 /* Hide search icon and sign in button */
@@ -551,8 +427,9 @@ a.primary-btn1 {
         /* Hero Section */
         .hero-section {
             position: relative;
-            height: 500px;
-            min-height: 500px;
+            height: 700px;
+            min-height: 700px;
+            padding: 240px 0;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
@@ -945,206 +822,98 @@ a.primary-btn1 {
         <div class="container-fluid d-flex flex-nowrap align-items-center justify-content-between">
             <div class="logo-and-menu-area">
                 <a href="travel-agency-03.html" class="header-logo">
-                    <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 45px; width: auto; max-width: 200px; object-fit: contain; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
+                    <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 45px; width: auto; max-width: 200px; object-fit: contain;">
                 </a>
                 <div class="main-menu">
-                    <div class="mobile-logo-area d-xl-none d-flex align-items-center justify-content-between">
-                        <a href="travel-agency-03.html" class="mobile-logo-wrap">
-                            <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 40px; width: auto; max-width: 60%; object-fit: contain;">
-                        </a>
-                        <div class="menu-close-btn">
-                            <i class="bi bi-x"></i>
+                <!-- Mobile Logo Area -->
+                <div class="mobile-logo-area d-xl-none d-flex align-items-center justify-content-between">
+                    <a href="travel-agency-03.html" class="mobile-logo-wrap">
+                        <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 40px; width: auto; max-width: 60%; object-fit: contain;">
+                    </a>
+                    <div class="menu-close-btn" id="menuCloseBtn">
+                        <span style="font-size:28px;font-weight:bold;color:#1a3a6e;line-height:1;">×</span>
+                    </div>
+                </div>
+
+                <!-- Navigation Menu -->
+                <ul class="menu-list">
+                    <li class="active"><a href="travel-agency-03.html">Home</a></li>
+                    <li><a href="all-destinations.html">Destinations</a></li>
+                    <li><a href="tours.html">Tours</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+                <!-- Mobile Language Selector -->
+                <div class="contact-area d-xl-none d-flex" style="padding: 20px 15px; border-top: 1px solid #e5e7eb; margin-top: 15px;">
+                    <div class="language-selector-mobile" style="position: relative; width: 100%;">
+                        <button class="language-btn-mobile" onclick="toggleMobileLanguageDropdown()" style="background: white; border: 1px solid #e5e7eb; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; color: #1f2937; padding: 12px 20px; border-radius: 10px; transition: all 0.3s; width: 100%;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                            </svg>
+                            <img id="currentFlagMobile" src="https://flagcdn.com/w40/gb.png" alt="EN" width="24" height="16" style="border-radius: 2px; border: 1px solid rgba(0,0,0,0.1);">
+                            <span id="currentLangMobile">English</span>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="language-dropdown-mobile" id="languageDropdownMobile" style="display: none; position: absolute; bottom: 100%; left: 0; right: 0; background: white; border-radius: 10px; box-shadow: 0 -4px 20px rgba(0,0,0,0.15); margin-bottom: 8px; z-index: 1000; overflow: hidden; max-height: 250px; overflow-y: auto;">
+                            <a href="#" class="lang-option-mobile" onclick="selectLanguageMobile('gb', 'English')" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; text-decoration: none; color: #1f2937; font-weight: 500; transition: background 0.2s; border-bottom: 1px solid #f3f4f6;">
+                                <img src="https://flagcdn.com/w20/gb.png" style="width: 24px; height: 16px; object-fit: cover; border-radius: 2px;">English
+                            </a>
+                            <a href="#" class="lang-option-mobile" onclick="selectLanguageMobile('uz', 'O\'zbekcha')" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; text-decoration: none; color: #1f2937; font-weight: 500; transition: background 0.2s; border-bottom: 1px solid #f3f4f6;">
+                                <img src="https://flagcdn.com/w20/uz.png" style="width: 24px; height: 16px; object-fit: cover; border-radius: 2px;">O'zbekcha
+                            </a>
+                            <a href="#" class="lang-option-mobile" onclick="selectLanguageMobile('ru', 'Русский')" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; text-decoration: none; color: #1f2937; font-weight: 500; transition: background 0.2s; border-bottom: 1px solid #f3f4f6;">
+                                <img src="https://flagcdn.com/w20/ru.png" style="width: 24px; height: 16px; object-fit: cover; border-radius: 2px;">Русский
+                            </a>
+                            <a href="#" class="lang-option-mobile" onclick="selectLanguageMobile('cn', '中文')" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; text-decoration: none; color: #1f2937; font-weight: 500; transition: background 0.2s; border-bottom: 1px solid #f3f4f6;">
+                                <img src="https://flagcdn.com/w20/cn.png" style="width: 24px; height: 16px; object-fit: cover; border-radius: 2px;">中文
+                            </a>
+                            <a href="#" class="lang-option-mobile" onclick="selectLanguageMobile('de', 'Deutsch')" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; text-decoration: none; color: #1f2937; font-weight: 500; transition: background 0.2s;">
+                                <img src="https://flagcdn.com/w20/de.png" style="width: 24px; height: 16px; object-fit: cover; border-radius: 2px;">Deutsch
+                            </a>
                         </div>
                     </div>
-                    <ul class="menu-list">
-                        <li class="active">
-                            <a href="travel-agency-03.html">Home</a>
-                        </li>
-                        <!-- Categories will be loaded dynamically here -->
-                        <li>
-                            <a href="about.html">About</a>
-                        </li>
-                        <li>
-                            <a href="contact.html">Contact Us</a>
-                        </li>
-                    </ul>
-                    <div class="contact-area d-xl-none d-flex" style="gap: 15px; align-items: center; flex-direction: column; padding: 15px 0;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <div class="icon">
-                                <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                                    <g>
-                                        <path
-                                            d="M15.5646 11.7424L13.3317 9.50954C12.5343 8.7121 11.1786 9.03111 10.8596 10.0678C10.6204 10.7855 9.82296 11.1842 9.10526 11.0247C7.51037 10.626 5.35726 8.55261 4.95854 6.87797C4.71931 6.16024 5.19778 5.36279 5.91548 5.12359C6.95216 4.80461 7.27113 3.44895 6.47369 2.65151L4.24084 0.418659C3.60288 -0.139553 2.64595 -0.139553 2.08774 0.418659L0.572591 1.93381C-0.942555 3.5287 0.73208 7.75516 4.48007 11.5032C8.22807 15.2512 12.4545 17.0056 14.0494 15.4106L15.5646 13.8955C16.1228 13.2575 16.1228 12.3006 15.5646 11.7424Z"/>
-                                    </g>
-                                </svg>
-                            </div>
-                            <a href="tel:998901234567" style="color: #1f2937; font-weight: 600; text-decoration: none; font-size: 16px;">+998 90 123 45 67</a>
-                        </div>
-                        <div class="language-selector-mobile" style="position: relative; width: 100%;">
-                            <button class="language-btn-mobile" style="background: transparent; border: 1px solid #e5e7eb; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; color: #1f2937; padding: 10px 20px; border-radius: 8px; transition: all 0.3s; width: 100%;">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <line x1="2" y1="12" x2="22" y2="12"></line>
-                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                                </svg>
-                                <span id="currentLangMobile">English</span>
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="language-dropdown-mobile" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 5px; z-index: 1000;">
-                                <a href="#" class="lang-option-mobile" data-lang="English" style="display: block; padding: 12px 15px; color: #1f2937; text-decoration: none; transition: all 0.2s; border-bottom: 1px solid #f3f4f6;">English</a>
-                                <a href="#" class="lang-option-mobile" data-lang="O'zbekcha" style="display: block; padding: 12px 15px; color: #1f2937; text-decoration: none; transition: all 0.2s; border-bottom: 1px solid #f3f4f6;">O'zbekcha</a>
-                                <a href="#" class="lang-option-mobile" data-lang="Русский" style="display: block; padding: 12px 15px; color: #1f2937; text-decoration: none; transition: all 0.2s;">Русский</a>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            </div>
+            <!-- Desktop Nav Right -->
+            <div class="nav-right d-none d-xl-flex">
+                <!-- Phone -->
+                <div class="header-phone">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+                    </svg>
+                    <a href="tel:+998932244333">+998932244333</a>
+                </div>
+
+                <!-- Language Selector Desktop -->
+                <div class="language-selector" style="position: relative;">
+                    <button class="language-btn" style="background: transparent; border: none; cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 600; color: #1f2937; padding: 5px 10px; border-radius: 6px; transition: all 0.3s;">
+                        <span id="currentFlag"><img src="https://flagcdn.com/w40/gb.png" alt="EN" width="24" height="16" style="border-radius: 2px; border: 1px solid rgba(0,0,0,0.1);"></span>
+                        <span id="currentLang">EN</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="language-dropdown" style="display: none; position: absolute; top: 100%; right: 0; background: white; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 5px; min-width: 160px; z-index: 1000;">
+                        <!-- Tillar language-loader.js orqali yuklanadi -->
                     </div>
-                    <a href="#" class="primary-btn1 black-bg d-xl-none d-flex">
-                        <span>
-                            <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
-                                <g>
-                                    <path
-                                        d="M7.50105 7.78913C9.64392 7.78913 11.3956 6.03744 11.3956 3.89456C11.3956 1.75169 9.64392 0 7.50105 0C5.35818 0 3.60652 1.75169 3.60652 3.89456C3.60652 6.03744 5.35821 7.78913 7.50105 7.78913ZM14.1847 10.9014C14.0827 10.6463 13.9467 10.4082 13.7936 10.1871C13.0113 9.0306 11.8038 8.2653 10.4433 8.07822C10.2732 8.06123 10.0861 8.09522 9.95007 8.19727C9.23578 8.72448 8.38546 8.99658 7.50108 8.99658C6.61671 8.99658 5.76638 8.72448 5.05209 8.19727C4.91603 8.09522 4.72895 8.04421 4.5589 8.07822C3.19835 8.2653 1.97387 9.0306 1.20857 10.1871C1.05551 10.4082 0.919443 10.6633 0.817424 10.9014C0.766415 11.0034 0.783407 11.1225 0.834416 11.2245C0.970484 11.4626 1.14054 11.7007 1.2936 11.9048C1.53168 12.2279 1.78679 12.517 2.07592 12.7891C2.31401 13.0272 2.58611 13.2483 2.85824 13.4694C4.20177 14.4728 5.81742 15 7.48409 15C9.15076 15 10.7664 14.4728 12.1099 13.4694C12.382 13.2653 12.6541 13.0272 12.8923 12.7891C13.1644 12.517 13.4365 12.2279 13.6746 11.9048C13.8446 11.6837 13.9977 11.4626 14.1338 11.2245C14.2188 11.1225 14.2358 11.0034 14.1847 10.9014Z"/>
-                                </g>
-                            </svg>
-                            Login
-                        </span>
-                        <span>
-                            <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
-                                <g>
-                                    <path
-                                        d="M7.50105 7.78913C9.64392 7.78913 11.3956 6.03744 11.3956 3.89456C11.3956 1.75169 9.64392 0 7.50105 0C5.35818 0 3.60652 1.75169 3.60652 3.89456C3.60652 6.03744 5.35821 7.78913 7.50105 7.78913ZM14.1847 10.9014C14.0827 10.6463 13.9467 10.4082 13.7936 10.1871C13.0113 9.0306 11.8038 8.2653 10.4433 8.07822C10.2732 8.06123 10.0861 8.09522 9.95007 8.19727C9.23578 8.72448 8.38546 8.99658 7.50108 8.99658C6.61671 8.99658 5.76638 8.72448 5.05209 8.19727C4.91603 8.09522 4.72895 8.04421 4.5589 8.07822C3.19835 8.2653 1.97387 9.0306 1.20857 10.1871C1.05551 10.4082 0.919443 10.6633 0.817424 10.9014C0.766415 11.0034 0.783407 11.1225 0.834416 11.2245C0.970484 11.4626 1.14054 11.7007 1.2936 11.9048C1.53168 12.2279 1.78679 12.517 2.07592 12.7891C2.31401 13.0272 2.58611 13.2483 2.85824 13.4694C4.20177 14.4728 5.81742 15 7.48409 15C9.15076 15 10.7664 14.4728 12.1099 13.4694C12.382 13.2653 12.6541 13.0272 12.8923 12.7891C13.1644 12.517 13.4365 12.2279 13.6746 11.9048C13.8446 11.6837 13.9977 11.4626 14.1338 11.2245C14.2188 11.1225 14.2358 11.0034 14.1847 10.9014Z"/>
-                                </g>
-                            </svg>
-                            Login
-                        </span>
-                    </a>    
                 </div>
             </div>
-            <div class="nav-right">
-                <div class="contact-and-search-area">
-                    <div class="contact-area d-xl-flex d-none" style="gap: 20px; align-items: center;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <div class="icon">
-                                <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                                    <g>
-                                        <path
-                                            d="M15.5646 11.7424L13.3317 9.50954C12.5343 8.7121 11.1786 9.03111 10.8596 10.0678C10.6204 10.7855 9.82296 11.1842 9.10526 11.0247C7.51037 10.626 5.35726 8.55261 4.95854 6.87797C4.71931 6.16024 5.19778 5.36279 5.91548 5.12359C6.95216 4.80461 7.27113 3.44895 6.47369 2.65151L4.24084 0.418659C3.60288 -0.139553 2.64595 -0.139553 2.08774 0.418659L0.572591 1.93381C-0.942555 3.5287 0.73208 7.75516 4.48007 11.5032C8.22807 15.2512 12.4545 17.0056 14.0494 15.4106L15.5646 13.8955C16.1228 13.2575 16.1228 12.3006 15.5646 11.7424Z"/>
-                                    </g>
-                                </svg>
-                            </div>
-                            <a href="tel:998901234567" style="color: #1f2937; font-weight: 600; text-decoration: none;">+998 90 123 45 67</a>
-                        </div>
-                        <div class="language-selector" style="position: relative;">
-                            <button class="language-btn" style="background: transparent; border: none; cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 600; color: #1f2937; padding: 5px 10px; border-radius: 6px; transition: all 0.3s;">
-                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 30'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Crect width='50' height='30'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Crect width='50' height='30' fill='%23012169'/%3E%3Cpath d='M0,0 L50,30 M50,0 L0,30' stroke='%23FFF' stroke-width='6'/%3E%3Cpath d='M0,0 L50,30 M50,0 L0,30' stroke='%23C8102E' stroke-width='4' clip-path='url(%23a)'/%3E%3Cpath d='M25,0 V30 M0,15 H50' stroke='%23FFF' stroke-width='10'/%3E%3Cpath d='M25,0 V30 M0,15 H50' stroke='%23C8102E' stroke-width='6'/%3E%3C/g%3E%3C/svg%3E" alt="UK Flag" width="24" height="16" style="border-radius: 2px; border: 1px solid rgba(0,0,0,0.1);">
-                                <span id="currentLang">EN</span>
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="language-dropdown" style="display: none; position: absolute; top: 100%; right: 0; background: white; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 5px; width: max-content; z-index: 1000;">
-                                <a href="#" class="lang-option" data-lang="EN" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 30'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Crect width='50' height='30'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Crect width='50' height='30' fill='%23012169'/%3E%3Cpath d='M0,0 L50,30 M50,0 L0,30' stroke='%23FFF' stroke-width='6'/%3E%3Cpath d='M0,0 L50,30 M50,0 L0,30' stroke='%23C8102E' stroke-width='4' clip-path='url(%23a)'/%3E%3Cpath d='M25,0 V30 M0,15 H50' stroke='%23FFF' stroke-width='10'/%3E%3Cpath d='M25,0 V30 M0,15 H50' stroke='%23C8102E' stroke-width='6'/%3E%3C/g%3E%3C/svg%3E" alt="UK" width="24" height="16" style="border-radius: 2px; border: 1px solid rgba(0,0,0,0.1);">
-                                    <span>English</span>
-                                </a>
-                                <a href="#" class="lang-option" data-lang="IT" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='1' height='2' fill='%23009246'/%3E%3Crect x='1' width='1' height='2' fill='%23fff'/%3E%3Crect x='2' width='1' height='2' fill='%23ce2b37'/%3E%3C/svg%3E" alt="Italy" width="24" height="16" style="border-radius: 2px;">
-                                    <span>Italiano</span>
-                                </a>
-                                <a href="#" class="lang-option" data-lang="FR" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='1' height='2' fill='%23002395'/%3E%3Crect x='1' width='1' height='2' fill='%23fff'/%3E%3Crect x='2' width='1' height='2' fill='%23ED2939'/%3E%3C/svg%3E" alt="France" width="24" height="16" style="border-radius: 2px;">
-                                    <span>Français</span>
-                                </a>
-                                <a href="#" class="lang-option" data-lang="DE" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 3'%3E%3Crect width='5' height='1' fill='%23000'/%3E%3Crect y='1' width='5' height='1' fill='%23D00'/%3E%3Crect y='2' width='5' height='1' fill='%23FFCE00'/%3E%3C/svg%3E" alt="Germany" width="24" height="16" style="border-radius: 2px;">
-                                    <span>Deutsch</span>
-                                </a>
-                                <a href="#" class="lang-option" data-lang="ES" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='3' height='2' fill='%23c60b1e'/%3E%3Crect y='0.5' width='3' height='1' fill='%23ffc400'/%3E%3C/svg%3E" alt="Spain" width="24" height="16" style="border-radius: 2px;">
-                                    <span>Español</span>
-                                </a>
-                                <a href="#" class="lang-option" data-lang="JP" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='3' height='2' fill='%23fff'/%3E%3Ccircle cx='1.5' cy='1' r='0.6' fill='%23bc002d'/%3E%3C/svg%3E" alt="Japan" width="24" height="16" style="border-radius: 2px;">
-                                    <span>日本語</span>
-                                </a>
-                                <a href="#" class="lang-option" data-lang="RU" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 6'%3E%3Crect width='9' height='2' fill='%23fff'/%3E%3Crect y='2' width='9' height='2' fill='%230039a6'/%3E%3Crect y='4' width='9' height='2' fill='%23d52b1e'/%3E%3C/svg%3E" alt="Russia" width="24" height="16" style="border-radius: 2px;">
-                                    <span>Русский</span>
-                                </a>
-                                <a href="#" class="lang-option" data-lang="UZ" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: #1f2937; text-decoration: none; transition: all 0.2s;">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 250'%3E%3Crect width='500' height='80' fill='%231EB53A'/%3E%3Crect y='80' width='500' height='3' fill='%23FF0000'/%3E%3Crect y='83' width='500' height='84' fill='%23FFFFFF'/%3E%3Crect y='167' width='500' height='3' fill='%23FF0000'/%3E%3Crect y='170' width='500' height='80' fill='%230099B5'/%3E%3Ccircle cx='100' cy='40' r='25' fill='%23FFFFFF'/%3E%3Ccircle cx='110' cy='40' r='20' fill='%231EB53A'/%3E%3Cpolygon points='150,25 153,34 162,34 155,40 158,49 150,43 142,49 145,40 138,34 147,34' fill='%23FFFFFF'/%3E%3Cpolygon points='180,25 183,34 192,34 185,40 188,49 180,43 172,49 175,40 168,34 177,34' fill='%23FFFFFF'/%3E%3Cpolygon points='210,25 213,34 222,34 215,40 218,49 210,43 202,49 205,40 198,34 207,34' fill='%23FFFFFF'/%3E%3Cpolygon points='165,50 168,59 177,59 170,65 173,74 165,68 157,74 160,65 153,59 162,59' fill='%23FFFFFF'/%3E%3Cpolygon points='195,50 198,59 207,59 200,65 203,74 195,68 187,74 190,65 183,59 192,59' fill='%23FFFFFF'/%3E%3C/svg%3E" alt="Uzbekistan" width="24" height="16" style="border-radius: 2px;">
-                                    <span>Uzbek</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="search-bar">
-                        <div class="search-btn">
-                            <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                                <g>
-                                    <path
-                                        d="M15.7417 14.6098L13.486 12.3621C14.7088 10.8514 15.3054 8.9291 15.1526 6.99153C14.9998 5.05396 14.1093 3.24888 12.6648 1.94851C11.2203 0.648146 9.33193 -0.0483622 7.38901 0.00261294C5.44609 0.0535881 3.59681 0.84816 2.22248 2.22248C0.84816 3.59681 0.0535881 5.44609 0.00261294 7.38901C-0.0483622 9.33193 0.648146 11.2203 1.94851 12.6648C3.24888 14.1093 5.05396 14.9998 6.99153 15.1526C8.9291 15.3054 10.8514 14.7088 12.3621 13.486L14.6098 15.7417C14.6839 15.8164 14.7721 15.8757 14.8692 15.9161C14.9664 15.9566 15.0705 15.9774 15.1758 15.9774C15.281 15.9774 15.3852 15.9566 15.4823 15.9161C15.5794 15.8757 15.6676 15.8164 15.7417 15.7417C15.8164 15.6676 15.8757 15.5794 15.9161 15.4823C15.9566 15.3852 15.9774 15.281 15.9774 15.1758C15.9774 15.0705 15.9566 14.9664 15.9161 14.8692C15.8757 14.7721 15.8164 14.6839 15.7417 14.6098ZM1.62572 7.60368C1.62572 6.42135 1.97632 5.26557 2.63319 4.2825C3.29005 3.29943 4.22368 2.53322 5.31601 2.08076C6.40834 1.62831 7.61031 1.50992 8.76992 1.74058C9.92953 1.97124 10.9947 2.54059 11.8307 3.37662C12.6668 4.21266 13.2361 5.27783 13.4668 6.43744C13.6974 7.59705 13.579 8.79902 13.1266 9.89134C12.6741 10.9837 11.9079 11.9173 10.9249 12.5742C9.94178 13.231 8.78601 13.5816 7.60368 13.5816C6.01822 13.5816 4.49771 12.9518 3.37662 11.8307C2.25554 10.7096 1.62572 9.18913 1.62572 7.60368Z"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="search-input">
-                            <div class="search-close"></div>
-                            <form>
-                                <div class="search-group">
-                                    <div class="form-inner2">
-                                        <input type="text" placeholder="Find Your Perfect Tour Package">
-                                        <button type="submit"><i class="bi bi-search"></i></button>
-                                    </div>
-                                </div>
-                                <div class="quick-search">
-                                    <ul>
-                                        <li>Quick Search :</li>
-                                        <li><a href="travel-package-01.html">Thailand Tour,</a></li>
-                                        <li><a href="travel-package-01.html">Philippines Tour,</a></li>
-                                        <li><a href="travel-package-01.html">Bali Tour,</a></li>
-                                        <li><a href="travel-package-01.html">Hawaii, USA Tour,</a></li>
-                                        <li><a href="travel-package-01.html">Switzerland Tour,</a></li>
-                                        <li><a href="travel-package-01.html">Maldives Tour,</a></li>
-                                        <li><a href="travel-package-01.html">Paris Tour,</a></li>
-                                    </ul>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <a href="#" class="primary-btn1 black-bg d-xl-flex d-none">
-                    <span>
-                        <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
-                            <g>
-                                <path
-                                    d="M7.50105 7.78913C9.64392 7.78913 11.3956 6.03744 11.3956 3.89456C11.3956 1.75169 9.64392 0 7.50105 0C5.35818 0 3.60652 1.75169 3.60652 3.89456C3.60652 6.03744 5.35821 7.78913 7.50105 7.78913ZM14.1847 10.9014C14.0827 10.6463 13.9467 10.4082 13.7936 10.1871C13.0113 9.0306 11.8038 8.2653 10.4433 8.07822C10.2732 8.06123 10.0861 8.09522 9.95007 8.19727C9.23578 8.72448 8.38546 8.99658 7.50108 8.99658C6.61671 8.99658 5.76638 8.72448 5.05209 8.19727C4.91603 8.09522 4.72895 8.04421 4.5589 8.07822C3.19835 8.2653 1.97387 9.0306 1.20857 10.1871C1.05551 10.4082 0.919443 10.6633 0.817424 10.9014C0.766415 11.0034 0.783407 11.1225 0.834416 11.2245C0.970484 11.4626 1.14054 11.7007 1.2936 11.9048C1.53168 12.2279 1.78679 12.517 2.07592 12.7891C2.31401 13.0272 2.58611 13.2483 2.85824 13.4694C4.20177 14.4728 5.81742 15 7.48409 15C9.15076 15 10.7664 14.4728 12.1099 13.4694C12.382 13.2653 12.6541 13.0272 12.8923 12.7891C13.1644 12.517 13.4365 12.2279 13.6746 11.9048C13.8446 11.6837 13.9977 11.4626 14.1338 11.2245C14.2188 11.1225 14.2358 11.0034 14.1847 10.9014Z"/>
-                            </g>
-                        </svg>
-                        Login
-                    </span>
-                    <span>
-                        <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
-                            <g>
-                                <path
-                                    d="M7.50105 7.78913C9.64392 7.78913 11.3956 6.03744 11.3956 3.89456C11.3956 1.75169 9.64392 0 7.50105 0C5.35818 0 3.60652 1.75169 3.60652 3.89456C3.60652 6.03744 5.35821 7.78913 7.50105 7.78913ZM14.1847 10.9014C14.0827 10.6463 13.9467 10.4082 13.7936 10.1871C13.0113 9.0306 11.8038 8.2653 10.4433 8.07822C10.2732 8.06123 10.0861 8.09522 9.95007 8.19727C9.23578 8.72448 8.38546 8.99658 7.50108 8.99658C6.61671 8.99658 5.76638 8.72448 5.05209 8.19727C4.91603 8.09522 4.72895 8.04421 4.5589 8.07822C3.19835 8.2653 1.97387 9.0306 1.20857 10.1871C1.05551 10.4082 0.919443 10.6633 0.817424 10.9014C0.766415 11.0034 0.783407 11.1225 0.834416 11.2245C0.970484 11.4626 1.14054 11.7007 1.2936 11.9048C1.53168 12.2279 1.78679 12.517 2.07592 12.7891C2.31401 13.0272 2.58611 13.2483 2.85824 13.4694C4.20177 14.4728 5.81742 15 7.48409 15C9.15076 15 10.7664 14.4728 12.1099 13.4694C12.382 13.2653 12.6541 13.0272 12.8923 12.7891C13.1644 12.517 13.4365 12.2279 13.6746 11.9048C13.8446 11.6837 13.9977 11.4626 14.1338 11.2245C14.2188 11.1225 14.2358 11.0034 14.1847 10.9014Z"/>
-                            </g>
-                        </svg>
-                        Login
-                    </span>
-                </a>
-                <div class="sidebar-button mobile-menu-btn">
-                    <svg width="20" height="18" viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1.29445 2.8421H10.5237C11.2389 2.8421 11.8182 2.2062 11.8182 1.42105C11.8182 0.635903 11.2389 0 10.5237 0H1.29445C0.579249 0 0 0.635903 0 1.42105C0 2.2062 0.579249 2.8421 1.29445 2.8421Z"></path>
-                        <path d="M1.23002 10.421H18.77C19.4496 10.421 20 9.78506 20 8.99991C20 8.21476 19.4496 7.57886 18.77 7.57886H1.23002C0.550421 7.57886 0 8.21476 0 8.99991C0 9.78506 0.550421 10.421 1.23002 10.421Z"></path>
-                        <path d="M18.8052 15.1579H10.2858C9.62563 15.1579 9.09094 15.7938 9.09094 16.5789C9.09094 17.3641 9.62563 18 10.2858 18H18.8052C19.4653 18 20 17.3641 20 16.5789C20 15.7938 19.4653 15.1579 18.8052 15.1579Z"></path>
-                    </svg>
-                </div>
+
+            <!-- Mobile Menu Button (Hamburger) -->
+            <div class="sidebar-button mobile-menu-btn d-xl-none" style="background: rgba(255,255,255,0.9); border-radius: 8px; padding: 10px 12px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1H21M1 9H21M1 17H21" stroke="#1a1a2e" stroke-width="2" stroke-linecap="round"/>
+                </svg>
             </div>
         </div>
     </header>
     <!-- header Section End-->
-    
 
 
     <!-- Hero Section -->
@@ -1463,13 +1232,15 @@ a.primary-btn1 {
     <!-- JS -->
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/jquery-ui.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/swiper-bundle.min.js"></script>
     <script src="assets/js/slick.js"></script>
     <script src="assets/js/jquery.fancybox.min.js"></script>
     <script src="assets/js/gsap.min.js"></script>
     <script src="assets/js/ScrollTrigger.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <!-- Custom JS for menu -->
+    <script src="assets/js/custom.js"></script>
 
     <!-- Dynamic Data Loading -->
     <script>
@@ -1954,5 +1725,92 @@ a.primary-btn1 {
     <!-- Settings Integration -->
     <script src="settings-integration.js"></script>
     <script src="language-loader.js"></script>
+
+    <!-- Header Menu & Language Script -->
+    <script>
+    // Language selector functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const languageBtn = document.querySelector('.language-btn');
+        const languageDropdown = document.querySelector('.language-dropdown');
+
+        if (languageBtn && languageDropdown) {
+            languageBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                languageDropdown.style.display = languageDropdown.style.display === 'none' ? 'block' : 'none';
+            });
+        }
+
+        // Mobile language selector
+        const languageBtnMobile = document.querySelector('.language-btn-mobile');
+        const languageDropdownMobile = document.querySelector('.language-dropdown-mobile');
+
+        if (languageBtnMobile && languageDropdownMobile) {
+            languageBtnMobile.addEventListener('click', function(e) {
+                e.stopPropagation();
+                languageDropdownMobile.style.display = languageDropdownMobile.style.display === 'none' ? 'block' : 'none';
+            });
+        }
+
+        // Close dropdowns on outside click (only for dropdowns, not menu)
+        document.addEventListener('click', function(e) {
+            // Desktop dropdown
+            if (languageDropdown && languageBtn && !languageBtn.contains(e.target) && !languageDropdown.contains(e.target)) {
+                languageDropdown.style.display = 'none';
+            }
+            // Mobile dropdown
+            if (languageDropdownMobile && languageBtnMobile && !languageBtnMobile.contains(e.target) && !languageDropdownMobile.contains(e.target)) {
+                languageDropdownMobile.style.display = 'none';
+            }
+        });
+
+        // Mobile menu custom.js tomonidan boshqariladi
+
+        // Dropdown tillar yuklanganidan keyin click handler qo'shish
+        // language-loader.js dropdown ni to'ldiradi, keyin biz click handler qo'shamiz
+        setTimeout(function() {
+            // Desktop language options
+            document.querySelectorAll('.language-dropdown .lang-option').forEach(function(option) {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Tanlangan til rasmini olish
+                    var selectedImg = this.querySelector('img');
+                    if (selectedImg) {
+                        var newImg = selectedImg.cloneNode(true);
+                        newImg.style.width = '24px';
+                        newImg.style.height = '16px';
+                        newImg.style.borderRadius = '2px';
+                        newImg.style.border = '1px solid rgba(0,0,0,0.1)';
+
+                        // Button ichidagi eski rasmni yangilash
+                        var btn = document.querySelector('.language-btn');
+                        var oldImg = btn.querySelector('img');
+                        if (oldImg && newImg) {
+                            oldImg.src = newImg.src;
+                        }
+                    }
+                });
+            });
+
+            // Mobile language options
+            document.querySelectorAll('.language-dropdown-mobile .lang-option-mobile').forEach(function(option) {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    var selectedImg = this.querySelector('img');
+                    if (selectedImg) {
+                        var btn = document.querySelector('.language-btn-mobile');
+                        var oldImg = btn.querySelector('img');
+                        if (oldImg) {
+                            oldImg.src = selectedImg.src;
+                        }
+                    }
+                });
+            });
+        }, 1000); // language-loader.js yuklanishini kutish
+    });
+    </script>
 </body>
 </html>
