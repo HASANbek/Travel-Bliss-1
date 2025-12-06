@@ -111,6 +111,13 @@ async function sendEmail({ to, subject, html, text }) {
 async function sendBookingConfirmationEmail(booking) {
   const subject = `Booking Confirmed - ${booking.tourName}`;
 
+  // Extract time from booking.time or from specialRequests
+  let bookingTime = booking.time;
+  if (!bookingTime && booking.specialRequests) {
+    const timeMatch = booking.specialRequests.match(/Preferred Time:\s*(\d{2}:\d{2})/);
+    if (timeMatch) bookingTime = timeMatch[1];
+  }
+
   const html = `
 <!DOCTYPE html>
 <html>
@@ -208,6 +215,11 @@ async function sendBookingConfirmationEmail(booking) {
                 </div>
 
                 <div class="detail-row">
+                    <span class="detail-label">Time:</span>
+                    <span class="detail-value">${bookingTime || 'Not specified'}</span>
+                </div>
+
+                <div class="detail-row">
                     <span class="detail-label">Guests:</span>
                     <span class="detail-value">${booking.guests.adults} adult${booking.guests.adults > 1 ? 's' : ''}${booking.guests.children > 0 ? `, ${booking.guests.children} child${booking.guests.children > 1 ? 'ren' : ''}` : ''}</span>
                 </div>
@@ -259,8 +271,16 @@ async function sendBookingConfirmationEmail(booking) {
  * @returns {Promise<Object>}
  */
 async function sendAdminBookingNotification(booking) {
+  console.log('📧 sendAdminBookingNotification called - NEW VERSION');
   const adminEmail = process.env.ADMIN_EMAIL || 'admin@travelbliss.uz';
-  const subject = `🔔 Yangi buyurtma - ${booking.tourName}`;
+  const subject = `🔔 New Booking - ${booking.tourName}`;
+
+  // Extract time from booking.time or from specialRequests
+  let bookingTime = booking.time;
+  if (!bookingTime && booking.specialRequests) {
+    const timeMatch = booking.specialRequests.match(/Preferred Time:\s*(\d{2}:\d{2})/);
+    if (timeMatch) bookingTime = timeMatch[1];
+  }
 
   const html = `
 <!DOCTYPE html>
@@ -330,26 +350,26 @@ async function sendAdminBookingNotification(booking) {
 <body>
     <div class="container">
         <div class="header">
-            <h1>🔔 Yangi Buyurtma!</h1>
-            <p>Mijozdan yangi tur buyurtmasi</p>
+            <h1>🔔 New Booking!</h1>
+            <p>New tour booking from customer</p>
         </div>
 
         <div class="content">
             <div class="booking-card">
-                <h2 style="color: #0F16E6; margin-top: 0;">📋 Buyurtma Ma'lumotlari</h2>
+                <h2 style="color: #0F16E6; margin-top: 0;">📋 Booking Details</h2>
 
                 <div class="detail-row">
-                    <span class="label">Buyurtma ID:</span>
+                    <span class="label">Booking ID:</span>
                     <span class="value">${booking.id}</span>
                 </div>
 
                 <div class="detail-row">
-                    <span class="label">Tur:</span>
+                    <span class="label">Tour:</span>
                     <span class="value">${booking.tourName}</span>
                 </div>
 
                 <div class="detail-row">
-                    <span class="label">Mijoz:</span>
+                    <span class="label">Customer:</span>
                     <span class="value">${booking.customerName}</span>
                 </div>
 
@@ -359,13 +379,13 @@ async function sendAdminBookingNotification(booking) {
                 </div>
 
                 <div class="detail-row">
-                    <span class="label">Telefon:</span>
+                    <span class="label">Phone:</span>
                     <span class="value">${booking.customerPhone}</span>
                 </div>
 
                 <div class="detail-row">
-                    <span class="label">Sana:</span>
-                    <span class="value">${new Date(booking.date).toLocaleDateString('uz-UZ', {
+                    <span class="label">Date:</span>
+                    <span class="value">${new Date(booking.date).toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric'
@@ -373,23 +393,35 @@ async function sendAdminBookingNotification(booking) {
                 </div>
 
                 <div class="detail-row">
-                    <span class="label">Mehmonlar:</span>
-                    <span class="value">${booking.guests.adults} kattalar${booking.guests.children > 0 ? `, ${booking.guests.children} bolalar` : ''}</span>
+                    <span class="label">Time:</span>
+                    <span class="value">${bookingTime || 'Not specified'}</span>
                 </div>
 
+                <div class="detail-row">
+                    <span class="label">Guests:</span>
+                    <span class="value">${booking.guests.adults} adults${booking.guests.children > 0 ? `, ${booking.guests.children} children` : ''}</span>
+                </div>
+
+                ${booking.specialRequests ? `
+                <div class="detail-row" style="flex-direction: column; align-items: flex-start;">
+                    <span class="label" style="margin-bottom: 5px;">Special Requests:</span>
+                    <span class="value" style="white-space: pre-line;">${booking.specialRequests}</span>
+                </div>
+                ` : ''}
+
                 <div class="total-amount">
-                    💰 Jami: $${booking.totalPrice}
+                    💰 Total: $${booking.totalPrice}
                 </div>
 
                 <div style="text-align: center; margin-top: 20px;">
                     <a href="http://localhost:4000/admin#bookings" class="action-button">
-                        Admin Panelga O'tish
+                        Go to Admin Panel
                     </a>
                 </div>
             </div>
 
             <p style="color: #666; font-size: 14px;">
-                ⏰ Buyurtma vaqti: ${new Date(booking.createdAt).toLocaleString('uz-UZ')}
+                ⏰ Booking time: ${new Date(booking.createdAt).toLocaleString('en-US')}
             </p>
         </div>
     </div>

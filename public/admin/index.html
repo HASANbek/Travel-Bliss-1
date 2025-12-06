@@ -7628,6 +7628,13 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             const duration = booking.duration || 1;
             const endDate = new Date(startDate.getTime() + (duration - 1) * 24 * 60 * 60 * 1000);
 
+            // Extract time from booking.time or from specialRequests
+            let bookingTime = booking.time;
+            if (!bookingTime && booking.specialRequests) {
+                const timeMatch = booking.specialRequests.match(/Preferred Time:\s*(\d{2}:\d{2})/);
+                if (timeMatch) bookingTime = timeMatch[1];
+            }
+
             const modal = document.createElement('div');
             modal.id = 'bookingModal';
             modal.innerHTML = `
@@ -7663,6 +7670,10 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                                     <p style="margin: 0; font-weight: 600; color: #374151;">${startDate.toLocaleDateString('uz-UZ')}</p>
                                 </div>
                                 <div>
+                                    <p style="margin: 0 0 5px; color: #6b7280; font-size: 12px;">Vaqt</p>
+                                    <p style="margin: 0; font-weight: 600; color: #374151;">${bookingTime || 'Belgilanmagan'}</p>
+                                </div>
+                                <div>
                                     <p style="margin: 0 0 5px; color: #6b7280; font-size: 12px;">Tugash</p>
                                     <p style="margin: 0; font-weight: 600; color: #374151;">${endDate.toLocaleDateString('uz-UZ')}</p>
                                 </div>
@@ -7675,6 +7686,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                                     <p style="margin: 0; font-weight: 600; color: #059669; font-size: 18px;">$${booking.totalPrice}</p>
                                 </div>
                             </div>
+                            ${booking.specialRequests ? '<div style="background: #f8fafc; padding: 12px; border-radius: 8px; margin-bottom: 15px;"><p style="margin: 0 0 5px; color: #6b7280; font-size: 12px;">Maxsus so\'rovlar</p><p style="margin: 0; color: #374151; white-space: pre-line;">' + booking.specialRequests + '</p></div>' : ''}
                             ${booking.notes ? '<div style="background: #f8fafc; padding: 12px; border-radius: 8px; margin-bottom: 15px;"><p style="margin: 0 0 5px; color: #6b7280; font-size: 12px;">Izohlar</p><p style="margin: 0; color: #374151;">' + booking.notes + '</p></div>' : ''}
                             <div style="display: flex; gap: 10px; justify-content: flex-end; border-top: 1px solid #e5e7eb; padding-top: 15px;">
                                 ${booking.status === 'pending' ? '<button onclick="updateBookingStatus(\'' + booking.id + '\', \'confirmed\'); closeBookingModal();" style="padding: 10px 20px; background: #22c55e; color: white; border: none; border-radius: 8px; cursor: pointer;">Tasdiqlash</button>' : ''}
@@ -8293,6 +8305,13 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                     'cancelled': '#ef4444'
                 };
 
+                // Extract time from booking.time or from specialRequests
+                let bookingTime = booking.time;
+                if (!bookingTime && booking.specialRequests) {
+                    const timeMatch = booking.specialRequests.match(/Preferred Time:\s*(\d{2}:\d{2})/);
+                    if (timeMatch) bookingTime = timeMatch[1];
+                }
+
                 const details = `
                     <div style="max-width: 600px;">
                         <div style="background: #f9fafb; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
@@ -8304,6 +8323,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                             <h4 style="margin: 0 0 10px 0; color: #6366f1;">Tour Information</h4>
                             <p style="margin: 0 0 5px 0;"><strong>Tour:</strong> ${booking.tourName}</p>
                             <p style="margin: 0 0 5px 0;"><strong>Date:</strong> ${bookingDate}</p>
+                            <p style="margin: 0 0 5px 0;"><strong>Time:</strong> ${bookingTime || 'Not specified'}</p>
                             <p style="margin: 0 0 5px 0;"><strong>Guests:</strong> ${booking.guests.adults} Adults${booking.guests.children > 0 ? `, ${booking.guests.children} Children` : ''}</p>
                             ${booking.pickupLocation ? `<p style="margin: 0 0 5px 0;"><strong>Pick up location:</strong> ${booking.pickupLocation}</p>` : ''}
                             <p style="margin: 0;"><strong>Total Price:</strong> <span style="color: #6366f1; font-weight: bold;">$${booking.totalPrice}</span></p>
@@ -12972,6 +12992,13 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             const duration = booking.duration || 1;
             const endDate = new Date(startDate.getTime() + (duration - 1) * 24 * 60 * 60 * 1000);
 
+            // Extract time from booking.time or from specialRequests
+            let bookingTime = booking.time;
+            if (!bookingTime && booking.specialRequests) {
+                const timeMatch = booking.specialRequests.match(/Preferred Time:\s*(\d{2}:\d{2})/);
+                if (timeMatch) bookingTime = timeMatch[1];
+            }
+
             const modal = document.createElement('div');
             modal.id = 'bookingModal';
             modal.innerHTML = `
@@ -13007,6 +13034,10 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                                     <p style="margin: 0; font-weight: 600; color: #374151;">${startDate.toLocaleDateString('uz-UZ')}</p>
                                 </div>
                                 <div>
+                                    <p style="margin: 0 0 5px; color: #6b7280; font-size: 12px;">Vaqt</p>
+                                    <p style="margin: 0; font-weight: 600; color: #374151;">${bookingTime || 'Belgilanmagan'}</p>
+                                </div>
+                                <div>
                                     <p style="margin: 0 0 5px; color: #6b7280; font-size: 12px;">Tugash</p>
                                     <p style="margin: 0; font-weight: 600; color: #374151;">${endDate.toLocaleDateString('uz-UZ')}</p>
                                 </div>
@@ -13019,6 +13050,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                                     <p style="margin: 0; font-weight: 600; color: #059669; font-size: 18px;">$${booking.totalPrice}</p>
                                 </div>
                             </div>
+                            ${booking.specialRequests ? '<div style="background: #f8fafc; padding: 12px; border-radius: 8px; margin-bottom: 15px;"><p style="margin: 0 0 5px; color: #6b7280; font-size: 12px;">Maxsus so\'rovlar</p><p style="margin: 0; color: #374151; white-space: pre-line;">' + booking.specialRequests + '</p></div>' : ''}
                             ${booking.notes ? '<div style="background: #f8fafc; padding: 12px; border-radius: 8px; margin-bottom: 15px;"><p style="margin: 0 0 5px; color: #6b7280; font-size: 12px;">Izohlar</p><p style="margin: 0; color: #374151;">' + booking.notes + '</p></div>' : ''}
                             <div style="display: flex; gap: 10px; justify-content: flex-end; border-top: 1px solid #e5e7eb; padding-top: 15px;">
                                 ${booking.status === 'pending' ? '<button onclick="updateBookingStatus(\'' + booking.id + '\', \'confirmed\'); closeBookingModal();" style="padding: 10px 20px; background: #22c55e; color: white; border: none; border-radius: 8px; cursor: pointer;">Tasdiqlash</button>' : ''}
@@ -13637,6 +13669,13 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                     'cancelled': '#ef4444'
                 };
 
+                // Extract time from booking.time or from specialRequests
+                let bookingTime = booking.time;
+                if (!bookingTime && booking.specialRequests) {
+                    const timeMatch = booking.specialRequests.match(/Preferred Time:\s*(\d{2}:\d{2})/);
+                    if (timeMatch) bookingTime = timeMatch[1];
+                }
+
                 const details = `
                     <div style="max-width: 600px;">
                         <div style="background: #f9fafb; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
@@ -13648,6 +13687,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                             <h4 style="margin: 0 0 10px 0; color: #6366f1;">Tour Information</h4>
                             <p style="margin: 0 0 5px 0;"><strong>Tour:</strong> ${booking.tourName}</p>
                             <p style="margin: 0 0 5px 0;"><strong>Date:</strong> ${bookingDate}</p>
+                            <p style="margin: 0 0 5px 0;"><strong>Time:</strong> ${bookingTime || 'Not specified'}</p>
                             <p style="margin: 0 0 5px 0;"><strong>Guests:</strong> ${booking.guests.adults} Adults${booking.guests.children > 0 ? `, ${booking.guests.children} Children` : ''}</p>
                             ${booking.pickupLocation ? `<p style="margin: 0 0 5px 0;"><strong>Pick up location:</strong> ${booking.pickupLocation}</p>` : ''}
                             <p style="margin: 0;"><strong>Total Price:</strong> <span style="color: #6366f1; font-weight: bold;">$${booking.totalPrice}</span></p>
