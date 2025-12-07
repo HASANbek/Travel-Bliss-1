@@ -84,6 +84,7 @@ const settingsRoutes = require('./routes/settings.routes');
 const homeSettingsRoutes = require('./routes/homeSettings.routes');
 const languageRoutes = require('./routes/language.routes');
 const aboutSettingsRoutes = require('./routes/aboutSettings.routes');
+const reviewRoutes = require('./routes/review.routes');
 
 // Use routes
 app.use('/api/demo', demoRoutes);
@@ -101,6 +102,7 @@ app.use('/api/settings', settingsRoutes);
 app.use('/api/home-settings', homeSettingsRoutes);
 app.use('/api/languages', languageRoutes);
 app.use('/api/about-settings', aboutSettingsRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 // SEO routes (sitemap.xml and robots.txt)
 app.use('/', sitemapRoutes);
