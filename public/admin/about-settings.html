@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Page Settings - Travel Bliss Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-header h1 {
+            font-size: 24px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .header-actions a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.2);
+            transition: all 0.3s;
+        }
+
+        .header-actions a:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: #f8fafc;
+            padding: 20px 25px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-header h2 {
+            font-size: 18px;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-header h2 i {
+            color: #667eea;
+        }
+
+        .section-body {
+            padding: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-outline:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        /* Team Member Cards */
+        .team-members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .team-member-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .team-photo-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border: 3px solid #667eea;
+        }
+
+        .team-photo-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-photo-preview .no-photo {
+            width: 100%;
+            height: 100%;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #9ca3af;
+        }
+
+        .team-info h4 {
+            color: #1f2937;
+            margin-bottom: 5px;
+        }
+
+        .team-info .role {
+            color: #667eea;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .team-info .desc {
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .team-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .btn-edit, .btn-delete {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .btn-edit {
+            background: #e0e7ff;
+            color: #4f46e5;
+        }
+
+        .btn-edit:hover {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .btn-delete:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-card-admin {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 25px;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-number-display {
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .stat-label-display {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .stat-desc-display {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .stat-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .stat-actions .btn-edit,
+        .stat-actions .btn-delete {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .stat-actions .btn-edit:hover {
+            background: rgba(255,255,255,0.4);
+        }
+
+        .stat-actions .btn-delete:hover {
+            background: #dc2626;
+        }
+
+        /* Feature Cards */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card-admin {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .feature-icon-display {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .feature-card-admin h4 {
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+
+        .feature-card-admin p {
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .feature-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        /* Review Cards */
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .review-card-admin {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-left: 4px solid #667eea;
+        }
+
+        .review-content-admin p {
+            color: #374151;
+            font-style: italic;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .reviewer-admin strong {
+            color: #1f2937;
+            display: block;
+        }
+
+        .reviewer-admin span {
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 18px;
+            color: #1f2937;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .modal-footer {
+            padding: 20px 25px;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* Image Preview */
+        .image-preview {
+            margin-top: 10px;
+        }
+
+        .image-preview img {
+            max-width: 200px;
+            border-radius: 8px;
+        }
+
+        .upload-btn {
+            margin-top: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="admin-header">
+        <h1><i class="bi bi-info-circle"></i> About Page Settings</h1>
+        <div class="header-actions">
+            <a href="index.html"><i class="bi bi-arrow-left"></i> Back to Dashboard</a>
+            <a href="../gofly/about.html" target="_blank"><i class="bi bi-eye"></i> Preview</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2><i class="bi bi-image"></i> Hero Section</h2>
+            </div>
+            <div class="section-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Hero Title</label>
+                        <input type="text" id="heroTitle" placeholder="About Travel Bliss">
+                    </div>
+                    <div class="form-group">
+                        <label>Hero Subtitle</label>
+                        <input type="text" id="heroSubtitle" placeholder="Your Gateway to Uzbekistan">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Hero Background Image URL</label>
+                    <input type="text" id="heroImage" placeholder="/uploads/hero-image.jpg">
+                    <button class="btn btn-outline upload-btn" onclick="uploadImage('heroImageInput', 'heroImagePreview', 'heroImage')">
+                        <i class="bi bi-upload"></i> Upload Image
+                    </button>
+                    <div id="heroImagePreview" class="image-preview"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Our Story Section -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2><i class="bi bi-book"></i> Our Story Section</h2>
+            </div>
+            <div class="section-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Eyebrow Text</label>
+                        <input type="text" id="storyEyebrow" placeholder="Our Story">
+                    </div>
+                    <div class="form-group">
+                        <label>Section Title</label>
+                        <input type="text" id="storyTitle" placeholder="From Samarkand to the World">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Story Content</label>
+                    <textarea id="storyContent" rows="6" placeholder="Write your story here..."></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Main Image URL</label>
+                        <input type="text" id="storyImageMain" placeholder="/uploads/story-main.jpg">
+                        <button class="btn btn-outline upload-btn" onclick="uploadImage('storyMainInput', null, 'storyImageMain')">
+                            <i class="bi bi-upload"></i> Upload
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label>Secondary Image URL</label>
+                        <input type="text" id="storyImageSecondary" placeholder="/uploads/story-secondary.jpg">
+                        <button class="btn btn-outline upload-btn" onclick="uploadImage('storySecInput', null, 'storyImageSecondary')">
+                            <i class="bi bi-upload"></i> Upload
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why Choose Us Section -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2><i class="bi bi-star"></i> Why Choose Us Section</h2>
+                <button class="btn btn-success" onclick="openFeatureModal()">
+                    <i class="bi bi-plus"></i> Add Feature
+                </button>
+            </div>
+            <div class="section-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Eyebrow Text</label>
+                        <input type="text" id="whyChooseEyebrow" placeholder="Why Travelers Choose Us">
+                    </div>
+                    <div class="form-group">
+                        <label>Section Title</label>
+                        <input type="text" id="whyChooseTitle" placeholder="What Makes Travel Bliss Different">
+                    </div>
+                </div>
+                <div id="featuresContainer" class="features-grid"></div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2><i class="bi bi-graph-up"></i> Statistics</h2>
+                <button class="btn btn-success" onclick="openStatModal()">
+                    <i class="bi bi-plus"></i> Add Stat
+                </button>
+            </div>
+            <div class="section-body">
+                <div id="statsContainer" class="stats-grid"></div>
+            </div>
+        </div>
+
+        <!-- Team Section -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2><i class="bi bi-people"></i> Team Members</h2>
+                <button class="btn btn-success" onclick="openTeamModal()">
+                    <i class="bi bi-plus"></i> Add Team Member
+                </button>
+            </div>
+            <div class="section-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Eyebrow Text</label>
+                        <input type="text" id="teamEyebrow" placeholder="Meet The Team">
+                    </div>
+                    <div class="form-group">
+                        <label>Section Title</label>
+                        <input type="text" id="teamTitle" placeholder="The People Behind Your Journey">
+                    </div>
+                </div>
+                <div id="teamMembersContainer" class="team-members-grid"></div>
+            </div>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2><i class="bi bi-chat-quote"></i> Reviews</h2>
+                <button class="btn btn-success" onclick="openReviewModal()">
+                    <i class="bi bi-plus"></i> Add Review
+                </button>
+            </div>
+            <div class="section-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Eyebrow Text</label>
+                        <input type="text" id="reviewsEyebrow" placeholder="Trusted by Travelers">
+                    </div>
+                    <div class="form-group">
+                        <label>Section Title</label>
+                        <input type="text" id="reviewsTitle" placeholder="What Our Guests Say">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>TripAdvisor Rating</label>
+                        <input type="text" id="tripadvisorRating" placeholder="4.9/5 (500+ reviews)">
+                    </div>
+                    <div class="form-group">
+                        <label>Google Rating</label>
+                        <input type="text" id="googleRating" placeholder="5.0/5 on Google">
+                    </div>
+                </div>
+                <div id="reviewsContainer" class="reviews-list"></div>
+            </div>
+        </div>
+
+        <!-- Save Button -->
+        <div style="text-align: center; margin: 40px 0;">
+            <button class="btn btn-primary" onclick="saveGeneralSettings()" style="padding: 15px 40px; font-size: 16px;">
+                <i class="bi bi-check-lg"></i> Save All Settings
+            </button>
+        </div>
+    </div>
+
+    <!-- Team Member Modal -->
+    <div id="teamModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="teamModalTitle">Add Team Member</h3>
+                <button class="modal-close" onclick="closeTeamModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Name *</label>
+                    <input type="text" id="newMemberName" placeholder="Full Name">
+                </div>
+                <div class="form-group">
+                    <label>Role *</label>
+                    <input type="text" id="newMemberRole" placeholder="e.g., Founder & CEO">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="newMemberDescription" rows="3" placeholder="Short bio..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Photo URL</label>
+                    <input type="text" id="newMemberPhoto" placeholder="/uploads/team/photo.jpg">
+                    <button class="btn btn-outline upload-btn" onclick="uploadImage('memberPhotoInput', 'memberPhotoPreview', 'newMemberPhoto')">
+                        <i class="bi bi-upload"></i> Upload Photo
+                    </button>
+                    <div id="memberPhotoPreview" class="image-preview"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeTeamModal()">Cancel</button>
+                <button class="btn btn-primary" id="teamModalBtn" onclick="updateTeamMember()">Add Member</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stat Modal -->
+    <div id="statModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="statModalTitle">Add Statistic</h3>
+                <button class="modal-close" onclick="closeStatModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Number *</label>
+                    <input type="text" id="newStatNumber" placeholder="e.g., 5000+">
+                </div>
+                <div class="form-group">
+                    <label>Label *</label>
+                    <input type="text" id="newStatLabel" placeholder="e.g., Tours Organized">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" id="newStatDescription" placeholder="Short description...">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeStatModal()">Cancel</button>
+                <button class="btn btn-primary" id="statModalBtn" onclick="updateStat()">Add Stat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feature Modal -->
+    <div id="featureModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="featureModalTitle">Add Feature</h3>
+                <button class="modal-close" onclick="closeFeatureModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Title *</label>
+                    <input type="text" id="newFeatureTitle" placeholder="Feature Title">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="newFeatureDescription" rows="3" placeholder="Feature description..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Icon</label>
+                    <select id="newFeatureIcon">
+                        <option value="home">Home</option>
+                        <option value="smile">Smile</option>
+                        <option value="dollar">Dollar</option>
+                        <option value="star">Star</option>
+                        <option value="heart">Heart</option>
+                        <option value="globe">Globe</option>
+                        <option value="map">Map</option>
+                        <option value="people">People</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeFeatureModal()">Cancel</button>
+                <button class="btn btn-primary" id="featureModalBtn" onclick="updateFeature()">Add Feature</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div id="reviewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Review</h3>
+                <button class="modal-close" onclick="closeReviewModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Review Content *</label>
+                    <textarea id="newReviewContent" rows="4" placeholder="Customer review..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Author Name *</label>
+                    <input type="text" id="newReviewAuthor" placeholder="e.g., Sarah Mitchell">
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="newReviewLocation" placeholder="e.g., USA">
+                </div>
+                <div class="form-group">
+                    <label>Tour Name</label>
+                    <input type="text" id="newReviewTour" placeholder="e.g., Silk Road Explorer">
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="text" id="newReviewDate" placeholder="e.g., October 2024">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeReviewModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="addReview()">Add Review</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="about-settings.js"></script>
+</body>
+</html>

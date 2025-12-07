@@ -563,7 +563,18 @@ exports.updateTour = asyncHandler(async (req, res) => {
   if (requestData.startDate) updateData.startDates = [requestData.startDate];
   if (requestData.startDates) updateData.startDates = requestData.startDates;
   if (requestData.image || requestData.imageCover) updateData.imageCover = requestData.image || requestData.imageCover;
-  if (requestData.images) updateData.images = requestData.images;
+  if (requestData.images) {
+    // Handle images array - convert objects to strings if needed
+    if (Array.isArray(requestData.images)) {
+      updateData.images = requestData.images.map(img => {
+        if (typeof img === 'string') return img;
+        if (typeof img === 'object' && img.url) return img.url;
+        return img;
+      }).filter(Boolean);
+    } else {
+      updateData.images = requestData.images;
+    }
+  }
   if (requestData.category !== undefined) updateData.category = requestData.category;
   if (requestData.videoUrl !== undefined) updateData.videoUrl = requestData.videoUrl;
   if (requestData.itinerary !== undefined) updateData.itinerary = requestData.itinerary;

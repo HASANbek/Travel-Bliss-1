@@ -1179,6 +1179,10 @@
                     <i>🏠</i>
                     <span>Home Settings</span>
                 </a>
+                <a class="menu-item" href="about-settings.html">
+                    <i>📄</i>
+                    <span>About Page</span>
+                </a>
                 <a class="menu-item" data-page="seo">
                     <i>🔍</i>
                     <span>SEO Settings</span>
@@ -4339,7 +4343,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
 
             try {
                 console.log('📊 Loading tours from API...');
-                const response = await fetch(`${API_URL}/tours`);
+                const response = await fetch(`${API_URL}/tours?limit=100`);
 
                 if (!response.ok) {
                     console.error('❌ API response not OK:', response.status);
@@ -7059,7 +7063,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
         async function loadSeoTours() {
             const tbody = document.getElementById('seoToursTableBody');
             try {
-                const response = await fetch(`${API_URL}/tours`);
+                const response = await fetch(`${API_URL}/tours?limit=100`);
                 const result = await response.json();
                 const tours = result.data?.tours || result.data || [];
 
@@ -10831,7 +10835,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
 
             try {
                 console.log('📊 Loading tours from API...');
-                const response = await fetch(`${API_URL}/tours`);
+                const response = await fetch(`${API_URL}/tours?limit=100`);
 
                 if (!response.ok) {
                     console.error('❌ API response not OK:', response.status);
@@ -12423,7 +12427,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
         async function loadSeoTours() {
             const tbody = document.getElementById('seoToursTableBody');
             try {
-                const response = await fetch(`${API_URL}/tours`);
+                const response = await fetch(`${API_URL}/tours?limit=100`);
                 const result = await response.json();
                 const tours = result.data?.tours || result.data || [];
 
@@ -14596,5 +14600,8 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             </div>
         </div>
     </div>
+
+    <!-- Tours Pagination Script -->
+    <script src="tours-pagination.js"></script>
 </body>
 </html>

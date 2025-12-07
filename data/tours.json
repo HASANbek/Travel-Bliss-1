@@ -728,5 +728,1106 @@
       "/uploads/yurt_camp_2-1763726189775-10828383.jpg"
     ],
     "updatedAt": "2025-11-21T11:56:33.960Z"
+  },
+  {
+    "id": "staging-44",
+    "title": "2-Day Desert Yurt Experience: From Samarkand or Bukhara to Nurata, Yanghi-Gazgan & Aydarkul Lake",
+    "description": "Step into a world of timeless nomadic life on this unforgettable 2-Day Desert Yurt Experience! Departing from either Samarkand or Bukhara, your journey takes you deep into Uzbekistan's heart — through the historic oasis town of Nurata, the quiet village of Yanghi-Gazgan, and the shimmering shores of Aydarkul Lake. On your first day, explore Nurata's ancient ruins, including the sacred Chashma Spring and the fortress of Alexander the Great. Continue to Yanghi-Gazgan, where you'll settle into a traditional desert yurt camp, surrounded by golden sands and open skies. As evening falls, enjoy a local dinner under the stars, complete with optional camel rides across the dunes.",
+    "destination": "Samarkand",
+    "price": 190,
+    "duration": 2,
+    "nights": 1,
+    "category": "adventure",
+    "rating": 4.8,
+    "ratingsCount": 45,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "2-day-desert-yurt-experience",
+    "imageCover": "/uploads/tours/desert-yurt-experience-hero.jpg",
+    "images": [],
+    "included": [
+      "Transportation from Samarkand or Bukhara",
+      "1 night yurt accommodation",
+      "All meals (dinner, breakfast, lunch)",
+      "English-speaking guide",
+      "Entrance fees",
+      "Camel ride opportunity"
+    ],
+    "excluded": [
+      "Personal expenses",
+      "Tips",
+      "Travel insurance"
+    ],
+    "highlights": [
+      "Visit to Nurata: Chashma Spring & Fortress of Alexander the Great",
+      "Overnight stay in a traditional desert yurt camp",
+      "Camel ride opportunity at sunset",
+      "Scenic exploration of Aydarkul Lake",
+      "Authentic Uzbek meals under the stars"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 15,
+    "languages": ["English", "Russian"]
+  },
+  {
+    "id": "staging-31",
+    "title": "Discover Uzbekistan — 5 Days / 4 Nights",
+    "description": "Experience the highlights of Uzbekistan on this compact and comfortable tour: Tashkent → Bukhara → drive via Shakhrisabz → Samarkand → return to Tashkent. Perfect for travelers who want to see the Silk Road's greatest treasures with reliable transfers, local guides and cozy hotel stays. Explore UNESCO World Heritage cities rich in history and architecture, visit ancient madrasahs, mosques, mausoleums, and bustling oriental bazaars.",
+    "destination": "Tashkent",
+    "price": 750,
+    "duration": 5,
+    "nights": 4,
+    "category": "cultural",
+    "rating": 4.9,
+    "ratingsCount": 67,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "discover-uzbekistan-5-days-4-nights",
+    "imageCover": "/uploads/tours/uzbekistan-classic-hero.jpg",
+    "images": [],
+    "included": [
+      "4 nights accommodation",
+      "All transfers",
+      "English-speaking guide",
+      "Entrance fees",
+      "Daily breakfast",
+      "Train tickets"
+    ],
+    "excluded": [
+      "International flights",
+      "Travel insurance",
+      "Lunches and dinners",
+      "Personal expenses"
+    ],
+    "highlights": [
+      "UNESCO World Heritage cities",
+      "Ancient madrasahs and mosques",
+      "Bustling oriental bazaars",
+      "Scenic mountain drive via Shakhrisabz"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 12,
+    "languages": ["English", "Russian"]
+  },
+  {
+    "id": "staging-32",
+    "title": "Uzbekistan Unveiled: Culture & Crafts of the Fergana Valley (10 Days / 9 Nights)",
+    "description": "Discover a lesser-known side of Central Asia on this immersive Fergana Valley tour Uzbekistan. This 10-day journey combines iconic heritage with artisan traditions. Explore Tashkent and Samarkand, but also go deeper—into the Fergana Valley, the cultural cradle of silk weaving, ceramics, and ancient khanates. With workshops, palace visits, and village hospitality, this tour is ideal for craft lovers, cultural explorers, and curious travelers looking beyond the usual.",
+    "destination": "Tashkent",
+    "price": 1200,
+    "duration": 10,
+    "nights": 9,
+    "category": "cultural",
+    "rating": 4.9,
+    "ratingsCount": 38,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "fergana-valley-tour-uzbekistan-10-days",
+    "imageCover": "/uploads/tours/fergana-valley-tour-hero.jpg",
+    "images": [],
+    "included": [
+      "9 nights accommodation",
+      "All transfers",
+      "English-speaking guide",
+      "Entrance fees",
+      "Daily breakfast",
+      "Craft workshops"
+    ],
+    "excluded": [
+      "International flights",
+      "Travel insurance",
+      "Most lunches and dinners",
+      "Personal expenses"
+    ],
+    "highlights": [
+      "Silk weaving workshops in Margilan",
+      "Ceramics in Rishtan",
+      "Ancient Kokand Palace",
+      "Traditional Fergana Valley hospitality"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 10,
+    "languages": ["English", "Russian"]
+  },
+  {
+    "id": "staging-33",
+    "title": "Nature and Nomads of Uzbekistan – Mountains, Lakes & Yurts in 7 Days",
+    "description": "Step off the beaten path and immerse yourself in the natural beauty and nomadic heritage of Central Asia. Over 7 days, you'll sleep in yurts under starry skies, ride camels along the edge of the desert, hike the Nurata Mountains, and explore the timeless cities of Samarkand and Tashkent. This is Uzbekistan beyond the madrasahs – a journey of raw landscapes, mountain hospitality, and ancient caravan trails.",
+    "destination": "Tashkent",
+    "price": 950,
+    "duration": 7,
+    "nights": 6,
+    "category": "adventure",
+    "rating": 4.8,
+    "ratingsCount": 52,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "nature-tour-uzbekistan-7-days",
+    "imageCover": "/uploads/tours/nature-nomads-tour-hero.jpg",
+    "images": [],
+    "included": [
+      "6 nights accommodation (hotels + yurt camps)",
+      "All transfers",
+      "English-speaking guide",
+      "Camel ride",
+      "Daily breakfast",
+      "Train tickets"
+    ],
+    "excluded": [
+      "International flights",
+      "Travel insurance",
+      "Personal expenses",
+      "Tips"
+    ],
+    "highlights": [
+      "Stay overnight in a traditional yurt camp near Aydarkul Lake",
+      "Ride a camel along ancient desert trails",
+      "Live like a local in a remote mountain village",
+      "Hike scenic trails in the Nurata Mountains",
+      "Explore Samarkand's UNESCO treasures"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 12,
+    "languages": ["English", "Russian"]
+  },
+  {
+    "id": "staging-34",
+    "title": "Classic Uzbekistan Tour – Explore Samarkand, Bukhara, Khiva & Tashkent in 8 Days",
+    "description": "Embark on the classic Uzbekistan tour, an 8-day cultural journey across Central Asia's most iconic Silk Road cities: Khiva, Bukhara, Samarkand, and Tashkent. Marvel at blue-tiled minarets, ancient madrasahs, and bustling bazaars while following in the footsteps of caravans and conquerors. This immersive itinerary includes domestic flights, train travel, local guides, and thoughtfully curated experiences.",
+    "destination": "Tashkent",
+    "price": 1100,
+    "duration": 8,
+    "nights": 7,
+    "category": "cultural",
+    "rating": 4.9,
+    "ratingsCount": 89,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "classic-uzbekistan-tour-8-days",
+    "imageCover": "/uploads/tours/classic-uzbekistan-tour-hero.jpg",
+    "images": [],
+    "included": [
+      "7 nights accommodation",
+      "Domestic flight Tashkent-Urgench",
+      "High-speed train tickets",
+      "English-speaking guide",
+      "Entrance fees",
+      "Daily breakfast"
+    ],
+    "excluded": [
+      "International flights",
+      "Travel insurance",
+      "Most lunches and dinners",
+      "Personal expenses"
+    ],
+    "highlights": [
+      "Guided visits to 4 UNESCO World Heritage Sites",
+      "Walk through the ancient walled city of Khiva",
+      "Visit the legendary Registan in Samarkand",
+      "Ride on Uzbekistan's Afrosiyob high-speed train"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 12,
+    "languages": ["English", "Russian", "German"]
+  },
+  {
+    "id": "staging-35",
+    "title": "Shahrisabz Day Tour – Explore the Birthplace of Tamerlane (With Guide)",
+    "description": "This Shahrisabz Day Tour offers a full day rich with cultural discovery, scenic beauty, and historical wonder. It's the perfect blend of architecture, nature, and immersive tradition — ideal for travelers eager to explore beyond Samarkand and step into the birthplace of one of the world's most legendary rulers, Amir Timur. Start your day with a visit to the Konigil Paper Mill, continue through the stunning Tahtakaracha Mountain Pass, and explore Shahrisabz's UNESCO-listed architectural gems.",
+    "destination": "Samarkand",
+    "price": 70,
+    "duration": 1,
+    "nights": 0,
+    "category": "cultural",
+    "rating": 4.7,
+    "ratingsCount": 34,
+    "isActive": true,
+    "isFeatured": false,
+    "slug": "shahrisabz-day-tour",
+    "imageCover": "/uploads/tours/shahrisabz-tour-hero.jpg",
+    "images": [],
+    "included": [
+      "Transportation",
+      "English-speaking guide",
+      "Entrance fees",
+      "Lunch"
+    ],
+    "excluded": [
+      "Personal expenses",
+      "Tips"
+    ],
+    "highlights": [
+      "Konigil Silk Paper Workshop",
+      "Teshik-Tosh Cave",
+      "Tahtakaracha Mountain Pass Scenic Viewpoint",
+      "Ak-Saray Palace",
+      "Dorus Saodat Complex",
+      "Crypt of Timur"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 15,
+    "languages": ["English", "Russian"]
+  },
+  {
+    "id": "staging-36",
+    "title": "Shahrisabz Day Tour – Explore the Birthplace of Tamerlane (Without Guide)",
+    "description": "Experience a captivating Shahrisabz Day Tour where history, nature, and craftsmanship come together in one unforgettable journey — ideal for independent travelers seeking adventure beyond Samarkand. This self-guided tour includes transportation to all the major sites, allowing you to explore at your own pace.",
+    "destination": "Samarkand",
+    "price": 50,
+    "duration": 1,
+    "nights": 0,
+    "category": "cultural",
+    "rating": 4.5,
+    "ratingsCount": 28,
+    "isActive": true,
+    "isFeatured": false,
+    "slug": "shahrisabz-day-tour-without-guide",
+    "imageCover": "/uploads/tours/shahrisabz-tour-no-guide-hero.jpg",
+    "images": [],
+    "included": [
+      "Transportation",
+      "Entrance fees"
+    ],
+    "excluded": [
+      "Guide",
+      "Lunch",
+      "Personal expenses",
+      "Tips"
+    ],
+    "highlights": [
+      "Konigil Silk Paper Workshop",
+      "Tahtakaracha Mountain Pass",
+      "Teshik-Tosh Cave",
+      "Ak-Saray Palace",
+      "Dorus Saodat Complex"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 20,
+    "languages": []
+  },
+  {
+    "id": "staging-37",
+    "title": "Paper, Pottery & Silk Carpet Tour near Samarkand",
+    "description": "Step into the living history of Samarkand with our Paper, Pottery & Silk Carpet Tour! This immersive day trip takes you beyond the city's monuments and into the heart of Uzbekistan's most treasured crafts. Visit traditional workshops, meet master artisans, and experience the time-honored techniques behind Samarkand's world-famous silk carpets, ancient paper-making, and exquisite pottery.",
+    "destination": "Samarkand",
+    "price": 60,
+    "duration": 1,
+    "nights": 0,
+    "category": "cultural",
+    "rating": 4.8,
+    "ratingsCount": 42,
+    "isActive": true,
+    "isFeatured": false,
+    "slug": "paper-pottery-silk-carpet-tour-samarkand",
+    "imageCover": "/uploads/tours/crafts-tour-samarkand-hero.jpg",
+    "images": [],
+    "included": [
+      "Transportation",
+      "English-speaking guide",
+      "Workshop visits",
+      "Tea and snacks"
+    ],
+    "excluded": [
+      "Lunch",
+      "Personal purchases",
+      "Tips"
+    ],
+    "highlights": [
+      "Konigil Silk Paper Workshop",
+      "Pottery Studio Visit",
+      "Urgut Bazaar",
+      "Sacred Chor-Chinor Grove"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 8,
+    "languages": ["English", "Russian"]
+  },
+  {
+    "id": "staging-38",
+    "title": "Bukhara City Tour – A Journey Through the Living History of Central Asia",
+    "description": "Step into the timeless beauty of Bukhara, one of the oldest cities in Central Asia and a UNESCO World Heritage Site. With over 2,000 years of history, Bukhara has been a center of religion, scholarship, trade, and culture. This full-day tour will take you through its most iconic monuments, revealing stories of dynasties, prophets, poets, and scholars.",
+    "destination": "Bukhara",
+    "price": 65,
+    "duration": 1,
+    "nights": 0,
+    "category": "cultural",
+    "rating": 4.9,
+    "ratingsCount": 78,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "bukhara-city-tour",
+    "imageCover": "/uploads/tours/bukhara-city-tour-hero.jpg",
+    "images": [],
+    "included": [
+      "Professional guide",
+      "Entrance fees to all monuments",
+      "Traditional tea break"
+    ],
+    "excluded": [
+      "Transportation",
+      "Lunch",
+      "Personal expenses",
+      "Tips"
+    ],
+    "highlights": [
+      "Ark Fortress",
+      "Bolo Hauz Mosque",
+      "Poi-Kalyan Complex",
+      "Trading Domes",
+      "Lyabi-Hauz Ensemble"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 15,
+    "languages": ["English", "Russian", "German", "French"]
+  },
+  {
+    "id": "staging-39",
+    "title": "Silk Road Splendors of Uzbekistan",
+    "description": "A legendary journey through time — across deserts, ancient cities, and caravan routes once traveled by merchants, mystics, and kings. Step into the heart of Central Asia and discover the architectural wonders, cultural treasures, and breathtaking landscapes of Uzbekistan — the jewel of the Silk Road. This immersive 10-day tour takes you through three UNESCO-listed cities: Khiva, Bukhara, and Samarkand.",
+    "destination": "Tashkent",
+    "price": 1300,
+    "duration": 10,
+    "nights": 9,
+    "category": "cultural",
+    "rating": 4.9,
+    "ratingsCount": 95,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "silk-road-splendors-of-uzbekistan",
+    "imageCover": "/uploads/tours/silk-road-splendors-hero.jpg",
+    "images": [],
+    "included": [
+      "9 nights accommodation",
+      "Domestic flights",
+      "Train tickets",
+      "All transfers",
+      "English-speaking guide",
+      "Entrance fees",
+      "Daily breakfast"
+    ],
+    "excluded": [
+      "International flights",
+      "Travel insurance",
+      "Lunches and dinners",
+      "Personal expenses"
+    ],
+    "highlights": [
+      "Three UNESCO-listed cities",
+      "Khiva's Itchan Kala",
+      "Bukhara's ancient medina",
+      "Samarkand's Registan Square"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 12,
+    "languages": ["English", "Russian", "German"]
+  },
+  {
+    "id": "staging-40",
+    "title": "Desert Fortress Tour from Khiva – Toprak Qala, Ayaz Qala & More",
+    "description": "Discover the Legendary Clay Castles of Ancient Khorezm. This experience is perfect for history buffs, archaeology lovers, and adventurous travelers who want to go beyond the walls of Khiva and explore the ancient desert citadels of Khorezm — some of the most spectacular and least-visited sites in all of Central Asia.",
+    "destination": "Khiva",
+    "price": 150,
+    "duration": 1,
+    "nights": 0,
+    "category": "adventure",
+    "rating": 4.8,
+    "ratingsCount": 36,
+    "isActive": true,
+    "isFeatured": false,
+    "slug": "desert-fortress-tour-from-khiva-toprak-qala-ayaz-qala-more",
+    "imageCover": "/uploads/tours/desert-fortresses-hero.jpg",
+    "images": [],
+    "included": [
+      "4x4 vehicle",
+      "English-speaking guide",
+      "Entrance fees",
+      "Picnic lunch"
+    ],
+    "excluded": [
+      "Personal expenses",
+      "Tips"
+    ],
+    "highlights": [
+      "Toprak Qala",
+      "Qizil Qala",
+      "Ayaz Qala (3 forts)",
+      "Janbas Qala"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 8,
+    "languages": ["English", "Russian"]
+  },
+  {
+    "id": "staging-41",
+    "title": "2-Day Nuratau Mountains Tour – Homestay, Nature & Heritage",
+    "description": "This tour is perfect for travelers looking to go off the beaten path and immerse themselves in village life, mountain landscapes, and ancient history. Experience real hospitality, explore untouched nature, and walk in the footsteps of Alexander the Great — all within just two days.",
+    "destination": "Samarkand",
+    "price": 180,
+    "duration": 2,
+    "nights": 1,
+    "category": "adventure",
+    "rating": 4.7,
+    "ratingsCount": 29,
+    "isActive": true,
+    "isFeatured": false,
+    "slug": "2-day-nuratau-mountains-tour-homestay-nature-heritage",
+    "imageCover": "/uploads/tours/nuratau-mountains-hero.jpg",
+    "images": [],
+    "included": [
+      "Transportation",
+      "1 night homestay",
+      "All meals",
+      "English-speaking guide",
+      "Hiking guide"
+    ],
+    "excluded": [
+      "Personal expenses",
+      "Tips",
+      "Travel insurance"
+    ],
+    "highlights": [
+      "Village homestay experience",
+      "Mountain hiking",
+      "Ancient petroglyphs",
+      "Alexander's Fortress ruins",
+      "Traditional Uzbek hospitality"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 10,
+    "languages": ["English", "Russian"]
+  },
+  {
+    "id": "staging-30",
+    "title": "Pamir Highway & Silk Road Odyssey: Tajikistan to Uzbekistan Epic Journey",
+    "description": "This is the adventure of a lifetime - combining two of Central Asia's most iconic experiences into one unforgettable 14-day journey. Part 1: Pamir Highway (Days 1-7) - Traverse the 'Roof of the World' on the legendary Pamir Highway, the second-highest international highway on Earth. Part 2: Silk Road Cities (Days 8-14) - Descend from the mountains into Uzbekistan's desert heartland.",
+    "destination": "Dushanbe",
+    "price": 2895,
+    "duration": 14,
+    "nights": 13,
+    "category": "adventure",
+    "rating": 5.0,
+    "ratingsCount": 24,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "pamir-highway-silk-road-odyssey-tajikistan-uzbekistan",
+    "imageCover": "/uploads/tours/pamir-silk-road-hero.webp",
+    "images": [],
+    "included": [
+      "13 nights accommodation",
+      "All transfers and 4x4 transport",
+      "Professional guides",
+      "Entrance fees",
+      "Daily breakfast",
+      "Some lunches and dinners"
+    ],
+    "excluded": [
+      "International flights",
+      "Visa fees",
+      "Travel insurance",
+      "Personal expenses"
+    ],
+    "highlights": [
+      "Pamir Highway - 1,200 km of the world's most spectacular mountain road",
+      "Wakhan Corridor",
+      "Iskanderkul Lake",
+      "Samarkand, Bukhara UNESCO sites"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 8,
+    "languages": ["English", "Russian"]
+  },
+  {
+    "id": "staging-29",
+    "title": "Kazakhstan-Kyrgyzstan Nature Explorer: Canyons, Singing Dunes & Alpine Lakes",
+    "description": "Discover the raw natural beauty of Central Asia on this 8-day cross-border adventure combining Kazakhstan's dramatic canyons and desert landscapes with Kyrgyzstan's alpine paradise. Experience Charyn Canyon, Altyn Emel's Singing Dunes, Issyk-Kul Lake, and Ala-Archa National Park.",
+    "destination": "Almaty",
+    "price": 1495,
+    "duration": 8,
+    "nights": 7,
+    "category": "adventure",
+    "rating": 4.9,
+    "ratingsCount": 31,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "kazakhstan-kyrgyzstan-nature-explorer-canyons-lakes",
+    "imageCover": "/uploads/tours/kz-kg-nature-hero.webp",
+    "images": [],
+    "included": [
+      "7 nights accommodation",
+      "All transfers",
+      "English-speaking guide",
+      "Park entrance fees",
+      "Daily breakfast"
+    ],
+    "excluded": [
+      "International flights",
+      "Visa fees",
+      "Travel insurance",
+      "Lunches and dinners"
+    ],
+    "highlights": [
+      "Charyn Canyon - Valley of Castles",
+      "Altyn Emel Singing Dunes",
+      "Issyk-Kul Lake",
+      "Jeti-Oguz & Skazka Canyon",
+      "Ala-Archa National Park"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 10,
+    "languages": ["English", "Russian"]
+  },
+  {
+    "id": "staging-28",
+    "title": "Kyrgyzstan Nomadic Adventure: Song Kul Lake & Tian Shan Valleys",
+    "description": "Experience authentic nomadic life in the Kyrgyz highlands. Sleep in traditional yurts at Song Kul Lake (3,016m), ride horses across endless meadows, learn ancient crafts from herder families, and trek through pristine alpine valleys. This immersive 7-day journey combines breathtaking mountain landscapes with deep cultural connection.",
+    "destination": "Bishkek",
+    "price": 1295,
+    "duration": 7,
+    "nights": 6,
+    "category": "adventure",
+    "rating": 4.9,
+    "ratingsCount": 47,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "kyrgyzstan-nomadic-adventure-song-kul-tian-shan",
+    "imageCover": "/uploads/tours/kyrgyzstan-nomad-hero.webp",
+    "images": [],
+    "included": [
+      "6 nights accommodation (yurts + guesthouses)",
+      "All transfers",
+      "English-speaking guide",
+      "Horse riding",
+      "All meals during yurt stays"
+    ],
+    "excluded": [
+      "International flights",
+      "Visa fees",
+      "Travel insurance",
+      "Personal expenses"
+    ],
+    "highlights": [
+      "Song Kul Lake at 3,016m",
+      "Yurt stays with nomadic families",
+      "Horseback riding",
+      "Alpine trekking",
+      "Traditional craft workshops"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 10,
+    "languages": ["English", "Russian"]
+  },
+  {
+    "id": "staging-24",
+    "title": "Luxury Uzbekistan: 6-Day Heritage Journey by High-Speed Rail",
+    "description": "Discover the legendary Silk Road in refined comfort on this carefully curated 6-day journey. Travel between ancient cities aboard Uzbekistan's modern Afrosiyob high-speed trains in business class, stay in handpicked boutique hotels housed in restored historic buildings, and explore with expert guides who bring 2,500 years of history to life.",
+    "destination": "Tashkent",
+    "price": 1695,
+    "duration": 6,
+    "nights": 5,
+    "category": "cultural",
+    "rating": 5.0,
+    "ratingsCount": 56,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "luxury-uzbekistan-6-day-heritage-high-speed-rail",
+    "imageCover": "/uploads/tours/luxury-uzbekistan-hero.webp",
+    "images": [],
+    "included": [
+      "5 nights boutique hotel accommodation",
+      "Business-class train tickets",
+      "Private guide in each city",
+      "All entrance fees",
+      "Daily breakfast",
+      "Airport transfers"
+    ],
+    "excluded": [
+      "International flights",
+      "Travel insurance",
+      "Lunches and dinners",
+      "Personal expenses"
+    ],
+    "highlights": [
+      "Premium boutique hotels",
+      "Business-class Afrosiyob trains",
+      "Small group (max 8 guests)",
+      "Expert local historians",
+      "Triple UNESCO World Heritage Sites"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 8,
+    "languages": ["English", "Russian", "German", "French"]
+  },
+  {
+    "id": "staging-23",
+    "title": "Forgotten Shores: 2-Day Aral Sea Ecological Journey",
+    "description": "This is not a typical tour—it's a pilgrimage to one of humanity's greatest environmental mistakes. The Aral Sea, once the world's fourth-largest lake, has shrunk to just 10% of its original size since the 1960s. This powerful 2-day journey takes you across the dried seabed, through Ustyurt Plateau canyons, and includes an overnight yurt stay.",
+    "destination": "Nukus",
+    "price": 385,
+    "duration": 2,
+    "nights": 1,
+    "category": "adventure",
+    "rating": 4.8,
+    "ratingsCount": 42,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "forgotten-shores-2-day-aral-sea-journey",
+    "imageCover": "/uploads/tours/aral-sea-hero.webp",
+    "images": [],
+    "included": [
+      "4x4 vehicle",
+      "1 night yurt accommodation",
+      "All meals",
+      "English-speaking guide",
+      "Entrance fees"
+    ],
+    "excluded": [
+      "Travel insurance",
+      "Personal expenses",
+      "Tips"
+    ],
+    "highlights": [
+      "Muynak Ship Cemetery",
+      "Ustyurt Plateau canyons",
+      "Aral Sea shore",
+      "Mizdakhan Necropolis",
+      "Yurt camping under stars"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 8,
+    "languages": ["English", "Russian"]
+  },
+  {
+    "id": "staging-22",
+    "title": "Central Asia Grand Odyssey: 4 Countries, 14 Days of Silk Road Discovery",
+    "description": "This is the definitive Central Asian journey—a 14-day odyssey through four distinct countries: Kazakhstan, Kyrgyzstan, Tajikistan, and Uzbekistan. From Almaty's snow-capped peaks to Kyrgyzstan's nomadic traditions, from Tajikistan's Sogdian heritage to Uzbekistan's architectural masterpieces.",
+    "destination": "Tashkent",
+    "price": 2895,
+    "duration": 14,
+    "nights": 13,
+    "category": "cultural",
+    "rating": 5.0,
+    "ratingsCount": 38,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "central-asia-grand-odyssey-4-countries-14-days",
+    "imageCover": "/uploads/tours/central-asia-odyssey-hero.webp",
+    "images": [],
+    "included": [
+      "13 nights accommodation",
+      "All transfers and flights",
+      "Expert guides in each country",
+      "Entrance fees",
+      "Daily breakfast",
+      "Train tickets"
+    ],
+    "excluded": [
+      "International flights",
+      "Visa fees",
+      "Travel insurance",
+      "Most lunches and dinners"
+    ],
+    "highlights": [
+      "Four countries, one epic journey",
+      "Three border crossings",
+      "Ancient Silk Road Heritage",
+      "Fergana Valley crafts",
+      "Dramatic landscape diversity"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 12,
+    "languages": ["English", "Russian"]
+  },
+  {
+    "id": "staging-21",
+    "title": "Masters of the Silk Road: Art, Craft & Architecture Odyssey",
+    "description": "This is not a museum tour—it's a living, breathing journey into the soul of Central Asian artistry. Over 10 transformative days, you'll stand beneath stunning Islamic architecture, work alongside master craftspeople, and discover why Uzbekistan is called the 'Jewel of the Silk Road.'",
+    "destination": "Tashkent",
+    "price": 2495,
+    "duration": 10,
+    "nights": 9,
+    "category": "cultural",
+    "rating": 5.0,
+    "ratingsCount": 29,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "masters-silk-road-art-craft-architecture-odyssey",
+    "imageCover": "/uploads/tours/masters-silk-road-hero.jpg",
+    "images": [],
+    "included": [
+      "9 nights accommodation",
+      "All transfers",
+      "Expert art historian guide",
+      "Workshop fees",
+      "Entrance fees",
+      "Daily breakfast"
+    ],
+    "excluded": [
+      "International flights",
+      "Travel insurance",
+      "Lunches and dinners",
+      "Personal purchases"
+    ],
+    "highlights": [
+      "Timurid Architecture Masterclass",
+      "Hands-On Artisan Workshops",
+      "Master Artisan Access",
+      "Photography-optimized schedule",
+      "Living Craft Villages"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 8,
+    "languages": ["English"]
+  },
+  {
+    "id": "staging-20",
+    "title": "Grand Silk Road: 11-Day Complete Uzbekistan Discovery",
+    "description": "This is not just a tour—it's a transformative journey through the living heart of the Silk Road. From the forbidden art treasures hidden in the desert to the azure domes of Samarkand, from ancient Khorezmian fortresses to the silk-weaving villages of the Fergana Valley.",
+    "destination": "Tashkent",
+    "price": 1895,
+    "duration": 11,
+    "nights": 10,
+    "category": "cultural",
+    "rating": 4.9,
+    "ratingsCount": 67,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "grand-silk-road-11-day-uzbekistan-discovery",
+    "imageCover": "/uploads/tours/grand-11-day-hero.webp",
+    "images": [],
+    "included": [
+      "10 nights accommodation",
+      "Domestic flight",
+      "Train tickets",
+      "All transfers",
+      "English-speaking guide",
+      "Entrance fees",
+      "Daily breakfast"
+    ],
+    "excluded": [
+      "International flights",
+      "Travel insurance",
+      "Lunches and dinners",
+      "Personal expenses"
+    ],
+    "highlights": [
+      "Savitsky Collection",
+      "Triple UNESCO World Heritage",
+      "Ancient Desert Fortresses",
+      "High-Speed Rail Experience",
+      "Living Crafts Traditions"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 12,
+    "languages": ["English", "Russian", "German"]
+  },
+  {
+    "id": "staging-17",
+    "title": "Classic Uzbekistan: 7-Day Silk Road Journey - Tashkent, Bukhara, Desert & Samarkand",
+    "description": "Discover the magic of the Silk Road on this comprehensive 7-day tour covering Uzbekistan's most iconic destinations. From the modern capital Tashkent to the ancient cities of Bukhara and Samarkand, with an unforgettable desert experience at Aydarkul Lake.",
+    "destination": "Tashkent",
+    "price": 890,
+    "duration": 7,
+    "nights": 6,
+    "category": "cultural",
+    "rating": 4.8,
+    "ratingsCount": 112,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "classic-uzbekistan-7-day-silk-road-tashkent-bukhara-samarkand",
+    "imageCover": "/uploads/tours/classic-uzbekistan-7day-hero.jpg",
+    "images": [],
+    "included": [
+      "6 nights accommodation (including yurt)",
+      "All transfers",
+      "English-speaking guide",
+      "Entrance fees",
+      "Daily breakfast",
+      "Camel ride"
+    ],
+    "excluded": [
+      "International flights",
+      "Travel insurance",
+      "Lunches and dinners",
+      "Personal expenses"
+    ],
+    "highlights": [
+      "Three UNESCO World Heritage Cities",
+      "Desert Adventure at Aydarkul Lake",
+      "Ancient Crafts workshops",
+      "High-Speed Train",
+      "Cultural Immersion"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 8,
+    "languages": ["English", "Russian"]
+  },
+  {
+    "id": "staging-16",
+    "title": "Samarkand Artisan Trail: Ancient Crafts, Urgut Bazaar & Afrosiyab Murals",
+    "description": "Step beyond the grand monuments to discover the living crafts and traditions that have defined Samarkand for millennia. This immersive day tour takes you to artisan workshops, an authentic Central Asian bazaar, and one of the world's most important archaeological museums.",
+    "destination": "Samarkand",
+    "price": 75,
+    "duration": 1,
+    "nights": 0,
+    "category": "cultural",
+    "rating": 4.8,
+    "ratingsCount": 58,
+    "isActive": true,
+    "isFeatured": false,
+    "slug": "samarkand-artisan-trail-crafts-urgut-afrosiyab",
+    "imageCover": "/uploads/tours/crafts-culture-hero.webp",
+    "images": [],
+    "included": [
+      "Transportation",
+      "English-speaking guide",
+      "Workshop entry fees",
+      "Paper-making experience",
+      "Museum entry"
+    ],
+    "excluded": [
+      "Lunch",
+      "Personal purchases",
+      "Tips"
+    ],
+    "highlights": [
+      "Konigil Village Paper Making",
+      "Urgut Bazaar",
+      "Silk Carpet Factory",
+      "Afrosiyab Museum"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 8,
+    "languages": ["English", "Russian"]
+  },
+  {
+    "id": "staging-15",
+    "title": "Tajikistan Seven Lakes Adventure: Marguzor & Sarazm UNESCO from Samarkand",
+    "description": "Experience one of Central Asia's most spectacular natural wonders - the Seven Lakes of Marguzor (Haftkul) - nestled in the breathtaking Fann Mountains of Tajikistan. This cross-border adventure from Samarkand combines pristine alpine beauty with ancient history and Tajik culture.",
+    "destination": "Samarkand",
+    "price": 120,
+    "duration": 1,
+    "nights": 0,
+    "category": "adventure",
+    "rating": 4.9,
+    "ratingsCount": 45,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "tajikistan-seven-lakes-marguzor-sarazm-unesco-samarkand",
+    "imageCover": "/uploads/tours/seven-lakes-hero.webp",
+    "images": [],
+    "included": [
+      "Transportation",
+      "English-speaking guide",
+      "Tajik guide",
+      "Entrance fees",
+      "Traditional lunch"
+    ],
+    "excluded": [
+      "Tajik visa (if required)",
+      "Personal expenses",
+      "Tips"
+    ],
+    "highlights": [
+      "Seven Lakes of Marguzor",
+      "Fann Mountains",
+      "Sarazm UNESCO site",
+      "Penjikent historic town",
+      "Cross-border experience"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 10,
+    "languages": ["English", "Russian"]
+  },
+  {
+    "id": "staging-14",
+    "title": "Shahrisabz Heritage & Mountain Panorama: Konigil, Teshik Tosh & Tahtakaracha",
+    "description": "Embark on an unforgettable journey from Samarkand to Shahrisabz, the birthplace of Amir Timur (Tamerlane). This full-day tour combines UNESCO World Heritage monuments with natural wonders and traditional crafts, taking you through one of Central Asia's most spectacular mountain passes.",
+    "destination": "Shahrisabz",
+    "price": 85,
+    "duration": 1,
+    "nights": 0,
+    "category": "cultural",
+    "rating": 4.7,
+    "ratingsCount": 39,
+    "isActive": true,
+    "isFeatured": false,
+    "slug": "shahrisabz-heritage-mountain-panorama-konigil-teshik-tosh",
+    "imageCover": "/uploads/tours/shahrisabz-ak-saray-hero.webp",
+    "images": [],
+    "included": [
+      "Transportation",
+      "English-speaking guide",
+      "Entrance fees",
+      "Lunch"
+    ],
+    "excluded": [
+      "Personal expenses",
+      "Tips"
+    ],
+    "highlights": [
+      "Shahrisabz Historic Center (UNESCO)",
+      "Konigil Village silk paper",
+      "Teshik Tosh Cave",
+      "Tahtakaracha Pass panoramas"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 12,
+    "languages": ["English", "Russian"]
+  },
+  {
+    "id": "staging-12",
+    "title": "Samarkand Heritage: Full-Day UNESCO Sites Explorer",
+    "description": "Immerse yourself in the timeless beauty of Samarkand, where azure domes pierce the sky and intricate tilework tells stories of empires past. This carefully curated full-day tour takes you through the city's most spectacular UNESCO World Heritage sites.",
+    "destination": "Samarkand",
+    "price": 65,
+    "duration": 1,
+    "nights": 0,
+    "category": "cultural",
+    "rating": 4.9,
+    "ratingsCount": 134,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "samarkand-heritage-full-day-unesco-explorer",
+    "imageCover": "/uploads/tours/samarkand-heritage-hero.webp",
+    "images": [],
+    "included": [
+      "Professional guide",
+      "Skip-the-line tickets",
+      "All entrance fees",
+      "Traditional tea ceremony"
+    ],
+    "excluded": [
+      "Transportation",
+      "Lunch",
+      "Personal expenses",
+      "Tips"
+    ],
+    "highlights": [
+      "Registan Square",
+      "Shah-i-Zinda",
+      "Gur-e-Amir",
+      "Bibi-Khanym Mosque",
+      "Siab Bazaar"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 15,
+    "languages": ["English", "Russian", "German", "French", "Spanish"]
+  },
+  {
+    "id": "staging-11",
+    "title": "Golden Ring of Samarkand: A Historical Journey",
+    "description": "Journey through time in the legendary city of Samarkand, where ancient history meets architectural brilliance. This comprehensive 4-day tour takes you through the most significant monuments of the Timurid period and beyond. Walk in the footsteps of merchants, scholars, and conquerors who shaped the Silk Road.",
+    "destination": "Samarkand",
+    "price": 320,
+    "duration": 4,
+    "nights": 3,
+    "category": "cultural",
+    "rating": 4.8,
+    "ratingsCount": 67,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "golden-ring-samarkand-historical-journey",
+    "imageCover": "/uploads/tours/golden-ring-hero.webp",
+    "images": [],
+    "included": [
+      "3 nights accommodation",
+      "All transfers",
+      "English-speaking guide",
+      "Entrance fees",
+      "Daily breakfast"
+    ],
+    "excluded": [
+      "Lunches and dinners",
+      "Personal expenses",
+      "Tips"
+    ],
+    "highlights": [
+      "Registan Square",
+      "Shah-i-Zinda necropolis",
+      "Ulugh Beg Observatory",
+      "Afrosiyab Museum",
+      "Gur-e-Amir Mausoleum"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 12,
+    "languages": ["English", "Russian"]
+  },
+  {
+    "id": "staging-9",
+    "title": "Full Day Bukhara City Tour",
+    "description": "Spend a full day exploring Bukhara, one of Central Asia's most complete medieval cities. With over 140 architectural monuments, Bukhara is a living museum of Islamic architecture.",
+    "destination": "Bukhara",
+    "price": 75,
+    "duration": 1,
+    "nights": 0,
+    "category": "cultural",
+    "rating": 4.9,
+    "ratingsCount": 89,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "full-day-bukhara-city-tour",
+    "imageCover": "/uploads/tours/bukhara-full-day-hero.webp",
+    "images": [],
+    "included": [
+      "Professional guide",
+      "All entrance fees",
+      "Traditional tea"
+    ],
+    "excluded": [
+      "Transportation",
+      "Lunch",
+      "Personal expenses",
+      "Tips"
+    ],
+    "highlights": [
+      "Ark Fortress",
+      "Poi-Kalyan Complex",
+      "Lyabi-Hauz",
+      "Trading Domes",
+      "Chor Minor"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 15,
+    "languages": ["English", "Russian", "German", "French"]
+  },
+  {
+    "id": "staging-8",
+    "title": "5-Day Silk Road Classic: Tashkent, Samarkand & Bukhara",
+    "description": "Experience the magic of the Silk Road on this comprehensive 5-day journey through Uzbekistan's most iconic cities. From the modern capital Tashkent to the ancient marvels of Samarkand and Bukhara, this tour offers the perfect introduction to Central Asian culture.",
+    "destination": "Tashkent",
+    "price": 890,
+    "duration": 5,
+    "nights": 4,
+    "category": "cultural",
+    "rating": 4.8,
+    "ratingsCount": 156,
+    "isActive": true,
+    "isFeatured": true,
+    "slug": "5-day-silk-road-classic",
+    "imageCover": "/uploads/tours/5-day-silk-road-hero.webp",
+    "images": [],
+    "included": [
+      "4 nights accommodation",
+      "All transfers",
+      "High-speed train tickets",
+      "English-speaking guide",
+      "Entrance fees",
+      "Daily breakfast"
+    ],
+    "excluded": [
+      "International flights",
+      "Travel insurance",
+      "Lunches and dinners",
+      "Personal expenses"
+    ],
+    "highlights": [
+      "Tashkent Old Town",
+      "Samarkand Registan",
+      "Bukhara Historic Center",
+      "Afrosiyob high-speed train"
+    ],
+    "createdAt": "2025-12-06T18:30:00.000Z",
+    "maxGroupSize": 12,
+    "languages": ["English", "Russian"]
   }
 ]

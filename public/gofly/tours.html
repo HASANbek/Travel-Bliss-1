@@ -1001,7 +1001,7 @@
     // Load tours from API
     async function loadTours() {
         try {
-            const response = await fetch(`${API_BASE}/api/tours`);
+            const response = await fetch(`${API_BASE}/api/tours?limit=100`);
             const data = await response.json();
 
             if (data.success && data.data && data.data.tours) {
@@ -1125,7 +1125,7 @@
     }
 
     // Pagination settings
-    const TOURS_PER_PAGE = 6;
+    const TOURS_PER_PAGE = 9;
     let currentPage = 1;
     let currentTours = [];
 

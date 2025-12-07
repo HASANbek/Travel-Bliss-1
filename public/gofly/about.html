@@ -1,666 +1,1399 @@
-<!DOCTYPE html>
-<html lang="uz">
+<!doctype html>
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Travel Bliss</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/jquery-ui.css" rel="stylesheet">
     <link href="assets/css/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/css/animate.min.css" rel="stylesheet">
+    <link href="assets/css/jquery.fancybox.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="assets/css/slick-theme.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/menu-custom.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
-    <style>
-        /* Header Styles from travel-agency-03.html */
-        .header-area.style-2 {
-            background: linear-gradient(to right, #f0f9ff 0%, #e0f2fe 100%);
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-            padding: 6px 0;
-            position: sticky;
-            top: 0;
-            z-index: 999;
-        }
+    <title>About Us - Travel Bliss | Your Gateway to Uzbekistan</title>
+    <link rel="icon" href="assets/img/fav-icon.svg" type="image/gif" sizes="20x20">
 
-        .header-area.style-2 .header-logo img {
-            width: auto !important;
-            height: 45px !important;
-            max-width: 200px !important;
-            object-fit: contain !important;
-            image-rendering: -webkit-optimize-contrast !important;
-            image-rendering: crisp-edges !important;
-        }
+<style>
+:root {
+    --primary-color1: #0F16E6 !important;
+    --primary-color1-opc: 15, 22, 230 !important;
+}
 
-        .header-area.style-2 .menu-list {
-            display: flex !important;
-            gap: 35px !important;
-            align-items: center !important;
-            list-style: none !important;
-            margin: 0;
-            padding: 0;
-        }
+/* Header Styles */
+.header-area .search-btn,
+.header-area .eg-btn,
+.header-area .primary-btn1:not(.mobile-menu-btn),
+.header-area a[href*="sign"],
+.header-area a[href*="login"],
+.nav-right .eg-btn,
+.nav-right .primary-btn1 {
+    display: none !important;
+}
 
-        .header-area.style-2 .menu-list > li {
-            margin: 0 !important;
-            padding: 0 !important;
-            position: relative;
-        }
+/* Mobile menu button - hidden on desktop */
+.mobile-menu-btn {
+    display: none;
+}
 
-        .header-area.style-2 .menu-list > li > a {
-            font-size: 16px;
-            font-weight: 600;
-            color: #1f2937 !important;
-            padding: 8px 18px !important;
-            text-decoration: none;
-            transition: all 0.3s;
-            background: transparent !important;
-            border-radius: 8px !important;
-            display: block;
-        }
+/* Mobile menu button - visible on mobile */
+@media(max-width:1199px){
+    .mobile-menu-btn {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: rgba(255,255,255,0.95) !important;
+        border-radius: 8px !important;
+        padding: 10px 12px !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+        cursor: pointer !important;
+        min-width: 44px !important;
+        min-height: 44px !important;
+    }
+    .mobile-menu-btn svg {
+        fill: #667eea !important;
+        width: 22px !important;
+        height: 18px !important;
+    }
+    .header-area.style-2 .nav-right *,
+    .header-area.style-2 .nav-right i,
+    .header-area.style-2 .nav-right svg,
+    .header-area.style-2 .sidebar-button i {
+        color: #1a1a2e !important;
+        stroke: #1a1a2e !important;
+    }
+}
 
-        .header-area.style-2 .menu-list > li.active > a {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
-            color: white !important;
-        }
+/* About Hero Section */
+.about-hero {
+    background: url('/uploads/registon-1764689562739-647287587.jpg') center/cover no-repeat;
+    padding: 240px 0 240px;
+    position: relative;
+    overflow: hidden;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .header-area.style-2 .menu-list > li > a:hover {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
-            color: white !important;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-        }
+.about-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5));
+}
 
-        /* Dropdown styles */
-        .header-area.style-2 .menu-list > li.has-dropdown > a::after {
-            content: "▼";
-            font-size: 10px;
-            margin-left: 6px;
-        }
+.about-hero h1 {
+    font-family: 'Playfair Display', 'Merriweather', serif;
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+}
 
-        .header-area.style-2 .menu-list > li .submenu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            min-width: 220px;
-            padding: 10px 0;
-            display: none;
-            z-index: 1000;
-            margin-top: 8px;
-            list-style: none;
-        }
+.about-hero p {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.9);
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    font-weight: 400;
+}
 
-        .header-area.style-2 .menu-list > li:hover .submenu {
-            display: block;
-        }
+/* Section Headers */
+.section-header {
+    margin-bottom: 50px;
+}
 
-        .header-area.style-2 .menu-list > li .submenu li {
-            margin: 0;
-            padding: 0;
-        }
+.section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: #1a1a1a;
+    margin-bottom: 0;
+}
 
-        .header-area.style-2 .menu-list > li .submenu li a {
-            display: block;
-            padding: 10px 20px;
-            color: #1f2937;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
+.eyebrow-label {
+    display: inline-block;
+    color: #2c7abf;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+}
 
-        .header-area.style-2 .menu-list > li .submenu li a:hover {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            color: white;
-            transform: none;
-            box-shadow: none;
-        }
+/* Why Choose Section */
+.why-choose-section {
+    padding: 80px 0;
+    background: #f9fafb;
+}
 
-        .nav-right {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
 
-        .contact-area {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
+.icon-card {
+    background: white;
+    padding: 35px 25px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+}
 
-        .language-selector {
-            position: relative;
-        }
+.icon-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
 
-        .language-btn {
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-weight: 600;
-            color: #1f2937;
-            padding: 5px 10px;
-            border-radius: 6px;
-            transition: all 0.3s;
-        }
+.icon-circle {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #2c7abf 0%, #1a5490 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: white;
+}
 
-        .language-btn:hover {
-            background: #f3f4f6;
-        }
+.icon-card h3 {
+    color: #1a1a1a;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
 
-        .language-dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            margin-top: 5px;
-            width: max-content;
-            z-index: 1000;
-        }
+.icon-card p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0;
+}
 
-        .language-dropdown.show {
-            display: block;
-        }
+/* Our Story Section */
+.our-story-section {
+    padding: 100px 0;
+    background: white;
+}
 
-        .lang-option {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 12px;
-            color: #1f2937;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
+.two-col-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
 
-        .lang-option:hover {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            color: white;
-        }
+.story-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: #1a1a1a;
+    margin-bottom: 25px;
+}
 
-        /* Admin Button */
-        .admin-btn {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            display: none;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s;
-        }
+.story-content p {
+    color: #444;
+    font-size: 16px;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
 
-        .admin-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
-            color: white;
-        }
+.story-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
 
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-        }
+.story-img-main {
+    grid-column: span 2;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
 
-        @media (max-width: 1199px) {
-            .header-area.style-2 .menu-list,
-            .contact-area,
-            .language-selector {
-                display: none !important;
-            }
+.story-img-secondary {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
 
-            .mobile-menu-btn {
-                display: block;
-            }
+/* Stats Section */
+.stats-section {
+    background: linear-gradient(135deg, #1a5490 0%, #2c7abf 100%);
+    padding: 70px 0;
+}
 
-            .main-menu {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 300px;
-                height: 100vh;
-                background: white;
-                box-shadow: -2px 0 15px rgba(0,0,0,0.1);
-                padding: 20px;
-                transition: right 0.3s;
-                z-index: 9999;
-                overflow-y: auto;
-            }
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
 
-            .main-menu.active {
-                right: 0;
-            }
+.stat-card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 40px 30px;
+    border-radius: 16px;
+    text-align: center;
+    color: white;
+}
 
-            .mobile-logo-area {
-                margin-bottom: 20px;
-                padding-bottom: 15px;
-                border-bottom: 1px solid #e5e7eb;
-            }
+.stat-number {
+    font-size: 52px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1;
+}
 
-            .menu-close-btn {
-                cursor: pointer;
-                font-size: 28px;
-                color: #1f2937;
-            }
+.stat-label {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
 
-            .main-menu .menu-list {
-                flex-direction: column !important;
-                gap: 0 !important;
-                display: flex !important;
-            }
+.stat-desc {
+    font-size: 14px;
+    opacity: 0.85;
+    margin: 0;
+}
 
-            .main-menu .menu-list > li {
-                width: 100%;
-                border-bottom: 1px solid #f3f4f6;
-            }
+/* Team Section */
+.team-section {
+    padding: 80px 0;
+    background: #f9fafb;
+}
 
-            .main-menu .menu-list > li > a {
-                padding: 16px 20px !important;
-            }
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
 
-            .main-menu .menu-list > li.has-dropdown .submenu {
-                position: static;
-                display: none;
-                margin-top: 0;
-                box-shadow: none;
-                background: #f9fafb;
-                border-radius: 0;
-                padding: 0;
-            }
+.team-card {
+    text-align: center;
+    background: white;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+}
 
-            .main-menu .menu-list > li.has-dropdown.open .submenu {
-                display: block;
-            }
-        }
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
 
-        /* Page specific styles */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f8fafc;
-            margin: 0;
-            padding: 0;
-        }
+.team-photo {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #2c7abf;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+.team-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-        .about-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            margin-top: 20px;
-        }
+.team-card h3 {
+    color: #1a1a1a;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
 
-        .about-header {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)),
-                        url('/uploads/registon-1764689562739-647287587.jpg');
-            background-size: cover;
-            background-position: center;
-            padding: 240px 40px;
-            min-height: 700px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-        }
+.team-role {
+    color: #2c7abf;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
 
-        .about-header h1 {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
+.team-desc {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
 
-        .about-header p {
-            font-size: 20px;
-            opacity: 0.95;
-        }
+/* Reviews Section */
+.reviews-section {
+    padding: 80px 0;
+    background: white;
+}
 
-        .about-content {
-            padding: 60px 40px;
-        }
+.reviews-badges {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 50px;
+}
 
-        .about-section {
-            margin-bottom: 50px;
-        }
+.review-badge {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #f9fafb;
+    padding: 15px 25px;
+    border-radius: 12px;
+}
 
-        .about-section h2 {
-            color: #667eea;
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
+.rating-info .stars {
+    color: #f59e0b;
+    font-size: 18px;
+    margin-bottom: 3px;
+}
 
-        .about-section p {
-            color: #4a5568;
-            font-size: 18px;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
+.rating-info span {
+    color: #666;
+    font-size: 13px;
+}
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
+.featured-review {
+    max-width: 800px;
+    margin: 0 auto;
+}
 
-        .feature-card {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-        }
+.review-content {
+    background: linear-gradient(135deg, #f9fafb 0%, #f0f4f8 100%);
+    padding: 40px;
+    border-radius: 16px;
+    border-left: 4px solid #2c7abf;
+}
 
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
+.review-content p {
+    font-size: 18px;
+    color: #333;
+    line-height: 1.8;
+    font-style: italic;
+    margin-bottom: 25px;
+}
 
-        .feature-card h3 {
-            color: #1f2937;
-            margin-bottom: 10px;
-        }
+.reviewer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
-        .feature-card p {
-            color: #6b7280;
-            font-size: 16px;
-        }
+.reviewer-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
 
-        @media (max-width: 768px) {
-            .about-header h1 {
-                font-size: 32px;
-            }
+.reviewer-info strong {
+    display: block;
+    color: #1a1a1a;
+    font-size: 15px;
+}
 
-            .about-content {
-                padding: 40px 20px;
-            }
+.reviewer-info span {
+    color: #666;
+    font-size: 13px;
+}
 
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+/* CTA Section */
+.cta-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.cta-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+}
+
+.cta-content > p {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 35px;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #2c7abf 0%, #1a5490 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(44, 122, 191, 0.4);
+    color: white;
+}
+
+.btn-whatsapp {
+    background: #25D366;
+    color: white;
+}
+
+.btn-whatsapp:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+    color: white;
+}
+
+.btn-outline {
+    background: white;
+    color: #1a1a1a;
+    border: 2px solid #ddd;
+}
+
+.btn-outline:hover {
+    border-color: #2c7abf;
+    color: #2c7abf;
+    transform: translateY(-3px);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .icon-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .two-col-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .story-images {
+        order: -1;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .about-hero h1 {
+        font-size: 32px;
+    }
+
+    .section-header h2,
+    .story-content h2,
+    .cta-content h2 {
+        font-size: 28px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .stat-card {
+        padding: 30px 20px;
+    }
+
+    .reviews-badges {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .icon-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .story-images {
+        grid-template-columns: 1fr;
+    }
+
+    .story-img-main {
+        grid-column: span 1;
+        height: 220px;
+    }
+
+    .story-img-secondary {
+        height: 150px;
+    }
+}
+
+/* Footer */
+.footer-area.style-3 {
+    background: #1e293b;
+    padding: 0;
+}
+
+.footer-area.style-3 a:hover {
+    color: white !important;
+}
+
+.footer-area.style-3 .footer-social a:hover {
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+    .footer-contact-row {
+        gap: 30px !important;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+</style>
 </head>
+
 <body>
-    <!-- Header from travel-agency-03.html -->
-    <header class="header-area style-2">
-        <div class="container-fluid d-flex flex-nowrap align-items-center justify-content-between">
-            <div class="logo-and-menu-area">
-                <a href="travel-agency-03.html" class="header-logo">
-                    <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss">
-                </a>
-                <div class="main-menu">
-                    <div class="mobile-logo-area d-xl-none d-flex align-items-center justify-content-between">
-                        <a href="travel-agency-03.html" class="mobile-logo-wrap">
-                            <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 40px;">
-                        </a>
-                        <div class="menu-close-btn">
-                            <i class="bi bi-x"></i>
-                        </div>
+<!-- Header -->
+<header class="header-area style-2" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: white; box-shadow: 0 2px 20px rgba(0,0,0,0.1);">
+    <div class="container-fluid d-flex flex-nowrap align-items-center justify-content-between" style="padding: 10px 30px;">
+        <div class="logo-and-menu-area d-flex align-items-center">
+            <a href="travel-agency-03.html" class="header-logo">
+                <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 45px; width: auto; max-width: 180px; object-fit: contain;">
+            </a>
+            <div class="main-menu">
+                <div class="mobile-logo-area d-xl-none d-flex align-items-center justify-content-between">
+                    <a href="travel-agency-03.html" class="mobile-logo-wrap">
+                        <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 40px; width: auto; max-width: 60%; object-fit: contain;">
+                    </a>
+                    <div class="menu-close-btn" id="menuCloseBtn">
+                        <span style="font-size:28px;font-weight:bold;color:#1a3a6e;line-height:1;">×</span>
                     </div>
-                    <ul class="menu-list">
-                        <li class="active">
-                            <a href="travel-agency-03.html">Home</a>
-                        </li>
-                        <!-- Categories will be loaded dynamically here -->
-                        <li>
-                            <a href="about.html">About</a>
-                        </li>
-                        <li>
-                            <a href="contact.html">Contact Us</a>
-                        </li>
-                    </ul>
                 </div>
-            </div>
-            <div class="nav-right">
-                <div class="contact-area d-xl-flex d-none">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <div class="icon">
-                            <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M15.5646 11.7424L13.3317 9.50954C12.5343 8.7121 11.1786 9.03111 10.8596 10.0678C10.6204 10.7855 9.82296 11.1842 9.10526 11.0247C7.51037 10.626 5.35726 8.55261 4.95854 6.87797C4.71931 6.16024 5.19778 5.36279 5.91548 5.12359C6.95216 4.80461 7.27113 3.44895 6.47369 2.65151L4.24084 0.418659C3.60288 -0.139553 2.64595 -0.139553 2.08774 0.418659L0.572591 1.93381C-0.942555 3.5287 0.73208 7.75516 4.48007 11.5032C8.22807 15.2512 12.4545 17.0056 14.0494 15.4106L15.5646 13.8955C16.1228 13.2575 16.1228 12.3006 15.5646 11.7424Z"/>
+                <ul class="menu-list">
+                    <li><a href="travel-agency-03.html">Home</a></li>
+                    <li><a href="all-destinations.html">Destinations</a></li>
+                    <li><a href="tours.html">Tours</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li class="active"><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+                <!-- Mobile Language Selector -->
+                <div class="contact-area d-xl-none d-flex" style="padding: 20px 15px; border-top: 1px solid #e5e7eb; margin-top: 15px;">
+                    <div class="language-selector-mobile" style="position: relative; width: 100%;">
+                        <button class="language-btn-mobile" onclick="toggleMobileLanguageDropdown(event)" style="background: white; border: 1px solid #e5e7eb; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; color: #1f2937; padding: 12px 20px; border-radius: 10px; transition: all 0.3s; width: 100%;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                             </svg>
-                        </div>
-                        <a href="tel:998932244333" style="color: #1f2937; font-weight: 600; text-decoration: none;">+998 93 224 4333</a>
-                    </div>
-                    <div class="language-selector">
-                        <button class="language-btn" onclick="toggleLanguageDropdown()">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 30'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Crect width='50' height='30'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Crect width='50' height='30' fill='%23012169'/%3E%3Cpath d='M0,0 L50,30 M50,0 L0,30' stroke='%23FFF' stroke-width='6'/%3E%3Cpath d='M0,0 L50,30 M50,0 L0,30' stroke='%23C8102E' stroke-width='4' clip-path='url(%23a)'/%3E%3Cpath d='M25,0 V30 M0,15 H50' stroke='%23FFF' stroke-width='10'/%3E%3Cpath d='M25,0 V30 M0,15 H50' stroke='%23C8102E' stroke-width='6'/%3E%3C/g%3E%3C/svg%3E" alt="UK Flag" width="24" height="16" style="border-radius: 2px;">
-                            <span id="currentLang">EN</span>
+                            <img id="currentFlagMobile" src="https://flagcdn.com/w40/gb.png" alt="EN" width="24" height="16" style="border-radius: 2px;">
+                            <span id="currentLangMobile">English</span>
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
                         </button>
-                        <div class="language-dropdown" id="languageDropdown">
-                            <a href="#" class="lang-option" data-lang="EN">
-                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 30'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Crect width='50' height='30'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Crect width='50' height='30' fill='%23012169'/%3E%3Cpath d='M0,0 L50,30 M50,0 L0,30' stroke='%23FFF' stroke-width='6'/%3E%3Cpath d='M0,0 L50,30 M50,0 L0,30' stroke='%23C8102E' stroke-width='4' clip-path='url(%23a)'/%3E%3Cpath d='M25,0 V30 M0,15 H50' stroke='%23FFF' stroke-width='10'/%3E%3Cpath d='M25,0 V30 M0,15 H50' stroke='%23C8102E' stroke-width='6'/%3E%3C/g%3E%3C/svg%3E" alt="UK" width="24" height="16" style="border-radius: 2px;">
-                                <span>English</span>
-                            </a>
-                            <a href="#" class="lang-option" data-lang="RU">
-                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 6'%3E%3Crect width='9' height='2' fill='%23fff'/%3E%3Crect y='2' width='9' height='2' fill='%230039a6'/%3E%3Crect y='4' width='9' height='2' fill='%23d52b1e'/%3E%3C/svg%3E" alt="Russia" width="24" height="16" style="border-radius: 2px;">
-                                <span>Русский</span>
-                            </a>
-                            <a href="#" class="lang-option" data-lang="UZ">
-                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 250'%3E%3Crect width='500' height='80' fill='%231EB53A'/%3E%3Crect y='80' width='500' height='3' fill='%23FF0000'/%3E%3Crect y='83' width='500' height='84' fill='%23FFFFFF'/%3E%3Crect y='167' width='500' height='3' fill='%23FF0000'/%3E%3Crect y='170' width='500' height='80' fill='%230099B5'/%3E%3Ccircle cx='100' cy='40' r='25' fill='%23FFFFFF'/%3E%3Ccircle cx='110' cy='40' r='20' fill='%231EB53A'/%3E%3Cpolygon points='150,25 153,34 162,34 155,40 158,49 150,43 142,49 145,40 138,34 147,34' fill='%23FFFFFF'/%3E%3Cpolygon points='180,25 183,34 192,34 185,40 188,49 180,43 172,49 175,40 168,34 177,34' fill='%23FFFFFF'/%3E%3Cpolygon points='210,25 213,34 222,34 215,40 218,49 210,43 202,49 205,40 198,34 207,34' fill='%23FFFFFF'/%3E%3Cpolygon points='165,50 168,59 177,59 170,65 173,74 165,68 157,74 160,65 153,59 162,59' fill='%23FFFFFF'/%3E%3Cpolygon points='195,50 198,59 207,59 200,65 203,74 195,68 187,74 190,65 183,59 192,59' fill='%23FFFFFF'/%3E%3C/svg%3E" alt="Uzbekistan" width="24" height="16" style="border-radius: 2px;">
-                                <span>Uzbek</span>
-                            </a>
+                        <div class="language-dropdown-mobile" id="languageDropdownMobile" style="display: none; position: absolute; bottom: 100%; left: 0; right: 0; background: white; border-radius: 10px; box-shadow: 0 -4px 20px rgba(0,0,0,0.15); margin-bottom: 8px; z-index: 1000; overflow: hidden;">
+                            <!-- Languages loaded by language-loader.js -->
                         </div>
                     </div>
-                </div>
-
-                <!-- Admin Button (visible only when logged in) -->
-                <a href="/admin/" class="admin-btn" id="adminBtn">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                    </svg>
-                    <span>Admin</span>
-                </a>
-
-                <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
-                    <svg width="20" height="18" viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1.29445 2.8421H10.5237C11.2389 2.8421 11.8182 2.2062 11.8182 1.42105C11.8182 0.635903 11.2389 0 10.5237 0H1.29445C0.579249 0 0 0.635903 0 1.42105C0 2.2062 0.579249 2.8421 1.29445 2.8421Z"/>
-                        <path d="M1.23002 10.421H18.77C19.4496 10.421 20 9.78506 20 8.99991C20 8.21476 19.4496 7.57886 18.77 7.57886H1.23002C0.550421 7.57886 0 8.21476 0 8.99991C0 9.78506 0.550421 10.421 1.23002 10.421Z"/>
-                        <path d="M18.8052 15.1579H10.2858C9.62563 15.1579 9.09094 15.7938 9.09094 16.5789C9.09094 17.3641 9.62563 18 10.2858 18H18.8052C19.4653 18 20 17.3641 20 16.5789C20 15.7938 19.4653 15.1579 18.8052 15.1579Z"/>
-                    </svg>
                 </div>
             </div>
         </div>
-    </header>
-
-    <!-- Main Content -->
-    <div class="container">
-        <div class="about-card">
-            <div class="about-header">
-                <h1>About Travel Bliss</h1>
-                <p>Your Gateway to Uzbekistan's Silk Road</p>
-            </div>
-
-            <div class="about-content">
-                <div class="about-section">
-                    <h2>🌍 Our Story</h2>
-                    <p>
-                        Travel Bliss was founded with a passion for sharing the rich history and culture of Uzbekistan
-                        with the world. As specialists in Silk Road tours, we provide authentic experiences that connect
-                        travelers with the heart of Central Asia.
-                    </p>
-                    <p>
-                        From the stunning blue domes of Samarkand to the ancient streets of Bukhara, we craft journeys
-                        that go beyond typical tourism, offering deep cultural immersion and unforgettable memories.
-                    </p>
+        <div class="nav-right d-flex align-items-center">
+            <!-- Desktop Phone & Language -->
+            <div class="contact-area d-xl-flex d-none" style="gap: 20px; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div class="icon" style="color: #667eea;">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.5646 11.7424L13.3317 9.50954C12.5343 8.7121 11.1786 9.03111 10.8596 10.0678C10.6204 10.7855 9.82296 11.1842 9.10526 11.0247C7.51037 10.626 5.35726 8.55261 4.95854 6.87797C4.71931 6.16024 5.19778 5.36279 5.91548 5.12359C6.95216 4.80461 7.27113 3.44895 6.47369 2.65151L4.24084 0.418659C3.60288 -0.139553 2.64595 -0.139553 2.08774 0.418659L0.572591 1.93381C-0.942555 3.5287 0.73208 7.75516 4.48007 11.5032C8.22807 15.2512 12.4545 17.0056 14.0494 15.4106L15.5646 13.8955C16.1228 13.2575 16.1228 12.3006 15.5646 11.7424Z"/>
+                        </svg>
+                    </div>
+                    <a href="tel:+998932244333" style="color: #1f2937; font-weight: 600; text-decoration: none;">+998 93 224 4333</a>
                 </div>
-
-                <div class="about-section">
-                    <h2>✨ What Makes Us Different</h2>
-                    <div class="features-grid">
-                        <div class="feature-card">
-                            <div class="feature-icon">🗺️</div>
-                            <h3>Expert Guides</h3>
-                            <p>Local experts with deep knowledge of history and culture</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">🏛️</div>
-                            <h3>Authentic Experiences</h3>
-                            <p>Real cultural immersion, not just sightseeing</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">💎</div>
-                            <h3>Quality Service</h3>
-                            <p>Small groups, personalized attention</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">🌟</div>
-                            <h3>Best Value</h3>
-                            <p>Competitive prices without compromising quality</p>
-                        </div>
+                <div class="language-selector" style="position: relative;">
+                    <button class="language-btn" onclick="toggleDesktopLanguage(event)" style="background: transparent; border: none; cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 600; color: #1f2937; padding: 5px 10px; border-radius: 6px; transition: all 0.3s;">
+                        <img id="currentFlag" src="https://flagcdn.com/w40/gb.png" alt="EN" width="24" height="16" style="border-radius: 2px; border: 1px solid rgba(0,0,0,0.1);">
+                        <span id="currentLang">EN</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="language-dropdown" style="display: none; position: absolute; top: 100%; right: 0; background: white; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 5px; width: max-content; z-index: 1000;">
+                        <!-- Languages will be loaded by language-loader.js -->
                     </div>
                 </div>
+            </div>
+            <!-- Mobile Menu Button -->
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <svg width="22" height="18" viewBox="0 0 20 18" fill="#667eea">
+                    <path d="M1.29445 2.8421H10.5237C11.2389 2.8421 11.8182 2.2062 11.8182 1.42105C11.8182 0.635903 11.2389 0 10.5237 0H1.29445C0.579249 0 0 0.635903 0 1.42105C0 2.2062 0.579249 2.8421 1.29445 2.8421Z"></path>
+                    <path d="M1.23002 10.421H18.77C19.4496 10.421 20 9.78506 20 8.99991C20 8.21476 19.4496 7.57886 18.77 7.57886H1.23002C0.550421 7.57886 0 8.21476 0 8.99991C0 9.78506 0.550421 10.421 1.23002 10.421Z"></path>
+                    <path d="M18.8052 15.1579H10.2858C9.62563 15.1579 9.09094 15.7938 9.09094 16.5789C9.09094 17.3641 9.62563 18 10.2858 18H18.8052C19.4653 18 20 17.3641 20 16.5789C20 15.7938 19.4653 15.1579 18.8052 15.1579Z"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+</header>
 
-                <div class="about-section">
-                    <h2>📍 Our Mission</h2>
-                    <p>
-                        To provide exceptional travel experiences that showcase the beauty, history, and hospitality
-                        of Uzbekistan while supporting local communities and preserving cultural heritage.
-                    </p>
+<!-- About Hero -->
+<section class="about-hero text-center" id="aboutHero">
+    <div class="container">
+        <h1 id="heroTitle">About Travel Bliss</h1>
+        <p id="heroSubtitle">Your Gateway to Uzbekistan's Silk Road Adventures</p>
+    </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="why-choose-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <span class="eyebrow-label" id="featuresEyebrow">Why Travelers Choose Us</span>
+            <h2 id="featuresTitle">What Makes Travel Bliss Different</h2>
+        </div>
+        <div class="icon-grid" id="featuresGrid">
+            <!-- Features will be loaded dynamically -->
+        </div>
+    </div>
+</section>
+
+<!-- Our Story Section -->
+<section class="our-story-section">
+    <div class="container">
+        <div class="two-col-layout">
+            <div class="story-content">
+                <span class="eyebrow-label" id="storyEyebrow">Our Story</span>
+                <h2 id="storyTitle">From Samarkand to the World</h2>
+                <div id="storyContent">
+                    <!-- Story paragraphs will be loaded dynamically -->
+                </div>
+            </div>
+            <div class="story-images" id="storyImages">
+                <!-- Story images will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid" id="statsGrid">
+            <!-- Stats will be loaded dynamically -->
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="team-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <span class="eyebrow-label" id="teamEyebrow">Meet The Team</span>
+            <h2 id="teamTitle">The People Behind Your Journey</h2>
+        </div>
+        <div class="team-grid" id="teamGrid">
+            <!-- Team members will be loaded dynamically -->
+        </div>
+    </div>
+</section>
+
+<!-- Reviews Section -->
+<section class="reviews-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <span class="eyebrow-label" id="reviewsEyebrow">Trusted by Travelers</span>
+            <h2 id="reviewsTitle">What Our Guests Say</h2>
+        </div>
+        <div class="reviews-badges" id="reviewsBadges">
+            <!-- Review badges will be loaded dynamically -->
+        </div>
+        <div class="featured-review" id="featuredReview">
+            <!-- Featured review will be loaded dynamically -->
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer-area style-3">
+    <!-- Contact Us Top Section -->
+    <div class="footer-top" style="background: #0d0d18; padding: 35px 0;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 30px; padding-bottom: 35px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <!-- Contact Us -->
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                        <svg width="36" height="36" viewBox="0 0 36 36" fill="#3b82f6" xmlns="http://www.w3.org/2000/svg">
+                            <g>
+                                <path d="M35.8703 28.2548L33.7795 22.1697C34.7873 20.1094 35.3199 17.8181 35.3235 15.5126C35.3297 11.5039 33.7788 7.71355 30.9563 4.83988C28.1332 1.96565 24.3714 0.347686 20.3636 0.284193C16.2077 0.218522 12.3015 1.79929 9.36472 4.73596C6.53295 7.56766 4.96231 11.3008 4.9126 15.29C2.12162 17.3914 0.474267 20.6676 0.479681 24.167C0.482282 25.8045 0.850861 27.4323 1.54927 28.9043L0.109064 33.0955C-0.138507 33.816 0.0423371 34.5983 0.581071 35.1371C0.960196 35.5162 1.46005 35.7181 1.9741 35.7181C2.19038 35.7181 2.4092 35.6824 2.62259 35.6091L6.81385 34.1688C8.28584 34.8673 9.91365 35.2358 11.5512 35.2384H11.5687C15.1201 35.2383 18.4213 33.5485 20.515 30.6891C22.6938 30.6317 24.8495 30.1043 26.7983 29.1509L32.8835 31.2419C33.1314 31.3274 33.3918 31.3712 33.654 31.3715C34.2649 31.3715 34.8589 31.1316 35.3095 30.6809C35.9497 30.0407 36.1645 29.1111 35.8703 28.2548ZM11.5685 33.0956H11.5545C10.1051 33.0934 8.66574 32.7361 7.39231 32.0624C7.2628 31.9939 7.12062 31.9526 6.97456 31.9412C6.82849 31.9299 6.68164 31.9485 6.54308 31.9961L2.24537 33.4729L3.72214 29.1753C3.76974 29.0367 3.78843 28.8898 3.77703 28.7438C3.76564 28.5977 3.72442 28.4555 3.65591 28.326C2.98217 27.0525 2.62484 25.6132 2.62259 24.1637C2.61901 21.8322 3.52597 19.6224 5.11201 17.9676C5.63007 21.1258 7.13525 24.036 9.46836 26.3277C11.7842 28.6023 14.6953 30.0506 17.8363 30.5241C16.1778 32.1588 13.9421 33.0956 11.5685 33.0956ZM33.7942 29.1656C33.7332 29.2266 33.6609 29.2432 33.5796 29.2152L27.0653 26.9767C26.9268 26.9291 26.7799 26.9104 26.6339 26.9218C26.4878 26.9332 26.3456 26.9744 26.2162 27.043C24.3562 28.0269 22.2544 28.5488 20.1379 28.552H20.1176C13.0257 28.552 7.16774 22.791 7.05538 15.7008C6.99877 12.13 8.35707 8.77401 10.88 6.25112C13.4028 3.72824 16.7593 2.37044 20.3297 2.42669C27.4267 2.53926 33.1917 8.40803 33.1807 15.5092C33.1774 17.6258 32.6556 19.7276 31.6717 21.5875C31.6032 21.717 31.562 21.8592 31.5506 22.0052C31.5392 22.1513 31.5579 22.2981 31.6055 22.4367L33.8439 28.951C33.8718 29.0326 33.8551 29.1048 33.7942 29.1656Z"/>
+                                <path d="M26.5002 9.80957H13.7343C13.1426 9.80957 12.6629 10.2893 12.6629 10.881C12.6629 11.4727 13.1426 11.9524 13.7343 11.9524H26.5002C27.092 11.9524 27.5717 11.4727 27.5717 10.881C27.5717 10.2893 27.092 9.80957 26.5002 9.80957ZM26.5002 14.2161H13.7343C13.1426 14.2161 12.6629 14.6959 12.6629 15.2875C12.6629 15.8792 13.1426 16.359 13.7343 16.359H26.5002C27.092 16.359 27.5717 15.8792 27.5717 15.2875C27.5717 14.6959 27.092 14.2161 26.5002 14.2161ZM21.5862 18.6225H13.7342C13.1425 18.6225 12.6628 19.1023 12.6628 19.694C12.6628 20.2857 13.1426 20.7654 13.7342 20.7654H21.5862C22.1779 20.7654 22.6576 20.2856 22.6576 19.694C22.6576 19.1023 22.178 18.6225 21.5862 18.6225Z"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div>
+                        <h6 style="color: #3b82f6; font-size: 16px; font-weight: 600; margin: 0 0 5px 0;">Contact Us</h6>
+                        <span style="color: white; font-size: 13px;">Don't hesitate to contact Travel Bliss.</span>
+                    </div>
+                </div>
+                <!-- WhatsApp -->
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 45px; height: 45px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span style="color: white; font-size: 12px; display: block;">WhatsApp</span>
+                        <a href="https://wa.me/998932244333" style="color: white; font-size: 17px; font-weight: 700; text-decoration: none;">+998932244333</a>
+                    </div>
+                </div>
+                <!-- Mail Us -->
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 45px; height: 45px; background: #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
+                    <div>
+                        <span style="color: white; font-size: 12px; display: block;">Mail Us</span>
+                        <a href="mailto:info@travel-bliss.uz" style="color: white; font-size: 17px; font-weight: 700; text-decoration: none;">info@travel-bliss.uz</a>
+                    </div>
+                </div>
+                <!-- Call Us -->
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 45px; height: 45px; background: #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <span style="color: white; font-size: 12px; display: block;">Call Us</span>
+                        <a href="tel:+998932244333" style="color: white; font-size: 17px; font-weight: 700; text-decoration: none;">+998932244333</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        const API_URL = 'http://localhost:5000/api';
+    <!-- Main Footer Content -->
+    <div class="footer-main" style="background: #12121f; padding: 60px 0;">
+        <div class="container">
+            <div class="row">
+                <!-- Logo & About -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <a href="travel-agency-03.html" class="footer-logo" style="display: inline-block; margin-bottom: 25px;">
+                        <img src="assets/img/travel-bliss-logo.png" alt="Travel Bliss" style="height: 55px;">
+                    </a>
+                    <h6 style="color: white; font-weight: 600; margin-bottom: 10px;">Travel Bliss Uzbekistan</h6>
+                    <p style="color: #94a3b8; margin-bottom: 25px; line-height: 1.7; font-size: 14px;">Rudaki street 172A, Samarkand, Uzbekistan</p>
+                    <div class="footer-social" style="display: flex; gap: 10px; margin-bottom: 25px;">
+                        <a href="#" style="width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; transition: all 0.3s;">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="#" style="width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; transition: all 0.3s;">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="#" style="width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; transition: all 0.3s;">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="#" style="width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; transition: all 0.3s;">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        </a>
+                    </div>
+                </div>
 
-        // Toggle mobile menu
-        function toggleMobileMenu() {
-            const mainMenu = document.querySelector('.main-menu');
-            mainMenu.classList.toggle('active');
-        }
+                <!-- Top Destination -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h4 style="color: white; font-size: 18px; font-weight: 600; margin-bottom: 25px;">Top Destination</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Samarkand Tour</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Bukhara Tour</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Khiva Tour</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Tashkent Tour</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Fergana Valley</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Nukus & Aral Sea</a></li>
+                        <li style="margin-bottom: 0;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Silk Road Tour</a></li>
+                    </ul>
+                </div>
 
-        // Close mobile menu when clicking close button
-        document.querySelector('.menu-close-btn')?.addEventListener('click', toggleMobileMenu);
+                <!-- Popular Search -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h4 style="color: white; font-size: 18px; font-weight: 600; margin-bottom: 25px;">Popular Search</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Adventure Tours</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Cultural Tours</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Day Trips</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Hiking Tours</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Homestays</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Group Tours</a></li>
+                        <li style="margin-bottom: 0;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Private Tours</a></li>
+                    </ul>
+                </div>
 
-        // Toggle language dropdown
-        function toggleLanguageDropdown() {
-            const dropdown = document.getElementById('languageDropdown');
-            dropdown.classList.toggle('show');
-        }
+                <!-- Resources -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h4 style="color: white; font-size: 18px; font-weight: 600; margin-bottom: 25px;">Resources</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 14px;"><a href="about.html" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">About Travel Bliss</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Visa Information</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Travel Tips</a></li>
+                        <li style="margin-bottom: 14px;"><a href="blog.html" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Blog</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">FAQs</a></li>
+                        <li style="margin-bottom: 14px;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Terms & Conditions</a></li>
+                        <li style="margin-bottom: 0;"><a href="contact.html" style="color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 14px;">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        // Change language
-        document.querySelectorAll('.lang-option').forEach(option => {
-            option.addEventListener('click', function(e) {
-                e.preventDefault();
-                const lang = this.getAttribute('data-lang');
-                document.getElementById('currentLang').textContent = lang;
-                toggleLanguageDropdown();
-            });
+    <!-- Footer Bottom -->
+    <div class="footer-bottom-bar" style="background: #0d0d18; padding: 20px 0;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                <p style="color: #64748b; margin: 0; font-size: 14px;">Copyright 2025 <a href="#" style="color: #f59e0b; text-decoration: none;">Travel Bliss</a> | All Rights Reserved.</p>
+                <div class="payment-methods" style="display: flex; align-items: center; gap: 8px;">
+                    <span style="color: #64748b; font-size: 13px; margin-right: 10px;">Accepted Payment Methods :</span>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" style="height: 28px; background: white; padding: 5px 10px; border-radius: 4px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" style="height: 28px; background: white; padding: 5px 10px; border-radius: 4px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" style="height: 28px; background: white; padding: 5px 10px; border-radius: 4px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="GPay" style="height: 28px; background: white; padding: 5px 10px; border-radius: 4px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="assets/js/jquery-3.7.1.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="language-loader.js"></script>
+
+<script>
+// Mobile menu
+function setupMobileMenu() {
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const mainMenu = document.querySelector('.main-menu');
+    const closeBtn = document.getElementById('menuCloseBtn');
+
+    console.log('Mobile menu setup:', { menuBtn, mainMenu, closeBtn });
+
+    if (menuBtn && mainMenu) {
+        menuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            console.log('Mobile menu clicked');
+            mainMenu.classList.add('show-menu');
         });
+    }
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            const langSelector = document.querySelector('.language-selector');
-            if (langSelector && !langSelector.contains(e.target)) {
-                document.getElementById('languageDropdown')?.classList.remove('show');
-            }
+    if (closeBtn && mainMenu) {
+        closeBtn.addEventListener('click', function() {
+            mainMenu.classList.remove('show-menu');
         });
+    }
 
-        // Check admin access
-        function checkAdminAccess() {
-            const token = localStorage.getItem('accessToken');
-            const adminBtn = document.getElementById('adminBtn');
-            if (token && adminBtn) {
-                adminBtn.style.display = 'flex';
+    document.addEventListener('click', function(e) {
+        if (mainMenu && mainMenu.classList.contains('show-menu')) {
+            if (e.target.closest('.language-selector-mobile')) return;
+            if (!mainMenu.contains(e.target) && !e.target.closest('.mobile-menu-btn') && !e.target.closest('#mobileMenuBtn')) {
+                mainMenu.classList.remove('show-menu');
             }
         }
+    });
+}
 
-        // Load dynamic categories
-        async function loadCategories() {
-            try {
-                const response = await fetch(`${API_URL}/categories`);
-                const result = await response.json();
+// Mobile Language Dropdown
+function toggleMobileLanguageDropdown(e) {
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    const dropdown = document.getElementById('languageDropdownMobile');
+    if (dropdown) {
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    }
+}
 
-                if (result.success && result.data.categories) {
-                    const categories = result.data.categories;
-                    const menuList = document.querySelector('.menu-list');
-                    const aboutLi = menuList.querySelector('li.active');
+// Desktop Language Dropdown
+function toggleDesktopLanguage(e) {
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    const dropdown = document.querySelector('.language-selector .language-dropdown');
+    if (dropdown) {
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    }
+}
 
-                    // Category mapping
-                    const categoryMap = {
-                        'cultural-tours': 'cultural',
-                        'adventure-tours': 'adventure',
-                        'homestays-hiking': 'hiking',
-                        'day-trips': 'day-trip'
-                    };
+// Close dropdowns on outside click
+document.addEventListener('click', function(e) {
+    const desktopDropdown = document.querySelector('.language-selector .language-dropdown');
+    const mobileDropdown = document.getElementById('languageDropdownMobile');
 
-                    for (const category of categories.reverse()) {
-                        const categoryValue = categoryMap[category.slug];
+    if (desktopDropdown && !e.target.closest('.language-selector')) {
+        desktopDropdown.style.display = 'none';
+    }
+    if (mobileDropdown && !e.target.closest('.language-selector-mobile')) {
+        mobileDropdown.style.display = 'none';
+    }
+});
 
-                        // Fetch tours for this category
-                        const toursResponse = await fetch(`${API_URL}/tours?category=${categoryValue}`);
-                        const toursResult = await toursResponse.json();
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+    setupMobileMenu();
+    loadAboutSettings();
+});
 
-                        const li = document.createElement('li');
-                        li.className = 'has-dropdown';
+// API Base URL
+const API_BASE = 'http://localhost:5000/api';
 
-                        const a = document.createElement('a');
-                        a.href = `#${category.slug}`;
-                        a.textContent = category.name;
+// Load About Settings from API
+async function loadAboutSettings() {
+    try {
+        const response = await fetch(`${API_BASE}/about-settings`);
+        const result = await response.json();
 
-                        // Mobile dropdown toggle
-                        a.addEventListener('click', function(e) {
-                            if (window.innerWidth < 1200) {
-                                e.preventDefault();
-                                li.classList.toggle('open');
-                            }
-                        });
-
-                        li.appendChild(a);
-
-                        // Create submenu if tours exist
-                        if (toursResult.success && toursResult.data.tours.length > 0) {
-                            const submenu = document.createElement('ul');
-                            submenu.className = 'submenu';
-
-                            toursResult.data.tours.forEach(tour => {
-                                const subLi = document.createElement('li');
-                                const subA = document.createElement('a');
-                                subA.href = `tour-details.html?id=${tour.id}`;
-                                subA.textContent = tour.title;
-                                subLi.appendChild(subA);
-                                submenu.appendChild(subLi);
-                            });
-
-                            li.appendChild(submenu);
-                        }
-
-                        // Insert before "About" li
-                        menuList.insertBefore(li, aboutLi);
-                    }
-                }
-            } catch (error) {
-                console.error('Error loading categories:', error);
-            }
+        if (result.success && result.data && result.data.settings) {
+            const data = result.data.settings;
+            renderAboutPage(data);
+        } else {
+            console.log('No about settings found, using defaults');
+            loadDefaultContent();
         }
+    } catch (error) {
+        console.error('Error loading about settings:', error);
+        loadDefaultContent();
+    }
+}
 
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            checkAdminAccess();
-            loadCategories();
-        });
-    </script>
-    <!-- Settings Integration -->
-    <script src="settings-integration.js"></script>
-    <script src="language-loader.js"></script>
+// Render all sections
+function renderAboutPage(data) {
+    // Hero Section
+    const heroTitle = document.getElementById('heroTitle');
+    const heroSubtitle = document.getElementById('heroSubtitle');
+    const aboutHero = document.getElementById('aboutHero');
+
+    if (heroTitle && data.heroTitle) heroTitle.textContent = data.heroTitle;
+    if (heroSubtitle && data.heroSubtitle) heroSubtitle.textContent = data.heroSubtitle;
+    if (aboutHero && data.heroImage) {
+        const bgUrl = data.heroImage.startsWith('/') ? data.heroImage : `/uploads/${data.heroImage}`;
+        aboutHero.style.backgroundImage = `url('${bgUrl}')`;
+    }
+
+    // Features Section
+    const featuresEyebrow = document.getElementById('featuresEyebrow');
+    const featuresTitle = document.getElementById('featuresTitle');
+    if (featuresEyebrow && data.whyChooseEyebrow) featuresEyebrow.textContent = data.whyChooseEyebrow;
+    if (featuresTitle && data.whyChooseTitle) featuresTitle.textContent = data.whyChooseTitle;
+
+    if (data.features && data.features.length > 0) {
+        renderFeatures(data.features);
+    } else {
+        loadDefaultFeatures();
+    }
+
+    // Story Section
+    const storyEyebrow = document.getElementById('storyEyebrow');
+    const storyTitle = document.getElementById('storyTitle');
+    const storyContent = document.getElementById('storyContent');
+    const storyImages = document.getElementById('storyImages');
+
+    if (storyEyebrow && data.storyEyebrow) storyEyebrow.textContent = data.storyEyebrow;
+    if (storyTitle && data.storyTitle) storyTitle.textContent = data.storyTitle;
+
+    if (storyContent && data.storyContent) {
+        // Split by double newlines to create paragraphs
+        const paragraphs = data.storyContent.split('\n\n').filter(p => p.trim());
+        storyContent.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
+    } else {
+        storyContent.innerHTML = '<p>Born and raised in Samarkand, we founded Travel Bliss with a dream of sharing our homeland\'s hidden treasures with the world.</p>';
+    }
+
+    if (storyImages) {
+        const mainImg = data.storyImageMain || '/uploads/registon-1764689562739-647287587.jpg';
+        const secondImg = data.storyImageSecondary || '/uploads/tours/bukhara-1733905530946.jpg';
+        storyImages.innerHTML = `
+            <img src="${mainImg.startsWith('/') ? mainImg : '/uploads/' + mainImg}" alt="Our Story" class="story-img-main">
+            <img src="${secondImg.startsWith('/') ? secondImg : '/uploads/' + secondImg}" alt="Our Story" class="story-img-secondary">
+        `;
+    }
+
+    // Stats Section
+    if (data.stats && data.stats.length > 0) {
+        renderStats(data.stats);
+    } else {
+        loadDefaultStats();
+    }
+
+    // Team Section
+    const teamEyebrow = document.getElementById('teamEyebrow');
+    const teamTitle = document.getElementById('teamTitle');
+    if (teamEyebrow && data.teamEyebrow) teamEyebrow.textContent = data.teamEyebrow;
+    if (teamTitle && data.teamTitle) teamTitle.textContent = data.teamTitle;
+
+    if (data.teamMembers && data.teamMembers.length > 0) {
+        renderTeam(data.teamMembers);
+    } else {
+        loadDefaultTeam();
+    }
+
+    // Reviews Section
+    const reviewsEyebrow = document.getElementById('reviewsEyebrow');
+    const reviewsTitle = document.getElementById('reviewsTitle');
+    if (reviewsEyebrow && data.reviewsEyebrow) reviewsEyebrow.textContent = data.reviewsEyebrow;
+    if (reviewsTitle && data.reviewsTitle) reviewsTitle.textContent = data.reviewsTitle;
+
+    renderReviewsBadges(data);
+
+    if (data.featuredReviews && data.featuredReviews.length > 0) {
+        renderReviews(data.featuredReviews);
+    } else {
+        loadDefaultReviews();
+    }
+}
+
+// Render Features
+function renderFeatures(features) {
+    const grid = document.getElementById('featuresGrid');
+    if (!grid) return;
+
+    const icons = {
+        home: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>',
+        smile: '<circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line>',
+        dollar: '<line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>',
+        star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>',
+        map: '<polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line>',
+        users: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>',
+        heart: '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>',
+        shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>'
+    };
+
+    grid.innerHTML = features.map(feature => `
+        <div class="icon-card">
+            <div class="icon-circle">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    ${icons[feature.icon] || icons.star}
+                </svg>
+            </div>
+            <h3>${feature.title}</h3>
+            <p>${feature.description}</p>
+        </div>
+    `).join('');
+}
+
+// Render Stats
+function renderStats(stats) {
+    const grid = document.getElementById('statsGrid');
+    if (!grid) return;
+
+    grid.innerHTML = stats.map(stat => `
+        <div class="stat-card">
+            <div class="stat-number">${stat.number}</div>
+            <div class="stat-label">${stat.label}</div>
+            <p class="stat-desc">${stat.description}</p>
+        </div>
+    `).join('');
+}
+
+// Render Team
+function renderTeam(team) {
+    const grid = document.getElementById('teamGrid');
+    if (!grid) return;
+
+    grid.innerHTML = team.map(member => {
+        const photo = member.photo ?
+            (member.photo.startsWith('http') ? member.photo :
+             member.photo.startsWith('/') ? member.photo : `/uploads/${member.photo}`) :
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face';
+
+        return `
+            <div class="team-card">
+                <div class="team-photo">
+                    <img src="${photo}" alt="${member.name}">
+                </div>
+                <h3>${member.name}</h3>
+                <p class="team-role">${member.role}</p>
+                <p class="team-desc">${member.description || member.bio || ''}</p>
+            </div>
+        `;
+    }).join('');
+}
+
+// Render Reviews Badges
+function renderReviewsBadges(data) {
+    const badges = document.getElementById('reviewsBadges');
+    if (!badges) return;
+
+    const tripadvisor = data?.tripadvisorRating || '4.9/5 (500+ reviews)';
+    const google = data?.googleRating || '5.0/5 on Google';
+
+    badges.innerHTML = `
+        <div class="review-badge">
+            <img src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" alt="TripAdvisor" style="height: 30px;">
+            <div class="rating-info">
+                <div class="stars">★★★★★</div>
+                <span>${tripadvisor}</span>
+            </div>
+        </div>
+        <div class="review-badge">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" style="height: 30px;">
+            <div class="rating-info">
+                <div class="stars">★★★★★</div>
+                <span>${google}</span>
+            </div>
+        </div>
+    `;
+}
+
+// Render Reviews
+function renderReviews(reviews) {
+    const container = document.getElementById('featuredReview');
+    if (!container || reviews.length === 0) return;
+
+    const review = reviews[0];
+    const photo = review.authorPhoto || review.photo ?
+        ((review.authorPhoto || review.photo).startsWith('http') ? (review.authorPhoto || review.photo) :
+         (review.authorPhoto || review.photo).startsWith('/') ? (review.authorPhoto || review.photo) : `/uploads/${review.authorPhoto || review.photo}`) :
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&h=60&fit=crop&crop=face';
+
+    const reviewText = review.content || review.text || '';
+    const authorName = review.authorName || review.name || '';
+    const location = review.authorLocation || review.country || '';
+    const tourName = review.tourName || '';
+    const date = review.date || '';
+
+    container.innerHTML = `
+        <div class="review-content">
+            <p>"${reviewText}"</p>
+            <div class="reviewer">
+                <img src="${photo}" alt="${authorName}" class="reviewer-photo">
+                <div class="reviewer-info">
+                    <strong>${authorName}</strong>
+                    <span>${location}${tourName ? ' • ' + tourName : ''}${date ? ' • ' + date : ''}</span>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Default Content Loaders
+function loadDefaultContent() {
+    loadDefaultFeatures();
+    loadDefaultStory();
+    loadDefaultStats();
+    loadDefaultTeam();
+    loadDefaultReviews();
+}
+
+function loadDefaultFeatures() {
+    const grid = document.getElementById('featuresGrid');
+    if (!grid) return;
+
+    grid.innerHTML = `
+        <div class="icon-card">
+            <div class="icon-circle">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+            </div>
+            <h3>Local Family Hospitality</h3>
+            <p>Experience genuine Uzbek warmth with our family-run service and personal attention to every detail</p>
+        </div>
+        <div class="icon-card">
+            <div class="icon-circle">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                </svg>
+            </div>
+            <h3>Artisan Partnerships</h3>
+            <p>Direct connections with local craftsmen, musicians, and chefs for authentic cultural encounters</p>
+        </div>
+        <div class="icon-card">
+            <div class="icon-circle">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+            </div>
+            <h3>Transparent Pricing</h3>
+            <p>No hidden fees or surprises. Clear, honest pricing with full breakdown of all costs included</p>
+        </div>
+        <div class="icon-card">
+            <div class="icon-circle">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+            </div>
+            <h3>Expert Local Planning</h3>
+            <p>Born and raised in Samarkand, we know every hidden gem and secret spot worth visiting</p>
+        </div>
+    `;
+}
+
+function loadDefaultStory() {
+    const content = document.getElementById('storyContent');
+    const images = document.getElementById('storyImages');
+
+    if (content) {
+        content.innerHTML = `
+            <p>Born and raised in Samarkand, we founded Travel Bliss with a dream of sharing our homeland's hidden treasures with the world. What started as a small family venture has grown into a trusted travel company, but we've never lost our personal touch.</p>
+            <p>Every tour we create draws from generations of local knowledge, family connections, and a genuine love for Uzbekistan's rich heritage. We don't just show you the Silk Road—we help you experience it through the eyes of those who call it home.</p>
+            <p>From the ancient madrasas of Bukhara to the bustling bazaars of Tashkent, from the desert fortresses of Khiva to the mountain villages of Chimgan—we bring you face-to-face with the living history that makes Central Asia truly magical.</p>
+        `;
+    }
+
+    if (images) {
+        images.innerHTML = `
+            <img src="/uploads/registon-1764689562739-647287587.jpg" alt="Registan Square Samarkand" class="story-img-main">
+            <img src="/uploads/tours/bukhara-1733905530946.jpg" alt="Bukhara Architecture" class="story-img-secondary">
+        `;
+    }
+}
+
+function loadDefaultStats() {
+    const grid = document.getElementById('statsGrid');
+    if (!grid) return;
+
+    grid.innerHTML = `
+        <div class="stat-card">
+            <div class="stat-number">5000+</div>
+            <div class="stat-label">Tours Organized</div>
+            <p class="stat-desc">Successful journeys through the Silk Road</p>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">Years Experience</div>
+            <p class="stat-desc">Dedicated to excellence since 2014</p>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Partner Network</div>
+            <p class="stat-desc">Hotels, guides, and local artisans</p>
+        </div>
+    `;
+}
+
+function loadDefaultTeam() {
+    const grid = document.getElementById('teamGrid');
+    if (!grid) return;
+
+    grid.innerHTML = `
+        <div class="team-card">
+            <div class="team-photo">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face" alt="Founder">
+            </div>
+            <h3>Hasanbek Mamatkulov</h3>
+            <p class="team-role">Founder & CEO</p>
+            <p class="team-desc">Born in Samarkand, passionate about sharing Uzbekistan's culture with the world</p>
+        </div>
+        <div class="team-card">
+            <div class="team-photo">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face" alt="Operations Manager">
+            </div>
+            <h3>Dilshod Rahimov</h3>
+            <p class="team-role">Operations Manager</p>
+            <p class="team-desc">Ensures every tour runs smoothly from start to finish</p>
+        </div>
+        <div class="team-card">
+            <div class="team-photo">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face" alt="Experience Officer">
+            </div>
+            <h3>Madina Sultanova</h3>
+            <p class="team-role">Customer Experience</p>
+            <p class="team-desc">Dedicated to making your journey unforgettable</p>
+        </div>
+    `;
+}
+
+function loadDefaultReviews() {
+    const badges = document.getElementById('reviewsBadges');
+    const container = document.getElementById('featuredReview');
+
+    if (badges) {
+        badges.innerHTML = `
+            <div class="review-badge">
+                <img src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" alt="TripAdvisor" style="height: 30px;">
+                <div class="rating-info">
+                    <div class="stars">★★★★★</div>
+                    <span>4.9/5 (500+ reviews)</span>
+                </div>
+            </div>
+            <div class="review-badge">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" style="height: 30px;">
+                <div class="rating-info">
+                    <div class="stars">★★★★★</div>
+                    <span>5.0/5 on Google</span>
+                </div>
+            </div>
+        `;
+    }
+
+    if (container) {
+        container.innerHTML = `
+            <div class="review-content">
+                <p>"Travel Bliss made our Silk Road dream come true! The attention to detail, local insights, and genuine hospitality exceeded all expectations. Our guide knew every hidden corner of Samarkand and Bukhara. Truly unforgettable experience!"</p>
+                <div class="reviewer">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&h=60&fit=crop&crop=face" alt="Reviewer" class="reviewer-photo">
+                    <div class="reviewer-info">
+                        <strong>Sarah Mitchell</strong>
+                        <span>USA • Silk Road Explorer Tour • October 2024</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+}
+</script>
 </body>
 </html>
