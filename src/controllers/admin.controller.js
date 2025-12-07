@@ -125,27 +125,53 @@ let demoBookings = [
  * @access  Private/Admin
  */
 exports.getDashboard = asyncHandler(async (req, res) => {
+  // MongoDB dan haqiqiy ma'lumotlarni olish
+  const Tour = require('../models/Tour.model');
+  const Blog = require('../models/Blog.model');
+  const User = require('../models/User.model');
+
+  // Get real counts from MongoDB
+  const totalTours = await Tour.countDocuments();
+  const activeTours = await Tour.countDocuments({ isActive: true });
+  const totalBlogs = await Blog.countDocuments();
+  const totalUsers = await User.countDocuments();
+
+  // Get bookings from storage
+  const allBookings = await bookingsStorage.findAll();
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todayBookings = allBookings.filter(b => {
+    const bookingDate = new Date(b.createdAt);
+    bookingDate.setHours(0, 0, 0, 0);
+    return bookingDate.getTime() === today.getTime();
+  });
+
   const stats = {
-    totalUsers: demoUsers.length,
+    totalUsers: totalUsers || demoUsers.length,
     activeUsers: demoUsers.filter(u => u.isActive).length,
-    totalTours: demoTours.length,
-    activeTours: demoTours.filter(t => t.status === 'active').length,
-    totalBookings: demoBookings.length,
-    confirmedBookings: demoBookings.filter(b => b.status === 'confirmed').length,
-    pendingBookings: demoBookings.filter(b => b.status === 'pending').length,
-    totalRevenue: demoBookings.reduce((sum, b) => sum + b.totalPrice, 0),
-    paidRevenue: demoBookings
+    totalTours: totalTours,
+    activeTours: activeTours,
+    totalBookings: allBookings.length,
+    todayBookings: todayBookings.length,
+    totalBlogs: totalBlogs,
+    confirmedBookings: allBookings.filter(b => b.status === 'confirmed').length,
+    pendingBookings: allBookings.filter(b => b.status === 'pending').length,
+    totalRevenue: allBookings.reduce((sum, b) => sum + (b.totalPrice || 0), 0),
+    paidRevenue: allBookings
       .filter(b => b.paymentStatus === 'paid')
-      .reduce((sum, b) => sum + b.totalPrice, 0),
-    pendingRevenue: demoBookings
+      .reduce((sum, b) => sum + (b.totalPrice || 0), 0),
+    pendingRevenue: allBookings
       .filter(b => b.paymentStatus === 'pending')
-      .reduce((sum, b) => sum + b.totalPrice, 0)
+      .reduce((sum, b) => sum + (b.totalPrice || 0), 0)
   };
 
-  const recentBookings = demoBookings.slice(0, 5);
-  const popularTours = demoTours
-    .sort((a, b) => b.totalBookings - a.totalBookings)
-    .slice(0, 5);
+  const recentBookings = allBookings.slice(0, 5);
+
+  // Get popular tours from MongoDB
+  const popularTours = await Tour.find({ isActive: true })
+    .sort({ bookingsCount: -1 })
+    .limit(5)
+    .select('title destination price bookingsCount');
 
   res.status(200).json(
     new ApiResponse(200, {
