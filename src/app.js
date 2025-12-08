@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 // Cookie parser
 app.use(cookieParser);
 
-// CORS configuration - allow all localhost origins for development
+// CORS configuration - allow all origins for development and production
 app.use(cors({
   origin: function(origin, callback) {
     // Allow requests with no origin (like mobile apps, curl, postman)
@@ -30,8 +30,23 @@ app.use(cors({
       return callback(null, true);
     }
 
+    // Allow Render.com domains
+    if (origin.includes('.onrender.com')) {
+      return callback(null, true);
+    }
+
+    // Allow production domains
+    if (origin.includes('travel-bliss.uz') || origin.includes('travelbliss')) {
+      return callback(null, true);
+    }
+
     // For production, check environment variable
     if (process.env.CORS_ORIGIN && origin === process.env.CORS_ORIGIN) {
+      return callback(null, true);
+    }
+
+    // In production, allow all origins (for now)
+    if (process.env.NODE_ENV === 'production') {
       return callback(null, true);
     }
 
