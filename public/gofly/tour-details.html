@@ -21,6 +21,10 @@
     <link rel="stylesheet" href="assets/css/jquery-ui.css">
     <link rel="stylesheet" href="assets/css/style.css?v=3">
 
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         :root {
             --travel-bliss-blue: #6366f1;
@@ -2040,6 +2044,24 @@
                 <section class="tour-section" id="reviews">
                     <h2 class="section-title">Traveler Reviews</h2>
 
+                    <!-- Write Review Button - Prominent -->
+                    <div style="margin-bottom: 24px;">
+                        <button onclick="openReviewModal()" style="padding: 14px 28px; background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);"
+                            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(99, 102, 241, 0.4)'"
+                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(99, 102, 241, 0.3)'">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                            </svg>
+                            Write a Review
+                        </button>
+                    </div>
+
+                    <!-- Reviews Stats -->
+                    <div id="reviewsStatsContainer" style="display: none; margin-bottom: 24px;">
+                        <!-- Stats will be loaded here -->
+                    </div>
+
                     <!-- TripAdvisor Header -->
                     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
                         <div style="display: flex; align-items: center; gap: 20px;">
@@ -3125,7 +3147,122 @@
             excludedList.innerHTML = excluded.map(item => `<li>${item}</li>`).join('');
         }
 
-        function loadReviews(tour) {
+        // Global variable for current tour
+        let currentTourData = null;
+
+        // Load reviews from API
+        async function loadReviews(tour) {
+            currentTourData = tour;
+            const container = document.getElementById('reviewCardsContainer');
+            const statsContainer = document.getElementById('reviewsStatsContainer');
+
+            if (!container) {
+                console.error('Review cards container not found');
+                return;
+            }
+
+            // Show loading
+            container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="bx bx-loader-alt bx-spin" style="font-size: 32px; color: #6366f1;"></i><p style="margin-top: 10px; color: #666;">Loading reviews...</p></div>';
+
+            try {
+                // Load reviews from API
+                const response = await fetch(`/api/reviews?serviceId=${tour._id}&serviceType=tour&limit=10`);
+                const data = await response.json();
+
+                if (data.success && data.data.reviews.length > 0) {
+                    const reviews = data.data.reviews;
+
+                    // Show stats
+                    if (statsContainer) {
+                        const statsResponse = await fetch(`/api/reviews/stats/${tour._id}`);
+                        const statsData = await statsResponse.json();
+
+                        if (statsData.success) {
+                            statsContainer.style.display = 'block';
+                            statsContainer.innerHTML = `
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px;">
+                                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; padding: 20px; text-align: center; color: white;">
+                                        <div style="font-size: 32px; font-weight: 700;">${statsData.data.avgRating || 0}</div>
+                                        <div style="font-size: 13px; opacity: 0.9;">Average Rating</div>
+                                    </div>
+                                    <div style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); border-radius: 12px; padding: 20px; text-align: center; color: white;">
+                                        <div style="font-size: 32px; font-weight: 700;">${statsData.data.numRatings || 0}</div>
+                                        <div style="font-size: 13px; opacity: 0.9;">Total Reviews</div>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    }
+
+                    // Render reviews
+                    container.innerHTML = reviews.map(review => renderReviewCard(review)).join('');
+                } else {
+                    // No reviews from API, show default reviews
+                    loadDefaultReviews(tour);
+                }
+            } catch (error) {
+                console.error('Error loading reviews:', error);
+                // On error, show default reviews
+                loadDefaultReviews(tour);
+            }
+        }
+
+        // Render single review card
+        function renderReviewCard(review) {
+            const fullStars = Math.floor(review.rating);
+            const starsSVG = Array.from({length: 5}).map((_, i) => {
+                if (i < fullStars) {
+                    return `<svg width="16" height="16" viewBox="0 0 14 14" fill="#00AA6C" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; margin-right: 2px;">
+                        <path d="M7 0L8.5716 4.83688H13.6574L9.5429 7.82624L11.1145 12.6631L7 9.67376L2.8855 12.6631L4.4571 7.82624L0.342604 4.83688H5.4284L7 0Z"/>
+                    </svg>`;
+                } else {
+                    return `<svg width="16" height="16" viewBox="0 0 14 14" fill="#E0E0E0" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; margin-right: 2px;">
+                        <path d="M7 0L8.5716 4.83688H13.6574L9.5429 7.82624L11.1145 12.6631L7 9.67376L2.8855 12.6631L4.4571 7.82624L0.342604 4.83688H5.4284L7 0Z"/>
+                    </svg>`;
+                }
+            }).join('');
+
+            const reviewDate = review.createdAt ? new Date(review.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Recent';
+            const avatar = review.userAvatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(review.userName)}&background=6366f1&color=fff`;
+
+            return `
+                <div style="background: white; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 0.3s;"
+                     onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.12)'"
+                     onmouseout="this.style.boxShadow='0 2px 8px rgba(0,0,0,0.08)'">
+                    <div style="display: flex; gap: 16px; margin-bottom: 16px;">
+                        <img src="${avatar}"
+                             alt="${review.userName}"
+                             style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+                        <div style="flex: 1;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                                <h5 style="margin: 0; font-size: 16px; font-weight: 700; color: #333;">${review.userName}</h5>
+                                <span style="color: #999; font-size: 13px;">${reviewDate}</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 4px;">
+                                ${starsSVG}
+                                ${review.isVerifiedPurchase ? '<span style="background: #e8f5e9; color: #2e7d32; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-left: 8px;">Verified Purchase</span>' : ''}
+                            </div>
+                        </div>
+                    </div>
+                    <p style="color: #666; line-height: 1.6; margin-bottom: 16px; font-size: 14px;">${review.review}</p>
+                    ${review.adminResponse ? `
+                        <div style="background: #f8f9fa; border-left: 3px solid #6366f1; padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: 12px;">
+                            <div style="font-size: 12px; color: #6366f1; font-weight: 600; margin-bottom: 6px;">Response from Travel Bliss</div>
+                            <p style="margin: 0; color: #555; font-size: 13px; line-height: 1.5;">${review.adminResponse}</p>
+                        </div>
+                    ` : ''}
+                    <div style="display: flex; align-items: center; gap: 6px; padding-top: 12px; border-top: 1px solid #f0f0f0;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+                        </svg>
+                        <span style="color: #666; font-size: 13px;">Helpful (${review.helpfulCount || 0})</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Load default reviews when no API reviews exist
+        function loadDefaultReviews(tour) {
             const container = document.getElementById('reviewCardsContainer');
 
             // All available reviews
@@ -3434,6 +3571,168 @@
                     </div>
                 `;
             }).join('');
+        }
+
+        // Open review modal
+        function openReviewModal() {
+            if (!currentTourData) {
+                alert('Tour ma\'lumotlari yuklanmagan');
+                return;
+            }
+
+            Swal.fire({
+                title: 'Write a Review',
+                html: `
+                    <div style="text-align: left;">
+                        <p style="margin-bottom: 20px; color: #666; font-size: 14px;">Share your experience about <strong>${currentTourData.title || 'this tour'}</strong></p>
+
+                        <div style="margin-bottom: 16px;">
+                            <label style="display: block; margin-bottom: 6px; font-weight: 600; color: #333;">Your Name *</label>
+                            <input type="text" id="reviewUserName" class="swal2-input" placeholder="Enter your name" style="margin: 0; width: 100%;">
+                        </div>
+
+                        <div style="margin-bottom: 16px;">
+                            <label style="display: block; margin-bottom: 6px; font-weight: 600; color: #333;">Email Address *</label>
+                            <input type="email" id="reviewUserEmail" class="swal2-input" placeholder="Enter your email" style="margin: 0; width: 100%;">
+                        </div>
+
+                        <div style="margin-bottom: 16px;">
+                            <label style="display: block; margin-bottom: 6px; font-weight: 600; color: #333;">Rating *</label>
+                            <div id="starRatingContainer" style="display: flex; gap: 8px; cursor: pointer;">
+                                ${[1,2,3,4,5].map(i => `
+                                    <svg class="star-rating" data-rating="${i}" width="32" height="32" viewBox="0 0 24 24" fill="#E0E0E0" xmlns="http://www.w3.org/2000/svg" style="transition: all 0.2s; cursor: pointer;"
+                                         onmouseover="highlightStars(${i})" onmouseout="resetStars()" onclick="setRating(${i})">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                `).join('')}
+                            </div>
+                            <input type="hidden" id="reviewRating" value="0">
+                        </div>
+
+                        <div style="margin-bottom: 16px;">
+                            <label style="display: block; margin-bottom: 6px; font-weight: 600; color: #333;">Trip Date</label>
+                            <input type="date" id="reviewTripDate" class="swal2-input" style="margin: 0; width: 100%;">
+                        </div>
+
+                        <div style="margin-bottom: 16px;">
+                            <label style="display: block; margin-bottom: 6px; font-weight: 600; color: #333;">Your Review *</label>
+                            <textarea id="reviewText" class="swal2-textarea" placeholder="Share your experience... (minimum 10 characters)" style="margin: 0; width: 100%; min-height: 120px;"></textarea>
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'Submit Review',
+                cancelButtonText: 'Cancel',
+                confirmButtonColor: '#6366f1',
+                width: '500px',
+                didOpen: () => {
+                    // Initialize star rating
+                    window.selectedRating = 0;
+                },
+                preConfirm: () => {
+                    const userName = document.getElementById('reviewUserName').value.trim();
+                    const userEmail = document.getElementById('reviewUserEmail').value.trim();
+                    const rating = parseInt(document.getElementById('reviewRating').value);
+                    const review = document.getElementById('reviewText').value.trim();
+                    const tripDate = document.getElementById('reviewTripDate').value;
+
+                    if (!userName) {
+                        Swal.showValidationMessage('Please enter your name');
+                        return false;
+                    }
+                    if (!userEmail || !userEmail.includes('@')) {
+                        Swal.showValidationMessage('Please enter a valid email');
+                        return false;
+                    }
+                    if (!rating || rating < 1) {
+                        Swal.showValidationMessage('Please select a rating');
+                        return false;
+                    }
+                    if (!review || review.length < 10) {
+                        Swal.showValidationMessage('Review must be at least 10 characters');
+                        return false;
+                    }
+
+                    return { userName, userEmail, rating, review, tripDate };
+                }
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    await submitReview(result.value);
+                }
+            });
+        }
+
+        // Star rating functions
+        window.selectedRating = 0;
+
+        function highlightStars(rating) {
+            document.querySelectorAll('.star-rating').forEach((star, index) => {
+                star.setAttribute('fill', index < rating ? '#f59e0b' : '#E0E0E0');
+            });
+        }
+
+        function resetStars() {
+            document.querySelectorAll('.star-rating').forEach((star, index) => {
+                star.setAttribute('fill', index < window.selectedRating ? '#f59e0b' : '#E0E0E0');
+            });
+        }
+
+        function setRating(rating) {
+            window.selectedRating = rating;
+            document.getElementById('reviewRating').value = rating;
+            highlightStars(rating);
+        }
+
+        // Submit review to API
+        async function submitReview(reviewData) {
+            try {
+                Swal.fire({
+                    title: 'Submitting...',
+                    html: 'Please wait while we submit your review',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                const response = await fetch('/api/reviews', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        userName: reviewData.userName,
+                        userEmail: reviewData.userEmail,
+                        rating: reviewData.rating,
+                        review: reviewData.review,
+                        serviceType: 'tour',
+                        serviceId: currentTourData._id,
+                        serviceName: currentTourData.title,
+                        tripDate: reviewData.tripDate || null
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thank You!',
+                        text: 'Your review has been submitted and will be visible after moderation.',
+                        confirmButtonColor: '#6366f1'
+                    });
+                } else {
+                    throw new Error(data.message || 'Failed to submit review');
+                }
+            } catch (error) {
+                console.error('Error submitting review:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: error.message || 'Failed to submit review. Please try again.',
+                    confirmButtonColor: '#6366f1'
+                });
+            }
         }
 
         function loadFAQ(tour) {

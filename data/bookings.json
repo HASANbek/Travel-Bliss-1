@@ -1,49 +1,5 @@
 [
   {
-    "id": "BOOK-20251121-6V71",
-    "tourId": "1",
-    "tourName": "Samarkand City Tour",
-    "customerName": "Yusufjon Yusufjon",
-    "customerEmail": "travelblissoffice@gmail.com",
-    "customerPhone": "+998932244333",
-    "pickupLocation": "tuu",
-    "date": "2025-11-22T00:00:00.000Z",
-    "guests": {
-      "adults": 2,
-      "children": 0
-    },
-    "totalPrice": 1000,
-    "specialRequests": "",
-    "userId": null,
-    "status": "confirmed",
-    "createdAt": "2025-11-21T08:48:05.191Z",
-    "updatedAt": "2025-11-21T08:54:19.385Z",
-    "confirmedAt": "2025-11-21T08:54:19.384Z",
-    "cancelledAt": null
-  },
-  {
-    "id": "BOOK-20251121-CSVG",
-    "tourId": "1",
-    "tourName": "Samarkand City Tour",
-    "customerName": "Travelbliss LLC",
-    "customerEmail": "travelblissoffice@gmail.com",
-    "customerPhone": "+998932244333",
-    "pickupLocation": "tuu",
-    "date": "2025-11-22T00:00:00.000Z",
-    "guests": {
-      "adults": 2,
-      "children": 0
-    },
-    "totalPrice": 1000,
-    "specialRequests": "",
-    "userId": null,
-    "status": "confirmed",
-    "createdAt": "2025-11-21T08:53:53.573Z",
-    "updatedAt": "2025-11-21T08:54:15.801Z",
-    "confirmedAt": "2025-11-21T08:54:15.801Z",
-    "cancelledAt": null
-  },
-  {
     "id": "BOOK-20251205-XDYX",
     "tourId": "692546d4b6c20b42bcba89c0",
     "tourName": "Khiva - Open Air Museum Full Day Tour",
@@ -59,10 +15,10 @@
     "totalPrice": 1100000,
     "specialRequests": "wefwefwef\n\nCountry: uzbekistan",
     "userId": null,
-    "status": "pending",
+    "status": "confirmed",
     "createdAt": "2025-12-05T07:22:02.456Z",
-    "updatedAt": "2025-12-05T07:22:02.456Z",
-    "confirmedAt": null,
+    "updatedAt": "2025-12-07T11:22:37.569Z",
+    "confirmedAt": "2025-12-07T11:22:37.568Z",
     "cancelledAt": null
   },
   {
@@ -81,10 +37,10 @@
     "totalPrice": 170,
     "specialRequests": "d2d23d23d23d23d23\n\nCountry: uzbekistan\nPreferred Time: 08:30",
     "userId": null,
-    "status": "pending",
+    "status": "confirmed",
     "createdAt": "2025-12-06T15:18:30.020Z",
-    "updatedAt": "2025-12-06T15:18:30.020Z",
-    "confirmedAt": null,
+    "updatedAt": "2025-12-07T11:22:39.478Z",
+    "confirmedAt": "2025-12-07T11:22:39.478Z",
     "cancelledAt": null
   },
   {
@@ -103,10 +59,10 @@
     "totalPrice": 170,
     "specialRequests": "dbfkjh kjkfjvhk h kjhskjhgvksjh kvjshg kvhsd\n\nCountry: uzbekistan\nPreferred Time: 07:15",
     "userId": null,
-    "status": "pending",
+    "status": "confirmed",
     "createdAt": "2025-12-06T15:31:22.081Z",
-    "updatedAt": "2025-12-06T15:31:22.081Z",
-    "confirmedAt": null,
+    "updatedAt": "2025-12-07T11:22:41.431Z",
+    "confirmedAt": "2025-12-07T11:22:41.430Z",
     "cancelledAt": null
   },
   {
@@ -125,10 +81,10 @@
     "totalPrice": 255,
     "specialRequests": "qdq q dqwd qw qw\n\nCountry: uzbekistan\nPreferred Time: 06:45",
     "userId": null,
-    "status": "pending",
+    "status": "confirmed",
     "createdAt": "2025-12-06T15:33:20.017Z",
-    "updatedAt": "2025-12-06T15:33:20.017Z",
-    "confirmedAt": null,
+    "updatedAt": "2025-12-07T11:22:48.934Z",
+    "confirmedAt": "2025-12-07T11:22:48.933Z",
     "cancelledAt": null
   },
   {
@@ -147,10 +103,10 @@
     "totalPrice": 170,
     "specialRequests": "wfwe wef wef we \n\nCountry: uzbekistan\nPreferred Time: 07:45",
     "userId": null,
-    "status": "pending",
+    "status": "confirmed",
     "createdAt": "2025-12-06T15:35:10.697Z",
-    "updatedAt": "2025-12-06T15:35:10.697Z",
-    "confirmedAt": null,
+    "updatedAt": "2025-12-07T11:22:54.886Z",
+    "confirmedAt": "2025-12-07T11:22:54.885Z",
     "cancelledAt": null
   },
   {
@@ -169,10 +125,10 @@
     "totalPrice": 300,
     "specialRequests": "saxas ad w a\n\nCountry: uzbekistan\nPreferred Time: 08:00",
     "userId": null,
-    "status": "pending",
+    "status": "confirmed",
     "createdAt": "2025-12-06T15:39:01.622Z",
-    "updatedAt": "2025-12-06T15:39:01.622Z",
-    "confirmedAt": null,
+    "updatedAt": "2025-12-07T11:22:58.118Z",
+    "confirmedAt": "2025-12-07T11:22:58.117Z",
     "cancelledAt": null
   },
   {
@@ -191,10 +147,10 @@
     "totalPrice": 300,
     "specialRequests": "wedqd\n\nCountry: uzbekistan\nPreferred Time: 08:00",
     "userId": null,
-    "status": "pending",
+    "status": "confirmed",
     "createdAt": "2025-12-06T15:52:36.990Z",
-    "updatedAt": "2025-12-06T15:52:36.990Z",
-    "confirmedAt": null,
+    "updatedAt": "2025-12-07T11:23:00.869Z",
+    "confirmedAt": "2025-12-07T11:23:00.869Z",
     "cancelledAt": null
   },
   {
@@ -213,10 +169,10 @@
     "totalPrice": 300,
     "specialRequests": "s bjsbs bjsnj bsjbs\n\nCountry: uzbekistan\nPreferred Time: 08:00",
     "userId": null,
-    "status": "pending",
+    "status": "confirmed",
     "createdAt": "2025-12-06T15:55:53.919Z",
-    "updatedAt": "2025-12-06T15:55:53.919Z",
-    "confirmedAt": null,
+    "updatedAt": "2025-12-07T11:25:03.589Z",
+    "confirmedAt": "2025-12-07T11:25:03.589Z",
     "cancelledAt": null
   },
   {
@@ -235,10 +191,10 @@
     "totalPrice": 300,
     "specialRequests": "v w w we we vew we\n\nCountry: uzbekistan\nPreferred Time: 07:45",
     "userId": null,
-    "status": "pending",
+    "status": "confirmed",
     "createdAt": "2025-12-06T16:02:45.328Z",
-    "updatedAt": "2025-12-06T16:02:45.328Z",
-    "confirmedAt": null,
+    "updatedAt": "2025-12-07T11:27:39.774Z",
+    "confirmedAt": "2025-12-07T11:27:39.773Z",
     "cancelledAt": null
   },
   {
@@ -257,10 +213,10 @@
     "totalPrice": 1560,
     "specialRequests": "j khjh kwe few\n\nCountry: uzbekistan\nPreferred Time: 08:15",
     "userId": null,
-    "status": "pending",
+    "status": "confirmed",
     "createdAt": "2025-12-06T16:04:05.376Z",
-    "updatedAt": "2025-12-06T16:04:05.376Z",
-    "confirmedAt": null,
+    "updatedAt": "2025-12-07T11:24:30.821Z",
+    "confirmedAt": "2025-12-07T11:24:30.820Z",
     "cancelledAt": null
   },
   {
@@ -279,10 +235,10 @@
     "totalPrice": 750,
     "specialRequests": "a rv aerv erv aerv ae\n\nCountry: uzbekistan\nPreferred Time: 07:30",
     "userId": null,
-    "status": "pending",
+    "status": "confirmed",
     "createdAt": "2025-12-06T16:04:57.792Z",
-    "updatedAt": "2025-12-06T16:04:57.792Z",
-    "confirmedAt": null,
+    "updatedAt": "2025-12-07T11:27:33.572Z",
+    "confirmedAt": "2025-12-07T11:27:33.572Z",
     "cancelledAt": null
   },
   {
@@ -301,11 +257,11 @@
     "totalPrice": 1040,
     "specialRequests": " a verv aerv er ervre rve\n\nCountry: uzbekistan\nPreferred Time: 08:15",
     "userId": null,
-    "status": "pending",
+    "status": "cancelled",
     "createdAt": "2025-12-06T16:15:56.846Z",
-    "updatedAt": "2025-12-06T16:15:56.846Z",
+    "updatedAt": "2025-12-07T11:24:38.630Z",
     "confirmedAt": null,
-    "cancelledAt": null
+    "cancelledAt": "2025-12-07T11:24:38.630Z"
   },
   {
     "id": "BOOK-20251206-0YNO",
@@ -323,10 +279,10 @@
     "totalPrice": 450,
     "specialRequests": "s gr g grtseg serg sregsre gsre s\n\nCountry: uzbekistan\nPreferred Time: 08:15",
     "userId": null,
-    "status": "pending",
+    "status": "confirmed",
     "createdAt": "2025-12-06T16:25:48.013Z",
-    "updatedAt": "2025-12-06T16:25:48.013Z",
-    "confirmedAt": null,
+    "updatedAt": "2025-12-07T11:27:28.374Z",
+    "confirmedAt": "2025-12-07T11:27:28.373Z",
     "cancelledAt": null
   },
   {
@@ -345,10 +301,10 @@
     "totalPrice": 600,
     "specialRequests": "kljlfkv jhdfvjn dlfjvd\n\nCountry: uzbekistan\nPreferred Time: 06:30",
     "userId": null,
-    "status": "pending",
+    "status": "confirmed",
     "createdAt": "2025-12-06T16:29:23.676Z",
-    "updatedAt": "2025-12-06T16:29:23.676Z",
-    "confirmedAt": null,
+    "updatedAt": "2025-12-07T11:27:26.526Z",
+    "confirmedAt": "2025-12-07T11:27:26.525Z",
     "cancelledAt": null
   },
   {
@@ -367,11 +323,11 @@
     "totalPrice": 255,
     "specialRequests": "sbdbsdfbfdbdf\n\nCountry: uzbekistan\nPreferred Time: 08:45",
     "userId": null,
-    "status": "pending",
+    "status": "cancelled",
     "createdAt": "2025-12-06T16:29:59.876Z",
-    "updatedAt": "2025-12-06T16:29:59.876Z",
+    "updatedAt": "2025-12-07T11:25:06.021Z",
     "confirmedAt": null,
-    "cancelledAt": null
+    "cancelledAt": "2025-12-07T11:25:06.020Z"
   },
   {
     "id": "BOOK-20251206-KALQ",
@@ -389,11 +345,11 @@
     "totalPrice": 170,
     "specialRequests": " df d d adf \n\nCountry: uzbekistan\nPreferred Time: 08:15",
     "userId": null,
-    "status": "pending",
+    "status": "cancelled",
     "createdAt": "2025-12-06T16:31:57.501Z",
-    "updatedAt": "2025-12-06T16:31:57.501Z",
+    "updatedAt": "2025-12-07T11:23:12.470Z",
     "confirmedAt": null,
-    "cancelledAt": null
+    "cancelledAt": "2025-12-07T11:23:12.469Z"
   },
   {
     "id": "BOOK-20251206-NKQR",
@@ -411,11 +367,11 @@
     "totalPrice": 255,
     "specialRequests": "hkgahgk ahkhkashk dsah\n\nCountry: uzbekistan\nPreferred Time: 07:45",
     "userId": null,
-    "status": "pending",
+    "status": "cancelled",
     "createdAt": "2025-12-06T16:34:15.403Z",
-    "updatedAt": "2025-12-06T16:34:15.403Z",
+    "updatedAt": "2025-12-07T11:23:09.157Z",
     "confirmedAt": null,
-    "cancelledAt": null
+    "cancelledAt": "2025-12-07T11:23:09.157Z"
   },
   {
     "id": "BOOK-20251206-3USM",
@@ -433,10 +389,10 @@
     "totalPrice": 170,
     "specialRequests": "dcwc wewe we\n\nCountry: uzbekistan\nPreferred Time: 08:45",
     "userId": null,
-    "status": "pending",
+    "status": "confirmed",
     "createdAt": "2025-12-06T16:42:43.139Z",
-    "updatedAt": "2025-12-06T16:42:43.139Z",
-    "confirmedAt": null,
+    "updatedAt": "2025-12-07T11:24:42.916Z",
+    "confirmedAt": "2025-12-07T11:24:42.916Z",
     "cancelledAt": null
   },
   {
@@ -455,10 +411,10 @@
     "totalPrice": 255,
     "specialRequests": "jhjhg jg jgh\n\nCountry: uzbekistan\nPreferred Time: 08:30",
     "userId": null,
-    "status": "pending",
+    "status": "confirmed",
     "createdAt": "2025-12-06T16:49:30.813Z",
-    "updatedAt": "2025-12-06T16:49:30.813Z",
-    "confirmedAt": null,
+    "updatedAt": "2025-12-07T11:27:41.884Z",
+    "confirmedAt": "2025-12-07T11:27:41.884Z",
     "cancelledAt": null
   },
   {
@@ -477,10 +433,10 @@
     "totalPrice": 300,
     "specialRequests": "hgahd ahsgkdhaksd\n\nCountry: uzbekistan\nPreferred Time: 07:15",
     "userId": null,
-    "status": "pending",
+    "status": "confirmed",
     "createdAt": "2025-12-06T17:00:48.238Z",
-    "updatedAt": "2025-12-06T17:00:48.238Z",
-    "confirmedAt": null,
+    "updatedAt": "2025-12-07T11:25:12.285Z",
+    "confirmedAt": "2025-12-07T11:25:12.284Z",
     "cancelledAt": null
   },
   {
@@ -587,10 +543,10 @@
     "totalPrice": 750,
     "specialRequests": "hbkjhkhwgkjh kweh kwe\n\nCountry: uzbekistan\nPreferred Time: 08:15",
     "userId": null,
-    "status": "pending",
+    "status": "confirmed",
     "createdAt": "2025-12-06T17:47:28.188Z",
-    "updatedAt": "2025-12-06T17:47:28.188Z",
-    "confirmedAt": null,
+    "updatedAt": "2025-12-07T11:24:51.124Z",
+    "confirmedAt": "2025-12-07T11:24:51.124Z",
     "cancelledAt": null
   },
   {
@@ -653,10 +609,54 @@
     "totalPrice": 3560,
     "specialRequests": "uzbekistan\n\nCountry: uzbekistan\nPreferred Time: 08:30",
     "userId": null,
-    "status": "pending",
+    "status": "confirmed",
     "createdAt": "2025-12-07T05:38:16.440Z",
-    "updatedAt": "2025-12-07T05:38:16.440Z",
-    "confirmedAt": null,
+    "updatedAt": "2025-12-07T11:24:46.334Z",
+    "confirmedAt": "2025-12-07T11:24:46.333Z",
+    "cancelledAt": null
+  },
+  {
+    "id": "BOOK-20251207-JKUU",
+    "tourId": "69347a53fadd580ecea18820",
+    "tourName": "5-Day Silk Road Classic: Tashkent, Samarkand and Bukhara",
+    "customerName": "Hasan",
+    "customerEmail": "info@travel-bliss.uz",
+    "customerPhone": "+998933514448",
+    "pickupLocation": "uzbekistan",
+    "date": "2025-12-11T00:00:00.000Z",
+    "guests": {
+      "adults": 6,
+      "children": 0
+    },
+    "totalPrice": 5340,
+    "specialRequests": "kjh jhk hk er er\n\nCountry: uzbekistan\nPreferred Time: 08:30",
+    "userId": null,
+    "status": "confirmed",
+    "createdAt": "2025-12-07T10:06:25.195Z",
+    "updatedAt": "2025-12-07T11:24:48.852Z",
+    "confirmedAt": "2025-12-07T11:24:48.851Z",
+    "cancelledAt": null
+  },
+  {
+    "id": "BOOK-20251207-G2UK",
+    "tourId": "69347a42fadd580ecea18816",
+    "tourName": "Tajikistan Seven Lakes Adventure: Marguzor and Sarazm UNESCO from Samarkand",
+    "customerName": "Hasan",
+    "customerEmail": "hmuzaffarov02@gmail.com",
+    "customerPhone": "+998933514448",
+    "pickupLocation": "uzbekistan",
+    "date": "2025-12-10T00:00:00.000Z",
+    "guests": {
+      "adults": 3,
+      "children": 0
+    },
+    "totalPrice": 360,
+    "specialRequests": "iuhbihbi\n\nCountry: uzbekistan\nPreferred Time: 08:00",
+    "userId": null,
+    "status": "confirmed",
+    "createdAt": "2025-12-07T11:26:23.320Z",
+    "updatedAt": "2025-12-07T11:27:23.175Z",
+    "confirmedAt": "2025-12-07T11:27:23.174Z",
     "cancelledAt": null
   }
 ]

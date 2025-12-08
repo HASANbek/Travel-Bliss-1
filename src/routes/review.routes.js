@@ -40,48 +40,44 @@ router.get('/stats/:serviceId', getReviewStats);
 
 // ========== ADMIN ROUTES ==========
 
-// Apply authentication and authorization for all admin routes
-router.use('/admin', protect);
-router.use('/admin', authorize('admin'));
-
 // @route   GET /api/reviews/admin
 // @desc    Get all reviews (admin)
 // @access  Private/Admin
-router.get('/admin', getAllReviews);
+router.get('/admin', protect, authorize('admin'), getAllReviews);
 
 // @route   GET /api/reviews/admin/export
 // @desc    Export reviews
 // @access  Private/Admin
-router.get('/admin/export', exportReviews);
+router.get('/admin/export', protect, authorize('admin'), exportReviews);
 
 // @route   POST /api/reviews/admin
 // @desc    Create review (admin)
 // @access  Private/Admin
-router.post('/admin', createAdminReview);
+router.post('/admin', protect, authorize('admin'), createAdminReview);
 
 // @route   PUT /api/reviews/admin/bulk-status
 // @desc    Bulk update review statuses
 // @access  Private/Admin
-router.put('/admin/bulk-status', bulkUpdateStatus);
+router.put('/admin/bulk-status', protect, authorize('admin'), bulkUpdateStatus);
 
 // @route   GET /api/reviews/admin/:id
 // @desc    Get single review
 // @access  Private/Admin
-router.get('/admin/:id', getReviewById);
+router.get('/admin/:id', protect, authorize('admin'), getReviewById);
 
 // @route   PUT /api/reviews/admin/:id/status
 // @desc    Update review status
 // @access  Private/Admin
-router.put('/admin/:id/status', updateReviewStatus);
+router.put('/admin/:id/status', protect, authorize('admin'), updateReviewStatus);
 
 // @route   PUT /api/reviews/admin/:id/response
 // @desc    Add admin response
 // @access  Private/Admin
-router.put('/admin/:id/response', addAdminResponse);
+router.put('/admin/:id/response', protect, authorize('admin'), addAdminResponse);
 
 // @route   DELETE /api/reviews/admin/:id
 // @desc    Delete review
 // @access  Private/Admin
-router.delete('/admin/:id', deleteReview);
+router.delete('/admin/:id', protect, authorize('admin'), deleteReview);
 
 module.exports = router;
