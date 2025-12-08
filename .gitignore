@@ -9,9 +9,9 @@ yarn-error.log*
 .env.local
 .env.production
 
-# Uploads
-uploads/*
-!uploads/.gitkeep
+# Uploads - now tracked for deployment
+# uploads/*
+# !uploads/.gitkeep
 
 # OS files
 .DS_Store
