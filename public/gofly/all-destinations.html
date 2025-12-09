@@ -11,6 +11,7 @@
     <link href="assets/css/jquery-ui.css" rel="stylesheet">
     <!-- Bootstrap Icon CSS -->
     <link href="assets/css/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <!-- CSS -->
     <link href="assets/css/animate.min.css" rel="stylesheet">
     <!-- FancyBox CSS -->
@@ -428,7 +429,7 @@ a.primary-btn1 {
 
 .destinations-section {
     padding: 80px 0;
-    background: #f8fafc;
+    background: #ffffff;
 }
 
 .destinations-grid {
@@ -853,9 +854,9 @@ a.primary-btn1 {
     <!-- Hero Banner Section -->
     <div class="hero-banner-section" id="heroBanner" style="position: relative; height: 500px; background: url('http://localhost:5000/uploads/registon-1764689562739-647287587.jpg') center/cover no-repeat; display: flex; align-items: center; justify-content: center;">
         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3);"></div>
-        <div class="banner-content-wrap" style="position: relative; z-index: 2; text-align: center; color: white;">
-            <h1 style="font-size: 3rem; font-weight: 700; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Explore All Destinations</h1>
-            <p style="font-size: 1.2rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">Discover amazing places across Central Asia with our curated travel experiences</p>
+        <div class="banner-content-wrap" style="position: relative; z-index: 2; text-align: center;">
+            <h1 style="font-size: 3rem; font-weight: 700; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); color: #ffffff !important;">Explore All Destinations</h1>
+            <p style="font-size: 1.2rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); color: #ffffff !important;">Discover amazing places across Central Asia with our curated travel experiences</p>
         </div>
     </div>
     <!-- Hero Banner Section End-->
@@ -866,16 +867,6 @@ a.primary-btn1 {
             <div class="section-header">
                 <h2>Our Destinations</h2>
                 <p>Choose from our carefully selected destinations and start planning your next adventure</p>
-            </div>
-
-            <!-- Filter Buttons -->
-            <div class="filter-section">
-                <button class="filter-btn active" data-country="all">All Countries</button>
-                <button class="filter-btn" data-country="UZ">🇺🇿 Uzbekistan</button>
-                <button class="filter-btn" data-country="TJ">🇹🇯 Tajikistan</button>
-                <button class="filter-btn" data-country="KZ">🇰🇿 Kazakhstan</button>
-                <button class="filter-btn" data-country="KG">🇰🇬 Kyrgyzstan</button>
-                <button class="filter-btn" data-country="TM">🇹🇲 Turkmenistan</button>
             </div>
 
             <!-- Destinations Grid -->
@@ -1202,13 +1193,25 @@ function displayTours(tours, containerId = 'toursContainer') {
 
     // console.log('Displaying tours:', tours); // Debug only
 
-    // Get image path helper
+    // Get image path helper - prioritize images array
     const getImageSrc = (tour) => {
-        const img = tour.imageCover || tour.image;
+        let img = null;
+        // First check images array
+        if (tour.images && tour.images.length > 0) {
+            img = typeof tour.images[0] === 'string' ? tour.images[0] : tour.images[0].url;
+        } else {
+            img = tour.imageCover || tour.image;
+        }
         if (!img) return '/images/tours/samarkand-registan.jpg';
         if (img.startsWith('http')) return img;
-        if (img.startsWith('/uploads/')) return `http://localhost:5000${img}`;
+        if (img.startsWith('/uploads/')) return img;
+        if (img.startsWith('uploads/')) return '/' + img;
+        if (img.startsWith('/')) return img;
         if (img.startsWith('assets/')) return img;
+        // Check if it's a filename from uploads
+        if (img.includes('-') && (img.endsWith('.jpg') || img.endsWith('.jpeg') || img.endsWith('.png') || img.endsWith('.webp'))) {
+            return '/uploads/' + img;
+        }
         return `assets/img/home1/${img}`;
     };
 
@@ -1935,7 +1938,6 @@ function getCountryFlag(countryCode) {
                     <div class="destination-card-grid" data-country="${dest.country_code || 'UZ'}">
                         <div class="card-image">
                             <img src="${image}" alt="${dest.title}" onerror="this.src='assets/img/home2/destination-img1.jpg'">
-                            <div class="card-flag">${flag}</div>
                             <div class="trips-badge">${trips} Tours</div>
                         </div>
                         <div class="card-content">

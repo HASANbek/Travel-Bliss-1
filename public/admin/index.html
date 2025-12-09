@@ -1139,10 +1139,6 @@
                     <i>👥</i>
                     <span>Users</span>
                 </a>
-                <a class="menu-item" data-page="pages">
-                    <i>📄</i>
-                    <span>Pages</span>
-                </a>
             </div>
 
             <div class="menu-section">
@@ -1154,10 +1150,6 @@
                 <a class="menu-item" data-page="destinations">
                     <i>🌍</i>
                     <span>Destinations</span>
-                </a>
-                <a class="menu-item" data-page="media">
-                    <i>🖼️</i>
-                    <span>Media Library</span>
                 </a>
                 <a class="menu-item" data-page="reviews">
                     <i>⭐</i>
@@ -1431,19 +1423,23 @@
                         <thead>
                             <tr style="background: #f9fafb; border-bottom: 2px solid #e5e7eb;">
                                 <th style="padding: 15px; text-align: left; font-weight: 600; color: #374151;">ID</th>
-                                <th style="padding: 15px; text-align: left; font-weight: 600; color: #374151;">Tour</th>
-                                <th style="padding: 15px; text-align: left; font-weight: 600; color: #374151;">Customer</th>
-                                <th style="padding: 15px; text-align: left; font-weight: 600; color: #374151;">Date</th>
-                                <th style="padding: 15px; text-align: left; font-weight: 600; color: #374151;">Guests</th>
-                                <th style="padding: 15px; text-align: left; font-weight: 600; color: #374151;">Price</th>
-                                <th style="padding: 15px; text-align: left; font-weight: 600; color: #374151;">Status</th>
-                                <th style="padding: 15px; text-align: left; font-weight: 600; color: #374151;">Actions</th>
+                                <th style="padding: 15px; text-align: left; font-weight: 600; color: #374151;">Tur nomi</th>
+                                <th style="padding: 15px; text-align: left; font-weight: 600; color: #374151;">Mijoz</th>
+                                <th onclick="sortBookings('date')" style="padding: 15px; text-align: left; font-weight: 600; color: #374151; cursor: pointer; user-select: none;" title="Saralash uchun bosing">
+                                    Sana <span id="dateSortIcon" style="font-size: 12px;">↕️</span>
+                                </th>
+                                <th style="padding: 15px; text-align: left; font-weight: 600; color: #374151;">Mehmonlar</th>
+                                <th style="padding: 15px; text-align: left; font-weight: 600; color: #374151;">Narx</th>
+                                <th onclick="sortBookings('status')" style="padding: 15px; text-align: left; font-weight: 600; color: #374151; cursor: pointer; user-select: none;" title="Saralash uchun bosing">
+                                    Holat <span id="statusSortIcon" style="font-size: 12px;">↕️</span>
+                                </th>
+                                <th style="padding: 15px; text-align: left; font-weight: 600; color: #374151;">Amallar</th>
                             </tr>
                         </thead>
                         <tbody id="bookingsTableBody">
                             <tr>
                                 <td colspan="8" style="padding: 40px; text-align: center; color: #9ca3af;">
-                                    Loading bookings...
+                                    Bronlar yuklanmoqda...
                                 </td>
                             </tr>
                         </tbody>
@@ -1461,11 +1457,6 @@
                 <div id="usersTableContainer" style="background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden;">
                     <p style="padding: 20px; text-align: center; color: #6c757d;">Loading users...</p>
                 </div>
-            </div>
-
-            <!-- Pages Page -->
-            <div class="page-section" id="pagesPage">
-                <h3>Pages management coming soon...</h3>
             </div>
 
             <!-- Categories Page -->
@@ -3100,10 +3091,7 @@
                             <label>Category <span class="required">*</span></label>
                             <select id="tourCategory" name="category" required>
                                 <option value="">Select category</option>
-                                <option value="cultural">Cultural Tours</option>
-                                <option value="adventure">Adventure Tours</option>
-                                <option value="day-trips">Day Trips</option>
-                                <option value="homestays">Homestays & Hiking</option>
+                                <!-- Categories will be loaded dynamically -->
                             </select>
                         </div>
 
@@ -3419,11 +3407,29 @@
                 const tourId = booking.tourId;
                 if (!tourBookings[tourId]) return;
 
-                const date = new Date(booking.date).toISOString().split('T')[0];
-                if (!tourBookings[tourId].bookings[date]) {
-                    tourBookings[tourId].bookings[date] = [];
+                // Use local date without timezone conversion
+                const startDateStr = booking.date.split('T')[0];
+                const [year, month, day] = startDateStr.split('-').map(Number);
+                const startDate = new Date(year, month - 1, day);
+                const duration = booking.duration || 1;
+
+                // Add booking to all days it spans
+                for (let d = 0; d < duration; d++) {
+                    const currentDate = new Date(startDate);
+                    currentDate.setDate(currentDate.getDate() + d);
+                    const dateStr = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`;
+
+                    if (!tourBookings[tourId].bookings[dateStr]) {
+                        tourBookings[tourId].bookings[dateStr] = [];
+                    }
+                    // Add booking with day info
+                    tourBookings[tourId].bookings[dateStr].push({
+                        ...booking,
+                        _dayNum: d + 1,
+                        _totalDays: duration
+                    });
                 }
-                tourBookings[tourId].bookings[date].push(booking);
+
                 tourBookings[tourId].totalBookings++;
                 tourBookings[tourId].totalGuests += (booking.guests?.adults || 0) + (booking.guests?.children || 0);
                 tourBookings[tourId].totalPrice += booking.totalPrice || 0;
@@ -3482,7 +3488,8 @@
                 for (let i = 0; i < days; i++) {
                     const date = new Date(dashboardCalendarStartDate);
                     date.setDate(date.getDate() + i);
-                    const dateStr = date.toISOString().split('T')[0];
+                    // Use local date format without timezone conversion
+                    const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
                     const isToday = date.toDateString() === new Date().toDateString();
                     const isWeekend = date.getDay() === 0 || date.getDay() === 6;
                     const dayBookings = bookings[dateStr] || [];
@@ -3499,10 +3506,15 @@
                         const firstName = b.customerName?.split(' ')[0] || 'Mehmon';
                         const hasWarning = b.status === 'pending' && new Date(b.date) <= new Date(Date.now() + 2 * 24 * 60 * 60 * 1000);
                         const bookingId = b.id || b._id;
+                        const dayNum = b._dayNum || 1;
+                        const totalDays = b._totalDays || 1;
+                        const isMultiDay = totalDays > 1;
+                        const isStart = dayNum === 1;
+                        const isEnd = dayNum === totalDays;
 
-                        html += `<div onclick="showDashboardBookingModal('${bookingId}')" style="background: ${color}; color: white; padding: 6px 10px; border-radius: 6px; font-size: 12px; margin-bottom: 4px; cursor: pointer; position: relative; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: transform 0.15s, box-shadow 0.15s;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.2)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 1px 3px rgba(0,0,0,0.1)';" title="${b.customerName} | ${guests} kishi | $${b.totalPrice || 0} | ${b.status}">
+                        html += `<div onclick="showDashboardBookingModal('${bookingId}')" style="background: ${color}; color: white; padding: 6px 10px; border-radius: ${isStart ? '6px' : '0'} ${isEnd ? '6px' : '0'} ${isEnd ? '6px' : '0'} ${isStart ? '6px' : '0'}; font-size: 12px; margin-bottom: 4px; cursor: pointer; position: relative; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: transform 0.15s, box-shadow 0.15s;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.2)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 1px 3px rgba(0,0,0,0.1)';" title="${b.customerName} | ${guests} kishi | $${b.totalPrice || 0} | ${b.status}${isMultiDay ? ' | ' + dayNum + '/' + totalDays + ' kun' : ''}">
                             ${hasWarning ? '<span style="position: absolute; top: -4px; right: -4px; background: #ef4444; border-radius: 50%; width: 12px; height: 12px; font-size: 8px; display: flex; align-items: center; justify-content: center; border: 2px solid white;">!</span>' : ''}
-                            <div style="font-weight: 600;">${firstName}</div>
+                            <div style="font-weight: 600;">${isStart ? firstName : ''} ${isMultiDay ? '(' + dayNum + '/' + totalDays + ')' : ''}</div>
                         </div>`;
                     });
 
@@ -3614,20 +3626,31 @@
                 };
                 const status = statusConfig[booking.status] || statusConfig.pending;
 
-                // Format date
-                const bookingDate = new Date(booking.date).toLocaleDateString('uz-UZ', {
-                    year: 'numeric', month: '2-digit', day: '2-digit'
-                });
+                // Format start date without timezone issues
+                const startDateStr = booking.date.split('T')[0];
+                const bookingDate = startDateStr;
+
+                // Calculate end date
+                const durationDays = booking.duration || 1;
+                let endDateStr = bookingDate;
+                if (booking.endDate) {
+                    endDateStr = booking.endDate.split('T')[0];
+                } else if (durationDays > 1) {
+                    const [y, m, d] = startDateStr.split('-').map(Number);
+                    const endDate = new Date(y, m - 1, d);
+                    endDate.setDate(endDate.getDate() + durationDays - 1);
+                    endDateStr = `${endDate.getFullYear()}-${String(endDate.getMonth() + 1).padStart(2, '0')}-${String(endDate.getDate()).padStart(2, '0')}`;
+                }
 
                 // Extract time
-                let bookingTime = booking.time || '';
+                let bookingTime = booking.pickupTime || booking.time || '';
                 if (!bookingTime && booking.specialRequests) {
                     const timeMatch = booking.specialRequests.match(/Preferred Time:\s*(\d{2}:\d{2})/);
                     if (timeMatch) bookingTime = timeMatch[1];
                 }
 
-                // Calculate duration (default 1 kun)
-                const duration = booking.duration || '1 kun';
+                // Duration display
+                const duration = durationDays + ' kun';
 
                 // Guests
                 const adults = booking.guests?.adults || 0;
@@ -3673,7 +3696,7 @@
                                 </div>
                                 <div style="margin-bottom: 16px;">
                                     <div style="font-size: 12px; color: #9ca3af; margin-bottom: 4px;">Tugash</div>
-                                    <div style="font-size: 16px; font-weight: 600; color: #1f2937;">${bookingDate}</div>
+                                    <div style="font-size: 16px; font-weight: 600; color: #1f2937;">${endDateStr}</div>
                                 </div>
                             </div>
                             <!-- Right Column -->
@@ -3719,32 +3742,30 @@
                     </div>
                 `;
 
+                // Add Edit button to modal footer
+                const footerHTML = `
+                    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                        ${booking.status === 'pending' ? `
+                            <button onclick="confirmDashboardBooking('${bookingId}')" style="background: #22c55e; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 6px;">✓ Tasdiqlash</button>
+                            <button onclick="cancelDashboardBooking('${bookingId}')" style="background: #ef4444; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 6px;">✕ Bekor qilish</button>
+                        ` : ''}
+                        <button onclick="openEditBookingModal('${bookingId}')" style="background: #3b82f6; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 6px;">✎ Tahrirlash</button>
+                        <button onclick="Swal.close()" style="background: #6b7280; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: 600;">Yopish</button>
+                    </div>
+                `;
+
                 Swal.fire({
                     html: modalHTML,
+                    footer: footerHTML,
                     width: 520,
                     padding: '20px 24px 24px',
                     showCloseButton: true,
-                    showCancelButton: true,
-                    showDenyButton: booking.status === 'pending',
-                    confirmButtonText: '<span style="display: flex; align-items: center; gap: 6px;">✓ Tasdiqlash</span>',
-                    denyButtonText: '<span style="display: flex; align-items: center; gap: 6px;">✕ Bekor qilish</span>',
-                    cancelButtonText: 'Yopish',
-                    confirmButtonColor: '#22c55e',
-                    denyButtonColor: '#ef4444',
-                    cancelButtonColor: '#6b7280',
-                    reverseButtons: false,
-                    focusConfirm: false,
+                    showConfirmButton: false,
+                    showCancelButton: false,
                     customClass: {
                         popup: 'booking-detail-popup',
-                        closeButton: 'booking-close-btn'
-                    }
-                }).then(async (result) => {
-                    if (result.isConfirmed && booking.status === 'pending') {
-                        // Confirm booking
-                        await updateDashboardBookingStatus(bookingId, 'confirmed');
-                    } else if (result.isDenied) {
-                        // Cancel booking
-                        await updateDashboardBookingStatus(bookingId, 'cancelled');
+                        closeButton: 'booking-close-btn',
+                        footer: 'booking-modal-footer'
                     }
                 });
 
@@ -3792,6 +3813,169 @@
                     text: error.message
                 });
             }
+        }
+
+        // Confirm booking helper
+        async function confirmDashboardBooking(bookingId) {
+            Swal.close();
+            await updateDashboardBookingStatus(bookingId, 'confirmed');
+        }
+
+        // Cancel booking helper
+        async function cancelDashboardBooking(bookingId) {
+            Swal.close();
+            await updateDashboardBookingStatus(bookingId, 'cancelled');
+        }
+
+        // Open Edit Booking Modal
+        async function openEditBookingModal(bookingId) {
+            Swal.close();
+
+            // Find booking
+            let booking = dashboardBookingsData.find(b => (b.id || b._id) === bookingId);
+            if (!booking) {
+                try {
+                    const token = localStorage.getItem('accessToken');
+                    const response = await fetch(`${API_URL}/bookings/${bookingId}`, {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    const result = await response.json();
+                    if (result.success) booking = result.data;
+                } catch (e) {}
+            }
+
+            if (!booking) {
+                Swal.fire({ icon: 'error', title: 'Xatolik', text: 'Booking topilmadi' });
+                return;
+            }
+
+            // Find tour name
+            const tour = dashboardToursData.find(t => t._id === booking.tourId);
+            const tourName = tour?.title || booking.tourName || 'Tour';
+
+            // Build edit form
+            const editFormHTML = `
+                <div style="text-align: left;">
+                    <h3 style="margin: 0 0 20px 0; color: #1f2937;">Bronni tahrirlash</h3>
+                    <div style="display: grid; gap: 15px;">
+                        <div>
+                            <label style="display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px;">Tur</label>
+                            <input type="text" id="editTourName" value="${tourName}" readonly style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; background: #f3f4f6;">
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <div>
+                                <label style="display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px;">Mijoz ismi</label>
+                                <input type="text" id="editCustomerName" value="${booking.customerName || ''}" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px;">
+                            </div>
+                            <div>
+                                <label style="display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px;">Telefon</label>
+                                <input type="text" id="editCustomerPhone" value="${booking.customerPhone || ''}" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px;">
+                            </div>
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px;">Email</label>
+                            <input type="email" id="editCustomerEmail" value="${booking.customerEmail || ''}" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px;">
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <div>
+                                <label style="display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px;">Sana</label>
+                                <input type="date" id="editBookingDate" value="${booking.date?.split('T')[0] || ''}" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px;">
+                            </div>
+                            <div>
+                                <label style="display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px;">Vaqt</label>
+                                <input type="time" id="editBookingTime" value="${booking.pickupTime || booking.time || ''}" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px;">
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+                            <div>
+                                <label style="display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px;">Kattalar</label>
+                                <input type="number" id="editAdults" value="${booking.guests?.adults || 1}" min="1" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px;">
+                            </div>
+                            <div>
+                                <label style="display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px;">Bolalar</label>
+                                <input type="number" id="editChildren" value="${booking.guests?.children || 0}" min="0" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px;">
+                            </div>
+                            <div>
+                                <label style="display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px;">Narx ($)</label>
+                                <input type="number" id="editTotalPrice" value="${booking.totalPrice || 0}" min="0" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px;">
+                            </div>
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px;">Pick up manzili</label>
+                            <input type="text" id="editPickupLocation" value="${booking.pickupLocation || ''}" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px;">Izohlar</label>
+                            <textarea id="editNotes" rows="2" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; resize: vertical;">${booking.notes || booking.specialRequests || ''}</textarea>
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px;">Status</label>
+                            <select id="editStatus" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px;">
+                                <option value="pending" ${booking.status === 'pending' ? 'selected' : ''}>Kutilmoqda</option>
+                                <option value="confirmed" ${booking.status === 'confirmed' ? 'selected' : ''}>Tasdiqlangan</option>
+                                <option value="cancelled" ${booking.status === 'cancelled' ? 'selected' : ''}>Bekor qilingan</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            Swal.fire({
+                html: editFormHTML,
+                width: 550,
+                showCancelButton: true,
+                confirmButtonText: 'Saqlash',
+                cancelButtonText: 'Bekor qilish',
+                confirmButtonColor: '#3b82f6',
+                cancelButtonColor: '#6b7280',
+                preConfirm: () => {
+                    return {
+                        customerName: document.getElementById('editCustomerName').value,
+                        customerPhone: document.getElementById('editCustomerPhone').value,
+                        customerEmail: document.getElementById('editCustomerEmail').value,
+                        date: document.getElementById('editBookingDate').value,
+                        pickupTime: document.getElementById('editBookingTime').value,
+                        guests: {
+                            adults: parseInt(document.getElementById('editAdults').value) || 1,
+                            children: parseInt(document.getElementById('editChildren').value) || 0
+                        },
+                        totalPrice: parseFloat(document.getElementById('editTotalPrice').value) || 0,
+                        pickupLocation: document.getElementById('editPickupLocation').value,
+                        notes: document.getElementById('editNotes').value,
+                        status: document.getElementById('editStatus').value
+                    };
+                }
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const token = localStorage.getItem('accessToken');
+                        const response = await fetch(`${API_URL}/bookings/${bookingId}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify(result.value)
+                        });
+
+                        const res = await response.json();
+                        if (res.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Saqlandi!',
+                                text: 'Bron ma\'lumotlari yangilandi',
+                                timer: 1500,
+                                showConfirmButton: false
+                            });
+                            loadDashboardCalendar();
+                        } else {
+                            throw new Error(res.message || 'Xatolik yuz berdi');
+                        }
+                    } catch (error) {
+                        Swal.fire({ icon: 'error', title: 'Xatolik', text: error.message });
+                    }
+                }
+            });
         }
 
         // ========== GLOBAL FETCH WITH AUTH TOKEN ==========
@@ -4438,6 +4622,8 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             // Clear image manager
             tourMediaImages = [];
             updateImageManager();
+            // Load categories from database
+            loadTourCategoryOptions();
             // Open modal
             document.getElementById('addTourModal').classList.add('active');
             // Add first itinerary day by default
@@ -5108,6 +5294,33 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             }
         }
 
+        // Load categories for tour form dropdown
+        async function loadTourCategoryOptions() {
+            try {
+                const response = await fetch(`${API_URL}/categories`);
+                const result = await response.json();
+
+                if (result.success) {
+                    const categories = result.data.categories.filter(c => c.isActive);
+                    const select = document.getElementById('tourCategory');
+
+                    if (select) {
+                        // Keep the first "Select category" option
+                        select.innerHTML = '<option value="">Select category</option>';
+
+                        categories.forEach(category => {
+                            const option = document.createElement('option');
+                            option.value = category.slug;
+                            option.textContent = category.name;
+                            select.appendChild(option);
+                        });
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading category options:', error);
+            }
+        }
+
         // Load Tours List
         async function loadTours() {
             const container = document.getElementById('toursTableContainer');
@@ -5142,6 +5355,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                     <table style="width: 100%; border-collapse: collapse; background: white;">
                         <thead>
                             <tr style="background: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                                <th style="padding: 12px; text-align: left; width: 70px;">Rasm</th>
                                 <th style="padding: 12px; text-align: left;">Title</th>
                                 <th style="padding: 12px; text-align: left;">Destination</th>
                                 <th style="padding: 12px; text-align: left;">Price</th>
@@ -5158,6 +5372,15 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                 tours.forEach(tour => {
                     const statusColor = tour.isActive ? '#28a745' : '#6c757d';
                     const statusText = tour.isActive ? 'Active' : 'Inactive';
+
+                    // Get tour image - prioritize images array (first image)
+                    let tourImage = '';
+                    if (tour.images && tour.images.length > 0) {
+                        const firstImg = typeof tour.images[0] === 'string' ? tour.images[0] : tour.images[0].url;
+                        tourImage = firstImg.startsWith('http') ? firstImg : (firstImg.startsWith('/') ? firstImg : '/uploads/' + firstImg);
+                    } else if (tour.imageCover) {
+                        tourImage = tour.imageCover.startsWith('http') ? tour.imageCover : (tour.imageCover.startsWith('/') ? tour.imageCover : '/uploads/' + tour.imageCover);
+                    }
 
                     // SEO Badge - with safe checking (supports both seo.meta.title and seo.title structures)
                     let seoBadge = '';
@@ -5180,6 +5403,11 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
 
                     html += `
                         <tr style="border-bottom: 1px solid #dee2e6;">
+                            <td style="padding: 8px;">
+                                <div style="width: 60px; height: 45px; border-radius: 6px; overflow: hidden; background: #f0f0f0;">
+                                    ${tourImage ? `<img src="${tourImage}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.parentElement.innerHTML='<div style=\\'display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-size:10px;\\'>No img</div>'">` : '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-size:10px;">No img</div>'}
+                                </div>
+                            </td>
                             <td style="padding: 12px;">
                                 <strong>${tour.title}</strong>
                                 ${tour.featured || tour.isFeatured ? '<span style="background: #ffc107; color: #000; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin-left: 8px;">FEATURED</span>' : ''}
@@ -5246,6 +5474,9 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
 
                 // Store tour ID for update
                 document.getElementById('addTourForm').dataset.editId = tour.id || tour._id;
+
+                // Load categories from database first, then set value
+                await loadTourCategoryOptions();
 
                 // Populate Basic Info (Tab 1)
                 document.getElementById('tourName').value = tour.title || '';
@@ -5723,10 +5954,8 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                 'tours': 'Tours',
                 'bookings': 'Bookings',
                 'users': 'Users',
-                'pages': 'Pages',
                 'categories': 'Categories',
                 'destinations': 'Destinations',
-                'media': 'Media Library',
                 'reviews': 'Reviews',
                 'blog': 'Blog',
                 'settings': 'General Settings',
@@ -8284,6 +8513,19 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                     </h3>
                     <form id="newBookingForm" style="display: grid; gap: 15px;">
                         <div>
+                            <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #374151;">Manba (Qayerdan keldi)</label>
+                            <select id="newBookingSource" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px;">
+                                <option value="">Manba tanlang...</option>
+                                <option value="GetYourGuide">GetYourGuide</option>
+                                <option value="Viator">Viator</option>
+                                <option value="WhatsApp">WhatsApp</option>
+                                <option value="Email">Email</option>
+                                <option value="Website">Website</option>
+                                <option value="Phone">Telefon</option>
+                                <option value="Other">Boshqa</option>
+                            </select>
+                        </div>
+                        <div>
                             <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #374151;">Tur tanlang</label>
                             <select id="newBookingTour" required onchange="onTourSelect()" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px;">
                                 <option value="">Turni tanlang...</option>
@@ -8341,11 +8583,21 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                             <div>
                                 <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #374151;">Kattalar</label>
-                                <input type="number" id="newBookingAdults" required min="1" value="1" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+                                <input type="number" id="newBookingAdults" required min="1" value="1" onchange="updateTotalPrice()" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
                             </div>
                             <div>
                                 <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #374151;">Bolalar</label>
-                                <input type="number" id="newBookingChildren" min="0" value="0" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+                                <input type="number" id="newBookingChildren" min="0" value="0" onchange="updateTotalPrice()" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div>
+                                <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #374151;">1 kishi narxi ($)</label>
+                                <input type="number" id="newBookingPricePerPerson" min="0" step="0.01" placeholder="Tur narxidan avtomatik" onchange="updateTotalPrice()" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #374151;">Jami narx ($)</label>
+                                <input type="number" id="newBookingTotalPrice" min="0" step="0.01" placeholder="Avtomatik hisoblanadi" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; box-sizing: border-box; background: #f0fdf4; font-weight: 600;">
                             </div>
                         </div>
                         <div>
@@ -8377,10 +8629,18 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             const select = document.getElementById('newBookingTour');
             const option = select.options[select.selectedIndex];
             const duration = parseInt(option.dataset.duration) || 1;
+            const price = parseFloat(option.dataset.price) || 0;
 
             const endDateContainer = document.getElementById('endDateContainer');
             const dayTourFields = document.getElementById('dayTourFields');
             const durationInput = document.getElementById('newBookingDuration');
+            const pricePerPersonInput = document.getElementById('newBookingPricePerPerson');
+
+            // Set price per person from tour
+            if (pricePerPersonInput && price > 0) {
+                pricePerPersonInput.value = price;
+                pricePerPersonInput.placeholder = 'Tur narxi: $' + price;
+            }
 
             if (duration === 1) {
                 // Day tour
@@ -8394,6 +8654,18 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             }
 
             updateEndDate();
+            updateTotalPrice();
+        }
+
+        function updateTotalPrice() {
+            const pricePerPerson = parseFloat(document.getElementById('newBookingPricePerPerson').value) || 0;
+            const adults = parseInt(document.getElementById('newBookingAdults').value) || 1;
+            const children = parseInt(document.getElementById('newBookingChildren').value) || 0;
+
+            // Total = (adults * full price) + (children * half price)
+            const totalPrice = (adults * pricePerPerson) + (children * pricePerPerson * 0.5);
+
+            document.getElementById('newBookingTotalPrice').value = totalPrice.toFixed(2);
         }
 
         function updateEndDate() {
@@ -8403,10 +8675,12 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
 
             const startDate = document.getElementById('newBookingDate').value;
             if (startDate && duration > 1) {
-                const start = new Date(startDate);
-                const end = new Date(start);
-                end.setDate(end.getDate() + duration - 1);
-                document.getElementById('newBookingEndDate').value = end.toISOString().split('T')[0];
+                // Parse date without timezone issues
+                const [year, month, day] = startDate.split('-').map(Number);
+                const endDay = day + duration - 1;
+                const end = new Date(year, month - 1, endDay);
+                const endDateStr = `${end.getFullYear()}-${String(end.getMonth() + 1).padStart(2, '0')}-${String(end.getDate()).padStart(2, '0')}`;
+                document.getElementById('newBookingEndDate').value = endDateStr;
             }
         }
 
@@ -8434,6 +8708,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             const duration = parseInt(selectedOption.dataset.duration) || 1;
             const bookingData = {
                 tourId: tourSelect.value,
+                source: document.getElementById('newBookingSource').value,
                 customerName: document.getElementById('newBookingName').value,
                 customerEmail: document.getElementById('newBookingEmail').value,
                 customerPhone: document.getElementById('newBookingPhone').value,
@@ -8447,7 +8722,8 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                     children: parseInt(document.getElementById('newBookingChildren').value) || 0
                 },
                 notes: document.getElementById('newBookingNotes').value,
-                totalPrice: parseFloat(selectedOption.dataset.price) * (parseInt(document.getElementById('newBookingAdults').value) || 1)
+                pricePerPerson: parseFloat(document.getElementById('newBookingPricePerPerson').value) || parseFloat(selectedOption.dataset.price) || 0,
+                totalPrice: parseFloat(document.getElementById('newBookingTotalPrice').value) || 0
             };
 
             try {
@@ -8694,13 +8970,16 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                     </td>`;
 
                 dates.forEach(date => {
-                    const dateStr = date.toISOString().split('T')[0];
+                    const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
                     const isToday = date.getTime() === today.getTime();
                     const isWeekend = date.getDay() === 0 || date.getDay() === 6;
 
                     // Find bookings for this tour on this date (including multi-day)
                     const dayBookings = tour.bookings.filter(b => {
-                        const start = new Date(b.date);
+                        // Parse booking date without timezone conversion
+                        const bookingDateStr = b.date.split('T')[0];
+                        const [year, month, day] = bookingDateStr.split('-').map(Number);
+                        const start = new Date(year, month - 1, day);
                         start.setHours(0, 0, 0, 0);
                         const duration = b.duration || 1;
                         const end = new Date(start);
@@ -8717,7 +8996,10 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                     html += `<td class="${conflictClass}" style="padding: 3px; text-align: center; vertical-align: top; background: ${cellBg}; border-left: 1px solid #e5e7eb; min-height: 40px; position: relative;"${hasConflict ? ' title="Diqqat: Ko\'p bronlar!"' : ''}>`;
 
                     dayBookings.forEach(b => {
-                        const start = new Date(b.date);
+                        // Parse booking date without timezone conversion
+                        const bDateStr = b.date.split('T')[0];
+                        const [bYear, bMonth, bDay] = bDateStr.split('-').map(Number);
+                        const start = new Date(bYear, bMonth - 1, bDay);
                         start.setHours(0, 0, 0, 0);
                         const dayNum = Math.floor((date - start) / (1000 * 60 * 60 * 24)) + 1;
                         const duration = b.duration || 1;
@@ -8926,10 +9208,16 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                         </span>
                     </td>
                     <td style="padding: 15px;">
-                        <button onclick="showBookingModal('${booking.id}')" style="background: #6366f1; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; margin-right: 5px;">View</button>
+                        <button onclick="showBookingModal('${booking.id}')" style="background: #6366f1; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; margin-right: 5px;">👁️ Ko'rish</button>
                         ${booking.status === 'pending' ? `
                             <button onclick="updateBookingStatus('${booking.id}', 'confirmed')" style="background: #22c55e; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; margin-right: 5px;">Confirm</button>
                             <button onclick="updateBookingStatus('${booking.id}', 'cancelled')" style="background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer;">Cancel</button>
+                        ` : ''}
+                        ${booking.status === 'confirmed' ? `
+                            <button onclick="cancelConfirmedBooking('${booking.id}')" style="background: #dc2626; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer;" title="Bekor qilish">❌ Bekor</button>
+                        ` : ''}
+                        ${booking.status === 'cancelled' ? `
+                            <button onclick="restoreCancelledBooking('${booking.id}')" style="background: #f59e0b; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer;" title="Tiklash">🔄 Tiklash</button>
                         ` : ''}
                     </td>
                 </tr>
@@ -10075,11 +10363,6 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                 </div>
             </div>
 
-            <!-- Pages Page -->
-            <div class="page-section" id="pagesPage">
-                <h3>Pages management coming soon...</h3>
-            </div>
-
             <!-- Categories Page -->
             <div class="page-section" id="categoriesPage">
                 <button class="add-tour-btn" onclick="openCategoryModal()">+ Add New Category</button>
@@ -11019,6 +11302,8 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             // Clear image manager
             tourMediaImages = [];
             updateImageManager();
+            // Load categories from database
+            loadTourCategoryOptions();
             // Open modal
             document.getElementById('addTourModal').classList.add('active');
             // Add first itinerary day by default
@@ -11689,6 +11974,33 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             }
         }
 
+        // Load categories for tour form dropdown
+        async function loadTourCategoryOptions() {
+            try {
+                const response = await fetch(`${API_URL}/categories`);
+                const result = await response.json();
+
+                if (result.success) {
+                    const categories = result.data.categories.filter(c => c.isActive);
+                    const select = document.getElementById('tourCategory');
+
+                    if (select) {
+                        // Keep the first "Select category" option
+                        select.innerHTML = '<option value="">Select category</option>';
+
+                        categories.forEach(category => {
+                            const option = document.createElement('option');
+                            option.value = category.slug;
+                            option.textContent = category.name;
+                            select.appendChild(option);
+                        });
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading category options:', error);
+            }
+        }
+
         // Load Tours List
         async function loadTours() {
             const container = document.getElementById('toursTableContainer');
@@ -11723,6 +12035,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                     <table style="width: 100%; border-collapse: collapse; background: white;">
                         <thead>
                             <tr style="background: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                                <th style="padding: 12px; text-align: left; width: 70px;">Rasm</th>
                                 <th style="padding: 12px; text-align: left;">Title</th>
                                 <th style="padding: 12px; text-align: left;">Destination</th>
                                 <th style="padding: 12px; text-align: left;">Price</th>
@@ -11739,6 +12052,15 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                 tours.forEach(tour => {
                     const statusColor = tour.isActive ? '#28a745' : '#6c757d';
                     const statusText = tour.isActive ? 'Active' : 'Inactive';
+
+                    // Get tour image - prioritize images array (first image)
+                    let tourImage = '';
+                    if (tour.images && tour.images.length > 0) {
+                        const firstImg = typeof tour.images[0] === 'string' ? tour.images[0] : tour.images[0].url;
+                        tourImage = firstImg.startsWith('http') ? firstImg : (firstImg.startsWith('/') ? firstImg : '/uploads/' + firstImg);
+                    } else if (tour.imageCover) {
+                        tourImage = tour.imageCover.startsWith('http') ? tour.imageCover : (tour.imageCover.startsWith('/') ? tour.imageCover : '/uploads/' + tour.imageCover);
+                    }
 
                     // SEO Badge - with safe checking (supports both seo.meta.title and seo.title structures)
                     let seoBadge = '';
@@ -11761,6 +12083,11 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
 
                     html += `
                         <tr style="border-bottom: 1px solid #dee2e6;">
+                            <td style="padding: 8px;">
+                                <div style="width: 60px; height: 45px; border-radius: 6px; overflow: hidden; background: #f0f0f0;">
+                                    ${tourImage ? `<img src="${tourImage}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.parentElement.innerHTML='<div style=\\'display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-size:10px;\\'>No img</div>'">` : '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-size:10px;">No img</div>'}
+                                </div>
+                            </td>
                             <td style="padding: 12px;">
                                 <strong>${tour.title}</strong>
                                 ${tour.featured || tour.isFeatured ? '<span style="background: #ffc107; color: #000; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin-left: 8px;">FEATURED</span>' : ''}
@@ -11827,6 +12154,9 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
 
                 // Store tour ID for update
                 document.getElementById('addTourForm').dataset.editId = tour.id || tour._id;
+
+                // Load categories from database first, then set value
+                await loadTourCategoryOptions();
 
                 // Populate Basic Info (Tab 1)
                 document.getElementById('tourName').value = tour.title || '';
@@ -12304,10 +12634,8 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                 'tours': 'Tours',
                 'bookings': 'Bookings',
                 'users': 'Users',
-                'pages': 'Pages',
                 'categories': 'Categories',
                 'destinations': 'Destinations',
-                'media': 'Media Library',
                 'reviews': 'Reviews',
                 'blog': 'Blog',
                 'settings': 'General Settings',
@@ -13737,6 +14065,19 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                     </h3>
                     <form id="newBookingForm" style="display: grid; gap: 15px;">
                         <div>
+                            <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #374151;">Manba (Qayerdan keldi)</label>
+                            <select id="newBookingSource" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px;">
+                                <option value="">Manba tanlang...</option>
+                                <option value="GetYourGuide">GetYourGuide</option>
+                                <option value="Viator">Viator</option>
+                                <option value="WhatsApp">WhatsApp</option>
+                                <option value="Email">Email</option>
+                                <option value="Website">Website</option>
+                                <option value="Phone">Telefon</option>
+                                <option value="Other">Boshqa</option>
+                            </select>
+                        </div>
+                        <div>
                             <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #374151;">Tur tanlang</label>
                             <select id="newBookingTour" required onchange="onTourSelect()" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px;">
                                 <option value="">Turni tanlang...</option>
@@ -13794,11 +14135,21 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                             <div>
                                 <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #374151;">Kattalar</label>
-                                <input type="number" id="newBookingAdults" required min="1" value="1" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+                                <input type="number" id="newBookingAdults" required min="1" value="1" onchange="updateTotalPrice()" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
                             </div>
                             <div>
                                 <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #374151;">Bolalar</label>
-                                <input type="number" id="newBookingChildren" min="0" value="0" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+                                <input type="number" id="newBookingChildren" min="0" value="0" onchange="updateTotalPrice()" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div>
+                                <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #374151;">1 kishi narxi ($)</label>
+                                <input type="number" id="newBookingPricePerPerson" min="0" step="0.01" placeholder="Tur narxidan avtomatik" onchange="updateTotalPrice()" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #374151;">Jami narx ($)</label>
+                                <input type="number" id="newBookingTotalPrice" min="0" step="0.01" placeholder="Avtomatik hisoblanadi" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; box-sizing: border-box; background: #f0fdf4; font-weight: 600;">
                             </div>
                         </div>
                         <div>
@@ -13830,10 +14181,18 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             const select = document.getElementById('newBookingTour');
             const option = select.options[select.selectedIndex];
             const duration = parseInt(option.dataset.duration) || 1;
+            const price = parseFloat(option.dataset.price) || 0;
 
             const endDateContainer = document.getElementById('endDateContainer');
             const dayTourFields = document.getElementById('dayTourFields');
             const durationInput = document.getElementById('newBookingDuration');
+            const pricePerPersonInput = document.getElementById('newBookingPricePerPerson');
+
+            // Set price per person from tour
+            if (pricePerPersonInput && price > 0) {
+                pricePerPersonInput.value = price;
+                pricePerPersonInput.placeholder = 'Tur narxi: $' + price;
+            }
 
             if (duration === 1) {
                 // Day tour
@@ -13847,6 +14206,18 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             }
 
             updateEndDate();
+            updateTotalPrice();
+        }
+
+        function updateTotalPrice() {
+            const pricePerPerson = parseFloat(document.getElementById('newBookingPricePerPerson').value) || 0;
+            const adults = parseInt(document.getElementById('newBookingAdults').value) || 1;
+            const children = parseInt(document.getElementById('newBookingChildren').value) || 0;
+
+            // Total = (adults * full price) + (children * half price)
+            const totalPrice = (adults * pricePerPerson) + (children * pricePerPerson * 0.5);
+
+            document.getElementById('newBookingTotalPrice').value = totalPrice.toFixed(2);
         }
 
         function updateEndDate() {
@@ -13856,10 +14227,12 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
 
             const startDate = document.getElementById('newBookingDate').value;
             if (startDate && duration > 1) {
-                const start = new Date(startDate);
-                const end = new Date(start);
-                end.setDate(end.getDate() + duration - 1);
-                document.getElementById('newBookingEndDate').value = end.toISOString().split('T')[0];
+                // Parse date without timezone issues
+                const [year, month, day] = startDate.split('-').map(Number);
+                const endDay = day + duration - 1;
+                const end = new Date(year, month - 1, endDay);
+                const endDateStr = `${end.getFullYear()}-${String(end.getMonth() + 1).padStart(2, '0')}-${String(end.getDate()).padStart(2, '0')}`;
+                document.getElementById('newBookingEndDate').value = endDateStr;
             }
         }
 
@@ -13887,6 +14260,7 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
             const duration = parseInt(selectedOption.dataset.duration) || 1;
             const bookingData = {
                 tourId: tourSelect.value,
+                source: document.getElementById('newBookingSource').value,
                 customerName: document.getElementById('newBookingName').value,
                 customerEmail: document.getElementById('newBookingEmail').value,
                 customerPhone: document.getElementById('newBookingPhone').value,
@@ -13900,7 +14274,8 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                     children: parseInt(document.getElementById('newBookingChildren').value) || 0
                 },
                 notes: document.getElementById('newBookingNotes').value,
-                totalPrice: parseFloat(selectedOption.dataset.price) * (parseInt(document.getElementById('newBookingAdults').value) || 1)
+                pricePerPerson: parseFloat(document.getElementById('newBookingPricePerPerson').value) || parseFloat(selectedOption.dataset.price) || 0,
+                totalPrice: parseFloat(document.getElementById('newBookingTotalPrice').value) || 0
             };
 
             try {
@@ -14147,13 +14522,16 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                     </td>`;
 
                 dates.forEach(date => {
-                    const dateStr = date.toISOString().split('T')[0];
+                    const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
                     const isToday = date.getTime() === today.getTime();
                     const isWeekend = date.getDay() === 0 || date.getDay() === 6;
 
                     // Find bookings for this tour on this date (including multi-day)
                     const dayBookings = tour.bookings.filter(b => {
-                        const start = new Date(b.date);
+                        // Parse booking date without timezone conversion
+                        const bookingDateStr = b.date.split('T')[0];
+                        const [year, month, day] = bookingDateStr.split('-').map(Number);
+                        const start = new Date(year, month - 1, day);
                         start.setHours(0, 0, 0, 0);
                         const duration = b.duration || 1;
                         const end = new Date(start);
@@ -14170,7 +14548,10 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                     html += `<td class="${conflictClass}" style="padding: 3px; text-align: center; vertical-align: top; background: ${cellBg}; border-left: 1px solid #e5e7eb; min-height: 40px; position: relative;"${hasConflict ? ' title="Diqqat: Ko\'p bronlar!"' : ''}>`;
 
                     dayBookings.forEach(b => {
-                        const start = new Date(b.date);
+                        // Parse booking date without timezone conversion
+                        const bDateStr = b.date.split('T')[0];
+                        const [bYear, bMonth, bDay] = bDateStr.split('-').map(Number);
+                        const start = new Date(bYear, bMonth - 1, bDay);
                         start.setHours(0, 0, 0, 0);
                         const dayNum = Math.floor((date - start) / (1000 * 60 * 60 * 24)) + 1;
                         const duration = b.duration || 1;
@@ -14379,10 +14760,16 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
                         </span>
                     </td>
                     <td style="padding: 15px;">
-                        <button onclick="showBookingModal('${booking.id}')" style="background: #6366f1; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; margin-right: 5px;">View</button>
+                        <button onclick="showBookingModal('${booking.id}')" style="background: #6366f1; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; margin-right: 5px;">👁️ Ko'rish</button>
                         ${booking.status === 'pending' ? `
                             <button onclick="updateBookingStatus('${booking.id}', 'confirmed')" style="background: #22c55e; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; margin-right: 5px;">Confirm</button>
                             <button onclick="updateBookingStatus('${booking.id}', 'cancelled')" style="background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer;">Cancel</button>
+                        ` : ''}
+                        ${booking.status === 'confirmed' ? `
+                            <button onclick="cancelConfirmedBooking('${booking.id}')" style="background: #dc2626; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer;" title="Bekor qilish">❌ Bekor</button>
+                        ` : ''}
+                        ${booking.status === 'cancelled' ? `
+                            <button onclick="restoreCancelledBooking('${booking.id}')" style="background: #f59e0b; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer;" title="Tiklash">🔄 Tiklash</button>
                         ` : ''}
                     </td>
                 </tr>
@@ -15167,58 +15554,170 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
         </div>
     </div>
 
-    <!-- Category Modal -->
+    <!-- Category Modal - Modern Design -->
     <div id="categoryModal" class="modal" style="display: none;">
-        <div class="modal-content" style="max-width: 600px;">
-            <div class="modal-header">
-                <h2 id="categoryModalTitle">Add New Category</h2>
-                <button class="close-modal" onclick="closeCategoryModal()">×</button>
+        <div class="modal-content" style="max-width: 550px; border-radius: 16px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.25);">
+            <!-- Header with gradient -->
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 24px 28px; position: relative;">
+                <h2 id="categoryModalTitle" style="color: white; margin: 0; font-size: 22px; font-weight: 600;">Yangi Kategoriya</h2>
+                <p style="color: rgba(255,255,255,0.8); margin: 6px 0 0; font-size: 14px;">Tur kategoriyasi ma'lumotlarini kiriting</p>
+                <button class="close-modal" onclick="closeCategoryModal()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); border: none; color: white; width: 36px; height: 36px; border-radius: 50%; font-size: 20px; cursor: pointer; transition: all 0.2s;">×</button>
             </div>
-            <div class="modal-body">
+
+            <div class="modal-body" style="padding: 28px;">
                 <form id="categoryForm">
                     <input type="hidden" id="categoryId">
 
-                    <div class="form-group">
-                        <label>Category Name *</label>
-                        <input type="text" id="categoryName" placeholder="E.g.: Adventure Tours" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea id="categoryDescription" rows="3" placeholder="Brief description about this category"></textarea>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Icon (Emoji)</label>
-                            <input type="text" id="categoryIcon" placeholder="🎯" maxlength="2">
-                        </div>
-                        <div class="form-group">
-                            <label>Color (Hex)</label>
-                            <input type="color" id="categoryColor" value="#667eea">
+                    <!-- Preview Card -->
+                    <div id="categoryPreviewCard" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; padding: 20px; margin-bottom: 24px; display: flex; align-items: center; gap: 16px;">
+                        <div id="categoryPreviewIcon" style="width: 56px; height: 56px; background: rgba(255,255,255,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 28px;">🏷️</div>
+                        <div>
+                            <div id="categoryPreviewName" style="color: white; font-size: 18px; font-weight: 600;">Kategoriya nomi</div>
+                            <div id="categoryPreviewDesc" style="color: rgba(255,255,255,0.8); font-size: 13px; margin-top: 4px;">Tavsif</div>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Order</label>
-                        <input type="number" id="categoryOrder" min="0" placeholder="0">
+                    <!-- Category Name -->
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 8px; font-size: 14px;">Kategoriya nomi *</label>
+                        <input type="text" id="categoryName" placeholder="Masalan: Kunlik turlar" required
+                            style="width: 100%; padding: 14px 16px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 15px; transition: all 0.2s; box-sizing: border-box;"
+                            oninput="updateCategoryPreview()"
+                            onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 3px rgba(102,126,234,0.1)'"
+                            onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='none'">
                     </div>
 
-                    <div class="form-group">
-                        <label>
-                            <input type="checkbox" id="categoryIsActive" checked>
-                            Active
-                        </label>
+                    <!-- Description -->
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 8px; font-size: 14px;">Tavsif</label>
+                        <textarea id="categoryDescription" rows="2" placeholder="Kategoriya haqida qisqa ma'lumot"
+                            style="width: 100%; padding: 14px 16px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 15px; resize: vertical; min-height: 70px; transition: all 0.2s; box-sizing: border-box;"
+                            oninput="updateCategoryPreview()"
+                            onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 3px rgba(102,126,234,0.1)'"
+                            onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='none'"></textarea>
                     </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="cancel-btn" onclick="closeCategoryModal()">Cancel</button>
-                        <button type="submit" class="submit-btn">Save Category</button>
+                    <!-- Icon Picker -->
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 8px; font-size: 14px;">Icon tanlang</label>
+                        <div id="iconPickerGrid" style="display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; background: #f9fafb; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb;">
+                            <button type="button" class="icon-option" onclick="selectCategoryIcon('🏛️')" style="padding: 10px; font-size: 22px; background: white; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s;">🏛️</button>
+                            <button type="button" class="icon-option" onclick="selectCategoryIcon('🌄')" style="padding: 10px; font-size: 22px; background: white; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s;">🌄</button>
+                            <button type="button" class="icon-option" onclick="selectCategoryIcon('🏔️')" style="padding: 10px; font-size: 22px; background: white; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s;">🏔️</button>
+                            <button type="button" class="icon-option" onclick="selectCategoryIcon('🐪')" style="padding: 10px; font-size: 22px; background: white; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s;">🐪</button>
+                            <button type="button" class="icon-option" onclick="selectCategoryIcon('🕌')" style="padding: 10px; font-size: 22px; background: white; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s;">🕌</button>
+                            <button type="button" class="icon-option" onclick="selectCategoryIcon('🏰')" style="padding: 10px; font-size: 22px; background: white; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s;">🏰</button>
+                            <button type="button" class="icon-option" onclick="selectCategoryIcon('🎭')" style="padding: 10px; font-size: 22px; background: white; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s;">🎭</button>
+                            <button type="button" class="icon-option" onclick="selectCategoryIcon('🎪')" style="padding: 10px; font-size: 22px; background: white; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s;">🎪</button>
+                            <button type="button" class="icon-option" onclick="selectCategoryIcon('🚐')" style="padding: 10px; font-size: 22px; background: white; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s;">🚐</button>
+                            <button type="button" class="icon-option" onclick="selectCategoryIcon('✈️')" style="padding: 10px; font-size: 22px; background: white; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s;">✈️</button>
+                            <button type="button" class="icon-option" onclick="selectCategoryIcon('🚂')" style="padding: 10px; font-size: 22px; background: white; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s;">🚂</button>
+                            <button type="button" class="icon-option" onclick="selectCategoryIcon('🍽️')" style="padding: 10px; font-size: 22px; background: white; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s;">🍽️</button>
+                            <button type="button" class="icon-option" onclick="selectCategoryIcon('🏕️')" style="padding: 10px; font-size: 22px; background: white; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s;">🏕️</button>
+                            <button type="button" class="icon-option" onclick="selectCategoryIcon('⛷️')" style="padding: 10px; font-size: 22px; background: white; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s;">⛷️</button>
+                            <button type="button" class="icon-option" onclick="selectCategoryIcon('🎿')" style="padding: 10px; font-size: 22px; background: white; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s;">🎿</button>
+                            <button type="button" class="icon-option" onclick="selectCategoryIcon('📸')" style="padding: 10px; font-size: 22px; background: white; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s;">📸</button>
+                        </div>
+                        <input type="hidden" id="categoryIcon" value="🏷️">
+                    </div>
+
+                    <!-- Color Picker -->
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 8px; font-size: 14px;">Rang tanlang</label>
+                        <div id="colorPickerGrid" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button type="button" class="color-option" onclick="selectCategoryColor('#667eea')" style="width: 40px; height: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: 3px solid #667eea; border-radius: 10px; cursor: pointer; transition: all 0.2s;"></button>
+                            <button type="button" class="color-option" onclick="selectCategoryColor('#10b981')" style="width: 40px; height: 40px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border: 3px solid transparent; border-radius: 10px; cursor: pointer; transition: all 0.2s;"></button>
+                            <button type="button" class="color-option" onclick="selectCategoryColor('#f59e0b')" style="width: 40px; height: 40px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border: 3px solid transparent; border-radius: 10px; cursor: pointer; transition: all 0.2s;"></button>
+                            <button type="button" class="color-option" onclick="selectCategoryColor('#ef4444')" style="width: 40px; height: 40px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); border: 3px solid transparent; border-radius: 10px; cursor: pointer; transition: all 0.2s;"></button>
+                            <button type="button" class="color-option" onclick="selectCategoryColor('#8b5cf6')" style="width: 40px; height: 40px; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); border: 3px solid transparent; border-radius: 10px; cursor: pointer; transition: all 0.2s;"></button>
+                            <button type="button" class="color-option" onclick="selectCategoryColor('#06b6d4')" style="width: 40px; height: 40px; background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); border: 3px solid transparent; border-radius: 10px; cursor: pointer; transition: all 0.2s;"></button>
+                            <button type="button" class="color-option" onclick="selectCategoryColor('#ec4899')" style="width: 40px; height: 40px; background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); border: 3px solid transparent; border-radius: 10px; cursor: pointer; transition: all 0.2s;"></button>
+                            <button type="button" class="color-option" onclick="selectCategoryColor('#374151')" style="width: 40px; height: 40px; background: linear-gradient(135deg, #374151 0%, #1f2937 100%); border: 3px solid transparent; border-radius: 10px; cursor: pointer; transition: all 0.2s;"></button>
+                        </div>
+                        <input type="hidden" id="categoryColor" value="#667eea">
+                    </div>
+
+                    <!-- Order and Active in one row -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+                        <div class="form-group">
+                            <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 8px; font-size: 14px;">Tartib raqami</label>
+                            <input type="number" id="categoryOrder" min="0" value="0"
+                                style="width: 100%; padding: 14px 16px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 15px; box-sizing: border-box;"
+                                onfocus="this.style.borderColor='#667eea'"
+                                onblur="this.style.borderColor='#e5e7eb'">
+                        </div>
+                        <div class="form-group">
+                            <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 8px; font-size: 14px;">Holati</label>
+                            <label style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: #f9fafb; border-radius: 10px; cursor: pointer; border: 2px solid #e5e7eb;">
+                                <input type="checkbox" id="categoryIsActive" checked style="width: 20px; height: 20px; accent-color: #667eea;">
+                                <span style="font-size: 15px; color: #374151;">Faol</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                        <button type="button" onclick="closeCategoryModal()"
+                            style="padding: 14px 28px; background: #f3f4f6; color: #374151; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s;"
+                            onmouseover="this.style.background='#e5e7eb'"
+                            onmouseout="this.style.background='#f3f4f6'">Bekor qilish</button>
+                        <button type="submit"
+                            style="padding: 14px 28px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s;"
+                            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(102,126,234,0.4)'"
+                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">Saqlash</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+        // Category Preview Update
+        function updateCategoryPreview() {
+            const name = document.getElementById('categoryName').value || 'Kategoriya nomi';
+            const desc = document.getElementById('categoryDescription').value || 'Tavsif';
+            document.getElementById('categoryPreviewName').textContent = name;
+            document.getElementById('categoryPreviewDesc').textContent = desc;
+        }
+
+        // Select Category Icon
+        function selectCategoryIcon(icon) {
+            document.getElementById('categoryIcon').value = icon;
+            document.getElementById('categoryPreviewIcon').textContent = icon;
+
+            // Update button styles
+            document.querySelectorAll('#iconPickerGrid .icon-option').forEach(btn => {
+                btn.style.borderColor = '#e5e7eb';
+                btn.style.background = 'white';
+            });
+            event.target.style.borderColor = '#667eea';
+            event.target.style.background = '#f0f4ff';
+        }
+
+        // Select Category Color
+        function selectCategoryColor(color) {
+            document.getElementById('categoryColor').value = color;
+
+            // Update preview card gradient
+            const gradients = {
+                '#667eea': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                '#10b981': 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                '#f59e0b': 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+                '#ef4444': 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+                '#8b5cf6': 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
+                '#06b6d4': 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)',
+                '#ec4899': 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)',
+                '#374151': 'linear-gradient(135deg, #374151 0%, #1f2937 100%)'
+            };
+            document.getElementById('categoryPreviewCard').style.background = gradients[color] || gradients['#667eea'];
+
+            // Update button styles
+            document.querySelectorAll('#colorPickerGrid .color-option').forEach(btn => {
+                btn.style.borderColor = 'transparent';
+            });
+            event.target.style.borderColor = color;
+        }
+    </script>
 
     <!-- Settings Functions -->
     <script>
@@ -15552,5 +16051,111 @@ Focus on Uzbekistan's rich Silk Road heritage, ancient architecture, and unique 
 
     <!-- Tours Pagination Script -->
     <script src="tours-pagination.js"></script>
+
+    <!-- Booking Actions Script -->
+    <script>
+        // Restore cancelled booking
+        async function restoreCancelledBooking(bookingId) {
+            const result = await Swal.fire({
+                title: 'Bronni tiklash',
+                text: 'Bekor qilingan bronni tiklamoqchimisiz?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#f59e0b',
+                cancelButtonColor: '#6b7280',
+                confirmButtonText: 'Ha, tiklash',
+                cancelButtonText: 'Yo\'q'
+            });
+
+            if (result.isConfirmed) {
+                await updateBookingStatus(bookingId, 'pending');
+                Swal.fire({
+                    title: 'Tiklandi!',
+                    text: 'Bron "Kutilmoqda" holatiga qaytarildi.',
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            }
+        }
+
+        // Cancel confirmed booking with confirmation
+        async function cancelConfirmedBooking(bookingId) {
+            const result = await Swal.fire({
+                title: 'Bronni bekor qilish',
+                text: 'Tasdiqlangan bronni bekor qilmoqchimisiz?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc2626',
+                cancelButtonColor: '#6b7280',
+                confirmButtonText: 'Ha, bekor qilish',
+                cancelButtonText: 'Yo\'q'
+            });
+
+            if (result.isConfirmed) {
+                await updateBookingStatus(bookingId, 'cancelled');
+                Swal.fire({
+                    title: 'Bekor qilindi!',
+                    text: 'Bron muvaffaqiyatli bekor qilindi.',
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            }
+        }
+    </script>
+
+    <!-- Booking Sort Script -->
+    <script>
+        // Booking sorting state
+        let bookingSortField = null;
+        let bookingSortOrder = 'asc'; // 'asc' or 'desc'
+
+        // Sort bookings function
+        function sortBookings(field) {
+            if (!allBookingsData || !allBookingsData.length) return;
+
+            // Toggle sort order if same field clicked
+            if (bookingSortField === field) {
+                bookingSortOrder = bookingSortOrder === 'asc' ? 'desc' : 'asc';
+            } else {
+                bookingSortField = field;
+                bookingSortOrder = 'asc';
+            }
+
+            // Update sort icons
+            const dateIcon = document.getElementById('dateSortIcon');
+            const statusIcon = document.getElementById('statusSortIcon');
+            if (dateIcon) dateIcon.textContent = '↕️';
+            if (statusIcon) statusIcon.textContent = '↕️';
+
+            if (field === 'date' && dateIcon) {
+                dateIcon.textContent = bookingSortOrder === 'asc' ? '⬆️' : '⬇️';
+            } else if (field === 'status' && statusIcon) {
+                statusIcon.textContent = bookingSortOrder === 'asc' ? '⬆️' : '⬇️';
+            }
+
+            // Sort the data
+            const sortedBookings = [...allBookingsData].sort((a, b) => {
+                if (field === 'date') {
+                    const dateA = new Date(a.date);
+                    const dateB = new Date(b.date);
+                    return bookingSortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+                } else if (field === 'status') {
+                    const statusOrder = { 'pending': 1, 'confirmed': 2, 'cancelled': 3 };
+                    const orderA = statusOrder[a.status] || 4;
+                    const orderB = statusOrder[b.status] || 4;
+                    return bookingSortOrder === 'asc' ? orderA - orderB : orderB - orderA;
+                }
+                return 0;
+            });
+
+            // Render sorted bookings
+            const tbody = document.getElementById('bookingsTableBody');
+            if (typeof renderBookingsTable === 'function') {
+                renderBookingsTable(sortedBookings, tbody);
+            }
+        }
+    </script>
 </body>
 </html>
